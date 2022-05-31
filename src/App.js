@@ -2,9 +2,10 @@ import './App.css';
 import React, { useState } from 'react';
 import { NativeBaseProvider, Heading } from "native-base";
 import Login from './components/auth/Login';
+import useToken from './hooks/useToken';
 
 function App() {
-  const [token, setToken] = useState();
+  const { token, setToken } = useToken();
 
   /**
    * if token is not set, show login screen
