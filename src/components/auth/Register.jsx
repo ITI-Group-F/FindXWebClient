@@ -9,7 +9,7 @@ import {
   Heading,
 } from "native-base";
 
-export default function Login({ setToken }) {
+export default function Register({ setToken }) {
   const [formData, setFormData] = useState({});
 
   const setEmail = (value) => {
@@ -20,8 +20,20 @@ export default function Login({ setToken }) {
     setFormData({ ...formData, password: value });
   };
 
-  const submitLoginData = () => {
+  const submitRegisterData = () => {
     console.log(formData);
+  };
+
+  const setFirstName = (value) => {
+    setFormData({ ...formData, firstName: value });
+  };
+
+  const setLastName = (value) => {
+    setFormData({ ...formData, lastName: value });
+  };
+
+  const setPhoneNumber = (value) => {
+    setFormData({ ...formData, phone: value });
   };
 
   return (
@@ -32,6 +44,24 @@ export default function Login({ setToken }) {
           <Box padding="10" backgroundColor="lightBlue.300" borderRadius="2xl">
             <Input
               size="xl"
+              placeholder="First Name"
+              onChangeText={(value) => setFirstName(value)}
+            />
+            <Input
+              size="xl"
+              marginTop="1.5"
+              placeholder="Last Name"
+              onChangeText={(value) => setLastName(value)}
+            />
+            <Input
+              size="xl"
+              marginTop="1.5"
+              placeholder="Phone Number"
+              onChangeText={(value) => setPhoneNumber(value)}
+            />
+            <Input
+              size="xl"
+              marginTop="1.5"
               placeholder="Email"
               onChangeText={(value) => setEmail(value)}
             />
@@ -47,7 +77,7 @@ export default function Login({ setToken }) {
             </FormControl.HelperText>
             <Button
               colorScheme="success"
-              onPress={submitLoginData}
+              onPress={submitRegisterData}
               marginTop="1.5"
             >
               Login
