@@ -27,7 +27,7 @@ export default function Login({ setToken }) {
   return (
     <Flex height="xl" alignItems="center" justifyContent="center">
       <Center>
-        <Heading marginBottom="5">Login</Heading>
+        <Heading marginBottom="5">Register</Heading>
         <FormControl>
           <Box padding="10" backgroundColor="lightBlue.300" borderRadius="2xl">
             <Input
@@ -50,7 +50,7 @@ export default function Login({ setToken }) {
               onPress={submitLoginData}
               marginTop="1.5"
             >
-              Login
+              Register
             </Button>
           </Box>
         </FormControl>
