@@ -1,27 +1,62 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Center,
   Flex,
   Input,
   Box,
   Button,
-  Heading,
   FormControl,
+  NativeBaseProvider,
+  extendTheme,
+  Heading,
 } from "native-base";
 
-const Login = () => {
+export default function Login({ setToken }) {
+  const [formData, setFormData] = useState({});
+
+  const setEmail = (value) => {
+    setFormData({ ...formData, email: value });
+  };
+
+  const setPassword = (value) => {
+    setFormData({ ...formData, password: value });
+  };
+
+  const submitLoginData = () => {
+    console.log(formData);
+  };
+
   return (
-    <Flex h={40} alignItems="center">
+    <Flex height="xl" alignItems="center" justifyContent="center">
       <Center>
+        <Heading marginBottom="5">Login</Heading>
         <FormControl>
-          <Box>
-            <Input size="xl" placeholder="Email" />
-            <Input size="xl" type="password" placeholder="Password" />
-            <Button colorScheme="success">Login</Button>
+          <Box padding="10" backgroundColor="lightBlue.300" borderRadius="2xl">
+            <Input
+              size="xl"
+              placeholder="Email"
+              onChangeText={(value) => setEmail(value)}
+            />
+            <Input
+              marginTop="1.5"
+              size="xl"
+              type="password"
+              placeholder="Password"
+              onChangeText={(value) => setPassword(value)}
+            />
+            <FormControl.HelperText>
+              Password must be strong
+            </FormControl.HelperText>
+            <Button
+              colorScheme="success"
+              onPress={submitLoginData}
+              marginTop="1.5"
+            >
+              Login
+            </Button>
           </Box>
         </FormControl>
       </Center>
     </Flex>
   );
-};
-export default Login;
+}
