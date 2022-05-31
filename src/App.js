@@ -5,6 +5,7 @@ import Login from './components/auth/Login';
 import useToken from './hooks/useToken';
 import { Routes, Route, Link } from "react-router-dom";
 import Register from './components/auth/Register';
+import NotFound from './components/NotFound';
 
 function App() {
   const { token, setToken } = useToken();
@@ -30,7 +31,7 @@ function App() {
         <Route path="/" element={<Heading>Home</Heading>} />
         <Route path="login" element={<Login setToken={setToken} />} />
         <Route path="register" element={<Register setToken={setToken} />} />
-        <Route path="*" element={<Heading>404 Not Found!</Heading>} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </NativeBaseProvider>
   );
