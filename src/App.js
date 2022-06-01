@@ -28,7 +28,7 @@ function App() {
     <NativeBaseProvider>
       <Heading>Hello React. We Come in Peace 👽</Heading>
       <Routes>
-        <Route path="/" element={<Heading>Home</Heading>} />
+        <Route path="/" element={<Heading>ما تخلص ياض منك ليه</Heading>} />
         <Route path="login" element={<Login setToken={setToken} />} />
         <Route path="register" element={<Register setToken={setToken} />} />
         <Route path="*" element={<NotFound />} />
