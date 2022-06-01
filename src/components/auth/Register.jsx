@@ -42,55 +42,6 @@ export default function Register({ setToken }) {
   };
 
   return (
-    // <Flex height="xl" alignItems="center" justifyContent="center">
-    //   <Center>
-    //     <Heading marginBottom="5">Register</Heading>
-    //     <FormControl>
-    //       <Box padding="10" backgroundColor="lightBlue.300" borderRadius="2xl">
-    //         <Input
-    //           size="xl"
-    //           placeholder="First Name"
-    //           onChangeText={(value) => setFirstName(value)}
-    //         />
-    //         <Input
-    //           size="xl"
-    //           marginTop="1.5"
-    //           placeholder="Last Name"
-    //           onChangeText={(value) => setLastName(value)}
-    //         />
-    //         <Input
-    //           size="xl"
-    //           marginTop="1.5"
-    //           placeholder="Phone Number"
-    //           onChangeText={(value) => setPhoneNumber(value)}
-    //         />
-    //         <Input
-    //           size="xl"
-    //           marginTop="1.5"
-    //           placeholder="Email"
-    //           onChangeText={(value) => setEmail(value)}
-    //         />
-    //         <Input
-    //           marginTop="1.5"
-    //           size="xl"
-    //           type="password"
-    //           placeholder="Password"
-    //           onChangeText={(value) => setPassword(value)}
-    //         />
-    //         <FormControl.HelperText>
-    //           Password must be strong
-    //         </FormControl.HelperText>
-    //         <Button
-    //           colorScheme="success"
-    //           onPress={submitRegisterData}
-    //           marginTop="1.5"
-    //         >
-    //           Register
-    //         </Button>
-    //       </Box>
-    //     </FormControl>
-    //   </Center>
-    // </Flex>
     <Center w="100%">
       <Box safeArea p="2" py="8" w="90%" maxW="290">
         <Heading
