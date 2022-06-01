@@ -153,8 +153,8 @@ export default function Register({ setToken }) {
               Forget Password?
             </Link>
           </FormControl>
-          <Button mt="2" colorScheme="indigo">
-            Sign in
+          <Button mt="2" colorScheme="blue">
+            Register
           </Button>
           <HStack mt="6" justifyContent="center">
             <Text
@@ -164,7 +164,7 @@ export default function Register({ setToken }) {
                 color: "warmGray.200",
               }}
             >
-              Not registerd yet?{" "}
+              Already registerd?{" "}
             </Text>
             <Link
               _text={{
@@ -172,9 +172,9 @@ export default function Register({ setToken }) {
                 fontWeight: "medium",
                 fontSize: "sm",
               }}
-              href="/register"
+              href="/login"
             >
-              Register
+              Login
             </Link>
           </HStack>
         </VStack>

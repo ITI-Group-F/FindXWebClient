@@ -71,8 +71,8 @@ export default function Login({ setToken }) {
               Forget Password?
             </Link>
           </FormControl>
-          <Button mt="2" colorScheme="indigo">
-            Sign in
+          <Button mt="2" colorScheme="blue">
+            Login
           </Button>
           <HStack mt="6" justifyContent="center">
             <Text
