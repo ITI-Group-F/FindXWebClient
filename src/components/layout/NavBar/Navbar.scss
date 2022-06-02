@@ -30,7 +30,7 @@
     &::before {
       content: attr(data-item);
       transition: all 1s ease-in-out;
-      color: #8254ff;
+      color: green;
       position: absolute;
       top: 0;
       bottom: 0;
@@ -70,7 +70,7 @@
           &::before {
             content: attr(data-item);
             transition: 0.5s;
-            color: #8254ff;
+            color: green;
             position: absolute;
             top: 0;
             bottom: 0;

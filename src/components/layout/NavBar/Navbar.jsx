@@ -1,13 +1,11 @@
-
 import React from "react";
 import "./Navbar.scss";
-
 export default function Navbar() {
   return (
 <>
 
-<p data-item='Rohit'>FindX</p>
-
+<p data-item='FindX'>FindX</p>
+<img src="" alt="" />
 <section>
   <nav>
     <ul class="menuItems">

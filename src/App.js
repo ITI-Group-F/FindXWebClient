@@ -27,7 +27,6 @@ function App() {
   */
   return (
     <NativeBaseProvider>
-      <Heading>Hello React. We Come in Peace 👽</Heading>
       <Navbar></Navbar>
       <Routes>
        
