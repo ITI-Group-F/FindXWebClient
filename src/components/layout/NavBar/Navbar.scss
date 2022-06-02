@@ -48,9 +48,9 @@
   }
   
   nav {
-    margin: 25px;
+    margin-bottom: 25px;
     background: #f9f9f9;
-    padding: 16px;
+    padding-bottom: 16px;
     .menuItems {
       list-style: none;
       display: flex;
@@ -58,7 +58,7 @@
       li {
         margin: 50px;
   
-        a {
+        .link {
           text-decoration: none;
           color: #8f8f8f;
           font-size: 24px;
@@ -89,4 +89,11 @@
         }
       }
     }
+  }
+
+  img{
+    width:20vw;
+    position: relative;
+    margin: 16px;
+    align-self: center;
   }
