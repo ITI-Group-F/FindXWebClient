@@ -1,0 +1,37 @@
+  .counter{
+    background-color: #f1f1f1;
+    overflow: auto;
+    padding: 80px;
+}
+.counter .count{
+    width: 25%;
+    float: left;
+    box-sizing: border-box;
+    text-align: center;
+    padding: 20px 0px;
+}
+.counter .count i{
+    color: #ff305b;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+.counter .count h3{
+    color: #333;
+    font-size: 26px;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+.counter .count h5{
+    color: #555555;
+    font-size: 16px;
+    font-weight: 600;
+}
+.edit{
+    margin-left: 247px;
+}
+.counter h2{
+    font-size: 50px;
+    color: #ff305b;
+    margin-bottom: 5px;
+}
