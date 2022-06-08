@@ -20,8 +20,8 @@ function Contact() {
             </div>
             <div class="count">
                 <i class="fas fa-cloud-download-alt"></i>
-                <h3>ehapdiab</h3>
-                <h5>diab96@hotmail.com</h5>
+                <h3>ehab diab</h3>
+                <h5>ediab96@hotmail.com</h5>
             </div> 
             <div class="count">
                 <i class="fas fa-coffee"></i>

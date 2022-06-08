@@ -29,20 +29,21 @@ function App() {
   * if token is set, then we can render the app
   */
   return ( 
-    // <NativeBaseProvider>
-    //   <Navbar></Navbar>
-    //   <Routes>
+    <NativeBaseProvider>
+      <Navbar></Navbar>
+      <Routes>
        
-    //     <Route path="login" element={<Login setToken={setToken} />} />
-    //     <Route path="register" element={<Register setToken={setToken} />} />
-    //     <Route path="*" element={<NotFound />} />
-    //     {/* <Route path="about" >  <About />   </Route> */}
-    //   </Routes>
-    // </NativeBaseProvider>
-    <div>
-      <About />
-      <Contact />
-    </div>
+        <Route path="login" element={<Login setToken={setToken} />} />
+        <Route path="register" element={<Register setToken={setToken} />} />
+        <Route path="*" element={<NotFound />} />
+       <Route path="about"  element ={<About/> }/>
+       <Route path="contact"  element ={<Contact/> }/>    
+      </Routes>
+    </NativeBaseProvider>
+    // <div>
+      // <About />
+      // <Contact />
+    // </div>
   );
 }
 

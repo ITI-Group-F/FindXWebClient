@@ -9,6 +9,7 @@
     box-sizing: border-box;
     text-align: center;
     padding: 20px 0px;
+    margin: 4%;
 }
 .counter .count i{
     color: #ff305b;
@@ -29,6 +30,7 @@
 }
 .edit{
     margin-left: 247px;
+    margin : 4px;
 }
 .counter h2{
     font-size: 50px;
