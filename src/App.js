@@ -10,6 +10,7 @@ import NotFound from './components/NotFound';
 import Navbar from './components/layout/NavBar/Navbar';
 import About from './components/about/about';
 import Contact from './components/contact/contact';
+import axios from 'axios';
 
 function App() {
   const { token, setToken } = useToken();
@@ -28,8 +29,11 @@ function App() {
   /**
   * if token is set, then we can render the app
   */
+
   return ( 
+    
     <NativeBaseProvider>
+     
       <Navbar></Navbar>
       <Routes>
        

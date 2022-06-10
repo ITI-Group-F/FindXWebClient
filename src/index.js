@@ -4,6 +4,20 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
+import axios from 'axios';
+import useToken from './hooks/useToken';
+
+
+
+axios.interceptors.request.use(function (config) {
+  // Do something before request is sent
+  const {getToken}=useToken();
+  config.headers.Authorization=`Bearer ${getToken()}`;
+  return config;
+}, function (error) {
+  // Do something with request error
+  return Promise.reject(error);
+});
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
