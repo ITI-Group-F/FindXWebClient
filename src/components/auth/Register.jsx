@@ -1,17 +1,5 @@
 import React, { useState } from "react";
-import {
-  Center,
-  Flex,
-  Input,
-  Box,
-  Button,
-  FormControl,
-  Heading,
-  Link,
-  VStack,
-  HStack,
-  Text,
-} from "native-base";
+
 import "./continueWith.css";
 
 export default function Register({ setToken }) {

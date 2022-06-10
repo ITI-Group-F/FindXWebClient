@@ -1,9 +1,8 @@
 import './App.css';
 import React, { useState } from 'react';
-import { NativeBaseProvider, Heading } from "native-base";
 import Login from './components/auth/Login';
 import useToken from './hooks/useToken';
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, Router } from "react-router-dom";
 
 import Register from './components/auth/Register';
 import NotFound from './components/NotFound';
@@ -32,7 +31,7 @@ function App() {
 
   return ( 
     
-    <NativeBaseProvider>
+<Router>
      
       <Navbar></Navbar>
       <Routes>
@@ -43,7 +42,7 @@ function App() {
        <Route path="about"  element ={<About/> }/>
        <Route path="contact"  element ={<Contact/> }/>    
       </Routes>
-    </NativeBaseProvider>
+</Router>
     // <div>
       // <About />
       // <Contact />

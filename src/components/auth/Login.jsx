@@ -1,17 +1,5 @@
 import React, { useState } from "react";
-import {
-  Center,
-  Flex,
-  Input,
-  Box,
-  Button,
-  FormControl,
-  Heading,
-  Link,
-  Text,
-  VStack,
-  HStack,
-} from "native-base";
+
 
 export default function Login({ setToken }) {
   const [formData, setFormData] = useState({});
