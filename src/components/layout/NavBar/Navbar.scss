@@ -3,14 +3,14 @@
     margin: 0;
   }
   
-  body {
+  .xnav {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     position: relative;
     min-height: 100vh;
-    font-family: Hack, monospace;
+    font-family: 'Cairo', sans-serif;
   }
   
   div {
@@ -48,6 +48,7 @@
   }
   
   nav {
+    margin: 30px;
     margin-bottom: 25px;
     background: #f9f9f9;
     padding-bottom: 16px;
@@ -92,8 +93,8 @@
   }
 
   img{
-    width:20vw;
+    width:200px;
     position: relative;
-    margin: 16px;
+   
     align-self: center;
   }

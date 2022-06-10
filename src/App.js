@@ -34,9 +34,9 @@ function App() {
       <Routes>
         <Route path="login" element={<Login setToken={setToken} />} />
         <Route path="register" element={<Register setToken={setToken} />} />
-        <Route path="*" element={<NotFound />} />
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
     // <div>
