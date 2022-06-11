@@ -103,7 +103,7 @@
     list-style: none;
     flex-direction: column;
     li {
-      margin: 50px;
+      margin: 30px;
 
       .link {
         text-decoration: none;
@@ -139,6 +139,7 @@
   .HammButton{
     
     margin-left: auto;
+    display: none;
   }
 
   img{
@@ -148,8 +149,11 @@
     align-self: center;
   }
 
-  @media only screen and (max-width:800px ) {
+  @media only screen and (max-width:950px ) {
     nav .menuItems {
       display: none;
+    }
+    .HammButton{
+      display: block;
     }
   }
