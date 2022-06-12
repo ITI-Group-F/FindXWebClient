@@ -33,6 +33,7 @@ function App() {
     <>
       <Navbar></Navbar>
       <Routes>
+        <Route path="/" element={<><div>This is Home page</div><img src='https://pbs.twimg.com/media/CcKZlndUkAA0ziF.jpg' /></>} />
         <Route path="login" element={<Login setToken={setToken} />} />
         <Route path="register" element={<Register setToken={setToken} />} />
         <Route path="about" element={<About />} />
