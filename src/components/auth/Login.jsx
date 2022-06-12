@@ -3,6 +3,11 @@ import React, { useState } from "react";
 import "./auth.css";
 
 export default function Login() {
+  /**
+   * variables for the form state and validation state of the form
+   * fields and the error message for the form fields if they are
+   * invalid and the error message for the form if it is invalid
+   */
   const [formData, setFormData] = useState({});
   const [showMailErr, setShowMailErr] = useState(false);
   const [showPassErr, setShowPassErr] = useState(false);
@@ -10,43 +15,52 @@ export default function Login() {
   const [mailErr, setMailErr] = useState("");
   const [passErr, setPassErr] = useState("");
 
+  /*
+   * function to handle the change of the form fields
+   */
   const setValue = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
     validateLogin();
   };
 
+  /**
+   *
+   * @returns {boolean} true if the form is valid, false otherwise
+   */
   const validateLogin = () => {
-    let isFormValid = false;
+    let isMailValid = false;
     if (!formData.email || formData.email.length < 1) {
-      isFormValid = false;
+      isMailValid = false;
       setShowMailErr(true);
       setMailErr("Email is required");
     } else if (
       formData.email &&
       !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(formData.email)
     ) {
-      isFormValid = false;
+      isMailValid = false;
       setShowMailErr(true);
       setMailErr("Invalid email address");
     } else {
-      isFormValid = true;
+      isMailValid = true;
       setShowMailErr(false);
     }
 
-    if (!isFormValid) return false;
-
+    let isPassValid = false;
     if (!formData.password || formData.password.length < 1) {
-      isFormValid = false;
+      isPassValid = false;
       setShowPassErr(true);
       setPassErr("Password is required");
     } else {
-      isFormValid = true;
+      isPassValid = true;
       setShowPassErr(false);
     }
-    return isFormValid;
+    return isMailValid && isPassValid;
   };
 
+  /*
+   * function to handle the submit of the form
+   */
   const submitLoginData = (event) => {
     event.preventDefault();
     if (!validateLogin()) {

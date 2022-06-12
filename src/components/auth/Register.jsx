@@ -1,18 +1,93 @@
 import React, { useState } from "react";
-import { Box, Button, Link, TextField, Typography } from "@mui/material";
+import { Box, Button, TextField, Typography, Link, Alert } from "@mui/material";
 import "./auth.css";
 
 export default function Register() {
-  const [formData, setFormData] = useState(null);
+  /**
+   * variables for the form state and validation state of the form
+   * fields and the error message for the form fields if they are
+   * invalid and the error message for the form if it is invalid
+   */
+  const [formData, setFormData] = useState({});
+  const [showFNameErr, setShowFNameErr] = useState(false);
+  const [showLNameErr, setShowLNameErr] = useState(false);
+  const [showMailErr, setShowMailErr] = useState(false);
+  const [showPassErr, setShowPassErr] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
+  const [fNameErr, setFNameErr] = useState("");
+  const [lNameErr, setLNameErr] = useState("");
+  const [mailErr, setMailErr] = useState("");
+  const [passErr, setPassErr] = useState("");
 
   const setValue = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+    validateLogin();
   };
 
   const submitRegisterData = (event) => {
     event.preventDefault();
-    console.log(formData);
+    if (!validateLogin()) {
+      setShowAlert(true);
+    } else {
+      setShowAlert(false);
+      console.log(formData);
+    }
+  };
+
+  /**
+   *
+   * @returns {boolean} true if the form is valid, false otherwise
+   */
+  const validateLogin = () => {
+    let isFNameValid = false;
+    if (!formData.firstName || formData.firstName.length < 1) {
+      setShowFNameErr(true);
+      setFNameErr("First name is required");
+    } else if (formData.firstName && !/^[a-zA-Z]+$/.test(formData.firstName)) {
+      setShowFNameErr(true);
+      setFNameErr("Invalid first name");
+    } else {
+      isFNameValid = true;
+      setShowFNameErr(false);
+    }
+
+    let isLNameValid = false;
+    if (!formData.lastName || formData.lastName.length < 1) {
+      setShowLNameErr(true);
+      setLNameErr("Last name is required");
+    } else if (formData.lastName && !/^[a-zA-Z]+$/.test(formData.lastName)) {
+      setShowLNameErr(true);
+      setLNameErr("Invalid last name");
+    } else {
+      isLNameValid = true;
+      setShowLNameErr(false);
+    }
+
+    let isMailValid = false;
+    if (!formData.email || formData.email.length < 1) {
+      setShowMailErr(true);
+      setMailErr("Email is required");
+    } else if (
+      formData.email &&
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(formData.email)
+    ) {
+      setShowMailErr(true);
+      setMailErr("Invalid email address");
+    } else {
+      isMailValid = true;
+      setShowMailErr(false);
+    }
+
+    let isPassValid = false;
+    if (!formData.password || formData.password.length < 1) {
+      setShowPassErr(true);
+      setPassErr("Password is required");
+    } else {
+      isPassValid = true;
+      setShowPassErr(false);
+    }
+    return isFNameValid && isLNameValid && isMailValid && isPassValid;
   };
 
   return (
@@ -30,6 +105,15 @@ export default function Register() {
             gap: 1,
           }}
         >
+          {showAlert && (
+            <center>
+              <Box width="300px">
+                <Alert severity="error">
+                  Some fileds are missing or invalid.
+                </Alert>
+              </Box>
+            </center>
+          )}
           <Box>
             <TextField
               style={{ width: "200px", margin: "5px" }}
@@ -40,6 +124,13 @@ export default function Register() {
               onChange={setValue}
             />
           </Box>
+          {showFNameErr && (
+            <Box>
+              <Typography color="red" variant="caption" gutterBottom>
+                {fNameErr}
+              </Typography>
+            </Box>
+          )}
           <Box>
             <TextField
               style={{ width: "200px", margin: "5px" }}
@@ -50,6 +141,13 @@ export default function Register() {
               onChange={setValue}
             />
           </Box>
+          {showLNameErr && (
+            <Box>
+              <Typography color="red" variant="caption" gutterBottom>
+                {lNameErr}
+              </Typography>
+            </Box>
+          )}
           <Box>
             <TextField
               style={{ width: "200px", margin: "5px" }}
@@ -70,6 +168,13 @@ export default function Register() {
               onChange={setValue}
             />
           </Box>
+          {showMailErr && (
+            <Box>
+              <Typography color="red" variant="caption" gutterBottom>
+                {mailErr}
+              </Typography>
+            </Box>
+          )}
           <Box>
             <TextField
               style={{ width: "200px", margin: "5px" }}
@@ -80,6 +185,13 @@ export default function Register() {
               onChange={setValue}
             />
           </Box>
+          {showPassErr && (
+            <Box>
+              <Typography color="red" variant="caption" gutterBottom>
+                {passErr}
+              </Typography>
+            </Box>
+          )}
           <Box>
             <Button
               variant="contained"
