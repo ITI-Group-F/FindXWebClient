@@ -16,6 +16,9 @@ export default function Login({ setToken }) {
   const [mailErr, setMailErr] = useState("");
   const [passErr, setPassErr] = useState("");
 
+  const [showResErrMsg, setShowResErrMsg] = useState(false);
+  const [resErrMsg, setResErrMsg] = useState("");
+
   /*
    * function to handle the change of the form fields
    */
@@ -71,8 +74,19 @@ export default function Login({ setToken }) {
       const token = await loginUser(formData);
       if (token) {
         setToken(token);
-      } else {
       }
+    }
+  };
+
+  const loginUser = async (data) => {
+    try {
+      const response = await API.post("/authentication/login", data);
+      setShowResErrMsg(false);
+      return response.data.token;
+    } catch (error) {
+      setShowResErrMsg(true);
+      setResErrMsg(error.response.data);
+      return null;
     }
   };
 
@@ -97,6 +111,13 @@ export default function Login({ setToken }) {
                 <Alert severity="error">
                   Some fileds are missing or invalid.
                 </Alert>
+              </Box>
+            </center>
+          )}
+          {showResErrMsg && (
+            <center>
+              <Box width="300px">
+                <Alert severity="error">{resErrMsg}</Alert>
               </Box>
             </center>
           )}
@@ -153,7 +174,6 @@ export default function Login({ setToken }) {
             <Typography variant="subtitle2" component="span">
               Not a member?
             </Typography>
-
             <Link href="/login" style={{ marginLeft: 5 }}>
               Register
             </Link>
@@ -163,12 +183,3 @@ export default function Login({ setToken }) {
     </>
   );
 }
-
-const loginUser = async (data) => {
-  const response = await API.post("/authentication/login", data);
-  // console.log(response.data);
-  if (response.status === 200) {
-  } else {
-    return null;
-  }
-};

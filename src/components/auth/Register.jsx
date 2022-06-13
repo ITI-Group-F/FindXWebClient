@@ -22,6 +22,9 @@ export default function Register({ setToken }) {
   const [mailErr, setMailErr] = useState("");
   const [passErr, setPassErr] = useState("");
 
+  const [showResErrMsg, setShowResErrMsg] = useState(false);
+  const [resErrMsg, setResErrMsg] = useState("");
+
   const setValue = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -37,7 +40,6 @@ export default function Register({ setToken }) {
       const token = await registerUser(formData);
       if (token) {
         setToken(token);
-      } else {
       }
     }
   };
@@ -112,6 +114,18 @@ export default function Register({ setToken }) {
     );
   };
 
+  const registerUser = async (data) => {
+    try {
+      const response = await API.post("/authentication/register", data);
+      setShowResErrMsg(true);
+      return response.data.token;
+    } catch (err) {
+      setShowResErrMsg(true);
+      setResErrMsg(err.response.data);
+      return null;
+    }
+  };
+
   return (
     <>
       <Typography variant="h3" component="div" gutterBottom>
@@ -133,6 +147,13 @@ export default function Register({ setToken }) {
                 <Alert severity="error">
                   Some fileds are missing or invalid.
                 </Alert>
+              </Box>
+            </center>
+          )}
+          {showResErrMsg && (
+            <center>
+              <Box width="400px">
+                <Alert severity="error">{resErrMsg}</Alert>
               </Box>
             </center>
           )}
@@ -255,13 +276,3 @@ export default function Register({ setToken }) {
     </>
   );
 }
-
-const registerUser = async (data) => {
-  const response = await API.post("/authentication/register", data);
-  console.log(response);
-  if (response.status === 200) {
-    console.log("success");
-  } else {
-    return null;
-  }
-};
