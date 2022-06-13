@@ -1,8 +1,9 @@
 import { Box, Button, TextField, Typography, Link, Alert } from "@mui/material";
 import React, { useState } from "react";
+import API from "../../Services/api";
 import "./auth.css";
 
-export default function Login() {
+export default function Login({ setToken }) {
   /**
    * variables for the form state and validation state of the form
    * fields and the error message for the form fields if they are
@@ -61,13 +62,17 @@ export default function Login() {
   /*
    * function to handle the submit of the form
    */
-  const submitLoginData = (event) => {
+  const submitLoginData = async (event) => {
     event.preventDefault();
     if (!validateLogin()) {
       setShowAlert(true);
     } else {
       setShowAlert(false);
-      console.log(formData);
+      const token = await loginUser(formData);
+      if (token) {
+        setToken(token);
+      } else {
+      }
     }
   };
 
@@ -158,3 +163,12 @@ export default function Login() {
     </>
   );
 }
+
+const loginUser = async (data) => {
+  const response = await API.post("/authentication/login", data);
+  // console.log(response.data);
+  if (response.status === 200) {
+  } else {
+    return null;
+  }
+};

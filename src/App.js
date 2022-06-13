@@ -38,14 +38,10 @@ function App() {
         <Route path="register" element={<Register setToken={setToken} />} />
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />
+        <Route path="post" element={<Post />} />
         <Route path="*" element={<NotFound />} />
-         <Route path="post" element={<Post />} />
       </Routes>
     </>
-    // <div>
-    // <About />
-    // <Contact />
-    // </div>
   );
 }
 

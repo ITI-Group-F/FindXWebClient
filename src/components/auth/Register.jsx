@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Box, Button, TextField, Typography, Link, Alert } from "@mui/material";
+import API from "../../Services/api";
 import "./auth.css";
 
-export default function Register() {
+export default function Register({ setToken }) {
   /**
    * variables for the form state and validation state of the form
    * fields and the error message for the form fields if they are
@@ -14,6 +15,8 @@ export default function Register() {
   const [showMailErr, setShowMailErr] = useState(false);
   const [showPassErr, setShowPassErr] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
+  const [showUserNameErr, setShowUserNameErr] = useState(false);
+  const [userNameErr, setUserNameErr] = useState("");
   const [fNameErr, setFNameErr] = useState("");
   const [lNameErr, setLNameErr] = useState("");
   const [mailErr, setMailErr] = useState("");
@@ -25,13 +28,17 @@ export default function Register() {
     validateLogin();
   };
 
-  const submitRegisterData = (event) => {
+  const submitRegisterData = async (event) => {
     event.preventDefault();
     if (!validateLogin()) {
       setShowAlert(true);
     } else {
       setShowAlert(false);
-      console.log(formData);
+      const token = await registerUser(formData);
+      if (token) {
+        setToken(token);
+      } else {
+      }
     }
   };
 
@@ -64,6 +71,15 @@ export default function Register() {
       setShowLNameErr(false);
     }
 
+    let isUserNameValid = false;
+    if (!formData.userName || formData.userName.length < 1) {
+      setShowUserNameErr(true);
+      setUserNameErr("User name is required");
+    } else {
+      isUserNameValid = true;
+      setShowUserNameErr(false);
+    }
+
     let isMailValid = false;
     if (!formData.email || formData.email.length < 1) {
       setShowMailErr(true);
@@ -87,7 +103,13 @@ export default function Register() {
       isPassValid = true;
       setShowPassErr(false);
     }
-    return isFNameValid && isLNameValid && isMailValid && isPassValid;
+    return (
+      isFNameValid &&
+      isLNameValid &&
+      isUserNameValid &&
+      isMailValid &&
+      isPassValid
+    );
   };
 
   return (
@@ -161,6 +183,23 @@ export default function Register() {
           <Box>
             <TextField
               style={{ width: "200px", margin: "5px" }}
+              name="userName"
+              type="text"
+              label="User Name"
+              variant="outlined"
+              onChange={setValue}
+            />
+          </Box>
+          {showUserNameErr && (
+            <Box>
+              <Typography color="red" variant="caption" gutterBottom>
+                {userNameErr}
+              </Typography>
+            </Box>
+          )}
+          <Box>
+            <TextField
+              style={{ width: "200px", margin: "5px" }}
               name="email"
               type="text"
               label="Email"
@@ -216,3 +255,13 @@ export default function Register() {
     </>
   );
 }
+
+const registerUser = async (data) => {
+  const response = await API.post("/authentication/register", data);
+  console.log(response);
+  if (response.status === 200) {
+    console.log("success");
+  } else {
+    return null;
+  }
+};
