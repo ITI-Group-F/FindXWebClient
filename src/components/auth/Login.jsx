@@ -132,7 +132,7 @@ export default function Login({ setToken }) {
             />
           </Box>
           {showMailErr && (
-            <Box>
+            <Box className="err-msg">
               <Typography color="red" variant="caption" gutterBottom>
                 {mailErr}
               </Typography>
@@ -149,7 +149,7 @@ export default function Login({ setToken }) {
             />
           </Box>
           {showPassErr && (
-            <Box>
+            <Box className="err-msg">
               <Typography color="red" variant="caption" gutterBottom>
                 {passErr}
               </Typography>

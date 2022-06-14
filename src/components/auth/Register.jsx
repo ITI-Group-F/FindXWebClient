@@ -168,7 +168,7 @@ export default function Register({ setToken }) {
             />
           </Box>
           {showFNameErr && (
-            <Box>
+            <Box className="err-msg">
               <Typography color="red" variant="caption" gutterBottom>
                 {fNameErr}
               </Typography>
@@ -185,7 +185,7 @@ export default function Register({ setToken }) {
             />
           </Box>
           {showLNameErr && (
-            <Box>
+            <Box className="err-msg">
               <Typography color="red" variant="caption" gutterBottom>
                 {lNameErr}
               </Typography>
@@ -212,7 +212,7 @@ export default function Register({ setToken }) {
             />
           </Box>
           {showUserNameErr && (
-            <Box>
+            <Box className="err-msg">
               <Typography color="red" variant="caption" gutterBottom>
                 {userNameErr}
               </Typography>
@@ -229,7 +229,7 @@ export default function Register({ setToken }) {
             />
           </Box>
           {showMailErr && (
-            <Box>
+            <Box className="err-msg">
               <Typography color="red" variant="caption" gutterBottom>
                 {mailErr}
               </Typography>
@@ -246,7 +246,7 @@ export default function Register({ setToken }) {
             />
           </Box>
           {showPassErr && (
-            <Box>
+            <Box className="err-msg">
               <Typography color="red" variant="caption" gutterBottom>
                 {passErr}
               </Typography>
