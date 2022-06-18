@@ -10,7 +10,7 @@ import Navbar from './components/layout/NavBar/Navbar';
 import About from './components/about/about';
 import Contact from './components/contact/contact';
 import Post from './components/post/post';
-
+import Profile from './components/profile/profile'
 function App() {
   const { token, setToken } = useToken();
 
@@ -39,7 +39,8 @@ function App() {
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />
         <Route path="post" element={<Post />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path="profile" element={<Profile/>} />
+        <Route path="*" element={<NotFound />} />       
       </Routes>
     </>
   );
