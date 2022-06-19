@@ -1,0 +1,15 @@
+.desc_body{
+
+    text-align: left;
+    font-size: medium;
+    font-family: 'Cairo', sans-serif;
+    color: #fff;
+    text-align: justify; 
+    padding: 5px;
+
+}
+.desc_head{
+
+    color: #fff;
+    padding: 5px;
+}

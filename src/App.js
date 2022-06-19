@@ -11,6 +11,10 @@ import About from './components/about/about';
 import Contact from './components/contact/contact';
 import Post from './components/post/post';
 import Profile from './components/profile/profile'
+
+
+
+import ItemDetailsPage from "./pages/ItemDetails"
 function App() {
   const { token, setToken } = useToken();
 
@@ -42,6 +46,9 @@ function App() {
         <Route path="profile" element={<Profile/>} />
         <Route path="*" element={<NotFound />} />       
       </Routes>
+
+
+      <ItemDetailsPage/>
     </>
   );
 }
