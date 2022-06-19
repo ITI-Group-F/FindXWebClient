@@ -11,7 +11,7 @@ import About from './components/about/about';
 import Contact from './components/contact/contact';
 import Post from './components/post/post';
 import Profile from './components/profile/profile'
-
+import Footer from './components/Footer/Footer';            //footer
 
 
 import ItemDetailsPage from "./pages/ItemDetails"
@@ -49,8 +49,7 @@ function App() {
         <Route path="chat" element={<Messenger/>} />
         <Route path="*" element={<NotFound />} />       
       </Routes>
-
-
+      <Footer></Footer>
     
     </>
   );

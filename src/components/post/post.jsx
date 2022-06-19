@@ -7,6 +7,10 @@ export default function Posts(){
 
     const [showhide,setshowhide]=useState('');
 
+    const [showcategoryErr, setShowcategoryErr] = useState(false);
+
+    
+
     const handleshow=(event)=>                //function to handle show fields based on category selection
     {
       const getuser=event.target.value;
@@ -159,7 +163,7 @@ export default function Posts(){
           <hr/>
          
           <div class="d-grid gap-2">
-          <button class="btn btn-success" type="button">Post Now</button>
+          <button  class="btn btn-success" type="button">Post Now</button>
     </div>
 
                    </div>
