@@ -11,6 +11,7 @@ import About from './components/about/about';
 import Contact from './components/contact/contact';
 import Post from './components/post/post';
 import Profile from './components/profile/profile'
+import Messenger from './components/Chat/Messenger';
 function App() {
   const { token, setToken } = useToken();
 
@@ -40,6 +41,7 @@ function App() {
         <Route path="contact" element={<Contact />} />
         <Route path="post" element={<Post />} />
         <Route path="profile" element={<Profile/>} />
+        <Route path="chat" element={<Messenger/>} />
         <Route path="*" element={<NotFound />} />       
       </Routes>
     </>
