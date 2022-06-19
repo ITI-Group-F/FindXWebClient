@@ -12,7 +12,7 @@ import Contact from './components/contact/contact';
 import Post from './components/post/post';
 import Profile from './components/profile/profile'
 import Footer from './components/Footer/Footer';            //footer
-
+import Items from './components/Items/items'
 
 import ItemDetailsPage from "./pages/ItemDetails"
 import Messenger from './components/Chat/Messenger';
@@ -47,6 +47,7 @@ function App() {
         <Route path="post" element={<Post />} />
         <Route path="profile" element={<Profile/>} />
         <Route path="chat" element={<Messenger/>} />
+        <Route path="items" element={<Items/>} />
         <Route path="*" element={<NotFound />} />       
       </Routes>
       <Footer></Footer>
