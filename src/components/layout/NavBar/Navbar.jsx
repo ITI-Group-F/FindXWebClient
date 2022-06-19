@@ -1,8 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.scss";
-
-import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import PopupState, { bindTrigger, bindMenu } from "material-ui-popup-state";
 
@@ -44,15 +42,11 @@ export default function Navbar() {
                 {(popupState) => (
                   <React.Fragment>
                     <IconButton
-                      aria-label="MenuRoundedIcon"
-                      color="secondary"
+               
                       {...bindTrigger(popupState)}
                     >
-                      <MenuRoundedIcon />
+                      <MenuRoundedIcon fontSize="large" />
                     </IconButton>
-                    <Button variant="contained" {...bindTrigger(popupState)}>
-                      Manue
-                    </Button>
 
                     <Menu {...bindMenu(popupState)}>
                       <ul className="MobilMenuItems">

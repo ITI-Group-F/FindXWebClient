@@ -19,34 +19,7 @@
     text-align: center;
   }
   
-  p {
-    margin: 16px;
-    font-size: 96px;
-    color: #ccc;
-    text-transform: uppercase;
-    font-weight: 600;
-    transition: all 1s ease-in-out;
-    position: relative;
-  
-    &::before {
-      content: attr(data-item);
-      transition: all 1s ease-in-out;
-      color: green;
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      width: 0;
-      overflow: hidden;
-    }
-  
-    &:hover {
-      &::before {
-        width: 100%;
-      }
-    }
-  }
+ 
   
   nav {
     margin: 30px;
@@ -62,7 +35,7 @@
       list-style: none;
   
       li {
-        margin: 50px;
+        margin: 15px;
   
         .link {
           text-decoration: none;
@@ -102,9 +75,11 @@
     align-items: center;
     list-style: none;
     flex-direction: column;
+    justify-content: center;
+    font-size:x-large;
     li {
-      margin: 30px;
-
+     margin-right: 35px;
+    margin-bottom:5vh ;
       .link {
         text-decoration: none;
         color: #8f8f8f;
@@ -139,11 +114,12 @@
   .HammButton{
     
     margin-left: auto;
+    transition: display 2s;
     display: none;
   }
 
   img{
-    width:200px;
+    width:130px;
     position: relative;
    
     align-self: center;
@@ -151,9 +127,10 @@
 
   @media only screen and (max-width:950px ) {
     nav .menuItems {
-      display: none;
+      display: none   ;
     }
     .HammButton{
+     
       display: block;
     }
   }

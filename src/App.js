@@ -15,6 +15,7 @@ import Profile from './components/profile/profile'
 
 
 import ItemDetailsPage from "./pages/ItemDetails"
+import Messenger from './components/Chat/Messenger';
 function App() {
   const { token, setToken } = useToken();
 
@@ -44,6 +45,7 @@ function App() {
         <Route path="contact" element={<Contact />} />
         <Route path="post" element={<Post />} />
         <Route path="profile" element={<Profile/>} />
+        <Route path="chat" element={<Messenger/>} />
         <Route path="*" element={<NotFound />} />       
       </Routes>
 
