@@ -1,6 +1,8 @@
 import React from 'react'
 import DetailsStyle from '../Details/Details.module.css'
 import Button from '@mui/material/Button';
+
+import "../itemDetails.css"
 export default function Details() {
   return (
     <div style={{backgroundColor:'#314D63'}} className={`col-md-6 col-12  ${DetailsStyle.itm_details_Con}`}>

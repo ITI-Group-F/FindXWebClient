@@ -1,10 +1,11 @@
 import React from 'react'
 import DescriptionStyle from "./Description.module.css"
+import "../itemDetails.css"
 export default function Description() {
   return (
 <div style={{backgroundColor:'#235675'}} className={`col`}>
   <div className={`${DescriptionStyle.desc_head}`}>
-      <h3 style={{color:"#fff"}} className={`ms-2`}>Description</h3><hr  />
+      <h3 style={{color:"#fff"}} className={`ms-2 `}>Description</h3><hr  />
   </div>
     {/* description Body */}
     <div className={`${DescriptionStyle.desc_body} ms-3`}>

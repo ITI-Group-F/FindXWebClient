@@ -1,7 +1,7 @@
 import {useState} from "react"
 import sliderStyles from "./slider.module.css";
 import Carousel from 'react-bootstrap/Carousel';
-
+import "../itemDetails.css"
 
 const ItemSlider=()=>{
     const [index, setIndex] = useState(0);
