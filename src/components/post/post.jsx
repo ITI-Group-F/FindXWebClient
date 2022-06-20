@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Button, FormControl, TextField, Typography,Input,InputAdornment,InputLabel,Avatar } from "@mui/material";
+import { Box, Button, FormControl, TextField, Typography,Input,InputAdornment,InputLabel,Avatar,Alert } from "@mui/material";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Posts(){
@@ -7,8 +7,48 @@ export default function Posts(){
 
     const [showhide,setshowhide]=useState('');
 
-    const [showcategoryErr, setShowcategoryErr] = useState(false);
 
+    const [showMailErr, setShowMailErr] = useState(false);
+    const [mailErr, setMailErr] = useState("");
+    const [formData, setFormData] = useState({});
+    const [showcatErr, setShowcatErr] = useState(false);
+    const [catErr, setcatErr] = useState("");
+
+
+    const setValue = (e) => {
+      const { name, value } = e.target;
+      setFormData({ ...formData, [name]: value });
+      validateLogin();
+    };
+
+
+    const validateLogin = () => {
+      let isMailValid = false;
+      if (formData.description.length>=200 && formData.description.length <=300) {
+        isMailValid = false;
+        setShowMailErr(true);
+        setMailErr("description is too long max is 300");}
+
+        else {
+          isMailValid = true;
+          setShowMailErr(false);
+        }
+            
+        let iscategoriesValid = false;
+         if(formData.category.option==='Select Category')
+         {
+            iscategoriesValid=false;
+            setShowcatErr(true);
+            setcatErr("Select Category !");
+         }  
+        else
+        {
+            iscategoriesValid=true;
+            setShowcatErr(false);
+        }
+        return isMailValid;     
+      }
+  
     
 
     const handleshow=(event)=>                //function to handle show fields based on category selection
@@ -30,14 +70,23 @@ export default function Posts(){
                     <hr />
                   <h4 htmlFor="category">Select Category</h4>
 
-                    <select  onChange={(e)=>(handleshow(e))} class="form-select" aria-label="Default select example">
+                    <select  name="category" required onSubmit={setValue} onChange={(e)=>(handleshow(e))} class="form-select" aria-label="Default select example">
                     <option selected value="1">Select Category</option>
                     <option value="2">Animals</option>
                     <option value="3">Belongings</option>
                     <option value="4">Electronics</option>
                     <option value="5">other</option>
                     </select>
-               
+
+                    {showcatErr && (
+            <center>
+              <Box width="300px">
+                <Alert severity="error">
+                  Some fileds are missing or invalid.
+                </Alert>
+              </Box>
+            </center>
+          )}
 
 
                 {showhide==='2'&&                          //show based on category selection
@@ -55,11 +104,11 @@ export default function Posts(){
                                 <FormControl/>
 
                                 <FormControl fullWidth sx={{ m: 1 }} variant="standard">
-          <InputLabel maxLength="3" htmlFor="standard-adornment-amount">Age</InputLabel>
+          <InputLabel  maxLength="3" htmlFor="standard-adornment-amount">Age</InputLabel>
           <Input
              type="number"
             id="standard-adornment-amount"
-            
+            required
             startAdornment={<InputAdornment position="start">Age</InputAdornment>}
           />
         </FormControl>
@@ -116,8 +165,10 @@ export default function Posts(){
                   
 
                   <FormControl fullWidth sx={{ m: 1 }} variant="standard">
-          <InputLabel maxLength="20" htmlFor="standard-adornment-amount">Brand Name</InputLabel>
+          <InputLabel  htmlFor="standard-adornment-amount">Brand Name</InputLabel>
           <Input
+              required
+              maxLength="20"
             id="standard-adornment-amount"
             startAdornment={<InputAdornment position="start">Brand</InputAdornment>}
           />
@@ -131,18 +182,25 @@ export default function Posts(){
                   } 
 
 
-          <TextField maxLength="20" fullWidth label="Item Title" id="fullWidth" />
+          <TextField required maxLength="20" fullWidth label="Item Title" id="fullWidth" />
 
          
           <div class="mb-3">
       <label for="exampleFormControlTextarea1"  class="form-label">Item Description</label> 
-      <textarea maxLength="600" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>     
+      <textarea name="description" required onChange={setValue} maxLength="300" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>     
         </div> 
 
+        {showMailErr && (
+            <Box className="err-msg">
+              <Typography color="red" variant="caption" gutterBottom>
+                {mailErr}
+              </Typography>
+            </Box>
+          )}
             
             {/*multiple image upload  */}
             <label for="formFileMultiple" class="form-label">Item Image</label>
-            <input class="form-control" type="file" id="formFileMultiple" multiple />
+            <input required class="form-control" type="file" id="formFileMultiple" multiple />
               
 
 
@@ -150,14 +208,14 @@ export default function Posts(){
             <hr />
           <h3>Review Your Details</h3>  
           
-          <label maxLength="20" htmlFor="location">Your Name</label>
-          <TextField fullWidth label="your name" id="fullWidth" />
+          <label  htmlFor="location">Your Name</label>
+          <TextField fullWidth label="your name" id="fullWidth"  maxLength="20" required />
 
-          <label maxLength="13" htmlFor="location">Your Phone Number</label>
-          <TextField fullWidth label="your phone number" id="fullWidth" />
+          <label  htmlFor="location">Your Phone Number</label>
+          <TextField fullWidth label="your phone number" id="fullWidth" type="number" maxLength="13"  required />
 
-          <label   maxLength="30" htmlFor="location">Your Address</label>
-          <TextField fullWidth label="your Address" id="fullWidth" />
+          <label    htmlFor="location">Your Address</label>
+          <TextField fullWidth label="your Address" id="fullWidth"  maxLength="30"  required/>
 
             
           <hr/>
