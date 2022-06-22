@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Button, FormControl, TextField, Typography,Input,InputAdornment,InputLabel,Avatar,Alert } from "@mui/material";
+import { Box, Button, FormControl, TextField, Typography,Input,InputAdornment,InputLabel,Avatar,Alert,RadioGroup,FormControlLabel,Radio,FormLabel } from "@mui/material";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Posts(){
@@ -8,8 +8,8 @@ export default function Posts(){
     const [showhide,setshowhide]=useState('');
 
 
-    const [showMailErr, setShowMailErr] = useState(false);
-    const [mailErr, setMailErr] = useState("");
+    const [showdescErr, setShowdescErr] = useState(false);
+    const [descErr, setdescErr] = useState("");
     const [formData, setFormData] = useState({});
     const [showcatErr, setShowcatErr] = useState(false);
     const [catErr, setcatErr] = useState("");
@@ -18,24 +18,25 @@ export default function Posts(){
     const setValue = (e) => {
       const { name, value } = e.target;
       setFormData({ ...formData, [name]: value });
-      validateLogin();
+      validatedesc();
     };
 
 
-    const validateLogin = () => {
-      let isMailValid = false;
+    const validatedesc = () => {
+      let isdescValid = false;
       if (formData.description.length>=200 && formData.description.length <=300) {
-        isMailValid = false;
-        setShowMailErr(true);
-        setMailErr("description is too long max is 300");}
+        isdescValid = false;
+        setShowdescErr(true);
+        setdescErr("description is too long max is 300");}
 
         else {
-          isMailValid = true;
-          setShowMailErr(false);
+          isdescValid = true;
+          setShowdescErr(false);
         }
-            
+             
+        
         let iscategoriesValid = false;
-         if(formData.category.option==='Select Category')
+          if(!formData.name||formData.name.length<=1||!formData.phone||formData.phone.length<=1||!formData.address||formData.address.length<=1 )
          {
             iscategoriesValid=false;
             setShowcatErr(true);
@@ -46,10 +47,9 @@ export default function Posts(){
             iscategoriesValid=true;
             setShowcatErr(false);
         }
-        return isMailValid;     
+        return isdescValid ,iscategoriesValid  ;     
       }
   
-    
 
     const handleshow=(event)=>                //function to handle show fields based on category selection
     {
@@ -70,23 +70,20 @@ export default function Posts(){
                     <hr />
                   <h4 htmlFor="category">Select Category</h4>
 
-                    <select  name="category" required onSubmit={setValue} onChange={(e)=>(handleshow(e))} class="form-select" aria-label="Default select example">
-                    <option selected value="1">Select Category</option>
+                    <select  name="category" id="category" required="required"   onChange={(e)=>(handleshow(e))} class="form-select" aria-label="Default select example">
+                    <option selected value="1" disabled="disabled" >Select Category</option> 
                     <option value="2">Animals</option>
                     <option value="3">Belongings</option>
                     <option value="4">Electronics</option>
                     <option value="5">other</option>
                     </select>
 
-                    {showcatErr && (
-            <center>
-              <Box width="300px">
-                <Alert severity="error">
-                  Some fileds are missing or invalid.
-                </Alert>
-              </Box>
-            </center>
-          )}
+          
+
+
+
+
+
 
 
                 {showhide==='2'&&                          //show based on category selection
@@ -94,8 +91,8 @@ export default function Posts(){
                     <div className="animalsubcategory">
 
                     <h6 htmlFor="category">Select Category</h6>
-                    <select   class="form-select" aria-label="Default select example">
-                          <option>Select Category</option>
+                    <select   required="required" class="form-select" aria-label="Default select example">
+                          <option  disabled="disabled">Select Category</option>
                               <option>cats</option>
                               <option>Dogs</option>
                               <option>Birds</option>
@@ -104,17 +101,17 @@ export default function Posts(){
                                 <FormControl/>
 
                                 <FormControl fullWidth sx={{ m: 1 }} variant="standard">
-          <InputLabel  maxLength="3" htmlFor="standard-adornment-amount">Age</InputLabel>
+          <InputLabel   htmlFor="standard-adornment-amount">Age</InputLabel>
           <Input
+              maxLength="3"
              type="number"
             id="standard-adornment-amount"
-            required
+            required="required"
             startAdornment={<InputAdornment position="start">Age</InputAdornment>}
           />
         </FormControl>
 
                   
-                    <p className="text-danger"></p>
                   
                     </div>
                   )
@@ -126,8 +123,8 @@ export default function Posts(){
                     <div className="Belongsubcategory">
 
                     <h6 htmlFor="category">Select Category</h6>
-                    <select   class="form-select" aria-label="Default select example">
-                          <option>Select Category</option>
+                    <select  required="required"  class="form-select" aria-label="Default select example">
+                      <option disabled="disabled">Select Category</option>
                       <option>Personal cards and papers</option>
                           <option>wallets</option>
                           <option>glasses</option>
@@ -151,8 +148,9 @@ export default function Posts(){
                     <div className="electronicsubcategory">
                       
                    <h6 htmlFor="category">Select Category</h6>
-            <select   class="form-select" aria-label="Default select example"
+            <select   required="required" class="form-select" aria-label="Default select example"
                   >
+                    <option disabled="disabled">Select Category</option>
                     <option>Mobiles</option>
                     <option>Tablets</option>
                     <option>Laptops</option>
@@ -167,7 +165,7 @@ export default function Posts(){
                   <FormControl fullWidth sx={{ m: 1 }} variant="standard">
           <InputLabel  htmlFor="standard-adornment-amount">Brand Name</InputLabel>
           <Input
-              required
+              required="required"
               maxLength="20"
             id="standard-adornment-amount"
             startAdornment={<InputAdornment position="start">Brand</InputAdornment>}
@@ -175,49 +173,78 @@ export default function Posts(){
         </FormControl>
 
                   
-                    <p className="text-danger"></p>
                   
                     </div>
                   )
                   } 
 
 
-          <TextField required maxLength="20" fullWidth label="Item Title" id="fullWidth" />
+                                {/* radio button */}
+<FormControl>
+  <FormLabel id="demo-controlled-radio-buttons-group">State</FormLabel>
+  <RadioGroup
+    aria-labelledby="demo-controlled-radio-buttons-group"
+    name="controlled-radio-buttons-group"
+    class="required"
+    required="required"
+    sx={{
+      display: "inline",
+      
+    }}
+  >
+    <FormControlLabel value="Lost" control={<Radio/>} label="Lost" />
+    <FormControlLabel value="Found" control={<Radio/>} label="Found" />
+  </RadioGroup>
+</FormControl>
+
+                    
+          <TextField  required="required" maxLength="20" fullWidth label="Item Title" id="fullWidth" />
 
          
           <div class="mb-3">
       <label for="exampleFormControlTextarea1"  class="form-label">Item Description</label> 
-      <textarea name="description" required onChange={setValue} maxLength="300" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>     
+      <textarea name="description"  required="required" onChange={setValue} maxLength="250" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>     
         </div> 
 
-        {showMailErr && (
+        {showdescErr && (
             <Box className="err-msg">
               <Typography color="red" variant="caption" gutterBottom>
-                {mailErr}
+                {descErr}
               </Typography>
             </Box>
           )}
             
             {/*multiple image upload  */}
             <label for="formFileMultiple" class="form-label">Item Image</label>
-            <input required class="form-control" type="file" id="formFileMultiple" multiple />
+            <input  required="required" class="form-control" type="file" id="formFileMultiple" multiple />
               
 
 
               {/* Details Section */}
-            <hr />
-          <h3>Review Your Details</h3>  
-          
-          <label  htmlFor="location">Your Name</label>
-          <TextField fullWidth label="your name" id="fullWidth"  maxLength="20" required />
-
-          <label  htmlFor="location">Your Phone Number</label>
-          <TextField fullWidth label="your phone number" id="fullWidth" type="number" maxLength="13"  required />
-
-          <label    htmlFor="location">Your Address</label>
-          <TextField fullWidth label="your Address" id="fullWidth"  maxLength="30"  required/>
+            <hr/>
+          <h3>Review Your Details</h3>
 
             
+
+          <label  htmlFor="location">Your Name</label>
+          <TextField name="name" onChange={setValue} fullWidth label="your name" id="fullWidth"  maxLength="20"  required="required"/>
+
+          <label  htmlFor="location">Your Phone Number</label>
+          <TextField name="phone" onChange={setValue} fullWidth label="your phone number" id="fullWidth" type="number" maxLength="13"   required="required" />
+
+          <label    htmlFor="location">Your Address</label>
+          <TextField name="address" onChange={setValue} fullWidth label="your Address" id="fullWidth"  maxLength="30"   required="required"/>
+
+          {showcatErr && (
+            <center>
+              <Box width="300px">
+                <Alert severity="error">
+                  Some fileds are missing or invalid.
+                </Alert>
+              </Box>
+            </center>
+          )}
+
           <hr/>
          
           <div class="d-grid gap-2">
