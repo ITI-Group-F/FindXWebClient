@@ -3,8 +3,6 @@ import React, { useState } from 'react';
 import Login from './components/auth/Login';
 import useToken from './hooks/useToken';
 import { Routes, Route, Link, Router } from "react-router-dom";
-import { Provider } from 'react-redux';
-import store from './Redux/Store';
 import Register from './components/auth/Register';
 import NotFound from './components/NotFound';
 import Navbar from './components/layout/NavBar/Navbar';
@@ -36,7 +34,7 @@ function App() {
   */
 
   return (
-  <Provider store={store}>
+
     <>
       <Navbar></Navbar>
       <Routes>
@@ -55,7 +53,7 @@ function App() {
       <Footer></Footer>
     
     </>
-  </Provider>
+
   );
 }
 
