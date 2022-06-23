@@ -12,12 +12,12 @@ const ItemSlider=()=>{
 
 
 return (
-<div className=" col-md-6 col-sm-12">
+<div className={ `col-md-5 col-sm-12 ${sliderStyles.sliderContainer}`}>
 <Carousel activeIndex={index} onSelect={handleSelect}>
       <Carousel.Item style={{height:'100%'}} className={sliderStyles.item}>
-          <div  >
-            <div className={`w-75 mx-auto `}>
-              <img 
+          <div className={`${sliderStyles.wrapperContainer}`} >
+            <div   className={`w-75 mx-auto d-flex align-items-center ${sliderStyles.imgContainer} `}>
+              <img className={`${sliderStyles.slideImg}`}
                   src="https://m.media-amazon.com/images/I/41A+0FWSUML._AC_SY780_.jpg"
                   alt="Third slide"
                 />
@@ -28,9 +28,9 @@ return (
       </Carousel.Item>
 
       <Carousel.Item style={{height:'100%'}} className={sliderStyles.item}>
-          <div  >
-            <div className={`w-75 mx-auto `}>
-              <img 
+          <div className={`${sliderStyles.wrapperContainer}`} >
+            <div   className={`w-75 mx-auto d-flex align-items-center ${sliderStyles.imgContainer} `}>
+              <img className={`${sliderStyles.slideImg}`}
                   src="https://m.media-amazon.com/images/I/41A+0FWSUML._AC_SY780_.jpg"
                   alt="Third slide"
                 />
@@ -39,11 +39,12 @@ return (
           </div>
             
       </Carousel.Item>
+
 
       <Carousel.Item style={{height:'100%'}} className={sliderStyles.item}>
-          <div  >
-            <div className={`w-75 mx-auto `}>
-              <img 
+          <div className={`${sliderStyles.wrapperContainer}`} >
+            <div   className={`w-75 mx-auto d-flex align-items-center ${sliderStyles.imgContainer} `}>
+              <img className={`${sliderStyles.slideImg}`}
                   src="https://m.media-amazon.com/images/I/41A+0FWSUML._AC_SY780_.jpg"
                   alt="Third slide"
                 />
@@ -52,6 +53,8 @@ return (
           </div>
             
       </Carousel.Item>
+
+
     </Carousel>
 </div>
 )

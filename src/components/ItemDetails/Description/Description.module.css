@@ -2,14 +2,27 @@
 
     text-align: left;
     font-size: medium;
-    font-family: 'Cairo', sans-serif;
+    font-family:  'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border: 1px solid rgba(0,47,52,.36);
     color: #fff;
     text-align: justify; 
     padding: 5px;
+    width: 96%;
+    margin: auto;
 
 }
 .desc_head{
-
+text-align: left;
     color: #fff;
     padding: 5px;
+}
+
+
+.descContainer{
+
+    background-color: #fff;
+}
+
+.descContainer P,h3,hr{
+    color: #002f34 !important;
 }

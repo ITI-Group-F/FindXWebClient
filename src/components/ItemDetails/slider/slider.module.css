@@ -6,3 +6,24 @@
 .item{
     background-color: black !important;
 }
+
+
+.imgContainer{
+    height: 100%;
+}
+
+.slideImg{
+    height: 70%;
+    width: 100%;
+}
+
+.wrapperContainer{
+    height: 100%;
+}
+
+.sliderContainer{
+
+     font-family:  'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+     border: 1px solid rgba(0,47,52,.36);
+}
+

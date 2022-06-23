@@ -6,8 +6,8 @@ import ItemSlider from "../components/ItemDetails/slider/slider";
 
 export default function ItemDetailsPage() {
   return (
-    <div style={{backgroundColor:"#314D63"}}>
-        <div className={`row g-0 d-flex`}>
+    <div >
+        <div className={`row g-0 d-flex justify-content-around`}>
 
         <ItemSlider/>
       <Details/>
