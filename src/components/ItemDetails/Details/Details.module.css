@@ -1,12 +1,15 @@
 .itm_details_Con{
 
-    font-family: 'Cairo', sans-serif;
-    color: #fff;
+    font-family:  'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  
+    background-color: #fff;
+    border: 1px solid rgba(0,47,52,.36);
 }
-/* .fontDetails{
 
-    font-size: 1vw;
-} */
+.itm_details_Con p ,h3,h6{
+
+    color: #002f34 !important;
+}
 
 
 

@@ -5,12 +5,12 @@ import MapLocation from "../../Map/MapLocation"
 import SendIcon from '@mui/icons-material/Send';
 export default function Details() {
   return (
-    <div style={{backgroundColor:'#314D63'}} className={`col-md-7 col-12 d-flex flex-column justify-content-between ${DetailsStyle.itm_details_Con}`}>
+    <div  className={`col-md-6 col-12 d-flex flex-column justify-content-between ${DetailsStyle.itm_details_Con}`}>
 
         <div className={`ms-3 p-4 d-flex justify-content-between row g-0`}>
 
-   <div className={`col-md-6   col-12`}>
-      <h5>Details</h5><hr /><br />
+   <div className={`col-lg-6   col-12`}>
+      <h3 style={{color:'#000000'}}>Details</h3><hr /><br />
       <h6>Category/SubCategory</h6>
         <div className={`ms-4`}>
               <p> <strong>Title: </strong>Lorem.</p>
@@ -21,8 +21,11 @@ export default function Details() {
   </div>
 
 
-  <div className={`col-md-5  col-12 `}>
-    
+  <div className={`col-lg-5  col-12 `}>
+    <div className={`text-center`}>
+      <h3>Found Location</h3>
+      <hr />
+    </div>
      <MapLocation/>
   </div>
         

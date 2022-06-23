@@ -12,7 +12,7 @@ const ItemSlider=()=>{
 
 
 return (
-<div className=" col-md-5 col-sm-12">
+<div className={ `col-md-5 col-sm-12 ${sliderStyles.sliderContainer}`}>
 <Carousel activeIndex={index} onSelect={handleSelect}>
       <Carousel.Item style={{height:'100%'}} className={sliderStyles.item}>
           <div className={`${sliderStyles.wrapperContainer}`} >
