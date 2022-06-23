@@ -51,9 +51,8 @@ function App() {
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer></Footer>
-<ItemDetailsPage/>
+
     
-      <Footer></Footer>
 
     </>
 
