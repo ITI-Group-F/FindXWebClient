@@ -16,7 +16,7 @@ return (
 <Carousel activeIndex={index} onSelect={handleSelect}>
       <Carousel.Item style={{height:'100%'}} className={sliderStyles.item}>
           <div className={`${sliderStyles.wrapperContainer}`} >
-            <div   className={`w-75 mx-auto ${sliderStyles.imgContainer} `}>
+            <div   className={`w-75 mx-auto d-flex align-items-center ${sliderStyles.imgContainer} `}>
               <img className={`${sliderStyles.slideImg}`}
                   src="https://m.media-amazon.com/images/I/41A+0FWSUML._AC_SY780_.jpg"
                   alt="Third slide"
@@ -29,7 +29,7 @@ return (
 
       <Carousel.Item style={{height:'100%'}} className={sliderStyles.item}>
           <div className={`${sliderStyles.wrapperContainer}`} >
-            <div   className={`w-75 mx-auto ${sliderStyles.imgContainer} `}>
+            <div   className={`w-75 mx-auto d-flex align-items-center ${sliderStyles.imgContainer} `}>
               <img className={`${sliderStyles.slideImg}`}
                   src="https://m.media-amazon.com/images/I/41A+0FWSUML._AC_SY780_.jpg"
                   alt="Third slide"
@@ -43,7 +43,7 @@ return (
 
       <Carousel.Item style={{height:'100%'}} className={sliderStyles.item}>
           <div className={`${sliderStyles.wrapperContainer}`} >
-            <div   className={`w-75 mx-auto ${sliderStyles.imgContainer} `}>
+            <div   className={`w-75 mx-auto d-flex align-items-center ${sliderStyles.imgContainer} `}>
               <img className={`${sliderStyles.slideImg}`}
                   src="https://m.media-amazon.com/images/I/41A+0FWSUML._AC_SY780_.jpg"
                   alt="Third slide"
