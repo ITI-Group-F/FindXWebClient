@@ -19,6 +19,7 @@ export default function Messenger(props) {
         const response = await API.get(`/chathistory/${userId}`);
         console.log(response.data[0]);
         setconvs(response.data);
+        setconvs(converstions);
       } catch (error) {
         console.log(error);
       }
@@ -45,10 +46,7 @@ export default function Messenger(props) {
             data-chat="perosn1"
             key={conv._id}
           >
-            <img
-              src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/thomas.jpg"
-              alt=""
-            />
+            <img src="/img/av.png" alt="" />
             <span className="name">{SenderFullName}</span>
             <span className="time">{lastMessageTime}</span>
             <span className="preview">{lastMessage.content}</span>
