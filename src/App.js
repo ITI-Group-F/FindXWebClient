@@ -38,20 +38,20 @@ function App() {
     <>
       <Navbar></Navbar>
       <Routes>
-      
-        <Route path="/" element={  <ItemDetailsPage/>} />       
+
+        <Route path="/" element={<ItemDetailsPage />} />
         <Route path="login" element={<Login setToken={setToken} />} />
         <Route path="register" element={<Register setToken={setToken} />} />
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />
         <Route path="post" element={<Post />} />
-        <Route path="profile" element={<Profile/>} />
-        <Route path="chat" element={<Messenger OwnerId="1"/>} />
-        <Route path="items" element={<Items/>} />
-        <Route path="*" element={<NotFound />} />       
+        <Route path="profile" element={<Profile />} />
+        <Route path="chat" element={<Messenger OwnerId="ab34115c-bd2f-4ec2-abbc-c5646cd62ecb" />} />
+        <Route path="items" element={<Items />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer></Footer>
-    
+
     </>
 
   );
