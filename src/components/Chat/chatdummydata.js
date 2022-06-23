@@ -14,7 +14,14 @@ export let converstions = [
     messages: [
       {
         _id: "1",
-        content: "hello",
+        content: "yo",
+        sendDate: "2022-06-19T11:11:27.861+00:00",
+        senderId: "",
+        seen: false,
+      },
+      {
+        _id: "2",
+        content: "not hello :(",
         sendDate: "2022-06-19T11:11:27.861+00:00",
         senderId: "",
         seen: false,
@@ -42,6 +49,13 @@ export let converstions = [
         senderId: "",
         seen: false,
       },
+      {
+        _id: "2",
+        content: "what do you want ",
+        sendDate: "2022-06-19T11:11:27.861+00:00",
+        senderId: "",
+        seen: false,
+      },
     ],
   },
 
@@ -60,7 +74,7 @@ export let converstions = [
     messages: [
       {
         _id: "1",
-        content: "hello",
+        content: "do whatever 123",
         sendDate: "2022-06-19T11:11:27.861+00:00",
         senderId: "",
         seen: false,

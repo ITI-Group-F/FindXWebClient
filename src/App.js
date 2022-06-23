@@ -46,7 +46,7 @@ function App() {
         <Route path="contact" element={<Contact />} />
         <Route path="post" element={<Post />} />
         <Route path="profile" element={<Profile/>} />
-        <Route path="chat" element={<Messenger/>} />
+        <Route path="chat" element={<Messenger OwnerId="1"/>} />
         <Route path="items" element={<Items/>} />
         <Route path="*" element={<NotFound />} />       
       </Routes>
