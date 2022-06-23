@@ -6,3 +6,18 @@
 .item{
     background-color: black !important;
 }
+
+
+.imgContainer{
+    height: 100%;
+}
+
+.slideImg{
+    height: 100%;
+    width: 100%;
+}
+
+.wrapperContainer{
+    height: 100%;
+}
+

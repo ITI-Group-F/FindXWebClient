@@ -36,7 +36,7 @@ function App() {
   return (
 
     <>
-      <Navbar></Navbar>
+      {/* <Navbar></Navbar>
       <Routes>
       
         <Route path="/" element={  <ItemDetailsPage/>} />       
@@ -50,9 +50,11 @@ function App() {
         <Route path="items" element={<Items/>} />
         <Route path="*" element={<NotFound />} />       
       </Routes>
-      <Footer></Footer>
+      <Footer></Footer> */}
+<ItemDetailsPage/>
     
     </>
+
 
   );
 }
