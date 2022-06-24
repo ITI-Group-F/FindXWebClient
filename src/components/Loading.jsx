@@ -1,11 +1,14 @@
-import { Box, C, CircularProgress } from "@mui/material";
+import { Box, C, CircularProgress, Typography } from "@mui/material";
 import React from "react";
 
 const Loading = () => {
   return (
     <>
       <Box style={{ marginTop: 180 }}>
-        <CircularProgress />
+        <CircularProgress color="success" />
+        <Typography color="success" variant="h5" gutterBottom component="div">
+          Loading...
+        </Typography>
       </Box>
     </>
   );
