@@ -1,9 +1,7 @@
 import './App.css';
 import React, { lazy, useState, Suspense } from 'react';
-import Login from './components/auth/Login';
 import useToken from './hooks/useToken';
 import { Routes, Route, Link, Router } from "react-router-dom";
-import Register from './components/auth/Register';
 import NotFound from './components/NotFound';
 import Navbar from './components/layout/NavBar/Navbar';
 import About from './components/about/about';
@@ -16,12 +14,13 @@ import Items from './components/Items/items'
 import ItemDetailsPage from "./pages/ItemDetails"
 import Loading from './pages/Loading';
 
-// Lazy Import
-const Messenger = lazy(() => import('./pages/Messenger'));
+// Modules
+import AuthModule from './modules/AuthModule';
+import ChatModule from './modules/ChatModule';
 
 
 function App() {
-  const { token, setToken } = useToken();
+
 
   // if (!token) {
   //   return (
@@ -37,13 +36,12 @@ function App() {
         <Navbar></Navbar>
         <Routes>
           <Route path="/" element={<ItemDetailsPage />} />
-          <Route path="login" element={<Login setToken={setToken} />} />
-          <Route path="register" element={<Register setToken={setToken} />} />
+          <Route path='auth/*' element={<AuthModule />} />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
           <Route path="post" element={<Post />} />
           <Route path="profile" element={<Profile />} />
-          <Route path="chat" element={<Messenger />} />
+          <Route path='chat/*' element={<ChatModule />} />
           <Route path="items" element={<Items />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -21,12 +21,12 @@ export default function Navbar() {
                 </Link>
               </li>
               <li>
-                <Link className="link" to="/login" data-item="Login">
+                <Link className="link" to="/auth/login" data-item="Login">
                   Login
                 </Link>
               </li>
               <li>
-                <Link className="link" to="/register" data-item="Register">
+                <Link className="link" to="/auth/register" data-item="Register">
                   Register
                 </Link>
               </li>
@@ -41,10 +41,7 @@ export default function Navbar() {
               <PopupState variant="popover" popupId="hamburger">
                 {(popupState) => (
                   <React.Fragment>
-                    <IconButton
-               
-                      {...bindTrigger(popupState)}
-                    >
+                    <IconButton {...bindTrigger(popupState)}>
                       <MenuRoundedIcon fontSize="large" />
                     </IconButton>
 
