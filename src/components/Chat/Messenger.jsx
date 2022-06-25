@@ -86,7 +86,7 @@ export default function Messenger() {
     else OwnerisTheSender = false;
     let Other = OwnerisTheSender ? conv.receiver : conv.sender;
     console.log(Other);
-    let otherFullName = Other.FirstName + " " + Other.LastName;
+    let otherFullName = Other.firstName + " " + Other.lastName;
     // let lastMessage = conv.messages[conv.messages.length - 1];
     // let lastMessageTime = lastMessage.sendDate.split("T")[1].slice(0,5);
 

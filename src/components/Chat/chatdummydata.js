@@ -3,8 +3,8 @@ export let converstions = [
     _id: "1",
     sender: {
         _id:"22",
-        FirstName:"Ahmed",
-        LastName:"Khaled"
+        firstName:"حمبوله",
+        lastName:"الشمه"
     },
     receiver: {
         _id:"22",
@@ -33,8 +33,8 @@ export let converstions = [
     _id: "2",
     sender: {
         _id:"22",
-        FirstName:"Ahmed",
-        LastName:"Khaled"
+        firstName:"Ahmed",
+        lastName:"Khaled"
     },
     receiver: {
         _id:"22",
@@ -63,8 +63,8 @@ export let converstions = [
     _id: "3",
     sender: {
         _id:"22",
-        FirstName:"Ahmed",
-        LastName:"Khaled"
+        firstName:"Ahmed",
+        lastName:"Khaled"
     },
     receiver: {
         _id:"22",
