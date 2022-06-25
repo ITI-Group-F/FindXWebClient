@@ -12,7 +12,6 @@ import Post from './components/post/post';
 import Profile from './components/profile/profile'
 import Footer from './components/Footer/Footer';
 import Items from './components/Items/items'
-
 import ItemDetailsPage from "./pages/ItemDetails"
 import Loading from './pages/Loading';
 
@@ -44,7 +43,7 @@ function App() {
           <Route path="post" element={<Post />} />
           <Route path="profile" element={<Profile />} />
           <Route path="chat" element={<Messenger />} />
-          <Route path="items" element={<Items />} />
+          <Route path="items" element={<Items />} />         
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer></Footer>

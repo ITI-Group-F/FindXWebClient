@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Box, Button, FormControl, TextField, Typography,Input,InputAdornment,InputLabel,Avatar,Alert,RadioGroup,FormControlLabel,Radio,FormLabel } from "@mui/material";
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import Location  from '../getlocation/Location';
 export default function Posts(){
 
 
@@ -216,16 +216,14 @@ export default function Posts(){
             
             {/*multiple image upload  */}
             <label for="formFileMultiple" class="form-label">Item Image</label>
-            <input  required="required" class="form-control" type="file" id="formFileMultiple" multiple />
-              
-
-
+            <input  required="required" class="form-control" type="file" id="formFileMultiple" multiple />            
               {/* Details Section */}
             <hr/>
-          <h3>Review Your Details</h3>
-
-            
-
+          <h3>Item location (Click And Drag The Marker Or Search By Location Name)</h3>
+          <Location></Location>
+          <br></br>
+          <br></br>
+          <h3>Review Your Details</h3>          
           <label  htmlFor="location">Your Name</label>
           <TextField name="name" onChange={setValue} fullWidth label="your name" id="fullWidth"  maxLength="20"  required="required"/>
 
