@@ -1,7 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import DescriptionStyle from "./Description.module.css"
 import "../itemDetails.css"
 export default function Description() {
+
+  useEffect(()=>{
+    console.log('firs')
+  })
+  useEffect(()=>{
+    console.log('ss')
+  },[])
+
+  useEffect(()=>{
+    /*
+    Query logic
+    */
+    console.log('i fire once');
+},[]);
+
   return (
 <div  className={`col ${DescriptionStyle.descContainer}`}>
 

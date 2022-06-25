@@ -3,7 +3,12 @@ import DetailsStyle from '../Details/Details.module.css'
 import Button from '@mui/material/Button';
 import MapLocation from "../../Map/MapLocation"
 import SendIcon from '@mui/icons-material/Send';
+// import itemsContext from "../../../Contexts/itemsContext";
 export default function Details() {
+
+
+
+  
   return (
     <div  className={`col-md-6 col-12 d-flex flex-column justify-content-between ${DetailsStyle.itm_details_Con}`}>
 
@@ -37,7 +42,7 @@ export default function Details() {
         <div className={`mb-2`} style={{textAlign:'left'}}>
 
         {/* it will be send message or Edit post depends on the case  */}
-        <Button color='success' className='mx-2' variant="contained">Send Message &nbsp;<SendIcon/></Button>
+        <Button  color='success' className='mx-2' variant="contained">Send Message &nbsp;<SendIcon/></Button>
        
 
 
