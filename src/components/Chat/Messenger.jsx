@@ -1,53 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Messenger.scss";
-import { converstions } from "./chatdummydata";
 import { useState, useEffect, useRef } from "react";
-import API from "../../Services/api";
-import { HubConnection, HubConnectionBuilder } from "@microsoft/signalr";
+import ChatContext from "../../Contexts/ChatContext";
 
-export default function Messenger(props) {
-  const [connection, setConnection] = useState(null);
+export default function Messenger() {
+  const { conversations, connection, ownerId } = useContext(ChatContext);
   const [message, setMessage] = useState("");
   let [loadedChat, setLoadedChat] = useState(<>You have no Messages</>);
   let [OtherFullName, seOtherFullName] = useState("User");
   let chatRef = useRef(null);
   let currentContactRef = useRef(null);
   let prevContactRef = useRef(null);
-
-  let [convs, setconvs] = useState(converstions);
-  useEffect(() => {
-    const fetchApi = async () => {
-      try {
-        let userId = "ab34115c-bd2f-4ec2-abbc-c5646cd62ecb";
-        const response = await API.get(`/chathistory/${userId}`);
-        console.log(response.data[0]);
-        setconvs(response.data);
-      } catch (error) {
-        console.log(error);
-        setconvs(converstions);
-      }
-    };
-    fetchApi();
-  }, []);
-
-  useEffect(() => {
-    const signalRConnection = new HubConnectionBuilder()
-      .withUrl("https://localhost:7085/hubs/chat")
-      .withAutomaticReconnect()
-      .build();
-
-    signalRConnection
-      .start()
-      .then(() =>
-        signalRConnection.invoke(
-          "CreatePrivateGroupForUserAsync",
-          props.OwnerId
-        )
-      )
-      .then(() => {
-        setConnection(signalRConnection);
-      });
-  }, []);
 
   useEffect(() => {
     if (connection) {
@@ -61,7 +24,7 @@ export default function Messenger(props) {
     if (connection) {
       connection.invoke(
         "SendMessageToGroupAsync",
-        props.OwnerId,
+        ownerId,
         "557e746a-694b-4dc2-80fb-fe25d6b880b6",
         message
       );
@@ -69,7 +32,7 @@ export default function Messenger(props) {
   };
 
   let populateContact = () => {
-    return convs.map((conv) => {
+    return conversations.map((conv) => {
       let SenderFullName =
         conv.receiver.firstName + " " + conv.receiver.lastName;
       let lastMessage = conv.messages[conv.messages.length - 1];
@@ -119,7 +82,7 @@ export default function Messenger(props) {
    */
   let populateChat = (conv) => {
     let OwnerisTheSender = true;
-    if (props.OwnerId === conv.sender.id) OwnerisTheSender = true;
+    if (ownerId === conv.sender.id) OwnerisTheSender = true;
     else OwnerisTheSender = false;
     let Other = OwnerisTheSender ? conv.receiver : conv.sender;
     console.log(Other);
@@ -128,13 +91,12 @@ export default function Messenger(props) {
     // let lastMessageTime = lastMessage.sendDate.split("T")[1].slice(0,5);
 
     let msgs = conv.messages.map((msg) => {
-      if (props.OwnerId === msg.senderId) {
+      if (ownerId === msg.senderId) {
         return <div className="bubble me">{msg.content}</div>;
       } else {
         return <div className="bubble you">{msg.content}</div>;
       }
     });
-    console.log("hit");
     let chatToLoad = (
       <div className="chat" data-chat={conv._id} ref={chatRef}>
         <div className="conversation-start">
