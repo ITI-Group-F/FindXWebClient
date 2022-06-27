@@ -8,7 +8,6 @@ import About from './components/about/about';
 import Contact from './components/contact/contact';
 import Post from './components/post/post';
 import Profile from './components/profile/profile'
-import Footer from './components/Footer/Footer';
 import Items from './components/Items/items'
 
 import ItemDetailsPage from "./pages/ItemDetails"
@@ -17,11 +16,10 @@ import Loading from './pages/Loading';
 // Modules
 import AuthModule from './modules/AuthModule';
 import ChatModule from './modules/ChatModule';
+import useClaims from './hooks/useClaims';
 
 
 function App() {
-
-
   // if (!token) {
   //   return (
   //     <NativeBaseProvider>
@@ -35,7 +33,8 @@ function App() {
       <Suspense fallback={<Loading />}>
         <Navbar></Navbar>
         <Routes>
-          <Route path="/" element={<ItemDetailsPage />} />
+          <Route path="/" element={<>Home</>} />
+          <Route path="/details" element={<ItemDetailsPage />} />
           <Route path='auth/*' element={<AuthModule />} />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
@@ -45,7 +44,6 @@ function App() {
           <Route path="items" element={<Items />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-        {/* <Footer></Footer> */}
       </Suspense>
     </>
   );

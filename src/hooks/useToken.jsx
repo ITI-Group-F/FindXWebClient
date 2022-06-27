@@ -13,9 +13,10 @@ export default function useToken() {
   const saveToken = (userToken) => {
     const claims = jwt(userToken);
     sessionStorage.setItem("token", JSON.stringify(userToken));
-    sessionStorage.setItem("userId", JSON.stringify(claims.userId));
-    sessionStorage.setItem("userName", JSON.stringify(claims.userName));
-    sessionStorage.setItem("email", JSON.stringify(claims.email));
+    sessionStorage.setItem("userId", claims.userId);
+    sessionStorage.setItem("userName", claims.userName);
+    sessionStorage.setItem("email", claims.email);
+    sessionStorage.setItem("roles", claims.roles);
     setToken(userToken.token);
   };
 

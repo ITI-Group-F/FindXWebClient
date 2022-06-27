@@ -171,10 +171,10 @@ export default function Login({ setToken }) {
             </Button>
           </Box>
           <Box style={{ marginBottom: "100px" }}>
-            <Typography  variant="subtitle2" component="span">
+            <Typography variant="subtitle2" component="span">
               Not a member?
             </Typography>
-            <Link href="/login" style={{ marginLeft: 5  }}>
+            <Link href="/login" style={{ marginLeft: 5 }}>
               Register
             </Link>
           </Box>
