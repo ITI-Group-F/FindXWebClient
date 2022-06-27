@@ -6,13 +6,12 @@ export default function useClaims() {
       userId: sessionStorage.getItem("userId"),
       userName: sessionStorage.getItem("userName"),
       email: sessionStorage.getItem("email"),
+      roles: sessionStorage.getItem("roles"),
     };
     return claims;
   };
 
   const [claims, setClaims] = useState(getClaims());
 
-  return {
-    claims,
-  };
+  return claims;
 }
