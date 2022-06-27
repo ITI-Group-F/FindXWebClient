@@ -5,8 +5,10 @@ import ChatContext from "../../Contexts/ChatContext";
 
 export default function Messenger() {
   const { conversations, connection, ownerId } = useContext(ChatContext);
+  const [withId, setWithId] = useState(null);
   const [message, setMessage] = useState("");
   let [loadedChat, setLoadedChat] = useState(<>You have no Messages</>);
+  const [msgs, setMsgs] = useState(null);
   let [OtherFullName, seOtherFullName] = useState("User");
   let chatRef = useRef(null);
   let currentContactRef = useRef(null);
@@ -15,7 +17,17 @@ export default function Messenger() {
   useEffect(() => {
     if (connection) {
       connection.on("ReceiveMessage", (sender, message) => {
-        alert(`${sender} says: ${message}`);
+        let msg;
+        if (sender === withId) {
+          if (ownerId === sender) {
+            msg = <div className="bubble me">{message.content}</div>;
+          } else {
+            msg = <div className="bubble you">{message.content}</div>;
+          }
+          setMsgs([...msgs, msg]);
+        } else {
+          alert(`${sender} says: ${message}`);
+        }
       });
     }
   }, [connection]);
@@ -33,8 +45,14 @@ export default function Messenger() {
 
   let populateContact = () => {
     return conversations.map((conv) => {
-      let SenderFullName =
-        conv.receiver.firstName + " " + conv.receiver.lastName;
+      console.log(conv);
+      let SenderFullName;
+      if (conv.receiver.id === ownerId) {
+        SenderFullName = conv.sender.firstName + " " + conv.sender.lastName;
+      } else {
+        SenderFullName = conv.receiver.firstName + " " + conv.receiver.lastName;
+      }
+      console.log(SenderFullName);
       let lastMessage = conv.messages[conv.messages.length - 1];
       let lastMessageTime = lastMessage.sendDate.split("T")[1].slice(0, 5);
 
@@ -86,22 +104,22 @@ export default function Messenger() {
     else OwnerisTheSender = false;
     let Other = OwnerisTheSender ? conv.receiver : conv.sender;
     console.log(Other);
+    setWithId(Other.id);
     let otherFullName = Other.firstName + " " + Other.lastName;
     // let lastMessage = conv.messages[conv.messages.length - 1];
     // let lastMessageTime = lastMessage.sendDate.split("T")[1].slice(0,5);
 
-    let msgs = conv.messages.map((msg) => {
+    let toLoadMsgs = conv.messages.map((msg) => {
       if (ownerId === msg.senderId) {
         return <div className="bubble me">{msg.content}</div>;
       } else {
         return <div className="bubble you">{msg.content}</div>;
       }
     });
+    setMsgs(toLoadMsgs);
     let chatToLoad = (
       <div className="chat" data-chat={conv._id} ref={chatRef}>
-        <div className="conversation-start">
-          {/* <span>Today, 6:48 AM</span> */}
-        </div>
+        <div className="conversation-start"></div>
         {msgs}
       </div>
     );

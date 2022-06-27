@@ -6,15 +6,14 @@ import { HubConnectionBuilder } from "@microsoft/signalr";
 const ChatContext = createContext();
 
 const ChatContextProvider = ({ children }) => {
-  let ownerId = "ab34115c-bd2f-4ec2-abbc-c5646cd62ecb";
+  let ownerId = "1c47a376-1267-4892-87f7-e0efbc66fa9f";
   const [connection, setConnection] = useState(null);
   let [conversations, setConversations] = useState(converstions);
 
   useEffect(() => {
     const fetchApi = async () => {
       try {
-        let userId = "ab34115c-bd2f-4ec2-abbc-c5646cd62ecb";
-        const response = await API.get(`/chathistory/${userId}`);
+        const response = await API.get(`/chathistory/${ownerId}`);
         console.log(response.data[0]);
         setConversations(response.data);
       } catch (error) {
