@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Box, Button, FormControl, TextField, Typography,Input,InputAdornment,InputLabel,Avatar,Alert,RadioGroup,FormControlLabel,Radio,FormLabel } from "@mui/material";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Location  from '../getlocation/Location';
+
+
 export default function Posts(){
 
 
@@ -24,7 +25,7 @@ export default function Posts(){
 
     const validatedesc = () => {
       let isdescValid = false;
-      if (formData.description.length>=200 && formData.description.length <=300) {
+      if (formData.description?.length>=200 && formData.description?.length <=300) {
         isdescValid = false;
         setShowdescErr(true);
         setdescErr("description is too long max is 300");}
@@ -36,7 +37,7 @@ export default function Posts(){
              
         
         let iscategoriesValid = false;
-          if(!formData.name||formData.name.length<=1||!formData.phone||formData.phone.length<=1||!formData.address||formData.address.length<=1 )
+          if(!formData.name||formData.name?.length<=1||!formData.phone||formData.phone?.length<=1||!formData.address||formData.address?.length<=1 )
          {
             iscategoriesValid=false;
             setShowcatErr(true);
@@ -70,8 +71,8 @@ export default function Posts(){
                     <hr />
                   <h4 htmlFor="category">Select Category</h4>
 
-                    <select  name="category" id="category" required="required"   onChange={(e)=>(handleshow(e))} class="form-select" aria-label="Default select example">
-                    <option selected value="1" disabled="disabled" >Select Category</option> 
+                    <select  name="category" id="category" required   onChange={(e)=>(handleshow(e))} className="form-select" aria-label="Default select example">
+                    <option selected="selected" value="1" disabled="disabled" >Select Category</option> 
                     <option value="2">Animals</option>
                     <option value="3">Belongings</option>
                     <option value="4">Electronics</option>
@@ -91,7 +92,7 @@ export default function Posts(){
                     <div className="animalsubcategory">
 
                     <h6 htmlFor="category">Select Category</h6>
-                    <select   required="required" class="form-select" aria-label="Default select example">
+                    <select   required className="form-select" aria-label="Default select example">
                           <option  disabled="disabled">Select Category</option>
                               <option>cats</option>
                               <option>Dogs</option>
@@ -106,7 +107,7 @@ export default function Posts(){
               maxLength="3"
              type="number"
             id="standard-adornment-amount"
-            required="required"
+            required
             startAdornment={<InputAdornment position="start">Age</InputAdornment>}
           />
         </FormControl>
@@ -123,7 +124,7 @@ export default function Posts(){
                     <div className="Belongsubcategory">
 
                     <h6 htmlFor="category">Select Category</h6>
-                    <select  required="required"  class="form-select" aria-label="Default select example">
+                    <select  required  className="form-select" aria-label="Default select example">
                       <option disabled="disabled">Select Category</option>
                       <option>Personal cards and papers</option>
                           <option>wallets</option>
@@ -148,7 +149,7 @@ export default function Posts(){
                     <div className="electronicsubcategory">
                       
                    <h6 htmlFor="category">Select Category</h6>
-            <select   required="required" class="form-select" aria-label="Default select example"
+            <select   required className="form-select" aria-label="Default select example"
                   >
                     <option disabled="disabled">Select Category</option>
                     <option>Mobiles</option>
@@ -165,7 +166,7 @@ export default function Posts(){
                   <FormControl fullWidth sx={{ m: 1 }} variant="standard">
           <InputLabel  htmlFor="standard-adornment-amount">Brand Name</InputLabel>
           <Input
-              required="required"
+              required
               maxLength="20"
             id="standard-adornment-amount"
             startAdornment={<InputAdornment position="start">Brand</InputAdornment>}
@@ -185,8 +186,8 @@ export default function Posts(){
   <RadioGroup
     aria-labelledby="demo-controlled-radio-buttons-group"
     name="controlled-radio-buttons-group"
-    class="required"
-    required="required"
+    className="required"
+    required
     sx={{
       display: "inline",
       
@@ -198,12 +199,12 @@ export default function Posts(){
 </FormControl>
 
                     
-          <TextField  required="required" maxLength="20" fullWidth label="Item Title" id="fullWidth" />
+          <TextField  required maxLength="20" fullWidth label="Item Title" id="fullWidth" />
 
          
-          <div class="mb-3">
-      <label for="exampleFormControlTextarea1"  class="form-label">Item Description</label> 
-      <textarea name="description"  required="required" onChange={setValue} maxLength="250" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>     
+          <div className="mb-3">
+      <label htmlFor="exampleFormControlTextarea1"  className="form-label">Item Description</label> 
+      <textarea name="description"  required onChange={setValue} maxLength="250" className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>     
         </div> 
 
         {showdescErr && (
@@ -215,23 +216,20 @@ export default function Posts(){
           )}
             
             {/*multiple image upload  */}
-            <label for="formFileMultiple" class="form-label">Item Image</label>
-            <input  required="required" class="form-control" type="file" id="formFileMultiple" multiple />            
+            <label htmlFor="formFileMultiple" className="form-label">Item Image</label>
+            <input  required className="form-control" type="file" id="formFileMultiple" multiple />            
               {/* Details Section */}
             <hr/>
-          <h3>Item location (Click And Drag The Marker Or Search By Location Name)</h3>
-          <Location></Location>
-          <br></br>
-          <br></br>
+
           <h3>Review Your Details</h3>          
           <label  htmlFor="location">Your Name</label>
-          <TextField name="name" onChange={setValue} fullWidth label="your name" id="fullWidth"  maxLength="20"  required="required"/>
+          <TextField name="name" onChange={setValue} fullWidth label="your name" id="fullWidth"  maxLength="20"  required/>
 
           <label  htmlFor="location">Your Phone Number</label>
-          <TextField name="phone" onChange={setValue} fullWidth label="your phone number" id="fullWidth" type="number" maxLength="13"   required="required" />
+          <TextField name="phone" onChange={setValue} fullWidth label="your phone number" id="fullWidth" type="number" maxLength="13"   required />
 
           <label    htmlFor="location">Your Address</label>
-          <TextField name="address" onChange={setValue} fullWidth label="your Address" id="fullWidth"  maxLength="30"   required="required"/>
+          <TextField name="address" onChange={setValue} fullWidth label="your Address" id="fullWidth"  maxLength="30"   required/>
 
           {showcatErr && (
             <center>
@@ -245,8 +243,8 @@ export default function Posts(){
 
           <hr/>
          
-          <div class="d-grid gap-2">
-          <button  class="btn btn-success" type="button">Post Now</button>
+          <div className="d-grid gap-2">
+          <button  className="btn btn-success" type="button">Post Now</button>
     </div>
 
                    </div>
