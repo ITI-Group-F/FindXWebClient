@@ -15,33 +15,33 @@ function Contact() {
             </div>
             <div class="count">
                 <i class="far fa-copy"></i>
-                <h3>ahmedelgohary</h3>
+                <h3>Ahmed Elgohary</h3>
                 <h5>ahmedelgohary3394@gmail.com</h5>
             </div>
             <div class="count">
                 <i class="fas fa-cloud-download-alt"></i>
-                <h3>ehab diab</h3>
+                <h3>Ehab Diab</h3>
                 <h5>ediab96@hotmail.com</h5>
             </div> 
             <div class="count">
                 <i class="fas fa-coffee"></i>
-                <h3>mohab</h3>
+                <h3>Mohab Elnajjar</h3>
                 <h5>mohabsoft21@outlook.com</h5>
             </div>
             <div className='edit'>
             <div class="count ml-3" >
                 <i class="fas fa-coffee"></i>
-                <h3>mohamedbibers</h3>
+                <h3>Mohamed Bibers</h3>
                 <h5>mohamedbibers2556@gmail.com</h5>
             </div>
             <div class="count">
                 <i class="fas fa-coffee"></i>
-                <h3>Abdullahelzayat</h3>
-                <h5>Abdullahelzayat23@outlook.com</h5>
+                <h3>Abdullah Elzayat</h3>
+                <h5>abdullahelzayat23@outlook.com</h5>
             </div>
             <div class="count">
                 <i class="fas fa-coffee"></i>
-                <h3>mohamed yousry</h3>
+                <h3>Mohamed Yousry</h3>
                 <h5>odsh97@gmail.com</h5>
             </div>
             </div>

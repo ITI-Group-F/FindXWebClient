@@ -9,96 +9,69 @@ import { Box, Link } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import { deepOrange, deepPurple } from '@mui/material/colors';
-import api from '../../Services/api';
+import API from '../../Services/api';
 import TextField from '@mui/material/TextField';
+import { useContext, useEffect } from 'react';
+import itemsContext from '../../Contexts/itemsContext';
+import { ItemsProvider } from '../../Contexts/itemsContext';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 
 
 
-
-export default function MediaCard() {
-  return (
-    <>
-    
-    
-
-<Box sx={{ display: "flex", flexDirection: "row", flexWrap:"wrap" }}>
-        
-    <Card sx={{ maxWidth: 345, margin: "20px", paddingLeft:"10px" }}>
-      <Stack direction="row" spacing={2}>
-        
-        <Link>
-          <Avatar sx={{ bgcolor: deepPurple[500] }}>
-            {/* Clickable avatar to redirect to the users Profile */}
-          H
-          </Avatar>
-        </Link>
+export default function Items() {
+  let {allItems} = useContext(itemsContext);
+ 
+  //let {date,description,id,images,isLost,latitude,location,longitude,subCategory,superCategory,title,userId }= allItems
   
-      </Stack>
-      <CardMedia
-        sx={{paddingTop:"10px", zIndex:1 }}
-        component="img"
-        height="140"
-        image="https://pbs.twimg.com/media/CcKZlndUkAA0ziF.jpg"
-        alt="green iguana"
-      />
-
-      
-      
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          Lizard
-        </Typography>
-
-          <Link  variant="body2" color="text.secondary" style={{textDecoration:"none"}}>
-          {/* Clickable Description redirects to item's Details Page*/}
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
-          </Link>
-      </CardContent>
-    </Card>
-
-
-
-    {/*------------------------------------------------------------ */}
-
-
-
-    <Card sx={{ maxWidth: 345, margin: "20px", paddingLeft:"10px" }}>
-      <Stack direction="row" spacing={2}>
-        <Link>
-          <Avatar sx={{ bgcolor: deepPurple[500] }}>
-            {/* Clickable avatar to redirect to the users Profile */}
-          H
-          </Avatar>
-        </Link>
+  //let navigate = useNavigate();
   
-      </Stack>
-      <CardMedia
-        sx={{paddingTop:"10px", zIndex:1 }}
-        component="img"
-        height="140"
-        image="https://pbs.twimg.com/media/CcKZlndUkAA0ziF.jpg"
-        alt="green iguana"
-      />
+ let renderItems = allItems.map((res)=>{
 
-      
-      
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          Lizard
-        </Typography>
 
-          <Link  variant="body2" color="text.secondary" style={{textDecoration:"none"}}>
-          {/* Clickable Description redirects to item's Details Page*/}
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
+  let id = res.id;
+ 
+  return(
+  
+
+     <Box key={res.id} sx={{ display: "inline-flex", flexDirection: "row", flexWrap:"wrap" }}>
+          
+      
+      <Card sx={{ maxWidth: 345, margin: "20px", paddingLeft:"10px" }}>
+        <Stack direction="row" spacing={2}>
+          
+          <Link>
+            <Avatar sx={{ bgcolor: deepPurple[500] }}>
+              {/* Clickable avatar to redirect to the users Profile */}
+            H
+            </Avatar>
           </Link>
-      </CardContent>
-    </Card>
 
+        </Stack>
 
-</Box>
-</>
-  );
+        <NavLink to = {`details/${id}`}>
+
+        <CardMedia
+          sx={{paddingTop:"10px", zIndex:1 }}
+          component="img"
+          height="140"
+          image={res.images[0]}
+          alt={res.date}
+          /* onClick={()=>{navigate(`details/${id}`)}} */
+          />
+          </NavLink>
+        
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+              {res.title}
+          </Typography>
+          <Typography gutterBottom variant="h5" component="div">
+              {res.description}
+          </Typography>
+
+        </CardContent>
+      </Card>
+  </Box>
+)})  
+  return <div>{renderItems}</div>
 }

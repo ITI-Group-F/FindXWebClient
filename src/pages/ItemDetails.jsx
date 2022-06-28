@@ -2,7 +2,7 @@ import React from "react";
 import Details from "../components/ItemDetails/Details/Details";
 import Description from "../components/ItemDetails/Description/Description";
 import ItemSlider from "../components/ItemDetails/slider/slider";
-import { ItemstProvider } from "../Contexts/itemsContext";
+import { ItemsProvider } from "../Contexts/itemsContext";
 
 
 export default function ItemDetailsPage() {

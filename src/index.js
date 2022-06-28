@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import axios from 'axios';
 import useToken from './hooks/useToken';
+import { ItemsProvider } from './Contexts/itemsContext';
 
 
 
@@ -23,7 +24,12 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+<ItemsProvider>
+
+
+<App />
+</ItemsProvider>
+
     </BrowserRouter>
    </React.StrictMode>
 );

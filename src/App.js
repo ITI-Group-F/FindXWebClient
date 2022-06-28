@@ -35,8 +35,8 @@ function App() {
 
         <Navbar></Navbar>
         <Routes>
-          <Route path="/" element={<>Home</>} />
-          <Route path="/details" element={<ItemDetailsPage />} />
+        <Route path="/" element={<>Home</>} />
+          <Route path="details" element={<ItemDetailsPage />} />
           <Route path='auth/*' element={<AuthModule />} />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
@@ -44,6 +44,7 @@ function App() {
           <Route path="profile" element={<Profile />} />
           <Route path='chat/*' element={<ChatModule />} />
           <Route path="items" element={<Items />} />
+          <Route path="items/details/:id" element={<ItemDetailsPage />}/>
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>

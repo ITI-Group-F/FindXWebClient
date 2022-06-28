@@ -1,30 +1,34 @@
-import axios from "../Services/api";
+import API from "../Services/api";
 import { createContext, useCallback, useEffect, useMemo, useState } from "react";
 
+// how to deal with context api
+//1 - ** DON'T FORGET TO MAKE THE PROVIDER AS A PARENT TO YOUR COMPONENT**
+//2 - import useContext from "react" and itemsContext in your component 
+//3 - give itemsContext as a parameter to the useContext hook in your component i.e : useCoentxt(itemsContext)
+
 const itemsContext = createContext();
-                                     // how to deal with context api
-                 //1 - ** DON'T FORGET TO MAKE THE PROVIDER AS A PARENT TO YOUR COMPONENT**
-                 //2 - import useContext from "react" and itemsContext in your component 
-                 //3 - give itemsContext as a parameter to the useContext hook in your component i.e : useCoentxt(itemsContext)
-
-export const ItemstProvider = (props) =>{
-    const {children} = props;
-    
+export const ItemsProvider = (props) =>{
+    const {children}=props;
     //making a state and initialize it with null
-    const [items,setItems]=useState([]);
-
+    let [items,setItems]=useState([]);
+    let [allItems,setAllItems]=useState([]);
+    
     useEffect(()=>{
-        //gohary you will get items based on search condition and set items and also you will send me the id of selected item and the getItemById function
-        //please make sure that you are calling the right end point to get data
-        axios.get('/UserItems/ab34115c-bd2f-4ec2-abbc-c5646cd62ecb').then(data=>{
-            setItems(data);
-        }).catch(err=>{
-            //oops somthing might went wrong..
-            // route to our Error Page...
-
-        })
-    },[])
-
+        try{
+            
+            const data = async () => {
+                const back = await API.get(`/items/all`).then(response=>response.data)
+                //console.log(back);
+                setAllItems(back);
+    //{date,description,id,images,isLost,latitude,location,longitude,subCategory,superCategory,title,userId }= allItems
+            };
+            data();
+        }catch(error){
+            console.log(error + "from (/items/all) endpoint");
+        }
+        
+    },[]);
+        
 
     const getItemById=useCallback((id)=>{
 
@@ -36,11 +40,9 @@ export const ItemstProvider = (props) =>{
     },[items])
 
     //memoize obeject that contain context data and send to any one who use this context ...
-    const contextValue=useMemo(()=>({
-
-        getItemById,
-        items
-    }),[items,getItemById])
+   let contextValue=useMemo(()=>({
+        allItems
+    }),[allItems])
 
     return (
 
