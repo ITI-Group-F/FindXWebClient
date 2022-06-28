@@ -9,9 +9,9 @@ import Contact from './components/contact/contact';
 import Post from './components/post/post';
 import Profile from './components/profile/profile'
 import Items from './components/Items/items'
-
 import ItemDetailsPage from "./pages/ItemDetails"
 import Loading from './pages/Loading';
+import  BackTop from "./components/BackTop/BackTop"
 
 // Modules
 import AuthModule from './modules/AuthModule';
@@ -31,6 +31,8 @@ function App() {
   return (
     <>
       <Suspense fallback={<Loading />}>
+      <BackTop/>
+
         <Navbar></Navbar>
         <Routes>
           <Route path="/" element={<>Home</>} />
