@@ -3,12 +3,13 @@ import { Link } from "react-router-dom";
 import "./Navbar.scss";
 import Menu from "@mui/material/Menu";
 import PopupState, { bindTrigger, bindMenu } from "material-ui-popup-state";
-
+import Search from "../../Search1/Search"
 import IconButton from "@mui/material/IconButton";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 
 export default function Navbar() {
-  return (
+  return ( 
+                 
     <>
       <div className=".xnav">
         <section>
@@ -31,12 +32,12 @@ export default function Navbar() {
                 </Link>
               </li>
               <li>
-                <Link className="link" to="/contact" data-item="Contact">
+                <Link className="link" to="#" data-item="Contact">
                   Contact
                 </Link>
               </li>
+              <Search></Search>
             </ul>
-
             <div className="HammButton">
               <PopupState variant="popover" popupId="hamburger">
                 {(popupState) => (
@@ -44,8 +45,7 @@ export default function Navbar() {
                     <IconButton {...bindTrigger(popupState)}>
                       <MenuRoundedIcon fontSize="large" />
                     </IconButton>
-
-                    <Menu {...bindMenu(popupState)}>
+                     <Menu {...bindMenu(popupState)}>
                       <ul className="MobilMenuItems">
                         <li>
                           <Link
@@ -89,6 +89,9 @@ export default function Navbar() {
                         </li>
                       </ul>
                     </Menu>
+                    <div className="search"> 
+                    <Search></Search>
+                    </div>
                   </React.Fragment>
                 )}
               </PopupState>
