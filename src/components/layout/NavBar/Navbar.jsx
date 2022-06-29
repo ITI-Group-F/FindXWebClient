@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "./Navbar.scss";
 import Menu from "@mui/material/Menu";
 import PopupState, { bindTrigger, bindMenu } from "material-ui-popup-state";
-import Search from "../../Search1/Search"
+import Search from "../../Search/Search"
 import IconButton from "@mui/material/IconButton";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 
