@@ -1,5 +1,6 @@
 import API from "../Services/api";
 import { createContext, useCallback, useEffect, useMemo, useState } from "react";
+import Loading from "../components/Loading";
 
 // how to deal with context api
 //1 - ** DON'T FORGET TO MAKE THE PROVIDER AS A PARENT TO YOUR COMPONENT**
@@ -12,7 +13,6 @@ export const ItemsProvider = (props) =>{
     //making a state and initialize it with null
     let [items,setItems]=useState([]);
     let [allItems,setAllItems]=useState([]);
-    
     useEffect(()=>{
         try{
             
@@ -28,8 +28,6 @@ export const ItemsProvider = (props) =>{
         }
         
     },[]);
-        
-
     const getItemById=useCallback((id)=>{
 
         //after getting Data 
@@ -41,8 +39,9 @@ export const ItemsProvider = (props) =>{
 
     //memoize obeject that contain context data and send to any one who use this context ...
    let contextValue=useMemo(()=>({
-        allItems
-    }),[allItems])
+        allItems,
+        getItemById
+    }),[allItems,getItemById])
 
     return (
 
