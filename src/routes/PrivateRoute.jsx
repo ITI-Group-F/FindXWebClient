@@ -2,9 +2,12 @@ import { Navigate } from "react-router-dom";
 import useToken from "../hooks/useToken";
 
 const PrivateRoute = ({ children }) => {
-  const { token, setToken } = useToken();
+  const { token } = useToken();
 
-  return token ? <>{children}</> : <Navigate replace={true} to="/auth/login" />;
+  if (!token) {
+    return <Navigate to="/auth/login" />;
+  }
+  return <>{children}</>;
 };
 
 export default PrivateRoute;
