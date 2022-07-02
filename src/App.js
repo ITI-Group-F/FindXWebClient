@@ -35,15 +35,10 @@ function App() {
       <Suspense fallback={<Loading />}>
         <BackTop />
         <Navbar></Navbar>
-        <Loading/>
+        
         <Routes>
-<<<<<<< HEAD
-        <Route path="/" element={<>Home</>} />
-         <Route path="details" element={<ItemDetailsPage />} />
-=======
           <Route path="/" element={<>Home</>} />
           <Route path="details" element={<ItemDetailsPage />} />
->>>>>>> cb8de4d078b9304f813e5632c4484c3f17dea484
           <Route path='auth/*' element={<AuthModule />} />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
