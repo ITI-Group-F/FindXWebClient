@@ -13,6 +13,8 @@ export const ItemsProvider = (props) =>{
     //making a state and initialize it with null
     let [items,setItems]=useState([]);
     let [allItems,setAllItems]=useState([]);
+    let [allItemsLoading,setAllItemsLoading]=useState(true);
+    
     useEffect(()=>{
         try{
             
@@ -20,6 +22,7 @@ export const ItemsProvider = (props) =>{
                 const back = await API.get(`/items/all`).then(response=>response.data)
                 //console.log(back);
                 setAllItems(back);
+                setAllItemsLoading(false);
     //{date,description,id,images,isLost,latitude,location,longitude,subCategory,superCategory,title,userId }= allItems
             };
             data();
@@ -47,7 +50,7 @@ export const ItemsProvider = (props) =>{
 
     
         <itemsContext.Provider value={contextValue}>
-            {children}
+            {allItemsLoading ? <Loading/>:children}
         </itemsContext.Provider>
     );
 };

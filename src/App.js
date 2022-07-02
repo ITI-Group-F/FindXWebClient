@@ -12,6 +12,7 @@ import Items from './components/Items/items'
 import ItemDetailsPage from "./pages/ItemDetails"
 import Loading from './pages/Loading';
 import  BackTop from "./components/BackTop/BackTop"
+import RenderItems from './components/Items/allItems';
 
 // Modules
 import AuthModule from './modules/AuthModule';
@@ -44,7 +45,7 @@ function App() {
           <Route path="profile" element={<Profile />} />
           <Route path='chat/*' element={<ChatModule />} />
           <Route path="items" element={<Items />} />
-          <Route path="items/details/:id" element={<ItemDetailsPage />}/>
+          <Route path="details/:id" element={<ItemDetailsPage />}/>
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>

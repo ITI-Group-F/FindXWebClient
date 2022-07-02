@@ -15,80 +15,229 @@ import { useContext, useEffect, useState } from "react";
 import itemsContext from "../../Contexts/itemsContext";
 import { ItemsProvider } from "../../Contexts/itemsContext";
 import { NavLink, useNavigate } from "react-router-dom";
+import Loading from "../Loading";
+
 
 export default function Items() {
   let { allItems, getItemById } = useContext(itemsContext);
   //let {date,description,id,images,isLost,latitude,location,longitude,subCategory,superCategory,title,userId }= {...allItems}
-  //let navigate = useNavigate();
-  /////////////////////////////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////////////////////////////
-  let [subKey, setsubKey] = useState("Cat");
-  const setSubCat = (e) => {
-    setsubKey(e.target.value);
-    getSubCategories();
-  };
+  let [subKey, setsubKey] = useState(null);
+  let [superKey, setsuperKey] = useState(null);
+  let [underSubData, setunderSubData] = useState([]);
+  let [underSuperData, setunderSuperData] = useState([]);
+  
+  let [superLoading,setSuperLoading] = useState(true);
+  let [subLoading,setSubLoading] = useState(true);
+  
+  /*if subkey && allItems.filter((res)=>res.subCategory==="a14111cf-41e4-42f8-8c76-86a5f97668b5"
+    state mo3yna.map((res)=> etc) ///////// n7otha f elreturn elnha2y 5aaaals t7t
+    else  setSubLoading   setSuperLoading
+    allitems.map....................
+    Electronics
+    Animals
+    Belongings
+    Other
+    */
 
-  const getSubCategories = () => {
+/* let navigate = useNavigate();
+const redirect = ()=>{
+  navigate("/items",{replace: true});
+} */
+
+    const GetSuperCategories = () => {
+      
     try {
       const data = async () => {
-        const back = await API.get(`/Items/undersub/${subKey}`).then(
+        const back = await API.get(`/Items/undersup/${superKey}`).then(
           (response) => response.data
         );
-        console.log(back);
-        //setAllItems(back);
-        //{date,description,id,images,isLost,latitude,location,longitude,subCategory,superCategory,title,userId }= allItems
+        //console.log(back);
+        setunderSuperData(back);
+        setSuperLoading(false)
       };
       data();
     } catch (error) {
-      console.log(error + "from (/Items/undersub) endpoint");
+      console.log(error + "from (/Items/undersuper) endpoint");
     }
+     
+    
   };
-  let Subval = () => {
-    useEffect(() => {
-      // try {
-      //   const data = async () => {
-      //     const back = await API.get(`/Items/undersub/${subKey}`).then(
-      //       (response) => response.data
-      //     );
-      //     console.log(back);
-      //     //setAllItems(back);
-      //     //{date,description,id,images,isLost,latitude,location,longitude,subCategory,superCategory,title,userId }= allItems
-      //   };
-      //   data();
-      // } catch (error) {
-      //   console.log(error + "from (/Items/undersub) endpoint");
-      // }
-    }, []);
+/////////////////////////////////////////////////////////////
+
+
+  let Superval = () => {
+  
     return (
       <select
         name="sub"
         id="sub"
         defaultValue="Choose a Subcategory"
-        onChange={setSubCat}
+        onChange={SetSuperCat}
       >
-        <option value="Tablet">Tablet</option>
-        <option value="Mobile">Mobile</option>
-        <option value="Laptop">Laptop</option>
-        <option value="Bird">Bird</option>
-        <option value="Cat">Cat</option>
-        <option value="Dog">Dog</option>
+        <option disabled>Select a Super Category</option>
+        <option value="Electronics">Electronics</option>
+        <option value="Animals">Animals</option>
+        <option value="Belongings">Belongings</option>
+        <option value="Other">Other</option>
+        
+      </select>
+    );
+  };
+ 
+  let SetSuperCat = (e) => {
+    setsuperKey(e.target.value);
+    GetSuperCategories();
+    //navigate(`/supercategory/${superKey}`);
+  }
+  
+  let SuperValRen = 
+  underSuperData.map((res) => {
+    let id = res.id;
+    
+  return (
+    <Box
+      key={res.id}
+      sx={{ display: "inline-flex", flexDirection: "row", flexWrap: "wrap" }}
+    >
+      <Card sx={{ maxWidth: 345, margin: "20px", paddingLeft: "10px" }}>
+        <Stack direction="row" spacing={2}>
+          <Link>
+            <Avatar sx={{ bgcolor: deepPurple[500] }}>
+              {/* Clickable avatar to redirect to the users Profile */}H
+              </Avatar>
+              </Link>
+            </Stack>
+    
+            <NavLink to={`/details/${id}`}>
+              <CardMedia
+                sx={{ paddingTop: "10px", zIndex: 1 }}
+                component="img"
+                height="140"
+                image={`data:image/jpeg;base64,${res.images[0]}`}
+                alt={res.date}
+                /* onClick={()=>{navigate(`details/${id}`)}} */
+              />
+            </NavLink>
+    
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div">
+                {res.title}
+              </Typography>
+              <Typography gutterBottom variant="h5" component="div">
+                {res.description}
+              </Typography>
+            </CardContent>
+          </Card>
+        </Box>
+      );
+    });
+
+  
+  const GetSubCategories = () => {
+    try {
+      const data = async () => {
+        const back = await API.get(`/Items/undersub/${subKey}`).then(
+          (response) => response.data
+        );
+        //console.log(back);
+        setunderSubData(back);
+        setSubLoading(false)   
+      };
+      data();
+    } catch (error) {
+      console.log(error + "from (/Items/undersub) endpoint");
+    }
+     
+    
+  };
+
+  
+
+  let Subval = () => {
+  
+    return (
+      <select
+        name="sub"
+        id="sub"
+        defaultValue="Choose a Subcategory"
+        onChange={SetSubCat}
+      >
+        <option disabled>selecet a subcategory</option>
+        <option value="Tablets">Tablets</option>
+        <option value="Mobiles">Mobiles</option>
+        <option value="Laptops">Laptops</option>
+        <option value="Birds">Birds</option>
+        <option value="Cats">Cats</option>
+        <option value="Dogs">Dogs</option>
         <option value="Personal cards and papers">
           Personal cards and papers
         </option>
-        <option value="Wallet">Wallet</option>
+        <option value="Wallets">Wallets</option>
         <option value="Glasses">Glasses</option>
         <option value="Money">Money</option>
-        <option value="Bag">Bag</option>
-        <option value="Accessory">Accessory</option>
+        <option value="Bags">Bags</option>
+        <option value="Accessories">Accessories</option>
         <option value="Other">Other</option>
       </select>
     );
   };
-  console.log(subKey);
+ 
+  let SetSubCat = (e) => {
+    setsubKey(e.target.value);
+    GetSubCategories();
+    //navigate(`/subcategory/${subKey}`);
+  }
 
-  let renderItems = allItems.map((res) => {
+  /* <Route path="subcategory/:subKey" element={<Items />} />
+          <Route path="supercategory/:superKey" element={<Items />} /> */
+  
+  let SubValRen = 
+  underSubData.map((res) => {
     let id = res.id;
+    
+  return (
+    <Box
+      key={res.id}
+      sx={{ display: "inline-flex", flexDirection: "row", flexWrap: "wrap" }}
+    >
+      <Card sx={{ maxWidth: 345, margin: "20px", paddingLeft: "10px" }}>
+        <Stack direction="row" spacing={2}>
+          <Link>
+            <Avatar sx={{ bgcolor: deepPurple[500] }}>
+              {/* Clickable avatar to redirect to the users Profile */}H
+            </Avatar>
+          </Link>
+        </Stack>
 
+        <NavLink to={`/details/${id}`}>
+          <CardMedia
+            sx={{ paddingTop: "10px", zIndex: 1 }}
+            component="img"
+            height="140"
+            image={`data:image/jpeg;base64,${res.images[0]}`}
+            alt={res.date}
+            /* onClick={()=>{navigate(`details/${id}`)}} */
+          />
+        </NavLink>
+
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            {res.title}
+          </Typography>
+          <Typography gutterBottom variant="h5" component="div">
+            {res.description}
+          </Typography>
+        </CardContent>
+      </Card>
+    </Box>
+  );
+});
+  
+      
+  let renderItems = 
+    allItems.map((res) => {
+      let id = res.id;
+      
     return (
       <Box
         key={res.id}
@@ -98,19 +247,18 @@ export default function Items() {
           <Stack direction="row" spacing={2}>
             <Link>
               <Avatar sx={{ bgcolor: deepPurple[500] }}>
-                {/* Clickable avatar to redirect to the users Profile */}H
+               H
               </Avatar>
             </Link>
           </Stack>
 
-          <NavLink to={`details/${id}`}>
+          <NavLink to={`/details/${id}`}>
             <CardMedia
               sx={{ paddingTop: "10px", zIndex: 1 }}
               component="img"
               height="140"
-              image={res.images[0]}
+              image={`data:image/jpeg;base64,${res.images[0]}`}
               alt={res.date}
-              /* onClick={()=>{navigate(`details/${id}`)}} */
             />
           </NavLink>
 
@@ -127,11 +275,56 @@ export default function Items() {
     );
   });
 
-  return (
-    <div>
-      <Subval />
-      <br />
-      {renderItems}
-    </div>
-  );
-}
+  
+  
+ 
+      if (subKey) {
+        return (
+          <div>
+             <Subval/>
+          <Superval/>
+          
+
+            
+    
+           <br/>
+          
+           {subLoading?<Loading/>:SubValRen}
+            </div>
+           )
+          }else if(superKey){
+            return (
+              <div>
+                   <Subval/>
+                   <Superval/>
+{/* <button onClick={redirect}>click</button>
+ */}                  
+
+
+      
+          
+                 <br/>
+
+            {superLoading?<Loading/>:SuperValRen}
+            </div>)
+          }else{ 
+            
+            return (
+              
+              <div>
+               <Subval/>
+               <Superval/>
+{/* <button onClick={redirect}>click</button>
+ */}
+
+
+               
+                 
+               <br/>
+               {renderItems}
+               </div>
+          )
+      }  
+    
+    }
+
