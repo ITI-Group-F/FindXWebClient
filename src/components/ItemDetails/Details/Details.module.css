@@ -6,7 +6,12 @@
     border: 1px solid rgba(0,47,52,.36);
 }
 
-.itm_details_Con p ,h3,h6{
+.location{
+  
+  text-align: justify;
+}
+
+.itm_details_Con p ,h3,h4{
 
     color: #002f34 !important;
 }
