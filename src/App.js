@@ -11,13 +11,14 @@ import Profile from './components/profile/profile'
 import Items from './components/Items/items'
 import ItemDetailsPage from "./pages/ItemDetails"
 import Loading from './pages/Loading';
-import  BackTop from "./components/BackTop/BackTop"
+import BackTop from "./components/BackTop/BackTop"
 import RenderItems from './components/Items/allItems';
 
 // Modules
 import AuthModule from './modules/AuthModule';
 import ChatModule from './modules/ChatModule';
 import useClaims from './hooks/useClaims';
+import PrivateRoute from './routes/PrivateRoute';
 
 
 function App() {
@@ -32,21 +33,25 @@ function App() {
   return (
     <>
       <Suspense fallback={<Loading />}>
-      <BackTop/>
-
+        <BackTop />
         <Navbar></Navbar>
         <Loading/>
         <Routes>
+<<<<<<< HEAD
         <Route path="/" element={<>Home</>} />
          <Route path="details" element={<ItemDetailsPage />} />
+=======
+          <Route path="/" element={<>Home</>} />
+          <Route path="details" element={<ItemDetailsPage />} />
+>>>>>>> cb8de4d078b9304f813e5632c4484c3f17dea484
           <Route path='auth/*' element={<AuthModule />} />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
           <Route path="post" element={<Post />} />
           <Route path="profile" element={<Profile />} />
-          <Route path='chat/*' element={<ChatModule />} />
+          <Route path='chat/*' element={<PrivateRoute> <ChatModule /> </PrivateRoute>} />
           <Route path="items" element={<Items />} />
-          <Route path="details/:id" element={<ItemDetailsPage />}/>
+          <Route path="details/:id" element={<ItemDetailsPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
