@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect, useCallback} from 'react'
 import BackTopStyle from './BackTop.module.css'
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 export default function BackTop() {
@@ -6,6 +6,7 @@ export default function BackTop() {
     const [backTopButton,setBackTopButton]=useState(false);
     useEffect(()=>{
 
+        console.log('ss')
         window.addEventListener("scroll",()=>{
 
             if(window.scrollY>100){
@@ -21,6 +22,12 @@ export default function BackTop() {
         })
 
     },[])
+
+
+
+    useEffect(()=>{
+        console.log('on update')
+    })
 
 
     const scrollUp=()=>{

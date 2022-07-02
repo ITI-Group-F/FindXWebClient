@@ -4,17 +4,14 @@ import "../itemDetails.css"
 export default function Description() {
 
   useEffect(()=>{
-    console.log('firs')
   })
   useEffect(()=>{
-    console.log('ss')
   },[])
 
   useEffect(()=>{
     /*
     Query logic
     */
-    console.log('i fire once');
 },[]);
 
   return (

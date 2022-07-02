@@ -28,21 +28,17 @@ export default function Items() {
   
   let [superLoading,setSuperLoading] = useState(true);
   let [subLoading,setSubLoading] = useState(true);
+  useEffect(()=>{
+    GetSuperCategories();
+  },[superKey])
   
-  /*if subkey && allItems.filter((res)=>res.subCategory==="a14111cf-41e4-42f8-8c76-86a5f97668b5"
-    state mo3yna.map((res)=> etc) ///////// n7otha f elreturn elnha2y 5aaaals t7t
-    else  setSubLoading   setSuperLoading
-    allitems.map....................
-    Electronics
-    Animals
-    Belongings
-    Other
-    */
+  useEffect(()=>{
+    GetSubCategories();
+  },[subKey])
+  
+ let renderAllItems = ()=>{
 
-/* let navigate = useNavigate();
-const redirect = ()=>{
-  navigate("/items",{replace: true});
-} */
+ }
 
     const GetSuperCategories = () => {
       
@@ -54,6 +50,7 @@ const redirect = ()=>{
         //console.log(back);
         setunderSuperData(back);
         setSuperLoading(false)
+
       };
       data();
     } catch (error) {
@@ -66,7 +63,7 @@ const redirect = ()=>{
 
 
   let Superval = () => {
-  
+
     return (
       <select
         name="sub"
@@ -74,7 +71,7 @@ const redirect = ()=>{
         defaultValue="Choose a Subcategory"
         onChange={SetSuperCat}
       >
-        <option disabled>Select a Super Category</option>
+        <option disabled defaultValue="Animals">Select a Super Category</option>
         <option value="Electronics">Electronics</option>
         <option value="Animals">Animals</option>
         <option value="Belongings">Belongings</option>
@@ -85,15 +82,19 @@ const redirect = ()=>{
   };
  
   let SetSuperCat = (e) => {
+    console.log(e.target.value);
     setsuperKey(e.target.value);
-    GetSuperCategories();
+    
+    console.log(e.target.value);
+
     //navigate(`/supercategory/${superKey}`);
   }
   
   let SuperValRen = 
   underSuperData.map((res) => {
     let id = res.id;
-    
+    let description = res.description;
+    if (description.length>40) description= description.substring(0,8).concat("...");    
   return (
     <Box
       key={res.id}
@@ -120,11 +121,11 @@ const redirect = ()=>{
             </NavLink>
     
             <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
+              <Typography gutterBottom variant="h5" component="div" color="WindowText">
                 {res.title}
               </Typography>
-              <Typography gutterBottom variant="h5" component="div">
-                {res.description}
+              <Typography gutterBottom variant="h5" component="div" color="text.secondary">
+                {description}
               </Typography>
             </CardContent>
           </Card>
@@ -141,7 +142,7 @@ const redirect = ()=>{
         );
         //console.log(back);
         setunderSubData(back);
-        setSubLoading(false)   
+        setSubLoading(false);
       };
       data();
     } catch (error) {
@@ -183,8 +184,10 @@ const redirect = ()=>{
   };
  
   let SetSubCat = (e) => {
+
     setsubKey(e.target.value);
-    GetSubCategories();
+        
+
     //navigate(`/subcategory/${subKey}`);
   }
 
@@ -194,7 +197,8 @@ const redirect = ()=>{
   let SubValRen = 
   underSubData.map((res) => {
     let id = res.id;
-    
+    let description = res.description;
+    if (description.length>40) description= description.substring(0,8).concat("...");
   return (
     <Box
       key={res.id}
@@ -221,11 +225,11 @@ const redirect = ()=>{
         </NavLink>
 
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography gutterBottom variant="h5" component="div" color="WindowText">
             {res.title}
           </Typography>
-          <Typography gutterBottom variant="h5" component="div">
-            {res.description}
+          <Typography gutterBottom variant="h5" component="div" color="text.secondary">
+            {description}
           </Typography>
         </CardContent>
       </Card>
@@ -237,7 +241,9 @@ const redirect = ()=>{
   let renderItems = 
     allItems.map((res) => {
       let id = res.id;
-      
+      let description = res.description;
+      if (description.length>40) description= description.substring(0,8).concat("...");
+
     return (
       <Box
         key={res.id}
@@ -263,11 +269,11 @@ const redirect = ()=>{
           </NavLink>
 
           <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
+            <Typography gutterBottom variant="h5" component="div" color="WindowText">
               {res.title}
             </Typography>
-            <Typography gutterBottom variant="h5" component="div">
-              {res.description}
+            <Typography gutterBottom variant="h5" component="div" color="text.secondary">
+              {description}
             </Typography>
           </CardContent>
         </Card>
@@ -281,22 +287,25 @@ const redirect = ()=>{
       if (subKey) {
         return (
           <div>
-             <Subval/>
+             {Subval()}
           <Superval/>
-          
+          <button></button>
 
             
     
            <br/>
           
            {subLoading?<Loading/>:SubValRen}
+       
             </div>
            )
           }else if(superKey){
             return (
               <div>
-                   <Subval/>
+                   {Subval()}
                    <Superval/>
+                   <button></button>
+                   
 {/* <button onClick={redirect}>click</button>
  */}                  
 
@@ -306,14 +315,16 @@ const redirect = ()=>{
                  <br/>
 
             {superLoading?<Loading/>:SuperValRen}
+        
             </div>)
           }else{ 
             
             return (
               
               <div>
-               <Subval/>
+              {Subval()}
                <Superval/>
+              <button></button>
 {/* <button onClick={redirect}>click</button>
  */}
 
@@ -324,7 +335,7 @@ const redirect = ()=>{
                {renderItems}
                </div>
           )
-      }  
+        }  
     
     }
 
