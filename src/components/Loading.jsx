@@ -25,7 +25,7 @@ useEffect(() => {
    return (
     <>
       <Box style={{ marginTop: 180 }}>
-        <CircularProgress size="80px" thickness="2" color="success" />
+        <CircularProgress size="80px" thickness={2} color="success" />
         <Typography style={{ marginTop: 10 }} color="success" variant="h5"  gutterBottom component="div">
           {loading}
         </Typography>
