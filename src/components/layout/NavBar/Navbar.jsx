@@ -8,8 +8,8 @@ import IconButton from "@mui/material/IconButton";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 
 export default function Navbar() {
-  return ( 
-                 
+  return (
+
     <>
       <div className=".xnav">
         <section>
@@ -45,7 +45,7 @@ export default function Navbar() {
                     <IconButton {...bindTrigger(popupState)}>
                       <MenuRoundedIcon fontSize="large" />
                     </IconButton>
-                     <Menu {...bindMenu(popupState)}>
+                    <Menu {...bindMenu(popupState)}>
                       <ul className="MobilMenuItems">
                         <li>
                           <Link
@@ -89,8 +89,8 @@ export default function Navbar() {
                         </li>
                       </ul>
                     </Menu>
-                    <div className="search"> 
-                    <Search></Search>
+                    <div className="search">
+                      <Search></Search>
                     </div>
                   </React.Fragment>
                 )}

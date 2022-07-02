@@ -1,18 +1,20 @@
 import React, { useContext } from "react";
 import "./Messenger.scss";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, } from "react";
 import ChatContext from "../../Contexts/ChatContext";
 
 export default function Messenger() {
   const { conversations, connection, ownerId } = useContext(ChatContext);
   const [withId, setWithId] = useState(null);
   const [message, setMessage] = useState("");
-  let [loadedChat, setLoadedChat] = useState(<>You have no Messages</>);
+  const [loadedChat, setLoadedChat] = useState(<>You have no Messages</>);
   const [msgs, setMsgs] = useState(null);
-  let [OtherFullName, seOtherFullName] = useState("User");
-  let chatRef = useRef(null);
-  let currentContactRef = useRef(null);
+  const [OtherFullName, seOtherFullName] = useState("User");
+  const chatRef = useRef(null);
+  const currentContactRef = useRef([]);
   let prevContactRef = useRef(null);
+  const MessageToSendRef = useRef(null);
+
 
   useEffect(() => {
     if (connection) {
@@ -44,27 +46,35 @@ export default function Messenger() {
   };
 
   let populateContact = () => {
-    return conversations.map((conv) => {
-      console.log(conv);
+    return conversations.map((conv, index) => {
+
       let SenderFullName;
       if (conv.receiver.id === ownerId) {
         SenderFullName = conv.sender.firstName + " " + conv.sender.lastName;
       } else {
         SenderFullName = conv.receiver.firstName + " " + conv.receiver.lastName;
       }
-      console.log(SenderFullName);
+
       let lastMessage = conv.messages[conv.messages.length - 1];
       let lastMessageTime = lastMessage.sendDate.split("T")[1].slice(0, 5);
 
       return (
         <>
           <li
-            ref={currentContactRef}
+
+            ref={(element) => { currentContactRef.current[index] = element }}
             onClick={() => {
+              if (prevContactRef.current != null) {
+                prevContactRef.current.classList.remove("active");
+              }
+
+
+              prevContactRef.current = currentContactRef.current[index];
               populateChat(conv);
+              currentContactRef.current[index].classList.add("active");
             }}
             className="person"
-            data-chat="perosn1"
+
             key={conv._id}
           >
             <img src="/img/av.png" alt="" />
@@ -79,11 +89,14 @@ export default function Messenger() {
 
   const setMessageValue = (e) => {
     setMessage(e.target.value);
-    console.log(message);
+
   };
 
   let activateChat = () => {
-    chatRef.current.classList.add("active-chat");
+    if (chatRef.current) {
+      chatRef.current.classList.add("active-chat");
+    }
+
     //currentContactRef.current.classList.add("active")
 
     // chat.current = chat.container.querySelector('.active-chat')
@@ -103,7 +116,7 @@ export default function Messenger() {
     if (ownerId === conv.sender.id) OwnerisTheSender = true;
     else OwnerisTheSender = false;
     let Other = OwnerisTheSender ? conv.receiver : conv.sender;
-    console.log(Other);
+
     setWithId(Other.id);
     let otherFullName = Other.firstName + " " + Other.lastName;
     // let lastMessage = conv.messages[conv.messages.length - 1];
@@ -111,9 +124,9 @@ export default function Messenger() {
 
     let toLoadMsgs = conv.messages.map((msg) => {
       if (ownerId === msg.senderId) {
-        return <div className="bubble me">{msg.content}</div>;
+        return <div key={msg._id} className="bubble me">{msg.content} </div>;
       } else {
-        return <div className="bubble you">{msg.content}</div>;
+        return <div key={msg._id} className="bubble you">{msg.content}</div>;
       }
     });
     setMsgs(toLoadMsgs);
@@ -129,9 +142,10 @@ export default function Messenger() {
     //chatRef.current.querySelector(".name").innerText= OtherFullName;
   };
 
-  const handleKeyPress = (event) => {
+  const handleEnter = (event) => {
     if (event.key === "Enter") {
       sendMessage(message);
+      MessageToSendRef.current.value = "";
     }
   };
 
@@ -154,8 +168,9 @@ export default function Messenger() {
             {loadedChat}
             <div className="write">
               <input
+                ref={MessageToSendRef}
                 onChange={setMessageValue}
-                onKeyPress={handleKeyPress}
+                onKeyPress={handleEnter}
                 type="text"
               />
             </div>
