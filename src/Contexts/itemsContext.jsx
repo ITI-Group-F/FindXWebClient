@@ -35,10 +35,11 @@ export const ItemsProvider = (props) =>{
 
         //after getting Data 
         // i'm going to use this function to get data of selected item Directly
-       const selectedItem=items.find(i=>i.id===id);
+       const selectedItem=allItems.find(i=>i.id===id);
 
+        console.log(selectedItem);
        return selectedItem;
-    },[items])
+    },[allItems])
 
     //memoize obeject that contain context data and send to any one who use this context ...
    let contextValue=useMemo(()=>({

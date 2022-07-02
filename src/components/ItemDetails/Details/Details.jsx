@@ -1,12 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import DetailsStyle from '../Details/Details.module.css'
 import Button from '@mui/material/Button';
 import MapLocation from "../../Map/MapLocation"
 import SendIcon from '@mui/icons-material/Send';
-// import itemsContext from "../../../Contexts/itemsContext";
+import itemsContext from "../../../Contexts/itemsContext";
+import {useParams} from 'react-router-dom'
 export default function Details() {
 
+const {getItemById}=useContext(itemsContext);
+const selectedID=useParams().id;
 
+ const selectedItem=getItemById(selectedID);
 
   
   return (
@@ -16,12 +20,11 @@ export default function Details() {
 
    <div className={`col-lg-6   col-12`}>
       <h3 style={{color:'#000000'}}>Details</h3><hr /><br />
-      <h6>Category/SubCategory</h6>
+      <h4>{selectedItem.superCategory}/{selectedItem.subCategory}</h4>
         <div className={`ms-4`}>
-              <p> <strong>Title: </strong>Lorem.</p>
-              <p> <strong>Description: </strong>Lorem.</p>
-              <p> <strong>Date: </strong>Lorem.</p>
-              <p className={`${DetailsStyle.fontDetails}`}> <strong>Location: </strong>Egpt-Alexandria-ibrhimia-94 kanop street.</p>
+              <p> <strong>Title: </strong>{selectedItem.title}</p>
+              <p> <strong>Date: </strong>{selectedItem.date}</p>
+              <div className={`${DetailsStyle.fontDetails} ${DetailsStyle.location}`}><p className={` ${DetailsStyle.location}`}> <strong>Location: </strong>{selectedItem.location}</p></div>
          </div>
   </div>
 
@@ -31,7 +34,7 @@ export default function Details() {
       <h3>Found Location</h3>
       <hr />
     </div>
-     <MapLocation/>
+     <MapLocation lat={selectedItem.latitude} long={selectedItem.longitude}/>
   </div>
         
 
