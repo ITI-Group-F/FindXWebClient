@@ -35,6 +35,7 @@ function App() {
       <Suspense fallback={<Loading />}>
         <BackTop />
         <Navbar></Navbar>
+        
         <Routes>
           <Route path="/" element={<>Home</>} />
           <Route path="details" element={<ItemDetailsPage />} />
