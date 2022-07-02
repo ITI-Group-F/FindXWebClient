@@ -23,6 +23,7 @@ import Stack from "@mui/material/Stack";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 
 import API from "../../Services/api";
+import useClaims from "../../hooks/useClaims";
 
 export default function Posts() {
   let apiFormData = new FormData();
@@ -35,6 +36,7 @@ export default function Posts() {
   const [catErr, setcatErr] = useState("");
   const [isLost, setIsLost] = useState(false);
   const [date, setDate] = useState(new Date("2014-08-18T21:11:54"));
+  const { userId } = useClaims();
 
   //
 
@@ -67,7 +69,7 @@ export default function Posts() {
       console.log(pair[0] + ", " + pair[1]);
     }
     try {
-      let userId = "557e746a-694b-4dc2-80fb-fe25d6b880b6";
+      let userId = userId;
       const res = API.post(`/UserItems/${userId}`, apiFormData);
     } catch (error) {
       console.log(error);
@@ -250,6 +252,9 @@ export default function Posts() {
               Status
             </FormLabel>
             <RadioGroup
+              sx={{
+                display: "inline-block",
+              }}
               aria-labelledby="demo-controlled-radio-buttons-group"
               name="controlled-radio-buttons-group"
               onChange={setValue}
@@ -268,6 +273,7 @@ export default function Posts() {
               />
             </RadioGroup>
           </FormControl>
+
           <TextField
             name="title"
             onChange={setValue}
@@ -321,6 +327,20 @@ export default function Posts() {
           <Location></Location>
           <br></br>
           <br></br>
+
+          <label>Location</label>
+          <TextField
+            name="Location"
+            onChange={setValue}
+            required
+            maxLength="20"
+            fullWidth
+            label="Location"
+            id="fullWidth"
+          />
+          <br></br>
+          <br></br>
+
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <Stack spacing={3}>
               <DesktopDatePicker
