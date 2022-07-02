@@ -35,9 +35,10 @@ function App() {
       <BackTop/>
 
         <Navbar></Navbar>
+        <Loading/>
         <Routes>
         <Route path="/" element={<>Home</>} />
-          <Route path="details" element={<ItemDetailsPage />} />
+         <Route path="details" element={<ItemDetailsPage />} />
           <Route path='auth/*' element={<AuthModule />} />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
