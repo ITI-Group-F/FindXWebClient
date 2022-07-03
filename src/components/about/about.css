@@ -1,103 +1,140 @@
- .hello{
-    overflow: hidden;
-    margin: 120px auto;
-    width: 80%;
-    box-sizing: border-box;
-}
-.hello .img-part{
-    width: 37%;
-    float: left; 
-    height: 422.67px;
-    border-radius: 5px;
-    position: relative;
-    margin-left: 3px;
-  
 
-}
-.img-part img{
-width: 100%;
-    height: 100%;
-position: absolute;
-    top: 20px;
-    left: 20px;
- }
+/* Start protofolio Section */
 
-
-.img-part .is i{
-    padding: 10px;
-    color: #fff;
-    font-size: 18px;
-}
-.img-part:hover .is{
+.protofolio .container{
     display: block;
-    top: 20px;
-    transition-delay: 3s;
+    margin: auto;
+    text-align: center;
 }
-.hello .content-part{
-    float: right;   
-    width: 60%;
+.protofolio .protoButtons{
+    margin-bottom: 60px;
 }
-.upper{
-    padding: 10px 30px;
-}
-.upper h2{
-    font-size: 34px;
-    font-weight: 600;
-    line-height: 22px;
-    margin-bottom: 0;
-    padding-left: 13px;
-    position: relative;
-    text-transform: uppercase;
-}
-.upper p{
-    color: #555555;
-    margin-top: 0px;
-    line-height: 24px;
-    border-bottom: 1px dashed #999999;
-    padding-bottom: 15px;
-    font-size: large;
-
-}
-.lower{
-    overflow: auto;
-    padding: 15px 30px;
-}
-.lower ul{
-
-}
-.lower ul li{
-    float: left;
-    list-style: none;
-    width: 50%;
-    padding: 10px 0px;
-    color: #555555;
-    font-weight: 400;
-    line-height: 1;
-}
-.lower ul li a{
-    text-decoration: none;
-    color: #7e7e7e;
-}
-.lower ul span{
-    color: #333333;
-    font-weight: 500;
-}
-.hello .content-part .btns{
-    overflow: auto;
-    padding: 0px 30px;
-}
-.btns button{
+.protofolio .protoButtons button{
     border: none;
-    border-radius: 4px;
-    padding: 10px 24px;
-    background-color: #ff305b;
-    margin-left: 2px;
+    background-color: transparent;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.protofolio .protoButtons button:first-child{
+    color: var(--mainColor);
 
 }
-.btns button a{
-    color: #fff;
-    text-decoration: none;  
-    font-size: 16px;
-    
+.protofolio .protoImages{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
- 
+.protofolio .protoImages .image{
+    width: 33.333%;
+    padding: 0 15px 20px;
+    position: relative;
+    cursor: pointer;
+}
+.protofolio img{
+    width: 100%;
+}
+
+.protofolio .protoImages .image .imageHover{
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    position: absolute;
+    top: 0;
+    left: 15px;
+    width: 91%;
+    height: 93%;
+    padding: 0 0 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.protofolio .protoImages .image:hover .imageHover{
+    opacity: 1;
+}
+
+.protofolio .protoImages .image .imageHover i{
+    font-size: 20px;
+    color: var(--mainColor);
+    margin-right: 15px;
+}
+@media screen and (max-width: 992px){
+    .protofolio .protoImages{
+        flex-wrap: wrap;
+    }
+    .protofolio .protoImages .image{
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 767px){
+    .protofolio .protoImages{
+        flex-wrap: wrap;
+    }
+    .protofolio .protoImages .image{
+        width: 90%;
+        margin-bottom: 15px;
+    }
+    .protofolio h2{
+        font-size: 34px;
+    }
+    .protofolio .container .protoButtons button{
+        font-size: 16px;
+    }
+    .protofolio .protoImages .image .imageHover{
+        width: 91%;
+        margin-bottom: 15px;
+    }
+}
+
+/* End protofolio Section */
+
+
+
+/* Start facts Section */
+
+.facts{
+    background-color: var(--secondaryColor);
+}
+.facts .container{
+    justify-content: space-evenly;
+}
+.facts .item{
+    text-align: center;
+}
+
+.facts i{
+    font-size: 30px;
+    color: var(--mainColor)
+}
+.facts h3{
+    font-size: 26px;
+    margin: 15px 0;
+}
+.facts h5{
+    font-size: 16px;
+    margin: 0;
+}
+@media screen and (max-width: 767px){
+    .facts .container{
+        flex-wrap: wrap;
+    }
+    .facts .item{
+        width: 90%;
+        margin-bottom: 15px;
+    }
+    .facts h3{
+        font-size: 20px;
+    }
+    .facts h5{
+        font-size: 16px;
+    }
+    .protofolio .protoImages .image .imageHover{
+        width: 91%;
+        margin-bottom: 15px;
+    }
+}
+
+/* End facts Section */
+
