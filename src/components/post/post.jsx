@@ -1,15 +1,12 @@
 import React, { useState } from "react";
 import {
   Box,
-  Button,
   FormControl,
   TextField,
   Typography,
   Input,
   InputAdornment,
   InputLabel,
-  Avatar,
-  Alert,
   RadioGroup,
   FormControlLabel,
   Radio,
@@ -26,8 +23,7 @@ import API from "../../Services/api";
 import useClaims from "../../hooks/useClaims";
 
 export default function Posts() {
-  const [apiFormData, setApiFormData] = useState();
-  const [formImgs, setFormImgs] = useState([]);
+  const [apiFormData, setApiFormData] = useState(new FormData());
   const [showhide, setshowhide] = useState("");
   const [longitude, setLongitude] = useState(31.235712);
   const [latitude, setLatitude] = useState(30.04442);
@@ -37,7 +33,7 @@ export default function Posts() {
   const [showcatErr, setShowcatErr] = useState(false);
   const [catErr, setcatErr] = useState("");
   const [isLost, setIsLost] = useState(false);
-  const [date, setDate] = useState(new Date("2014-08-18T21:11:54"));
+  const [date, setDate] = useState(new Date());
   const { userId } = useClaims();
 
   const setValue = (e) => {
@@ -60,33 +56,30 @@ export default function Posts() {
   };
 
   const submitFormData = () => {
-    let formDataObj = new FormData();
+    setApiFormData(new FormData());
     for (let k in formData) {
-      formDataObj.append(k, formData[k]);
+      apiFormData.append(`${k}`.replace(/\d$/, ""), formData[k]);
     }
-    for (let k in formImgs) {
-      formDataObj.append("File", formImgs[k]);
-    }
-    formDataObj.append("longitude", longitude);
-    formDataObj.append("latitude", latitude);
-    console.log(formDataObj);
-    setApiFormData(formDataObj);
-
+    console.log("----------------");
     for (var pair of apiFormData.entries()) {
       console.log(pair[0] + ": " + pair[1]);
     }
+    console.log("----------------");
+
     try {
-      // let id = "1c47a376-1267-4892-87f7-e0efbc66fa9f";
-      const res = API.post(`/UserItems/${userId}`, apiFormData);
+      let id = "1c47a376-1267-4892-87f7-e0efbc66fa9f";
+      let dummy = "cf28af55-85be-4295-b437-c81d787ba15c";
+      const res = API.post(`/UserItems/${dummy}`, apiFormData);
     } catch (error) {
       console.log(error);
     }
   };
 
+  // const [formImgs, setFormImgs] = useState([]);
   const setFormFiles = (e) => {
     const { files } = e.target;
     for (let i = 0; i < files.length; i++) {
-      setFormImgs([...formImgs, files[i]]);
+      setFormData({ ...formData, [`File${i}`]: files[i] });
     }
   };
 

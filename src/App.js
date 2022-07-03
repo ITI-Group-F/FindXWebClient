@@ -41,8 +41,8 @@ function App() {
           <Route path="auth/*" element={<AuthModule />} />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
-          <Route path="post" element={<Post />} />
-          <Route path="profile" element={<Profile />} />
+          <Route path="post" element={<PrivateRoute> <Post /> </PrivateRoute>} />
+          <Route path="profile" element={<PrivateRoute> <Profile /> </PrivateRoute>} />
           <Route path="chat/*" element={<PrivateRoute> <ChatModule /> </PrivateRoute>} />
           <Route path="items" element={<Items />} />
           <Route path="details/:id" element={<ItemDetailsPage />} />

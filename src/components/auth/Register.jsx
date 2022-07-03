@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Box, Button, TextField, Typography, Link, Alert } from "@mui/material";
 import API from "../../Services/api";
 import "./auth.css";
+import { useNavigate } from "react-router-dom";
 
 export default function Register({ setToken }) {
   /**
@@ -9,6 +10,7 @@ export default function Register({ setToken }) {
    * fields and the error message for the form fields if they are
    * invalid and the error message for the form if it is invalid
    */
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({});
   const [showFNameErr, setShowFNameErr] = useState(false);
   const [showLNameErr, setShowLNameErr] = useState(false);
@@ -40,6 +42,7 @@ export default function Register({ setToken }) {
       const token = await registerUser(formData);
       if (token) {
         setToken(token);
+        navigate("/", { replace: true });
       }
     }
   };
@@ -191,16 +194,7 @@ export default function Register({ setToken }) {
               </Typography>
             </Box>
           )}
-          <Box>
-            <TextField
-              style={{ width: "200px", margin: "5px" }}
-              name="phone"
-              type="text"
-              label="Phone"
-              variant="outlined"
-              onChange={setValue}
-            />
-          </Box>
+
           <Box>
             <TextField
               style={{ width: "200px", margin: "5px" }}
@@ -245,6 +239,16 @@ export default function Register({ setToken }) {
               onChange={setValue}
             />
           </Box>
+          <Box>
+            <TextField
+              style={{ width: "200px", margin: "5px" }}
+              name="phone"
+              type="text"
+              label="Phone"
+              variant="outlined"
+              onChange={setValue}
+            />
+          </Box>
           {showPassErr && (
             <Box className="err-msg">
               <Typography color="red" variant="caption" gutterBottom>
@@ -257,6 +261,7 @@ export default function Register({ setToken }) {
               variant="contained"
               type="submit"
               className="sub-btn"
+              color="success"
               style={{ width: "200px", margin: "5px" }}
             >
               Register
@@ -267,7 +272,7 @@ export default function Register({ setToken }) {
               Already a member?
             </Typography>
 
-            <Link href="/register" style={{ marginLeft: 5 }}>
+            <Link href="/auth/login" style={{ marginLeft: 5 }}>
               Login
             </Link>
           </Box>

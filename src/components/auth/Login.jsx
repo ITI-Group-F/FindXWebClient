@@ -169,6 +169,7 @@ export default function Login({ setToken }) {
               variant="contained"
               type="submit"
               className="sub-btn"
+              color="success"
               style={{ width: "200px", margin: "5px" }}
             >
               Login
@@ -178,7 +179,7 @@ export default function Login({ setToken }) {
             <Typography variant="subtitle2" component="span">
               Not a member?
             </Typography>
-            <Link href="/login" style={{ marginLeft: 5 }}>
+            <Link href="/auth/register" style={{ marginLeft: 5 }}>
               Register
             </Link>
           </Box>
