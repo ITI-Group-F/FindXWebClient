@@ -26,9 +26,11 @@ import API from "../../Services/api";
 import useClaims from "../../hooks/useClaims";
 
 export default function Posts() {
-  let apiFormData = new FormData();
+  const [apiFormData, setApiFormData] = useState();
+  const [formImgs, setFormImgs] = useState([]);
   const [showhide, setshowhide] = useState("");
-
+  const [longitude, setLongitude] = useState(31.235712);
+  const [latitude, setLatitude] = useState(30.04442);
   const [showdescErr, setShowdescErr] = useState(false);
   const [descErr, setdescErr] = useState("");
   const [formData, setFormData] = useState({});
@@ -37,10 +39,6 @@ export default function Posts() {
   const [isLost, setIsLost] = useState(false);
   const [date, setDate] = useState(new Date("2014-08-18T21:11:54"));
   const { userId } = useClaims();
-
-  //
-
-  //
 
   const setValue = (e) => {
     const { name, value } = e.target;
@@ -58,18 +56,27 @@ export default function Posts() {
     var day = date.getDate().toString();
     day = day.length > 1 ? day : "0" + day;
 
-    return month + "/" + day + "/" + year;
+    return day + "/" + month + "/" + year;
   };
 
   const submitFormData = () => {
+    let formDataObj = new FormData();
     for (let k in formData) {
-      apiFormData.append(k, formData[k]);
+      formDataObj.append(k, formData[k]);
     }
+    for (let k in formImgs) {
+      formDataObj.append("File", formImgs[k]);
+    }
+    formDataObj.append("longitude", longitude);
+    formDataObj.append("latitude", latitude);
+    console.log(formDataObj);
+    setApiFormData(formDataObj);
+
     for (var pair of apiFormData.entries()) {
-      console.log(pair[0] + ", " + pair[1]);
+      console.log(pair[0] + ": " + pair[1]);
     }
     try {
-      let userId = userId;
+      // let id = "1c47a376-1267-4892-87f7-e0efbc66fa9f";
       const res = API.post(`/UserItems/${userId}`, apiFormData);
     } catch (error) {
       console.log(error);
@@ -79,7 +86,7 @@ export default function Posts() {
   const setFormFiles = (e) => {
     const { files } = e.target;
     for (let i = 0; i < files.length; i++) {
-      apiFormData.append(`File`, files[i]);
+      setFormImgs([...formImgs, files[i]]);
     }
   };
 
@@ -345,7 +352,7 @@ export default function Posts() {
             <Stack spacing={3}>
               <DesktopDatePicker
                 label="Date desktop"
-                inputFormat="MM/dd/yyyy"
+                inputFormat="dd/MM/yyyy"
                 value={date}
                 onChange={(newDate) => {
                   newDate = getFormattedDate(newDate);
