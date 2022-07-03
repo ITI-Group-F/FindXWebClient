@@ -116,7 +116,7 @@ export default function Register({ setToken }) {
 
   const registerUser = async (data) => {
     try {
-      const response = await API.post("/authentication/register", data);
+      const response = await API.post("/authentication/register-user", data);
       setShowResErrMsg(true);
       return response.data.token;
     } catch (err) {
