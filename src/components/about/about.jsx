@@ -5,19 +5,11 @@ import logo from "./../../images/one.jpg";
 function About() {
   return (
     <>
-       {/* <!-- Start protofolio Section --> */}
+       {/* <!-- Start services section --> */}
 
-<div className="protofolio paddingTopBottom">
-    <div className="container" id="protofolio">
-        <h2>Our Portfolio</h2>
-        <div className="protoButtons">
-            <button>ALL</button>
-            <button>GRAPHIC</button>
-            <button>WEB DESIGN</button>
-            <button>BRANDING</button>
-        </div>
-        <div className="protoImages">
-<p>
+<div class="about" id="about">
+    <h2>about us</h2>
+    <p>
 A person cannot live alone in this world,  and that's why no
               matter how much he tries to rely on himself,  he will not be
               able to dispense with seeking help from others  in many matters
@@ -31,57 +23,64 @@ A person cannot live alone in this world,  and that's why no
               people..  we found this is a great way to help people to find
               lost things
 </p>
-           
-            
-        </div>
-    </div>
-</div>
+<div className="team">team member</div>
 
-{/* <!-- Start protofolio Section --> */}
-
-{/* <!-- Start facts Section --> */}
-
-<div className="facts paddingTopBottom">
-    <div className="container">
-        <div className="item">
-            {/* <i className="fas fa-users"></i> */}
-            <h3>Hanan</h3>
+    <div class="container">
+        <div class="itemsContainer">
+            <div class="item">
+                <i class="fas fa-pencil-ruler"></i>
+                <h3>Hanan</h3>
                 <h5>hananelzftawy1999@gmail.com</h5>
-                
-        </div>
-        <div className="item">
-            {/* <i className="far fa-copy"></i> */}
-            <h3>ahmedelgohary</h3>
+            </div>
+
+            <div class="item">
+                {/* <i class="fas fa-file-code"></i> */}
+                <h3>ahmedelgohary</h3>
                 <h5>ahmedelgohary3394@gmail.com</h5>
-        </div>
-        <div className="item">
-            <i className="fas fa-cloud-download-alt"></i>
-            <h3>ehapdiab</h3>
+                
+            </div>
+
+            <div class="item">
+                {/* <i class="fas fa-object-group"></i> */}
+                <h3>ehapdiab</h3>
                 <h5>diab96@hotmail.com</h5>
-        </div>
-        <div className="item">
-            <i className="fas fa-coffee"></i>
-            <h3>mohab</h3>
+               
+            </div>
+
+            <div class="item">
+                {/* <i class="fas fa-cogs"></i> */}
+                <h3>mohab</h3>
                 <h5>mohabsoft21@outlook.com</h5>
-        </div>
-        <div className="item">
-            <i className="fas fa-coffee"></i>
+              
+            </div>
+           
+           
+            <div class="item">
+                {/* <i class="fas fa-cogs"></i> */}
+                <h3>Abdullahelzayat</h3>
+                <h5>Abdullahelzayat23@outlook.com</h5>
+              
+            </div>
+            <div className="item">
+            {/* <i className="fas fa-coffee"></i> */}
             <h3>mohamedbibers</h3>
                 <h5>mohamedbibers2556@gmail.com</h5>
-        </div>
-        <div className="item">
-            <i className="fas fa-coffee"></i>
-            <h3>Abdullahelzayat</h3>
-                <h5>Abdullahelzayat23@outlook.com</h5>
         </div>
         <div className="item">
             <i className="fas fa-coffee"></i>
             <h3>mohamed yousry</h3>
                 <h5>odsh97@gmail.com</h5>
         </div>
+           
 
+        </div>
     </div>
 </div>
+
+{/* <!-- End services section --> */}
+
+
+ 
 
 
 {/* <!-- End facts Section --> */}

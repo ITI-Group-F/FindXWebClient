@@ -3,6 +3,7 @@
 .contact h2{
     text-align: center;
     font-size: 40px;
+    color: black;
 }
 .contact .container form{
     display: block;

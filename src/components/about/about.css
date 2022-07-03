@@ -1,140 +1,80 @@
+/* Start Services Section */
 
-/* Start protofolio Section */
-
-.protofolio .container{
-    display: block;
-    margin: auto;
+.about {
     text-align: center;
+    background-color: var(--secondaryColor);
 }
-.protofolio .protoButtons{
-    margin-bottom: 60px;
+.about h2 ,.team{
+    font-size: xx-large;
+    margin-bottom: 20px;
+    color: black;
+    
+    background-color: rgb(226, 237, 241);
 }
-.protofolio .protoButtons button{
-    border: none;
-    background-color: transparent;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
+.team h3 ,h5{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-.protofolio .protoButtons button:first-child{
-    color: var(--mainColor);
+.about p{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: large;
+}
 
-}
-.protofolio .protoImages{
+.about .itemsContainer{
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    margin: 30px;
 }
-.protofolio .protoImages .image{
-    width: 33.333%;
-    padding: 0 15px 20px;
-    position: relative;
-    cursor: pointer;
+.about .itemsContainer .item{
+    padding: 30px 15px;
+    transition: .4s
 }
-.protofolio img{
-    width: 100%;
+.about .itemsContainer .item:hover{
+    box-shadow: 5px 5px 5px 5px #ccc;
+    -moz-box-shadow: 5px 5px 5px 5px #ccc;
+    -webkit-box-shadow: 5px 5px 5px 5px #ccc;
+    -khtml-box-shadow: 5px 5px 5px 5px #ccc;
+    background-color: white;
 }
-
-.protofolio .protoImages .image .imageHover{
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-    position: absolute;
-    top: 0;
-    left: 15px;
-    width: 91%;
-    height: 93%;
-    padding: 0 0 20px;
-    background-color: rgba(0, 0, 0, 0.5);
-    opacity: 0;
-    transition: opacity 1s;
-}
-
-.protofolio .protoImages .image:hover .imageHover{
-    opacity: 1;
-}
-
-.protofolio .protoImages .image .imageHover i{
-    font-size: 20px;
+.services .itemsContainer .item i{
+    font-size: 30px;
     color: var(--mainColor);
-    margin-right: 15px;
+}
+
+.about h3{
+    font-size: 20px;
+    margin: 15px 0;
+}
+
+.about p{
+    line-height: 1.6em;
 }
 @media screen and (max-width: 992px){
-    .protofolio .protoImages{
+    .about .itemsContainer{
         flex-wrap: wrap;
     }
-    .protofolio .protoImages .image{
+    .about .itemsContainer .item{
         width: 50%;
     }
 }
 
 @media screen and (max-width: 767px){
-    .protofolio .protoImages{
+    .about .itemsContainer{
         flex-wrap: wrap;
     }
-    .protofolio .protoImages .image{
-        width: 90%;
-        margin-bottom: 15px;
+    .about .itemsContainer .item{
+        width: 100%;
     }
-    .protofolio h2{
+    .about h2{
         font-size: 34px;
     }
-    .protofolio .container .protoButtons button{
-        font-size: 16px;
+    .about h3{
+        font-size: 18px;
     }
-    .protofolio .protoImages .image .imageHover{
-        width: 91%;
-        margin-bottom: 15px;
-    }
+
+.team{
+    color: black;
+    font-size: xx-large;
+}
 }
 
-/* End protofolio Section */
-
-
-
-/* Start facts Section */
-
-.facts{
-    background-color: var(--secondaryColor);
-}
-.facts .container{
-    justify-content: space-evenly;
-}
-.facts .item{
-    text-align: center;
-}
-
-.facts i{
-    font-size: 30px;
-    color: var(--mainColor)
-}
-.facts h3{
-    font-size: 26px;
-    margin: 15px 0;
-}
-.facts h5{
-    font-size: 16px;
-    margin: 0;
-}
-@media screen and (max-width: 767px){
-    .facts .container{
-        flex-wrap: wrap;
-    }
-    .facts .item{
-        width: 90%;
-        margin-bottom: 15px;
-    }
-    .facts h3{
-        font-size: 20px;
-    }
-    .facts h5{
-        font-size: 16px;
-    }
-    .protofolio .protoImages .image .imageHover{
-        width: 91%;
-        margin-bottom: 15px;
-    }
-}
-
-/* End facts Section */
-
+/* End Services Section */
