@@ -26,7 +26,7 @@ function Contact() {
             <div class="count">
                 <i class="fas fa-coffee"></i>
                 <h3>Mohab Elnajjar</h3>
-                <h5>mohabsoft21@outlook.com</h5>
+                <h5>mohat21@outlook.com</h5>
             </div>
             <div className='edit'>
             <div class="count ml-3" >
