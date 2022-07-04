@@ -14,7 +14,9 @@ export default function Navbar() {
       <div className=".xnav">
         <section>
           <nav>
+            <Link to ="/">
             <img className="logo" src="img/logo.png" alt="" />
+            </Link>
             <ul className="menuItems">
               <li>
                 <Link className="link" to="/" data-item="Home">

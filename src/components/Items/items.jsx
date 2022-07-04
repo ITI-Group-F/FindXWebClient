@@ -16,6 +16,8 @@ import itemsContext from "../../Contexts/itemsContext";
 import { ItemsProvider } from "../../Contexts/itemsContext";
 import { NavLink, useNavigate } from "react-router-dom";
 import Loading from "../Loading";
+import RenderItems from "./allItems";
+import ActionAreaCard from "./allItems";
 
 
 export default function Items() {
@@ -130,7 +132,7 @@ setDidMountSuper(true);
   
   const GetSubCategories = () => {
     try {
-      allItems.prev = underSubData;
+      //allItems.prev = underSubData;
       const data = async () => {
         const back = await API.get(`/Items/undersub/${subKey}`).then(
           (response) => response.data
@@ -192,6 +194,7 @@ setDidMountSuper(true);
     let description = res.description;
     if (description.length>40) description= description.substring(0,8).concat("...");
   return (
+    
     <Box
       key={res.id}
       sx={{ display: "inline-flex", flexDirection: "row", flexWrap: "wrap" }}
@@ -225,11 +228,12 @@ setDidMountSuper(true);
         </CardContent>
       </Card>
     </Box>
+     
   );
 });
   
       
-  let renderItems = 
+  /* let renderItems = 
     allItems.map((res) => {
       let id = res.id;
       let description = res.description;
@@ -251,7 +255,7 @@ setDidMountSuper(true);
 
           <NavLink to={`/details/${id}`}>
             <CardMedia
-              sx={{ paddingTop: "10px", zIndex: 1 }}
+              sx={{ paddingTop: "10px", zIndex: 1, objectFit:"contain", width:"100px", height:"200px" }}
               component="img"
               height="140"
               image={`data:image/jpeg;base64,${res.images[0]}`}
@@ -271,9 +275,8 @@ setDidMountSuper(true);
       </Box>
     );
   });
+  */
 
-  
-  
   
   if (subKey!==null) {
     return (
@@ -282,6 +285,7 @@ setDidMountSuper(true);
                 {Superval()}
                 <br/>
                 {subLoading?<Loading/>:SubValRen}
+                
         </div>
             )
   }else if(superKey!==null){
@@ -299,7 +303,8 @@ setDidMountSuper(true);
                 {Subval()}
                 {Superval()}
                 <br/>
-                {renderItems}
+                <ActionAreaCard/>
+                
         </div>
             )
         }  

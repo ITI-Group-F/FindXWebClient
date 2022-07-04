@@ -19,6 +19,7 @@ import AuthModule from "./modules/AuthModule";
 import ChatModule from "./modules/ChatModule";
 import useClaims from "./hooks/useClaims";
 import PrivateRoute from "./routes/PrivateRoute";
+import Home from "./components/Home/Home";
 
 function App() {
   // if (!token) {
@@ -36,7 +37,7 @@ function App() {
         <Navbar></Navbar>
 
         <Routes>
-          <Route path="/" element={<>Home</>} />
+          <Route path="/" element={<Home/>} />
           <Route path="details" element={<ItemDetailsPage />} />
           <Route path="auth/*" element={<AuthModule />} />
           <Route path="about" element={<About />} />

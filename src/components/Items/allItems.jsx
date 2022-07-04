@@ -15,38 +15,44 @@ import { useContext, useEffect, useState } from "react";
 import itemsContext from "../../Contexts/itemsContext";
 import { ItemsProvider } from "../../Contexts/itemsContext";
 import { NavLink, useNavigate } from "react-router-dom";
+import Loading from "../Loading";
+import { CardActionArea } from '@mui/material';
+///////////////////////////////////////////////////
 
-export default function RenderItems (){
-    let { allItems, getItemById } = useContext(itemsContext);
-    console.log(allItems);
 
-    allItems.map((res) => {
-        let id = res.id;
-      
+
+export default function ActionAreaCard() {
+  let { allItems } = useContext(itemsContext);
     return (
-
-      <Box
+      <div>
+      {allItems.map((res) => {
+        
+        let description = res.description
+  
+        if (description.length>20) description= description.substring(0,8).concat("...");
+        return(
+          
+          
+          
+        <Box
         key={res.id}
         sx={{ display: "inline-flex", flexDirection: "row", flexWrap: "wrap" }}
       >
-        <div>hiiii</div>
         <Card sx={{ maxWidth: 345, margin: "20px", paddingLeft: "10px" }}>
           <Stack direction="row" spacing={2}>
             <Link>
-              <Avatar sx={{ bgcolor: deepPurple[500] }}>
-                {/* Clickable avatar to redirect to the users Profile */}H
+              <Avatar sx={{ bgcolor: deepPurple[500] }}>H
               </Avatar>
             </Link>
           </Stack>
 
-          <NavLink to={`/details/${id}`}>
+          <NavLink to={`/details/${res.id}`}>
             <CardMedia
-              sx={{ paddingTop: "10px", zIndex: 1 }}
+              sx={{ paddingTop: "10px", zIndex: 1, objectFit:"contain", width:"200px", height:"200px" }}
               component="img"
               height="140"
               image={`data:image/jpeg;base64,${res.images[0]}`}
               alt={res.date}
-              /* onClick={()=>{navigate(`details/${id}`)}} */
             />
           </NavLink>
 
@@ -55,11 +61,16 @@ export default function RenderItems (){
               {res.title}
             </Typography>
             <Typography gutterBottom variant="h5" component="div">
-              {res.description}
+              {description}
             </Typography>
           </CardContent>
         </Card>
       </Box>
-    );
-  });
-    }
+          )
+      })}
+        </div>
+  );
+}
+
+
+
