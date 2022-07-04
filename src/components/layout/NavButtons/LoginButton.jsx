@@ -29,7 +29,7 @@ export default function LoginButton() {
 
         <>
             <IconButton onClick={handleClickOpen}>
-                <LoginRoundedIcon color="" fontSize="large" />
+                <LoginRoundedIcon color="primary" fontSize="large" />
             </IconButton>
             <Dialog
                 open={open}
