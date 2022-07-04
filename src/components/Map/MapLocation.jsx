@@ -1,8 +1,10 @@
 import React from 'react'
 import MapStyle from './Map.css'
 
-export default function MapLocation() {
+export default function MapLocation(props) {
 
+
+    
 // const {isLoded}=useLoadScript({
 
 //     googleMapsApiKey:"AIzaSyBm9AVd2_9C9OiJBIOjUGzC73581bzgzAw"
@@ -27,7 +29,7 @@ export default function MapLocation() {
 return (
     <div >
 
-        <iframe className={`${MapStyle.map}`} title='Find' src="https://maps.google.com/maps?q=31.20796684728882,29.949285252704637&hl=es;&output=embed" width="100%" height="250"  allowFullScreen="" loading="lazy" referrerPolicy='no-referrer-when-downgrade'></iframe>
+        <iframe className={`${MapStyle.map}`} title='Find' src={`https://maps.google.com/maps?q=${props.lat},${props.long}&hl=es;&output=embed`} width="100%" height="250"  allowFullScreen="" loading="lazy" referrerPolicy='no-referrer-when-downgrade'></iframe>
     </div>
     
 

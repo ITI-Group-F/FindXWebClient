@@ -8,12 +8,14 @@ import { ItemsProvider } from "../Contexts/itemsContext";
 export default function ItemDetailsPage() {
   return (
     <div>
-
+      <ItemsProvider>
         <div className={`row g-0 d-flex justify-content-around`}>
           <ItemSlider />
           <Details />
         </div>
         <Description />
+
+        </ItemsProvider>
     </div>
   );
 }

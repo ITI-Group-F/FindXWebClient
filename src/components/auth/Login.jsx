@@ -2,6 +2,8 @@ import { Box, Button, TextField, Typography, Link, Alert } from "@mui/material";
 import React, { useState } from "react";
 import API from "../../Services/api";
 import "./auth.css";
+import { useNavigate } from "react-router-dom";
+import useToken from "../../hooks/useToken";
 
 export default function Login({ setToken }) {
   /**
@@ -18,6 +20,7 @@ export default function Login({ setToken }) {
 
   const [showResErrMsg, setShowResErrMsg] = useState(false);
   const [resErrMsg, setResErrMsg] = useState("");
+  const navigate = useNavigate();
 
   /*
    * function to handle the change of the form fields
@@ -74,6 +77,7 @@ export default function Login({ setToken }) {
       const token = await loginUser(formData);
       if (token) {
         setToken(token);
+        navigate("/", { replace: true });
       }
     }
   };
@@ -165,6 +169,7 @@ export default function Login({ setToken }) {
               variant="contained"
               type="submit"
               className="sub-btn"
+              color="success"
               style={{ width: "200px", margin: "5px" }}
             >
               Login
@@ -174,7 +179,7 @@ export default function Login({ setToken }) {
             <Typography variant="subtitle2" component="span">
               Not a member?
             </Typography>
-            <Link href="/login" style={{ marginLeft: 5 }}>
+            <Link href="/auth/register" style={{ marginLeft: 5 }}>
               Register
             </Link>
           </Box>

@@ -28,17 +28,20 @@ export default function Items() {
   
   let [superLoading,setSuperLoading] = useState(true);
   let [subLoading,setSubLoading] = useState(true);
+  const [didMountSub, setDidMountSub] = useState(false)
+  const [didMountSuper, setDidMountSuper] = useState(false)
+  useEffect(() => { setDidMountSub(true) }, [])
+  useEffect(() => { setDidMountSuper(true) }, []) 
+
   useEffect(()=>{
-    GetSuperCategories();
+if (didMountSuper) GetSuperCategories();
+setDidMountSuper(true);
   },[superKey])
   
   useEffect(()=>{
-    GetSubCategories();
+    if(didMountSub) GetSubCategories();
+    setDidMountSub(true);
   },[subKey])
-  
- let renderAllItems = ()=>{
-
- }
 
     const GetSuperCategories = () => {
       
@@ -56,12 +59,7 @@ export default function Items() {
     } catch (error) {
       console.log(error + "from (/Items/undersuper) endpoint");
     }
-     
-    
   };
-/////////////////////////////////////////////////////////////
-
-
   let Superval = () => {
 
     return (
@@ -82,12 +80,8 @@ export default function Items() {
   };
  
   let SetSuperCat = (e) => {
-    console.log(e.target.value);
     setsuperKey(e.target.value);
-    
-    console.log(e.target.value);
-
-    //navigate(`/supercategory/${superKey}`);
+    setsubKey(null);
   }
   
   let SuperValRen = 
@@ -136,6 +130,7 @@ export default function Items() {
   
   const GetSubCategories = () => {
     try {
+      allItems.prev = underSubData;
       const data = async () => {
         const back = await API.get(`/Items/undersub/${subKey}`).then(
           (response) => response.data
@@ -184,11 +179,8 @@ export default function Items() {
   };
  
   let SetSubCat = (e) => {
-
     setsubKey(e.target.value);
-        
-
-    //navigate(`/subcategory/${subKey}`);
+    setsuperKey(null);
   }
 
   /* <Route path="subcategory/:subKey" element={<Items />} />
@@ -208,7 +200,7 @@ export default function Items() {
         <Stack direction="row" spacing={2}>
           <Link>
             <Avatar sx={{ bgcolor: deepPurple[500] }}>
-              {/* Clickable avatar to redirect to the users Profile */}H
+              H
             </Avatar>
           </Link>
         </Stack>
@@ -220,7 +212,6 @@ export default function Items() {
             height="140"
             image={`data:image/jpeg;base64,${res.images[0]}`}
             alt={res.date}
-            /* onClick={()=>{navigate(`details/${id}`)}} */
           />
         </NavLink>
 
@@ -243,7 +234,7 @@ export default function Items() {
       let id = res.id;
       let description = res.description;
       if (description.length>40) description= description.substring(0,8).concat("...");
-
+ 
     return (
       <Box
         key={res.id}
@@ -283,58 +274,34 @@ export default function Items() {
 
   
   
- 
-      if (subKey) {
-        return (
-          <div>
-             {Subval()}
-          <Superval/>
-          <button></button>
-
-            
-    
-           <br/>
-          
-           {subLoading?<Loading/>:SubValRen}
-       
-            </div>
+  
+  if (subKey!==null) {
+    return (
+        <div>
+                {Subval()}
+                {Superval()}
+                <br/>
+                {subLoading?<Loading/>:SubValRen}
+        </div>
+            )
+  }else if(superKey!==null){
+    return (
+        <div>
+                {Subval()}
+                {Superval()}
+                  <br/>
+                {superLoading?<Loading/>:SuperValRen}
+       </div>
            )
-          }else if(superKey){
-            return (
-              <div>
-                   {Subval()}
-                   <Superval/>
-                   <button></button>
-                   
-{/* <button onClick={redirect}>click</button>
- */}                  
-
-
-      
-          
-                 <br/>
-
-            {superLoading?<Loading/>:SuperValRen}
-        
-            </div>)
-          }else{ 
-            
-            return (
-              
-              <div>
-              {Subval()}
-               <Superval/>
-              <button></button>
-{/* <button onClick={redirect}>click</button>
- */}
-
-
-               
-                 
-               <br/>
-               {renderItems}
-               </div>
-          )
+  }else{ 
+    return (
+        <div>
+                {Subval()}
+                {Superval()}
+                <br/>
+                {renderItems}
+        </div>
+            )
         }  
     
     }

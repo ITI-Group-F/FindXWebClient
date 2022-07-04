@@ -1,15 +1,12 @@
 import React, { useState } from "react";
 import {
   Box,
-  Button,
   FormControl,
   TextField,
   Typography,
   Input,
   InputAdornment,
   InputLabel,
-  Avatar,
-  Alert,
   RadioGroup,
   FormControlLabel,
   Radio,
@@ -26,21 +23,18 @@ import API from "../../Services/api";
 import useClaims from "../../hooks/useClaims";
 
 export default function Posts() {
-  let apiFormData = new FormData();
+  const [apiFormData, setApiFormData] = useState(new FormData());
   const [showhide, setshowhide] = useState("");
-
+  const [longitude, setLongitude] = useState(31.235712);
+  const [latitude, setLatitude] = useState(30.04442);
   const [showdescErr, setShowdescErr] = useState(false);
   const [descErr, setdescErr] = useState("");
   const [formData, setFormData] = useState({});
   const [showcatErr, setShowcatErr] = useState(false);
   const [catErr, setcatErr] = useState("");
   const [isLost, setIsLost] = useState(false);
-  const [date, setDate] = useState(new Date("2014-08-18T21:11:54"));
+  const [date, setDate] = useState(new Date());
   const { userId } = useClaims();
-
-  //
-
-  //
 
   const setValue = (e) => {
     const { name, value } = e.target;
@@ -58,28 +52,34 @@ export default function Posts() {
     var day = date.getDate().toString();
     day = day.length > 1 ? day : "0" + day;
 
-    return month + "/" + day + "/" + year;
+    return day + "/" + month + "/" + year;
   };
 
   const submitFormData = () => {
+    setApiFormData(new FormData());
     for (let k in formData) {
-      apiFormData.append(k, formData[k]);
+      apiFormData.append(`${k}`.replace(/\d$/, ""), formData[k]);
     }
+    console.log("----------------");
     for (var pair of apiFormData.entries()) {
-      console.log(pair[0] + ", " + pair[1]);
+      console.log(pair[0] + ": " + pair[1]);
     }
+    console.log("----------------");
+
     try {
-      let userId = userId;
-      const res = API.post(`/UserItems/${userId}`, apiFormData);
+      let id = "1c47a376-1267-4892-87f7-e0efbc66fa9f";
+      let dummy = "cf28af55-85be-4295-b437-c81d787ba15c";
+      const res = API.post(`/UserItems/${dummy}`, apiFormData);
     } catch (error) {
       console.log(error);
     }
   };
 
+  // const [formImgs, setFormImgs] = useState([]);
   const setFormFiles = (e) => {
     const { files } = e.target;
     for (let i = 0; i < files.length; i++) {
-      apiFormData.append(`File`, files[i]);
+      setFormData({ ...formData, [`File${i}`]: files[i] });
     }
   };
 
@@ -345,7 +345,7 @@ export default function Posts() {
             <Stack spacing={3}>
               <DesktopDatePicker
                 label="Date desktop"
-                inputFormat="MM/dd/yyyy"
+                inputFormat="dd/MM/yyyy"
                 value={date}
                 onChange={(newDate) => {
                   newDate = getFormattedDate(newDate);

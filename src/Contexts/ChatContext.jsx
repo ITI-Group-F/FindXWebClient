@@ -10,19 +10,19 @@ const ChatContextProvider = ({ children }) => {
   const [connection, setConnection] = useState(null);
   let [conversations, setConversations] = useState(converstions);
 
-  useEffect(() => {
-    const fetchApi = async () => {
-      try {
-        const response = await API.get(`/chathistory/${ownerId}`);
-        console.log(response.data[0]);
-        setConversations(response.data);
-      } catch (error) {
-        console.log(error);
-        setConversations(converstions);
-      }
-    };
-    fetchApi();
-  }, []);
+  // useEffect(() => {
+  //   const fetchApi = async () => {
+  //     try {
+  //       const response = await API.get(`/chathistory/${ownerId}`);
+  //       console.log(response.data[0]);
+  //       setConversations(response.data);
+  //     } catch (error) {
+  //       console.log(error);
+  //       setConversations(converstions);
+  //     }
+  //   };
+  //   fetchApi();
+  // }, []);
 
   useEffect(() => {
     const signalRConnection = new HubConnectionBuilder()
