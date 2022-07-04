@@ -36,6 +36,19 @@ export default function Posts() {
   const [date, setDate] = useState(new Date());
   const { userId } = useClaims();
 
+  //Longtuide and latitude of the Map...
+  const [lat,setLat]=useState(null);
+  const [long,setLong]=useState(null);
+
+  //this function will be send to Location component to set longtude and latitude 
+  const seTCoordinates=(lt,lg)=>{
+
+      setLat(lt);//set Latitude
+      setLong(lg);//set lontude
+
+  }
+  
+
   const setValue = (e) => {
     const { name, value } = e.target;
     console.log(name, value);
@@ -324,7 +337,7 @@ export default function Posts() {
           <h3>
             Item location (Click And Drag The Marker Or Search By Location Name)
           </h3>
-          <Location></Location>
+          <Location locationSetter={seTCoordinates} ></Location>
           <br></br>
           <br></br>
 
