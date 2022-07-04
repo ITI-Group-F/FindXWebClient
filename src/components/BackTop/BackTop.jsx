@@ -36,7 +36,7 @@ export default function BackTop() {
     }
     
   return (
-    <div >
+    <div className={`${BackTopStyle.BackTopContainer}`} >
         <div>
 
       {backTopButton&&(<button onClick={scrollUp} className={`${BackTopStyle.scrollBtn}`} ><KeyboardArrowUpIcon fontSize='large' className={`${BackTopStyle.upIcon}`}/></button>)}

@@ -12,6 +12,7 @@ const selectedID=useParams().id;
 
  const selectedItem=getItemById(selectedID);
 
+
   
   return (
     <div  className={`col-md-6 col-12 d-flex flex-column justify-content-between ${DetailsStyle.itm_details_Con}`}>
@@ -34,7 +35,7 @@ const selectedID=useParams().id;
       <h3>Found Location</h3>
       <hr />
     </div>
-     <MapLocation lat={selectedItem.latitude} long={selectedItem.longitude}/>
+     <MapLocation  lat={selectedItem.latitude} long={selectedItem.longitude}/>
   </div>
         
 
