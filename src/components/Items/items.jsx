@@ -27,26 +27,26 @@ export default function Items() {
   let [superKey, setsuperKey] = useState(null);
   let [underSubData, setunderSubData] = useState([]);
   let [underSuperData, setunderSuperData] = useState([]);
-  
-  let [superLoading,setSuperLoading] = useState(true);
-  let [subLoading,setSubLoading] = useState(true);
+
+  let [superLoading, setSuperLoading] = useState(true);
+  let [subLoading, setSubLoading] = useState(true);
   const [didMountSub, setDidMountSub] = useState(false)
   const [didMountSuper, setDidMountSuper] = useState(false)
   useEffect(() => { setDidMountSub(true) }, [])
-  useEffect(() => { setDidMountSuper(true) }, []) 
+  useEffect(() => { setDidMountSuper(true) }, [])
 
-  useEffect(()=>{
-if (didMountSuper) GetSuperCategories();
-setDidMountSuper(true);
-  },[superKey])
-  
-  useEffect(()=>{
-    if(didMountSub) GetSubCategories();
+  useEffect(() => {
+    if (didMountSuper) GetSuperCategories();
+    setDidMountSuper(true);
+  }, [superKey])
+
+  useEffect(() => {
+    if (didMountSub) GetSubCategories();
     setDidMountSub(true);
-  },[subKey])
+  }, [subKey])
 
-    const GetSuperCategories = () => {
-      
+  const GetSuperCategories = () => {
+
     try {
       const data = async () => {
         const back = await API.get(`/Items/undersup/${superKey}`).then(
@@ -76,35 +76,35 @@ setDidMountSuper(true);
         <option value="Animals">Animals</option>
         <option value="Belongings">Belongings</option>
         <option value="Other">Other</option>
-        
+
       </select>
     );
   };
- 
+
   let SetSuperCat = (e) => {
     setsuperKey(e.target.value);
     setsubKey(null);
   }
-  
-  let SuperValRen = 
-  underSuperData.map((res) => {
-    let id = res.id;
-    let description = res.description;
-    if (description.length>40) description= description.substring(0,8).concat("...");    
-  return (
-    <Box
-      key={res.id}
-      sx={{ display: "inline-flex", flexDirection: "row", flexWrap: "wrap" }}
-    >
-      <Card sx={{ maxWidth: 345, margin: "20px", paddingLeft: "10px" }}>
-        <Stack direction="row" spacing={2}>
-          <Link>
-            <Avatar sx={{ bgcolor: deepPurple[500] }}>
-              {/* Clickable avatar to redirect to the users Profile */}H
-              </Avatar>
+
+  let SuperValRen =
+    underSuperData.map((res) => {
+      let id = res.id;
+      let description = res.description;
+      if (description.length > 40) description = description.substring(0, 8).concat("...");
+      return (
+        <Box
+          key={res.id}
+          sx={{ display: "inline-flex", flexDirection: "row", flexWrap: "wrap" }}
+        >
+          <Card sx={{ maxWidth: 345, margin: "20px", paddingLeft: "10px" }}>
+            <Stack direction="row" spacing={2}>
+              <Link>
+                <Avatar sx={{ bgcolor: deepPurple[500] }}>
+                  {/* Clickable avatar to redirect to the users Profile */}H
+                </Avatar>
               </Link>
             </Stack>
-    
+
             <NavLink to={`/details/${id}`}>
               <CardMedia
                 sx={{ paddingTop: "10px", zIndex: 1 }}
@@ -112,10 +112,10 @@ setDidMountSuper(true);
                 height="140"
                 image={`data:image/jpeg;base64,${res.images[0]}`}
                 alt={res.date}
-                /* onClick={()=>{navigate(`details/${id}`)}} */
+              /* onClick={()=>{navigate(`details/${id}`)}} */
               />
             </NavLink>
-    
+
             <CardContent>
               <Typography gutterBottom variant="h5" component="div" color="WindowText">
                 {res.title}
@@ -129,7 +129,7 @@ setDidMountSuper(true);
       );
     });
 
-  
+
   const GetSubCategories = () => {
     try {
       //allItems.prev = underSubData;
@@ -145,14 +145,14 @@ setDidMountSuper(true);
     } catch (error) {
       console.log(error + "from (/Items/undersub) endpoint");
     }
-     
-    
+
+
   };
 
-  
+
 
   let Subval = () => {
-  
+
     return (
       <select
         name="sub"
@@ -179,7 +179,7 @@ setDidMountSuper(true);
       </select>
     );
   };
- 
+
   let SetSubCat = (e) => {
     setsubKey(e.target.value);
     setsuperKey(null);
@@ -187,52 +187,52 @@ setDidMountSuper(true);
 
   /* <Route path="subcategory/:subKey" element={<Items />} />
           <Route path="supercategory/:superKey" element={<Items />} /> */
-  
-  let SubValRen = 
-  underSubData.map((res) => {
-    let id = res.id;
-    let description = res.description;
-    if (description.length>40) description= description.substring(0,8).concat("...");
-  return (
-    
-    <Box
-      key={res.id}
-      sx={{ display: "inline-flex", flexDirection: "row", flexWrap: "wrap" }}
-    >
-      <Card sx={{ maxWidth: 345, margin: "20px", paddingLeft: "10px" }}>
-        <Stack direction="row" spacing={2}>
-          <Link>
-            <Avatar sx={{ bgcolor: deepPurple[500] }}>
-              H
-            </Avatar>
-          </Link>
-        </Stack>
 
-        <NavLink to={`/details/${id}`}>
-          <CardMedia
-            sx={{ paddingTop: "10px", zIndex: 1 }}
-            component="img"
-            height="140"
-            image={`data:image/jpeg;base64,${res.images[0]}`}
-            alt={res.date}
-          />
-        </NavLink>
+  let SubValRen =
+    underSubData.map((res) => {
+      let id = res.id;
+      let description = res.description;
+      if (description.length > 40) description = description.substring(0, 8).concat("...");
+      return (
 
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div" color="WindowText">
-            {res.title}
-          </Typography>
-          <Typography gutterBottom variant="h5" component="div" color="text.secondary">
-            {description}
-          </Typography>
-        </CardContent>
-      </Card>
-    </Box>
-     
-  );
-});
-  
-      
+        <Box
+          key={res.id}
+          sx={{ display: "inline-flex", flexDirection: "row", flexWrap: "wrap" }}
+        >
+          <Card sx={{ maxWidth: 345, margin: "20px", paddingLeft: "10px" }}>
+            <Stack direction="row" spacing={2}>
+              <Link>
+                <Avatar sx={{ bgcolor: deepPurple[500] }}>
+                  H
+                </Avatar>
+              </Link>
+            </Stack>
+
+            <NavLink to={`/details/${id}`}>
+              <CardMedia
+                sx={{ paddingTop: "10px", zIndex: 1 }}
+                component="img"
+                height="140"
+                image={`data:image/jpeg;base64,${res.images[0]}`}
+                alt={res.date}
+              />
+            </NavLink>
+
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div" color="WindowText">
+                {res.title}
+              </Typography>
+              <Typography gutterBottom variant="h5" component="div" color="text.secondary">
+                {description}
+              </Typography>
+            </CardContent>
+          </Card>
+        </Box>
+
+      );
+    });
+
+
   /* let renderItems = 
     allItems.map((res) => {
       let id = res.id;
@@ -277,37 +277,37 @@ setDidMountSuper(true);
   });
   */
 
-  
-  if (subKey!==null) {
+
+  if (subKey !== null) {
     return (
-        <div>
-                {Subval()}
-                {Superval()}
-                <br/>
-                {subLoading?<Loading/>:SubValRen}
-                
-        </div>
-            )
-  }else if(superKey!==null){
+      <div>
+        {Subval()}
+        {Superval()}
+        <br />
+        {subLoading ? <Loading /> : SubValRen}
+
+      </div>
+    )
+  } else if (superKey !== null) {
     return (
-        <div>
-                {Subval()}
-                {Superval()}
-                  <br/>
-                {superLoading?<Loading/>:SuperValRen}
-       </div>
-           )
-  }else{ 
+      <div>
+        {Subval()}
+        {Superval()}
+        <br />
+        {superLoading ? <Loading /> : SuperValRen}
+      </div>
+    )
+  } else {
     return (
-        <div>
-                {Subval()}
-                {Superval()}
-                <br/>
-                <ActionAreaCard/>
-                
-        </div>
-            )
-        }  
-    
-    }
+      <div>
+        {Subval()}
+        {Superval()}
+        <br />
+        <ActionAreaCard />
+
+      </div>
+    )
+  }
+
+}
 

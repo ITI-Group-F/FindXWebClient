@@ -6,6 +6,7 @@ import PopupState, { bindTrigger, bindMenu } from "material-ui-popup-state";
 import Search from "../../Search/Search"
 import IconButton from "@mui/material/IconButton";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
+import LoginButton from "../NavButtons/LoginButton";
 
 export default function Navbar() {
   return (
@@ -14,10 +15,12 @@ export default function Navbar() {
       <div className=".xnav">
         <section>
           <nav>
-            <Link to ="/">
-            <img className="logo" src="img/logo.png" alt="" />
+            <Link to="/">
+              <img className="logo" src="img/logo.png" alt="" />
             </Link>
-            <ul className="menuItems">
+            <Search></Search>
+            <LoginButton />
+            {/* <ul className="menuItems">
               <li>
                 <Link className="link" to="/" data-item="Home">
                   Home
@@ -38,12 +41,13 @@ export default function Navbar() {
                   Contact
                 </Link>
               </li>
-              <Search></Search>
-            </ul>
+             
+            </ul> */}
             <div className="HammButton">
               <PopupState variant="popover" popupId="hamburger">
                 {(popupState) => (
                   <React.Fragment>
+
                     <IconButton {...bindTrigger(popupState)}>
                       <MenuRoundedIcon fontSize="large" />
                     </IconButton>
@@ -92,7 +96,7 @@ export default function Navbar() {
                       </ul>
                     </Menu>
                     <div className="search">
-                      <Search></Search>
+
                     </div>
                   </React.Fragment>
                 )}
