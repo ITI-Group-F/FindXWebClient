@@ -12,6 +12,7 @@ import Footer from './components/Footer/Footer';
 import Items from './components/Items/items'
 import ItemDetailsPage from "./pages/ItemDetails"
 import Loading from './pages/Loading';
+import Home from "./pages/Home";
 
 // Modules
 import AuthModule from './modules/AuthModule';
@@ -34,7 +35,8 @@ function App() {
       <Suspense fallback={<Loading />}>
         <Navbar></Navbar>
         <Routes>
-          <Route path="/" element={<ItemDetailsPage />} />
+
+          <Route path="/" element={<Home />} />
           <Route path='auth/*' element={<AuthModule />} />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />

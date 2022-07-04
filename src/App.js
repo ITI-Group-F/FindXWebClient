@@ -19,7 +19,7 @@ import AuthModule from "./modules/AuthModule";
 import ChatModule from "./modules/ChatModule";
 import useClaims from "./hooks/useClaims";
 import PrivateRoute from "./routes/PrivateRoute";
-import Home from "./components/Home/Home";
+import Home from "./pages/Home";
 
 function App() {
   // if (!token) {
