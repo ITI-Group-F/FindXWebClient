@@ -68,7 +68,7 @@ export default function Profile(props){
                     <h4 className="text-right">Profile Settings</h4>
                 </div>
                 <div className="row mt-2">
-                    <div className="col-md-6"><label className="labels">FIrst name</label><input type="text" id="firstname" className="form-control" placeholder="first name" defaultValue={firstname}/></div>
+                    <div className="col-md-6"><label className="labels">First name</label><input type="text" id="firstname" className="form-control" placeholder="first name" defaultValue={firstname}/></div>
                     <div className="col-md-6"><label className="labels">Last name</label><input type="text" id="lastname" className="form-control" placeholder="last name" defaultValue={lastname} /></div>
                 </div>
                 <div className="row mt-3">

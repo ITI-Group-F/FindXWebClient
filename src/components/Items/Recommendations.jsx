@@ -29,7 +29,7 @@ export default function ActionAreaCard() {
         
         let description = res.description
   
-        if (description.length>20) description= description.substring(0,8).concat("...");
+        description= description.substring(0,8).concat("...");
         return(
           
           
@@ -48,7 +48,7 @@ export default function ActionAreaCard() {
 
           <NavLink to={`/details/${res.id}`}>
             <CardMedia
-              sx={{ paddingTop: "10px", zIndex: 1, objectFit:"contain", width:"200px", height:"200px" }}
+              sx={{ paddingTop: "10px", zIndex: 1, objectFit:"contain", width:"200px", height:"200px", margin:"auto" }}
               component="img"
               height="140"
               image={`data:image/jpeg;base64,${res.images[0]}`}
