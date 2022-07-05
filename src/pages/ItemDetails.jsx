@@ -1,7 +1,5 @@
 import React from "react";
-import Details from "../components/ItemDetails/Details/Details";
-import Description from "../components/ItemDetails/Description/Description";
-import ItemSlider from "../components/ItemDetails/slider/slider";
+import Wrapper from "../components/ItemDetails/Wrapper/wrapper";
 import { ItemsProvider } from "../Contexts/itemsContext";
 
 
@@ -9,12 +7,7 @@ export default function ItemDetailsPage() {
   return (
     <div>
       <ItemsProvider>
-        <div className={`row g-0 d-flex justify-content-around`}>
-          <ItemSlider />
-          <Details />
-        </div>
-        <Description />
-
+        <Wrapper/>
         </ItemsProvider>
     </div>
   );

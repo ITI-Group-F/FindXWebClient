@@ -1,11 +1,10 @@
-import {useState,useContext} from "react"
+import {useState} from "react"
 import sliderStyles from "./slider.module.css";
 import Carousel from 'react-bootstrap/Carousel';
 import "../itemDetails.css"
-import itemsContext from "../../../Contexts/itemsContext";
-import {useParams} from 'react-router-dom'
 
-const ItemSlider=()=>{
+
+const ItemSlider=(props)=>{
     const [index, setIndex] = useState(0);
 
     const handleSelect = (selectedIndex, e) => {
@@ -13,10 +12,9 @@ const ItemSlider=()=>{
     };
 
 
-    const {getItemById}=useContext(itemsContext);
-    const selectedID=useParams().id;
 
-    const selectedItem=getItemById(selectedID);
+
+    const selectedItem=props.item;
 
     const SliderImages=selectedItem.images.map((value,index)=>{
 

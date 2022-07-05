@@ -1,14 +1,12 @@
-import React, { useEffect,useContext } from 'react'
-import {useParams} from 'react-router-dom'
+import React from 'react'
+
 import DescriptionStyle from "./Description.module.css"
 import "../itemDetails.css"
-import itemsContext from "../../../Contexts/itemsContext";
 
-export default function Description() {
+export default function Description(props) {
 
-const {getItemById}=useContext(itemsContext);
-const selectedID=useParams().id;
-const selectedItem=getItemById(selectedID);
+
+const selectedItem=props.item
   
 
   return (

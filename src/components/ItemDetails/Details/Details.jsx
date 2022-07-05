@@ -1,16 +1,14 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import DetailsStyle from '../Details/Details.module.css'
 import Button from '@mui/material/Button';
 import MapLocation from "../../Map/MapLocation"
 import SendIcon from '@mui/icons-material/Send';
-import itemsContext from "../../../Contexts/itemsContext";
-import {useParams} from 'react-router-dom'
-export default function Details() {
 
-const {getItemById}=useContext(itemsContext);
-const selectedID=useParams().id;
+export default function Details(props) {
 
- const selectedItem=getItemById(selectedID);
+
+
+ const selectedItem=props.item
 
 
   
