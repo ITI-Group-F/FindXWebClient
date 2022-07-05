@@ -18,14 +18,16 @@ export default function ActionAreaCard(props) {
       <div>
           {props.allItemsData.map((res) => {
                   
-              let description = res.description.substring(0,20).concat("...");
+              let description = res.description.substring(0,8).concat("...");
+              let title = res.title.length > 18 ? res.title.substring(0,18).concat("..."): res.title ;
+       
             
                   return(
                     <Box
                     key={res.id}
                     sx={{ display: "inline-flex", flexDirection: "row", flexWrap: "wrap" }}
                     >
-                      <Card sx={{ maxWidth: 345, margin: "20px", paddingLeft: "10px" }}>
+                      <Card sx={{ width:"300px", height:"350px", margin: "20px", paddingLeft: "10px" }}>
                         <Stack direction="row" spacing={2}>
                           <Link>
                             <Avatar sx={{ bgcolor: deepPurple[500] }}>H
@@ -45,7 +47,7 @@ export default function ActionAreaCard(props) {
 
                         <CardContent>
                           <Typography gutterBottom variant="h5" component="div">
-                            {res.title}
+                            {title}
                           </Typography>
                           <Typography gutterBottom variant="h5" component="div" sx={{ color:"darkgray"}}>
                             {description}

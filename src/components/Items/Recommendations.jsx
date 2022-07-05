@@ -28,8 +28,9 @@ export default function ActionAreaCard() {
       {allItems.map((res) => {
         
         let description = res.description
-  
-        description= description.substring(0,8).concat("...");
+        description = description.substring(0,8).concat("...");
+        let title = res.title;
+        title = title.length > 18 ? title.substring(0,18).concat("..."): title ;
         return(
           
           
@@ -38,7 +39,7 @@ export default function ActionAreaCard() {
         key={res.id}
         sx={{ display: "inline-flex", flexDirection: "row", flexWrap: "wrap" }}
       >
-        <Card sx={{ maxWidth: 345, margin: "20px", paddingLeft: "10px" }}>
+        <Card sx={{ width:"300px", height:"350px", margin: "20px", paddingLeft: "10px" }}>
           <Stack direction="row" spacing={2}>
             <Link>
               <Avatar sx={{ bgcolor: deepPurple[500] }}>H
@@ -58,7 +59,7 @@ export default function ActionAreaCard() {
 
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
-              {res.title}
+              {title}
             </Typography>
             <Typography gutterBottom variant="h5" component="div">
               {description}
