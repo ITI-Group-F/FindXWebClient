@@ -1,16 +1,21 @@
-import React,{useState,useContext} from 'react'
-import {itemsContext} from "../../Contexts/itemsContext"
-import SearchIcon from "./SearchIcon"
-import CloseIcon from "./CloseIcon"
-import { useHistory } from 'react';
-import "./search.css"
+import React, { useState, useContext, useEffect, useRef } from "react";
+import { itemsContext } from "../../Contexts/itemsContext";
+import SearchIcon from "./SearchIcon";
+import CloseIcon from "./CloseIcon";
+import { useHistory } from "react";
+import "./search.css";
+import API from "../../Services/api";
 
 function Search() {
   //   const {allPost,setAllPost}=useContext(itemsContext)
   //   const history=useHistory()
-    
+
   const [filteredData, setFilteredData] = useState([]);
-  // const [wordEntered, setWordEntered] = useState("");
+  const [wordEntered, setWordEntered] = useState("");
+  const [input, setInput] = useState("");
+  const inputref = useRef(null);
+  const selected = useRef(null);
+  let apiFormData = new FormData();
 
   // const handleFilter = (event) => {
   //   const searchWord = event.target.value;
@@ -26,10 +31,12 @@ function Search() {
   //   }
   // };
 
-  // const clearInput = () => {
-  //   setFilteredData([]);
-  //   setWordEntered("");
-  // };
+  const clearInput = () => {
+    setFilteredData([]);
+    setWordEntered("");
+  };
+
+  const handleSearch = () => {};
   // const handleSelectedSearch=(item)=>{
   //      setAllPost(item)
   //      history.push("/view")
@@ -38,39 +45,86 @@ function Search() {
   //   if(filteredData.length===0){
   //    alert("No items found.., please search by product category or product name");
   //    }
-     
+
   //    else {setAllPost(filteredData);
   //    history.push("/viewmore")}
-     
+
   // }
+
+  // const submitFormData = () => {
+  //   for (var pair of apiFormData.entries()) {
+  //     console.log(pair[0] + ", " + pair[1]);
+  //   }
+  //   try {
+  //     const res = API.get(`/Items/all`, apiFormData);
+  //     setItems(res.data.data);
+  //     console.log(res.data.data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+
+  //   submitFormData();
+  // };
+  // for (var pair of apiFormData.entries()) {
+  //   console.log(pair[0] + ", " + pair[1]);
+  // }
+
+  useEffect(() => {
+    const getItems = async () => {
+      try {
+        const res = await API.get(`/search/${wordEntered}`, apiFormData);
+        setFilteredData(res.data);
+        console.log(filteredData);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getItems();
+  }, [wordEntered]);
+
   return (
     <div className="search">
       <div className="searchInputs">
         <input
+          ref={inputref}
           type="text"
-          placeholder="Find Your Lost Belongings ..."
+          placeholder=" Find Your Lost Belongings ..."
+          value={wordEntered}
+          onChange={(e) => setWordEntered(e.target.value)}
         />
+        
         <div className="searchIcon">
-          
-           <div > <SearchIcon /> </div>
-           {filteredData.length !== 0 && (
-            <div id="clearBtn"   ><CloseIcon/></div>
+          <div>
+            {" "}
+            <SearchIcon />{" "}
+          </div>
+          {filteredData.length !== 0 && (
+            <div id="clearBtn" onClick={() => clearInput()}>
+              <CloseIcon />
+            </div>
           )}
         </div>
       </div>
       {filteredData.length !== 0 && (
         <div className="dataResult">
-          {filteredData.slice(0, 15).map((value, key) => {
+          {filteredData.map((item) => {
             return (
-              <div key={key} className="dataItem" >
-                <p>{value.name} </p>
+              <div
+                key={item.id}
+                className="dataItem"
+                ref={selected}
+                onClick={(e) => setWordEntered(e.target.innerText)}
+              >
+                <p>{item.title} </p>
               </div>
             );
           })}
         </div>
       )}
     </div>
+    
+
   );
 }
 
-export default Search
+export default Search;
