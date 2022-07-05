@@ -16,7 +16,7 @@ const ItemSlider=(props)=>{
 
     const selectedItem=props.item;
 
-    const SliderImages=selectedItem.images.map((value,index)=>{
+    const SliderImages=selectedItem?.images.map((value,index)=>{
 
       return ( <Carousel.Item key={index} style={{height:'100%'}} className={sliderStyles.item}>
       <div className={`${sliderStyles.wrapperContainer}`} >
@@ -33,20 +33,19 @@ const ItemSlider=(props)=>{
     })
 
 
-    console.log(selectedItem.images)
 
-return (
+return selectedItem? (
 <div className={ `col-md-5 col-sm-12 ${sliderStyles.sliderContainer}`}>
 <Carousel activeIndex={index} onSelect={handleSelect}>
 
 
-      {SliderImages}
+      {SliderImages??null}
 
      
 
     </Carousel>
 </div>
-)
+):(<div></div>)
 
 }
 

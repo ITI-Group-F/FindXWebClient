@@ -12,7 +12,7 @@ export default function Details(props) {
 
 
   
-  return (
+  return selectedItem?(
     <div  className={`col-md-6 col-12 d-flex flex-column justify-content-between ${DetailsStyle.itm_details_Con}`}>
 
         <div className={`ms-3 p-4 d-flex justify-content-between row g-0`}>
@@ -51,7 +51,7 @@ export default function Details(props) {
         </div>
       
     </div>
-  )
+  ):(<div></div>)
 }
 
 
