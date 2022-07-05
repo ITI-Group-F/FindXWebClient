@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
+import { NavLink} from "react-router-dom";
 import noAdds from "./../../images/myadds.webp";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
@@ -69,12 +70,14 @@ function MyAds() {
           <div className="row productRow">
             {filteredData.map((item) => (
               <div
-                className="col-lg-2 col-md-6 col-sm-0 h-100 "
+                className="col-lg-2 col-md-6 col-sm-0  "
                 key={item.id}
                 ref={deleteref}
                 // onClick={() => routeHandler(item)}
               >
+                
                 <div className="card">
+                <NavLink to={`/details/${item.id}`}>
                   <CardMedia
                     sx={{ paddingTop: "10px", zIndex: 1 }}
                     component="img"
@@ -82,7 +85,7 @@ function MyAds() {
                     image={`data:image/jpeg;base64,${item.images[0]}`}
                     alt={item.date}
                   />
-
+                  </NavLink> 
                   <div className="card-body">
                     <h5 className="card-title">
                       {item.title.substring(0, 25).concat("...")}
@@ -91,6 +94,7 @@ function MyAds() {
                       {item.description.substring(0, 40).concat("...")}
                     </p>
                   </div>
+                    
                   <div className="card-footer">
                     <small className="text-muted"></small>
                     <button
