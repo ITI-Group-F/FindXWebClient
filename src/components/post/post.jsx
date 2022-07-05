@@ -25,8 +25,8 @@ import useClaims from "../../hooks/useClaims";
 export default function Posts() {
   const [apiFormData, setApiFormData] = useState(new FormData());
   const [showhide, setshowhide] = useState("");
-  const [longitude, setLongitude] = useState(31.235712);
-  const [latitude, setLatitude] = useState(30.04442);
+  const [long, setLong] = useState(null);
+  const [lat, setLat] = useState(null);
   const [showdescErr, setShowdescErr] = useState(false);
   const [descErr, setdescErr] = useState("");
   const [formData, setFormData] = useState({});
@@ -36,18 +36,11 @@ export default function Posts() {
   const [date, setDate] = useState(new Date());
   const { userId } = useClaims();
 
-  //Longtuide and latitude of the Map...
-  const [lat,setLat]=useState(null);
-  const [long,setLong]=useState(null);
-
-  //this function will be send to Location component to set longtude and latitude 
-  const seTCoordinates=(lt,lg)=>{
-
-      setLat(lt);//set Latitude
-      setLong(lg);//set lontude
-
-  }
-  
+  //this function will be send to Location component to set longtude and latitude
+  const seTCoordinates = (lt, lg) => {
+    setLong(lg);
+    setLat(lt);
+  };
 
   const setValue = (e) => {
     const { name, value } = e.target;
@@ -69,7 +62,11 @@ export default function Posts() {
   };
 
   const submitFormData = () => {
+    console.log(long, lat);
     setApiFormData(new FormData());
+    setFormData({ ...formData, longitude: long, latitude: lat });
+    console.log(formData);
+
     for (let k in formData) {
       apiFormData.append(`${k}`.replace(/\d$/, ""), formData[k]);
     }
@@ -337,7 +334,7 @@ export default function Posts() {
           <h3>
             Item location (Click And Drag The Marker Or Search By Location Name)
           </h3>
-          <Location locationSetter={seTCoordinates} ></Location>
+          <Location locationSetter={seTCoordinates}></Location>
           <br></br>
           <br></br>
 
