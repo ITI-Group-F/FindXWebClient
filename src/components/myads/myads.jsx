@@ -16,30 +16,12 @@ import { useHistory } from "react-router-dom";
 import { display } from "@mui/system";
 
 function MyAds() {
-  // const currentUser = useSelector((state) => state.currentUser);
-  // const history = useHistory();
-  // if(Object.keys(currentUser).length < 1){
-  //         history.push('/')
-  // }
-
   let apiFormData = new FormData();
   const [filteredData, setFilteredData] = useState([]);
   const [userProducts, setUserProducts] = useState([]);
   const [itemId, setItemId] = useState("");
   const [userHaveProducts, setUserHaveProducts] = useState(false);
   const deleteref = useRef(null);
-  // const products = () => {
-  //   for (var pair of apiFormData.entries()) {
-  //     console.log(pair[0] + ", " + pair[1]);
-  //   }
-  //   try {
-  //     let userId = "1c47a376-1267-4892-87f7-e0efbc66fa9f";
-  //     let res = API.Get(`/UserItems/${userId}`, apiFormData);
-  //     console.log(res.response);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   useEffect(() => {
     const getItems = async () => {
@@ -87,7 +69,7 @@ function MyAds() {
           <div className="row productRow">
             {filteredData.map((item) => (
               <div
-                className="col-lg-3 col-md-6 col-sm-6"
+                className="col-lg-2 col-md-6 col-sm-0 h-100 "
                 key={item.id}
                 ref={deleteref}
                 // onClick={() => routeHandler(item)}
@@ -102,9 +84,11 @@ function MyAds() {
                   />
 
                   <div className="card-body">
-                    <h5 className="card-title">{item.title}</h5>
+                    <h5 className="card-title">
+                      {item.title.substring(0, 25).concat("...")}
+                    </h5>
                     <p className="card-text">
-                      {item.description.substring(0, 100).concat("...")}
+                      {item.description.substring(0, 40).concat("...")}
                     </p>
                   </div>
                   <div className="card-footer">

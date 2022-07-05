@@ -13,6 +13,7 @@ import ItemDetailsPage from "./pages/ItemDetails";
 import Loading from "./pages/Loading";
 import BackTop from "./components/BackTop/BackTop";
 import RenderItems from "./components/Items/allItems";
+import MyAds from "./components/myads/myads";
 
 // Modules
 import AuthModule from "./modules/AuthModule";
@@ -48,6 +49,7 @@ function App() {
           <Route path="items" element={<Items />} />
           <Route path="details/:id" element={<ItemDetailsPage />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="myads" element={<MyAds/>} />
         </Routes>
       </Suspense>
     </>
