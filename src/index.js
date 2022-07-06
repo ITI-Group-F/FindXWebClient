@@ -10,6 +10,7 @@ import { ItemsProvider } from "./Contexts/itemsContext";
 
 import { ThemeProvider} from '@mui/material/styles';
 import { defaultlight  } from './theming/default';
+import { SubAndSuperData } from "./Contexts/subAndsuperContext";
 
 axios.interceptors.request.use(
   function (config) {
@@ -29,11 +30,13 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <ItemsProvider>
+      <SubAndSuperData>
 
      <ThemeProvider theme={defaultlight}>
      <App />
      </ThemeProvider>
 
+        </SubAndSuperData>  
       </ItemsProvider>
     </BrowserRouter>
   </React.StrictMode>

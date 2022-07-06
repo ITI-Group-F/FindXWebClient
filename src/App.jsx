@@ -23,33 +23,48 @@ import PrivateRoute from "./routes/PrivateRoute";
 import Home from "./pages/Home";
 
 function App() {
-  // if (!token) {
-  //   return (
-  //     <NativeBaseProvider>
-  //       <Login setToken={setToken} />
-  //     </NativeBaseProvider>
-  //   );
-  // }
-
   return (
     <>
       <Suspense fallback={<Loading />}>
         <BackTop />
         <Navbar></Navbar>
-
         <Routes>
-          <Route path="/" element={<Home/>} />
+          <Route path="/" element={<Home />} />
           <Route path="details" element={<ItemDetailsPage />} />
           <Route path="auth/*" element={<AuthModule />} />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
-          <Route path="post" element={<PrivateRoute> <Post /> </PrivateRoute>} />
-          <Route path="profile" element={<PrivateRoute> <Profile /> </PrivateRoute>} />
-          <Route path="chat/*" element={<PrivateRoute> <ChatModule /> </PrivateRoute>} />
+          <Route
+            path="post"
+            element={
+              <PrivateRoute>
+                {" "}
+                <Post />{" "}
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="profile"
+            element={
+              <PrivateRoute>
+                {" "}
+                <Profile />{" "}
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="chat/*"
+            element={
+              <PrivateRoute>
+                {" "}
+                <ChatModule />{" "}
+              </PrivateRoute>
+            }
+          />
           <Route path="items" element={<Items />} />
           <Route path="details/:id" element={<ItemDetailsPage />} />
           <Route path="*" element={<NotFound />} />
-          <Route path="myads" element={<MyAds/>} />
+          <Route path="myads" element={<MyAds />} />
         </Routes>
       </Suspense>
     </>
