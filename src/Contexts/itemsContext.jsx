@@ -7,6 +7,11 @@ import Loading from "../components/Loading";
 //2 - import useContext from "react" and itemsContext in your component 
 //3 - give itemsContext as a parameter to the useContext hook in your component i.e : useCoentxt(itemsContext)
 
+/* 
+ <Route path="/supercategory/:superKey" element={<SubAndSuperItems/>} />
+          <Route path="/subcategory/:subKey" element={<SubAndSuperItems/>} />
+*/
+
 const itemsContext = createContext();
 export const ItemsProvider = (props) =>{
     const {children}=props;
@@ -44,8 +49,9 @@ export const ItemsProvider = (props) =>{
     //memoize obeject that contain context data and send to any one who use this context ...
    let contextValue=useMemo(()=>({
         allItems,
-        getItemById
-    }),[allItems,getItemById])
+        getItemById,
+        setAllItems
+    }),[allItems,getItemById,setAllItems])
 
     return (
 

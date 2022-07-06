@@ -21,6 +21,8 @@ import ChatModule from "./modules/ChatModule";
 import useClaims from "./hooks/useClaims";
 import PrivateRoute from "./routes/PrivateRoute";
 import Home from "./pages/Home";
+import SubAndSuperItems from "./components/Items/subAndSuperItems";
+import SearchResults from "./components/Items/searchResults";
 
 function App() {
   return (
@@ -61,6 +63,9 @@ function App() {
               </PrivateRoute>
             }
           />
+          <Route path="/supercategory/:superKey" element={<SubAndSuperItems/>} />
+          <Route path="/subcategory/:subKey" element={<SubAndSuperItems/>} />
+          <Route path="/search/:wordEntered" element={<SearchResults />} />
           <Route path="items" element={<Items />} />
           <Route path="details/:id" element={<ItemDetailsPage />} />
           <Route path="*" element={<NotFound />} />
