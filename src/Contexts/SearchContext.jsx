@@ -1,4 +1,4 @@
-import API from "../Services/api";
+/* import API from "../Services/api";
 import { createContext, useCallback, useEffect, useMemo, useState } from "react";
 import Loading from "../components/Loading";
 
@@ -10,19 +10,19 @@ export const SearchProvider= (props)=>{
 let [searchWord,setSearchWord] = useState(null);
 let [searchLoading, setSearchLoading] = useState(true)
 let [searchResult,setSearchResult] = useState([])
-const [didMountSuper, setDidMountSuper] = useState(false);
+const [didMountSuper, setDidMountSuper] = useState(true);
 let [clearApi, setClearApi] = useState(false);
 
 useEffect(() => { 
   
-    setDidMountSuper(true) }
+    setDidMountSuper(false) }
     
   , [])
 
 useEffect(()=>{
     if (didMountSuper)GetSearchData();
     setDidMountSuper(true);
-},[searchWord])
+},[])
 
 let GetSearchData = ()=>{
 
@@ -40,16 +40,22 @@ let GetSearchData = ()=>{
     console.log(error + " from search/full/query endpoint");
 }
 };
+
+let changeWord = (word)=>{
+    setSearchWord(word)
+}
+
 let contextValue = useMemo(()=>({
     setSearchWord,
     searchLoading,
     setSearchLoading, 
     searchResult,
     setSearchResult,
-    searchWord
+    searchWord,
+    changeWord,GetSearchData
 
 
-}),[setSearchWord,searchLoading,setSearchLoading,searchResult,searchWord])
+}),[setSearchWord,searchLoading,setSearchLoading,searchResult,searchWord,changeWord,GetSearchData])
 
 return (
     <searchContext.Provider value = {contextValue}>
@@ -61,4 +67,4 @@ return (
 
 }
 
-export default searchContext;
+export default searchContext; */

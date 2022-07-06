@@ -8,7 +8,6 @@ import Loading from "../Loading";
 import ActionAreaCard from "./allItems";
 import Filters from "./filters";
 import SubAndSuperItems from "./subAndSuperItems";
-import searchContext from "../../Contexts/SearchContext";
 import SearchResults from "./searchResults";
 
   //---------------------------------------------------------------------------------------
@@ -26,7 +25,6 @@ export default function Items() {
     
      } = useContext(subAndSuperContext);
 
-     let {setSearchWord,searchLoading,setSearchLoading,searchResult,searchWord} = useContext(searchContext)
  /*  let [subKey, setsubKey] = useState(null);
   let [superKey, setsuperKey] = useState(null);
   let [underSubData, setunderSubData] = useState([]);
