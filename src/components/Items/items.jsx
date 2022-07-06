@@ -8,6 +8,8 @@ import Loading from "../Loading";
 import ActionAreaCard from "./allItems";
 import Filters from "./filters";
 import SubAndSuperItems from "./subAndSuperItems";
+import searchContext from "../../Contexts/SearchContext";
+import SearchResults from "./searchResults";
 
   //---------------------------------------------------------------------------------------
 
@@ -23,6 +25,8 @@ export default function Items() {
     subLoading
     
      } = useContext(subAndSuperContext);
+
+     let {setSearchWord,searchLoading,setSearchLoading,searchResult,searchWord} = useContext(searchContext)
  /*  let [subKey, setsubKey] = useState(null);
   let [superKey, setsuperKey] = useState(null);
   let [underSubData, setunderSubData] = useState([]);
@@ -82,24 +86,7 @@ export default function Items() {
           console.log(error + "from (/Items/undersuper) endpoint");
         }
       }; */
-      let Superval = () => {
-
-        return (
-          <select
-            name="sub"
-            id="sub"
-            defaultValue="Choose a Subcategory"
-            onChange={SetSuperCat}
-          >
-            <option disabled defaultValue="Animals">Select a Super Category</option>
-            <option value="Electronics">Electronics</option>
-            <option value="Animals">Animals</option>
-            <option value="Belongings">Belongings</option>
-            <option value="Other">Other</option>
-
-          </select>
-        );
-      };
+     
 
     /*   let SetSuperCat = (e) => {
         setsuperKey(e.target.value);
@@ -129,35 +116,7 @@ export default function Items() {
 
 
 
-      let Subval = () => {
-
-        return (
-          <select
-            name="sub"
-            id="sub"
-            defaultValue="Choose a Subcategory"
-            onChange={SetSubCat}
-          >
-            <option disabled>selecet a subcategory</option>
-            <option value="Tablets">Tablets</option>
-            <option value="Mobiles">Mobiles</option>
-            <option value="Laptops">Laptops</option>
-            <option value="Birds">Birds</option>
-            <option value="Cats">Cats</option>
-            <option value="Dogs">Dogs</option>
-            <option value="Personal cards and papers">
-              Personal cards and papers
-            </option>
-            <option value="Wallets">Wallets</option>
-            <option value="Glasses">Glasses</option>
-            <option value="Money">Money</option>
-            <option value="Bags">Bags</option>
-            <option value="Accessories">Accessories</option>
-            <option value="Other">Other</option>
-          </select>
-        );
-      };
-
+     
      /*  let SetSubCat = (e) => {
         setsubKey(e.target.value);
         setsuperKey(null);
@@ -202,15 +161,14 @@ if (subKey !== null) {
         
 
   </div>    
-)
-}else{
+  )
+    }else {
 
   return (
     <div>
             <Filters/>
             <br />
             <ActionAreaCard allItemsData = {allItems}/>
-            {console.log("hiii from main")}
           </div>
         )
       }

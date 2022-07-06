@@ -38,10 +38,10 @@ function Search() {
   };
 
   const handleSearch = () => {
- 
-        if(wordEntered.length>0){
-        navigate(`/items/${wordEntered}`);
-        }   
+        
+        navigate(`/search/${wordEntered}`);
+        console.log(wordEntered)
+           
   };
   // const handleSelectedSearch=(item)=>{
   //      setAllPost(item)
