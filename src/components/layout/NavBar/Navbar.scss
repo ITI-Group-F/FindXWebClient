@@ -117,7 +117,7 @@ nav {
 .HammButton {
   margin-left: auto;
   transition: display 2s;
-  display: none;
+  display: flex;
 }
 
 .logo {
@@ -127,11 +127,11 @@ nav {
   align-self: center;
 }
 
-@media only screen and (max-width: 950px) {
-  nav .menuItems {
-    display: none;
-  }
-  .HammButton {
-    display: flex;
-  }
-}
+// @media only screen and (max-width: 950px) {
+//   nav .menuItems {
+//     display: none;
+//   }
+//   .HammButton {
+//     display: flex;
+//   }
+// }

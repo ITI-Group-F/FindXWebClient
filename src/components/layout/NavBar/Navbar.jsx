@@ -19,8 +19,7 @@ export default function Navbar() {
               <img className="logo" src="img/logo.png" alt="" />
             </Link>
             <Search></Search>
-            <LoginButton />
-            <CameraButton />
+
             {/* <ul className="menuItems">
               <li>
                 <Link className="link" to="/" data-item="Home">
@@ -45,11 +44,15 @@ export default function Navbar() {
              
             </ul> */}
             <div className="HammButton">
+
+              <LoginButton />
+              <CameraButton />
+
               <PopupState variant="popover" popupId="hamburger">
                 {(popupState) => (
                   <React.Fragment>
                     <IconButton {...bindTrigger(popupState)}>
-                      <MenuRoundedIcon fontSize="large" />
+                      <MenuRoundedIcon fontSize="large" color="primary" />
                     </IconButton>
                     <Menu {...bindMenu(popupState)}>
                       <ul className="MobilMenuItems">

@@ -1,20 +1,24 @@
 import React from "react";
+import {useEffect} from "react";
 import IconButton from "@mui/material/IconButton";
 import LoginRoundedIcon from '@mui/icons-material/LoginRounded';
 
 import Login from "../../auth/Login";
+import useToken from "../../../hooks/useToken";
 
-import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
+
+import useClaims from '../../../hooks/useClaims';
 
 
 export default function LoginButton() {
 
+    const { token, setToken } = useToken();
+    const { claims } = useClaims();
     const [open, setOpen] = React.useState(false);
+
+    
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -24,6 +28,16 @@ export default function LoginButton() {
         setOpen(false);
     };
 
+    const handleisLoggedin = () => {
+        console.log("Working");
+        if (claims) {
+            setOpen(false);
+        } else {
+            
+        }
+    }
+
+    useEffect(handleisLoggedin,[claims])
     return (
 
 
@@ -38,7 +52,7 @@ export default function LoginButton() {
 
                 <DialogContent>
 
-                    <Login />
+                    <Login onClick={handleisLoggedin} setToken={setToken} />
 
                 </DialogContent>
 

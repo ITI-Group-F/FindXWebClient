@@ -7,7 +7,7 @@ export  const defaultlight = createTheme({
       main: green[500],
     },
     secondary: {
-      main: '#43a047',
+      main: '#000',
     },
   },
 });
