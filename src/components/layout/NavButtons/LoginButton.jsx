@@ -1,5 +1,5 @@
 import React from "react";
-import {useEffect} from "react";
+import { useEffect } from "react";
 import IconButton from "@mui/material/IconButton";
 import LoginRoundedIcon from '@mui/icons-material/LoginRounded';
 
@@ -18,7 +18,7 @@ export default function LoginButton() {
     const { claims } = useClaims();
     const [open, setOpen] = React.useState(false);
 
-    
+
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -29,15 +29,11 @@ export default function LoginButton() {
     };
 
     const handleisLoggedin = () => {
-        console.log("Working");
-        if (claims) {
-            setOpen(false);
-        } else {
-            
-        }
+
+        setOpen(false);
     }
 
-    useEffect(handleisLoggedin,[claims])
+
     return (
 
 
@@ -52,7 +48,7 @@ export default function LoginButton() {
 
                 <DialogContent>
 
-                    <Login onClick={handleisLoggedin} setToken={setToken} />
+                    <Login onClick={handleisLoggedin} setToken={setToken} loginfromNavbar={handleisLoggedin} />
 
                 </DialogContent>
 

@@ -5,7 +5,7 @@ import "./auth.css";
 import { useNavigate } from "react-router-dom";
 import useToken from "../../hooks/useToken";
 
-export default function Login({ setToken }) {
+export default function Login({ setToken ,loginfromNavbar}) {
   /**
    * variables for the form state and validation state of the form
    * fields and the error message for the form fields if they are
@@ -78,6 +78,9 @@ export default function Login({ setToken }) {
       if (token) {
         setToken(token);
         navigate("/", { replace: true });
+        if(loginfromNavbar){
+          loginfromNavbar();
+        }
       }
     }
   };
