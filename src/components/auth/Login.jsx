@@ -1,9 +1,10 @@
 import { Box, Button, TextField, Typography, Link, Alert } from "@mui/material";
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import API from "../../Services/api";
 import "./auth.css";
 import { useNavigate } from "react-router-dom";
 import useToken from "../../hooks/useToken";
+import { authenticationContext } from "../../Contexts/AuthContext";
 
 export default function Login({ setToken ,loginfromNavbar}) {
   /**
@@ -21,6 +22,7 @@ export default function Login({ setToken ,loginfromNavbar}) {
   const [showResErrMsg, setShowResErrMsg] = useState(false);
   const [resErrMsg, setResErrMsg] = useState("");
   const navigate = useNavigate();
+  const [isloggedIn,login] = useContext(authenticationContext);
 
   /*
    * function to handle the change of the form fields
@@ -78,6 +80,7 @@ export default function Login({ setToken ,loginfromNavbar}) {
       if (token) {
         setToken(token);
         navigate("/", { replace: true });
+        login();
         if(loginfromNavbar){
           loginfromNavbar();
         }
