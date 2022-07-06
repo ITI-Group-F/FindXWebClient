@@ -8,6 +8,7 @@ import {
   InputAdornment,
   InputLabel,
   RadioGroup,
+  Alert,
   FormControlLabel,
   Radio,
   FormLabel,
@@ -18,9 +19,10 @@ import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import Stack from "@mui/material/Stack";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-
+import { useNavigate } from "react-router-dom";
 import API from "../../Services/api";
 import useClaims from "../../hooks/useClaims";
+
 
 export default function Posts() {
   const [apiFormData, setApiFormData] = useState(new FormData());
@@ -28,13 +30,20 @@ export default function Posts() {
   const [long, setLong] = useState(null);
   const [lat, setLat] = useState(null);
   const [showdescErr, setShowdescErr] = useState(false);
+  const [showtitleErr, setShowtitleErr] = useState(false);
+  const [showbrandErr, setShowbrandErr] = useState(false);
+  const [showLocationErr, setShowLocationErr] = useState(false);
   const [descErr, setdescErr] = useState("");
+  const [titleErr, settitleErr] = useState("");
+  const [brandErr, setbrandErr] = useState("");
+  const [LocationErr, setLocationErr] = useState("");
   const [formData, setFormData] = useState({});
-  const [showcatErr, setShowcatErr] = useState(false);
-  const [catErr, setcatErr] = useState("");
+  const [showfieldErr, setShowfieldErr] = useState(false);
+  const [fieldErr, setfieldErr] = useState("");
   const [isLost, setIsLost] = useState(false);
   const [date, setDate] = useState(new Date());
   const { userId } = useClaims();
+  const navigate = useNavigate();
 
   //this function will be send to Location component to set longtude and latitude
   const seTCoordinates = (lt, lg) => {
@@ -76,15 +85,18 @@ export default function Posts() {
     }
     console.log("----------------");
 
-    try {
-      let id = "1c47a376-1267-4892-87f7-e0efbc66fa9f";
-      let dummy = "cf28af55-85be-4295-b437-c81d787ba15c";
-      const res = API.post(`/UserItems/${dummy}`, apiFormData);
+
+      try {
+      const res = API.post(`/UserItems/${userId}`, apiFormData);
+      // navigate("/", { replace: true });
+
     } catch (error) {
       console.log(error);
     }
-  };
+ 
+  ;}
 
+ 
   // const [formImgs, setFormImgs] = useState([]);
   const setFormFiles = (e) => {
     const { files } = e.target;
@@ -96,34 +108,71 @@ export default function Posts() {
   const validatedesc = () => {
     let isdescValid = false;
     if (
-      formData.description?.length >= 200 &&
-      formData.description?.length <= 300
-    ) {
+      formData.description?.length >= 200 ) {
       isdescValid = false;
       setShowdescErr(true);
-      setdescErr("description is too long max is 300");
+      setdescErr("The Description is too long, the max is 300 characters");
     } else {
       isdescValid = true;
       setShowdescErr(false);
     }
 
-    let iscategoriesValid = false;
+    ////////////////////////////////////////////
+    let isFeildsValid = false;
     if (
-      !formData.name ||
-      formData.name?.length <= 1 ||
-      !formData.phone ||
-      formData.phone?.length <= 1 ||
-      !formData.address ||
-      formData.address?.length <= 1
+      !formData.title ||
+      formData.title?.length <= 1 ||
+      !formData.description ||
+      formData.description?.length <= 1 ||
+      !formData.Location ||
+      formData.Location?.length <= 1
+     
     ) {
-      iscategoriesValid = false;
-      setShowcatErr(true);
-      setcatErr("Select Category !");
+      isFeildsValid = false;
+      setShowfieldErr(true);
+      setfieldErr("some Fiels are missing or invalid!");
     } else {
-      iscategoriesValid = true;
-      setShowcatErr(false);
+      isFeildsValid = true;
+      setShowfieldErr(false);
     }
-    return isdescValid, iscategoriesValid;
+   ////////////////////////////////////////////////
+   let istitleValid = false;
+   if (
+     formData.title?.length >= 101 ) {
+     istitleValid = false;
+     setShowtitleErr(true);
+     settitleErr("The Title is too long, the max is 100 characters");
+   } else {
+     istitleValid = true;
+     setShowtitleErr(false);
+   }  
+  ////////////////////////////////////////////////
+   
+  let isbrandValid = false;
+  if (
+    formData.brand?.length >= 31 ) {
+    isbrandValid = false;
+    setShowbrandErr(true);
+    setbrandErr("The Brand is too long, the max is 30 characters");
+  } else {
+    isbrandValid = true;
+    setShowbrandErr(false);
+  }  
+
+  ////////////////////////////////////////////////
+  let isLocationValid = false;
+  if (
+    formData.Location?.length >= 101 ) {
+    isLocationValid = false;
+    setShowLocationErr(true);
+    setLocationErr("The Location is too long, the max is 100 characters");
+  } else {
+    isLocationValid = true;
+    setShowLocationErr(false);
+  }  
+
+
+    return isdescValid, isFeildsValid ,istitleValid,isbrandValid,isLocationValid;
   };
 
   const handleshow = (
@@ -134,6 +183,7 @@ export default function Posts() {
     setshowhide(getuser);
   };
   return (
+    
     <div className="container-fluid">
       <div className="row justify-content-center">
         {/* {spinner ? (
@@ -143,6 +193,17 @@ export default function Posts() {
           <h3 className="text-center text-uppercase pt-3  pb-3 text-underline shadow">
             Post Your ad
           </h3>
+           
+          {showfieldErr && (
+            <center>
+              <Box width="300px">
+                <Alert severity="error">
+                  Some fileds are missing or invalid.
+                </Alert>
+              </Box>
+            </center>
+          )}
+
           <hr />
           <h4 htmlFor="category">Select Category</h4>
 
@@ -173,11 +234,10 @@ export default function Posts() {
                 className="form-select"
                 aria-label="Default select example"
               >
-                <option disabled="disabled">Select Category</option>
+                <option selected disabled="disabled">Select Category</option>
                 <option value="Cats">Cats</option>
                 <option value="Dogs">Dogs</option>
                 <option value="Birds">Birds</option>
-                <option value="other">other</option>
               </select>
               <FormControl />
 
@@ -208,14 +268,13 @@ export default function Posts() {
                 className="form-select"
                 aria-label="Default select example"
               >
-                <option disabled="disabled">Select Category</option>
+                <option selected disabled="disabled">Select Category</option>
                 <option>Personal cards and papers</option>
                 <option value="Wallets">Wallets</option>
                 <option value="Glasses">Glasses</option>
                 <option value="Money">Money</option>
                 <option value="Bags">Bags</option>
                 <option value="Accessories">Accessories</option>
-                <option value="other">other</option>
               </select>
               <FormControl />
             </div>
@@ -231,11 +290,10 @@ export default function Posts() {
                 className="form-select"
                 aria-label="Default select example"
               >
-                <option disabled="disabled">Select Category</option>
+                <option selected disabled="disabled">Select Category</option>
                 <option value="Mobiles">Mobiles</option>
                 <option value="Tablets">Tablets</option>
                 <option value="Laptops">Laptops</option>
-                <option value="other">other</option>
               </select>
 
               <FormControl fullWidth sx={{ m: 1 }} variant="standard">
@@ -253,6 +311,16 @@ export default function Posts() {
                   }
                 />
               </FormControl>
+
+              {/*  */}
+              {showbrandErr && (
+            <Box className="err-msg">
+              <Typography color="red" variant="caption" gutterBottom>
+                {brandErr}
+              </Typography>
+            </Box>
+          )} 
+              {/*  */}
             </div>
           )}
 
@@ -293,6 +361,18 @@ export default function Posts() {
             label="Item Title"
             id="fullWidth"
           />
+
+{/*  */}
+
+{showtitleErr && (
+            <Box className="err-msg">
+              <Typography color="red" variant="caption" gutterBottom>
+                {titleErr}
+              </Typography>
+            </Box>
+          )}     
+
+{/*  */}
           <div className="mb-3">
             <label htmlFor="exampleFormControlTextarea1" className="form-label">
               Item Description
@@ -307,7 +387,7 @@ export default function Posts() {
               rows="3"
             ></textarea>
           </div>
-
+{/*  */}
           {showdescErr && (
             <Box className="err-msg">
               <Typography color="red" variant="caption" gutterBottom>
@@ -315,7 +395,7 @@ export default function Posts() {
               </Typography>
             </Box>
           )}
-
+{/*  */}
           {/*multiple image upload  */}
           <label htmlFor="formFileMultiple" className="form-label">
             Item Image
@@ -348,6 +428,16 @@ export default function Posts() {
             label="Location"
             id="fullWidth"
           />
+
+          {/*  */}
+          {showLocationErr && (
+            <Box className="err-msg">
+              <Typography color="red" variant="caption" gutterBottom>
+                {LocationErr}
+              </Typography>
+            </Box>
+          )}  
+          {/*  */}
           <br></br>
           <br></br>
 
@@ -404,15 +494,7 @@ export default function Posts() {
             required
           /> */}
 
-          {/* {showcatErr && (
-            <center>
-              <Box width="300px">
-                <Alert severity="error">
-                  Some fileds are missing or invalid.
-                </Alert>
-              </Box>
-            </center>
-          )} */}
+
 
           <div className="d-grid gap-2">
             <button
