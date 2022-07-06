@@ -9,6 +9,8 @@ import ActionAreaCard from "./allItems";
 import Filters from "./filters";
 import SubAndSuperItems from "./subAndSuperItems";
 import SearchResults from "./searchResults";
+import noAdds from "./../../images/myadds.webp";
+
 
   //---------------------------------------------------------------------------------------
 
@@ -21,7 +23,9 @@ export default function Items() {
     subKey,
     superKey,
     superLoading,
-    subLoading
+    subLoading,
+    setSuperLoading,
+    setSubLoading
     
      } = useContext(subAndSuperContext);
 
@@ -140,36 +144,22 @@ https://dev.to/raaynaldo/react-router-usehistory-uselocation-and-useparams-10cd
 */
 /* console.log("sub " +subLoading);
 console.log("super " + superLoading); */
-
-if (subKey !== null) {
-
-  return (
-    <div>
-      <Filters/>
-        {subLoading ? <Loading /> : <SubAndSuperItems underSubData={underSubData}/>}
-
-
-    </div>
-);
-}else if (superKey !== null) {
-  return (
-      <div>
-        <Filters/>
-      {superLoading ? <Loading /> : <SubAndSuperItems underSuperData={underSuperData}/>}
-        
-
-  </div>    
-  )
-    }else {
+console.log(allItems);
 
   return (
     <div>
             <Filters/>
             <br />
-            <ActionAreaCard allItemsData = {allItems}/>
+            {allItems === [] ? <img
+            src={noAdds}
+            alt=""
+            className="img-fluid"
+            width="200"
+            height="auto"
+          />:<ActionAreaCard allItemsData = {allItems}/>}
           </div>
         )
-      }
+      
       
 
 }

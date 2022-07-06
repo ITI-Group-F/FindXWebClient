@@ -1,4 +1,4 @@
-/* import API from "../Services/api";
+import API from "../Services/api";
 import { createContext, useCallback, useEffect, useMemo, useState } from "react";
 import Loading from "../components/Loading";
 
@@ -10,27 +10,36 @@ export const SearchProvider= (props)=>{
 let [searchWord,setSearchWord] = useState(null);
 let [searchLoading, setSearchLoading] = useState(true)
 let [searchResult,setSearchResult] = useState([])
-const [didMountSuper, setDidMountSuper] = useState(true);
+const [didMountSuper, setDidMountSuper] = useState(false);
 let [clearApi, setClearApi] = useState(false);
 
-useEffect(() => { 
+/* useEffect(() => { 
   
-    setDidMountSuper(false) }
+    console.log("1  mount " + didMountSuper);
+    setDidMountSuper(true) 
     
-  , [])
+    console.log("2  mount " + didMountSuper);
+
+}, []) */
 
 useEffect(()=>{
-    if (didMountSuper)GetSearchData();
-    setDidMountSuper(true);
-},[])
+    //console.log("3  mount " + didMountSuper);
+    //if (didMountSuper){
+
+        GetSearchData();
+
+},[searchWord])
 
 let GetSearchData = ()=>{
 
+    setSearchLoading(true);
     try{
         
     const data = async () =>{
+
         const back = await API.get(`/Search/full/${searchWord}`).then((response) => response.data)
-        console.log(back);
+       // console.log(back);
+       // console.log(searchResult);
         setSearchResult(back);
         setSearchLoading(false);
     }
@@ -41,9 +50,6 @@ let GetSearchData = ()=>{
 }
 };
 
-let changeWord = (word)=>{
-    setSearchWord(word)
-}
 
 let contextValue = useMemo(()=>({
     setSearchWord,
@@ -51,11 +57,10 @@ let contextValue = useMemo(()=>({
     setSearchLoading, 
     searchResult,
     setSearchResult,
-    searchWord,
-    changeWord,GetSearchData
+    searchWord
 
 
-}),[setSearchWord,searchLoading,setSearchLoading,searchResult,searchWord,changeWord,GetSearchData])
+}),[setSearchWord,searchLoading,setSearchLoading,searchResult,searchWord])
 
 return (
     <searchContext.Provider value = {contextValue}>
@@ -67,4 +72,4 @@ return (
 
 }
 
-export default searchContext; */
+export default searchContext;

@@ -20,11 +20,12 @@ import RenderItems from "./allItems";
 import ActionAreaCard from "./allItems";
 import subAndSuperContext from '../../Contexts/subAndsuperContext';
 import Filters from './filters';
+import noAdds from "./../../images/myadds.webp";
+
 //////////////////////////////////
 
 function SubAndSuperItems(props) {
     
-    let {underSubData,underSuperData} = props
     
     let navigate = useNavigate();
 
@@ -37,23 +38,42 @@ function SubAndSuperItems(props) {
     setsubKey,
     setsuperKey,
     superLoading,
-    subLoading } = useContext(subAndSuperContext);
+    subLoading,
+    underSubData,
+    underSuperData } = useContext(subAndSuperContext);
 
 
     let renderAllItemsBtn = ()=>{
-        setsubKey(null);
-        setsuperKey(null);
+        
+        navigate("/items");
         
         
       }
+console.log(subKey);
+console.log(superKey);
+console.log(underSubData);
+
+
+
+
+
 
     if (subKey !== null) {
 
         return (
           <div>
+              <Filters/>
               <button onClick={()=>{renderAllItemsBtn()
               }}>View All Items</button>
-              {subLoading ? <Loading /> : <ActionAreaCard allItemsData={underSubData}/>}
+              {subLoading ? <Loading /> : underSubData === []?<img
+            src={noAdds}
+            alt=""
+            className="img-fluid"
+            width="200"
+            height="auto"
+          />:<ActionAreaCard allItemsData={underSubData}/>}
+
+             
   
           </div>
       );
@@ -61,10 +81,11 @@ function SubAndSuperItems(props) {
       return (
         <div>
 
+          <Filters/>
             <button onClick={()=>{renderAllItemsBtn()
               }}>View All Items</button>
-            {superLoading ? <Loading /> : <ActionAreaCard allItemsData={underSuperData}/>}
-              
+            {superLoading ? <Loading /> : underSuperData === []?<>No Data</>: <ActionAreaCard allItemsData={underSuperData}/>}
+              {console.log( underSubData)}
   
         </div>    
       )

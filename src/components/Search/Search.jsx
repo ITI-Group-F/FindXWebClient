@@ -5,19 +5,20 @@ import CloseIcon from "./CloseIcon";
 import "./search.css";
 import API from "../../Services/api";
 import { NavLink, useNavigate } from "react-router-dom";
+import searchContext from "../../Contexts/SearchContext";
 
 function Search() {
   //   const {allPost,setAllPost}=useContext(itemsContext)
   //   const history=useHistory()
 
-  const [filteredData, setFilteredData] = useState([]);
-  const [wordEntered, setWordEntered] = useState("");
-  const [input, setInput] = useState("");
+  let [filteredData, setFilteredData] = useState([]);
+  let [wordEntered, setWordEntered] = useState("");
+  let [input, setInput] = useState("");
   const inputref = useRef(null);
   const selected = useRef(null);
   let apiFormData = new FormData();
   const navigate = useNavigate();
-
+  let {setSearchWord, GetSearchData} = useContext(searchContext)
   // const handleFilter = (event) => {
   //   const searchWord = event.target.value;
   //   setWordEntered(searchWord);
@@ -37,10 +38,10 @@ function Search() {
     setWordEntered("");
   };
 
-  const handleSearch = () => {
-        
-        navigate(`/search/${wordEntered}`);
-        console.log(wordEntered)
+  let handleSearch = () => {
+    setSearchWord(wordEntered);
+    navigate(`/search/${wordEntered}`);
+        //console.log(wordEntered)
            
   };
   // const handleSelectedSearch=(item)=>{
@@ -80,13 +81,14 @@ function Search() {
       try {
         const res = await API.get(`/search/${wordEntered}`, apiFormData);
         setFilteredData(res.data);
-        console.log(filteredData);
+        //console.log(filteredData);
       } catch (error) {
         console.log(error);
       }
     };
     getItems();
   }, [wordEntered]);
+
 
   return (
     <div className="search">

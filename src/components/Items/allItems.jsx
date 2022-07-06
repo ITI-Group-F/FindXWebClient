@@ -12,8 +12,7 @@ import { NavLink} from "react-router-dom";
 ///////////////////////////////////////////////////
 
 export default function ActionAreaCard(props) {
-
-  
+  console.log(props);
     return (
       <div>
           {props.allItemsData.map((res) => {

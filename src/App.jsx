@@ -63,10 +63,11 @@ function App() {
               </PrivateRoute>
             }
           />
-          <Route path="/supercategory/:superKey" element={<SubAndSuperItems/>} />
-          <Route path="/subcategory/:subKey" element={<SubAndSuperItems/>} />
-{/*           <Route path="/search/:wordEntered" element={<SearchResults />} />
- */}          <Route path="items" element={<Items />} />
+
+          <Route path="/subandsupercategories/:superKey" element={<SubAndSuperItems />} />
+          <Route path="/subandsupercategories/:subKey" element={<SubAndSuperItems />} />
+          <Route path="/search/:wordEntered" element={<SearchResults />} />
+          <Route path="items" element={<Items />} />
           <Route path="details/:id" element={<ItemDetailsPage />} />
           <Route path="*" element={<NotFound />} />
           <Route path="myads" element={<MyAds />} />

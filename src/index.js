@@ -11,6 +11,7 @@ import { ItemsProvider } from "./Contexts/itemsContext";
 import { ThemeProvider} from '@mui/material/styles';
 import { defaultlight  } from './theming/default';
 import { SubAndSuperData } from "./Contexts/subAndsuperContext";
+import { SearchProvider } from "./Contexts/SearchContext";
 
 axios.interceptors.request.use(
   function (config) {
@@ -31,11 +32,13 @@ root.render(
     <BrowserRouter>
       <ItemsProvider>
       <SubAndSuperData>
+      <SearchProvider>
 
      <ThemeProvider theme={defaultlight}>
      <App />
      </ThemeProvider>
 
+      </SearchProvider>
         </SubAndSuperData>  
       </ItemsProvider>
     </BrowserRouter>

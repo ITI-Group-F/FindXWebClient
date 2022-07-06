@@ -21,6 +21,8 @@ export const ItemsProvider = (props) =>{
     let [allItemsLoading,setAllItemsLoading]=useState(true);
     
     useEffect(()=>{
+        setAllItemsLoading(true);
+
         try{
             
             const data = async () => {

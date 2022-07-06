@@ -18,7 +18,6 @@ const subAndSuperContext = createContext();
   let navigate = useNavigate();
 
   
-  
   //////////////////////////////////////////////////
 
 useEffect(() => { 
@@ -33,7 +32,10 @@ useEffect(() => {
   , [])
   
   useEffect(() => {
-      if (didMountSuper) GetSuperCategories();
+      if (didMountSuper){
+
+        GetSuperCategories();
+      } 
       
       setDidMountSuper(true);
       
@@ -41,7 +43,10 @@ useEffect(() => {
       
       useEffect(() => {
           
-        if (didMountSub)       GetSubCategories();
+        if (didMountSub){
+
+          GetSubCategories();
+        } 
   //
   
     setDidMountSub(true);
@@ -49,6 +54,7 @@ useEffect(() => {
 }, [subKey])
 
 const GetSuperCategories = () => {
+  setSuperLoading(true);
 
   try {
     const data = async () => {
@@ -57,16 +63,18 @@ const GetSuperCategories = () => {
       );
       //console.log(back);
       setunderSuperData(back);
-      setSuperLoading(false)
-
+      setSuperLoading(false);      
     };
     data();
   } catch (error) {
     console.log(error + "from (/Items/undersuper) endpoint");
   }
+  navigate(`/subandsupercategories/${superKey}`);
+
 };
 
 const GetSubCategories = () => {
+  setSubLoading(true)
     try {
       //allItems.prev = underSubData;
       const data = async () => {
@@ -81,18 +89,13 @@ const GetSubCategories = () => {
     } catch (error) {
       console.log(error + "from (/Items/undersub) endpoint");
     }
-
+    navigate(`/subandsupercategories/${subKey}`);
 
   };
   
-  /* const stateObj = { foo: 'bar' };
-  let hh = (e)=>{ History.pushState(stateObj,"",`subcategory/${e.target.value}`) } */
   let SetSubCat = (e) => {
     setsubKey(e.target.value);
     setsuperKey(null);
-    //navigate(`subcategory/${e.target.value}`);
-    //hh()
-    //console.log(subKey);
     
     
   }
@@ -100,10 +103,8 @@ const GetSubCategories = () => {
   let SetSuperCat = (e) => {
     setsuperKey(e.target.value);
     setsubKey(null);
-    //navigate(`supercategory/${e.target.value}`);
-    //console.log(superKey);
-    //History.replaceState(`supercategory/${e.target.value}`)
   }
+
   let contextValue= useMemo(()=>({
     underSubData,
     underSuperData,
@@ -114,7 +115,9 @@ const GetSubCategories = () => {
     setsubKey,
     setsuperKey,
     superLoading,
-    subLoading
+    subLoading,
+    setSuperLoading,
+    setSubLoading
     
   }),[underSubData,
     underSuperData,
@@ -125,7 +128,10 @@ const GetSubCategories = () => {
     setsubKey,
     setsuperKey,
     superLoading,
-    subLoading
+    subLoading,
+    setSuperLoading,
+    setSubLoading
+    
     ])
 
   return (
