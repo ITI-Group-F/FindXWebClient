@@ -2,9 +2,9 @@ import React, { useState, useContext, useEffect, useRef } from "react";
 import { itemsContext } from "../../Contexts/itemsContext";
 import SearchIcon from "./SearchIcon";
 import CloseIcon from "./CloseIcon";
-import { useHistory } from "react";
 import "./search.css";
 import API from "../../Services/api";
+import { NavLink, useNavigate } from "react-router-dom";
 
 function Search() {
   //   const {allPost,setAllPost}=useContext(itemsContext)
@@ -16,6 +16,7 @@ function Search() {
   const inputref = useRef(null);
   const selected = useRef(null);
   let apiFormData = new FormData();
+  const navigate = useNavigate();
 
   // const handleFilter = (event) => {
   //   const searchWord = event.target.value;
@@ -36,7 +37,12 @@ function Search() {
     setWordEntered("");
   };
 
-  const handleSearch = () => {};
+  const handleSearch = () => {
+ 
+        if(wordEntered.length>0){
+        navigate(`/items/${wordEntered}`);
+        }   
+  };
   // const handleSelectedSearch=(item)=>{
   //      setAllPost(item)
   //      history.push("/view")
@@ -94,7 +100,7 @@ function Search() {
         />
         
         <div className="searchIcon">
-          <div>
+          <div onClick={()=>handleSearch()}>
             {" "}
             <SearchIcon />{" "}
           </div>

@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 import "./Navbar.scss";
 import Menu from "@mui/material/Menu";
 import PopupState, { bindTrigger, bindMenu } from "material-ui-popup-state";
-import Search from "../../Search/Search"
+import Search from "../../Search/Search";
 import IconButton from "@mui/material/IconButton";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import LoginButton from "../NavButtons/LoginButton";
+import CameraButton from "../NavButtons/CameraButton";
 
 export default function Navbar() {
   return (
-
     <>
       <div className=".xnav">
         <section>
@@ -20,6 +20,7 @@ export default function Navbar() {
             </Link>
             <Search></Search>
             <LoginButton />
+            <CameraButton />
             {/* <ul className="menuItems">
               <li>
                 <Link className="link" to="/" data-item="Home">
@@ -47,7 +48,6 @@ export default function Navbar() {
               <PopupState variant="popover" popupId="hamburger">
                 {(popupState) => (
                   <React.Fragment>
-
                     <IconButton {...bindTrigger(popupState)}>
                       <MenuRoundedIcon fontSize="large" />
                     </IconButton>
@@ -95,9 +95,7 @@ export default function Navbar() {
                         </li>
                       </ul>
                     </Menu>
-                    <div className="search">
-
-                    </div>
+                    <div className="search"></div>
                   </React.Fragment>
                 )}
               </PopupState>
