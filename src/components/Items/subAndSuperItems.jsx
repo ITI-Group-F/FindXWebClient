@@ -24,7 +24,7 @@ import Filters from './filters';
 
 function SubAndSuperItems(props) {
     
-    
+    let {underSubData,underSuperData} = props
     
     let navigate = useNavigate();
 
@@ -37,9 +37,9 @@ function SubAndSuperItems(props) {
     setsubKey,
     setsuperKey,
     superLoading,
-    subLoading,
-    underSubData,
-    underSuperData, } = useContext(subAndSuperContext);
+    subLoading } = useContext(subAndSuperContext);
+
+
     let renderAllItemsBtn = ()=>{
         setsubKey(null);
         setsuperKey(null);
@@ -51,20 +51,16 @@ function SubAndSuperItems(props) {
 
         return (
           <div>
-            <Filters/>
               <button onClick={()=>{renderAllItemsBtn()
               }}>View All Items</button>
               {subLoading ? <Loading /> : <ActionAreaCard allItemsData={underSubData}/>}
-              {navigate(`subcategory/${subKey}`)}
-
   
           </div>
       );
     }else if (superKey !== null) {
-        return (
-            <div>
+      return (
+        <div>
 
-            <Filters/>
             <button onClick={()=>{renderAllItemsBtn()
               }}>View All Items</button>
             {superLoading ? <Loading /> : <ActionAreaCard allItemsData={underSuperData}/>}

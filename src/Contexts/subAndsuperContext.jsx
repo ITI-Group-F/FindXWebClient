@@ -92,7 +92,7 @@ const GetSubCategories = () => {
     setsuperKey(null);
     //navigate(`subcategory/${e.target.value}`);
     //hh()
-    console.log(subKey);
+    //console.log(subKey);
     
     
   }
@@ -101,7 +101,7 @@ const GetSubCategories = () => {
     setsuperKey(e.target.value);
     setsubKey(null);
     //navigate(`supercategory/${e.target.value}`);
-    console.log(superKey);
+    //console.log(superKey);
     //History.replaceState(`supercategory/${e.target.value}`)
   }
   let contextValue= useMemo(()=>({

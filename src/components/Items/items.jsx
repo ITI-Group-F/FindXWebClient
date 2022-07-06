@@ -7,6 +7,7 @@ import subAndSuperContext from "../../Contexts/subAndsuperContext";
 import Loading from "../Loading";
 import ActionAreaCard from "./allItems";
 import Filters from "./filters";
+import SubAndSuperItems from "./subAndSuperItems";
 
   //---------------------------------------------------------------------------------------
 
@@ -180,18 +181,39 @@ https://dev.to/raaynaldo/react-router-usehistory-uselocation-and-useparams-10cd
 
 
 */
-console.log("sub " +subLoading);
-console.log("super " + superLoading);
+/* console.log("sub " +subLoading);
+console.log("super " + superLoading); */
+
+if (subKey !== null) {
+
+  return (
+    <div>
+      <Filters/>
+        {subLoading ? <Loading /> : <SubAndSuperItems underSubData={underSubData}/>}
 
 
-        return (
-          <div>
+    </div>
+);
+}else if (superKey !== null) {
+  return (
+      <div>
+        <Filters/>
+      {superLoading ? <Loading /> : <SubAndSuperItems underSuperData={underSuperData}/>}
+        
+
+  </div>    
+)
+}else{
+
+  return (
+    <div>
             <Filters/>
             <br />
             <ActionAreaCard allItemsData = {allItems}/>
             {console.log("hiii from main")}
           </div>
         )
+      }
       
 
 }
