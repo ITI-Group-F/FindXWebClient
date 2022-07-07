@@ -8,11 +8,12 @@ import axios from "axios";
 import useToken from "./hooks/useToken";
 import { ItemsProvider } from "./Contexts/itemsContext";
 
-import { ThemeProvider} from '@mui/material/styles';
-import { defaultlight  } from './theming/default';
+import { ThemeProvider } from '@mui/material/styles';
+import { defaultlight } from './theming/default';
 import { SubAndSuperData } from "./Contexts/subAndsuperContext";
 import { SearchProvider } from "./Contexts/SearchContext";
 import { AuthContextProvider } from "./Contexts/AuthContext";
+import { ImageSearchProvider } from "./Contexts/ImageSearchContext";
 
 axios.interceptors.request.use(
   function (config) {
@@ -32,17 +33,19 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <ItemsProvider>
-      <SubAndSuperData>
-      <AuthContextProvider>
-      <SearchProvider>
+        <SubAndSuperData>
+          <AuthContextProvider>
+            <SearchProvider>
+              <ImageSearchProvider>
 
-     <ThemeProvider theme={defaultlight}>
-     <App />
-     </ThemeProvider>
+                <ThemeProvider theme={defaultlight}>
+                  <App />
+                </ThemeProvider>
 
-      </SearchProvider>
-      </AuthContextProvider>
-        </SubAndSuperData>  
+              </ImageSearchProvider>
+            </SearchProvider>
+          </AuthContextProvider>
+        </SubAndSuperData>
       </ItemsProvider>
     </BrowserRouter>
   </React.StrictMode>

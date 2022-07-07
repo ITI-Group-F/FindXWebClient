@@ -23,6 +23,7 @@ import PrivateRoute from "./routes/PrivateRoute";
 import Home from "./pages/Home";
 import SubAndSuperItems from "./components/Items/subAndSuperItems";
 import SearchResults from "./components/Items/searchResults";
+import ImageResult from "./components/Items/ImageResult";
 
 function App() {
   return (
@@ -32,19 +33,57 @@ function App() {
         <Navbar></Navbar>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="search-by-img" element={<ImageResult />} />
           <Route path="details" element={<ItemDetailsPage />} />
           <Route path="auth/*" element={<AuthModule />} />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
 
-          <Route  path="post" element={<PrivateRoute>{" "}<Post />{" "}</PrivateRoute>}/>
-          <Route path="profile"element={<PrivateRoute>{" "}<Profile />{" "}</PrivateRoute>  }/>
-          <Route  path="chat/*"element={<PrivateRoute>{" "}<ChatModule />{" "}</PrivateRoute>}/>
-          <Route  path="myads" element={<PrivateRoute>{" "}<MyAds/>{" "}</PrivateRoute>}/>
-            
+          <Route
+            path="post"
+            element={
+              <PrivateRoute>
+                {" "}
+                <Post />{" "}
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="profile"
+            element={
+              <PrivateRoute>
+                {" "}
+                <Profile />{" "}
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="chat/*"
+            element={
+              <PrivateRoute>
+                {" "}
+                <ChatModule />{" "}
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="myads"
+            element={
+              <PrivateRoute>
+                {" "}
+                <MyAds />{" "}
+              </PrivateRoute>
+            }
+          />
 
-          <Route path="/subandsupercategories/:superKey" element={<SubAndSuperItems />} />
-          <Route path="/subandsupercategories/:subKey" element={<SubAndSuperItems />} />
+          <Route
+            path="/subandsupercategories/:superKey"
+            element={<SubAndSuperItems />}
+          />
+          <Route
+            path="/subandsupercategories/:subKey"
+            element={<SubAndSuperItems />}
+          />
           <Route path="/search/:wordEntered" element={<SearchResults />} />
           <Route path="items" element={<Items />} />
           <Route path="details/:id" element={<ItemDetailsPage />} />
