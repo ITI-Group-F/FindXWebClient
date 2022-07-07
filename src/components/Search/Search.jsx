@@ -98,7 +98,7 @@ function Search() {
           type="text"
           placeholder=" Find Your Lost Belongings ..."
           value={wordEntered}
-          onChange={(e) => setWordEntered(e.target.value)}
+          onChange={(e) => {setWordEntered(e.target.value)}}
         />
         
         <div className="searchIcon">
@@ -121,8 +121,9 @@ function Search() {
                 key={item.id}
                 className="dataItem"
                 ref={selected}
-                onClick={(e) => setWordEntered(e.target.innerText)}
+                onClick={(e) => {setWordEntered(e.target.innerText); navigate(`details/${item.id}`)}}
               >
+                <CloseIcon />
                 <p>{item.title} </p>
               </div>
             );

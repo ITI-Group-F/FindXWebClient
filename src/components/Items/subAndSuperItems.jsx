@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -18,19 +18,18 @@ import { NavLink, useNavigate } from "react-router-dom";
 import Loading from "../Loading";
 import RenderItems from "./allItems";
 import ActionAreaCard from "./allItems";
-import subAndSuperContext from '../../Contexts/subAndsuperContext';
-import Filters from './filters';
+import subAndSuperContext from "../../Contexts/subAndsuperContext";
+import Filters from "./filters";
 import noAdds from "./../../images/myadds.webp";
+import {useParams } from 'react-router-dom';
 
 //////////////////////////////////
 
 function SubAndSuperItems(props) {
-    
-    
-    let navigate = useNavigate();
+  let navigate = useNavigate();
+  let {para} = useParams();
 
-  
-  let { 
+  let {
     SetSubCat,
     SetSuperCat,
     subKey,
@@ -40,57 +39,65 @@ function SubAndSuperItems(props) {
     superLoading,
     subLoading,
     underSubData,
-    underSuperData } = useContext(subAndSuperContext);
+    underSuperData,
+  } = useContext(subAndSuperContext);
+  
 
+  let renderAllItemsBtn = () => {
+    navigate("/items");
+  };
+  console.log(subKey);
+//  console.log(superKey);
+  console.log(underSubData);
 
-    let renderAllItemsBtn = ()=>{
-        
-        navigate("/items");
-        
-        
-      }
-console.log(subKey);
-console.log(superKey);
-console.log(underSubData);
-
-
-
-
-
-
-    if (subKey !== null) {
-
-        return (
-          <div>
-              <Filters/>
-              <button onClick={()=>{renderAllItemsBtn()
-              }}>View All Items</button>
-              {subLoading ? <Loading /> : underSubData === []?<img
+  if (subKey !== null) {
+    return (
+      <div>
+        <Filters />
+        <button
+          onClick={() => {
+            renderAllItemsBtn();
+          }}
+        >
+          View All Items
+        </button>
+        {subLoading ? (
+          <Loading />
+        ) : underSubData === [] ? (
+          <img
             src={noAdds}
             alt=""
             className="img-fluid"
             width="200"
             height="auto"
-          />:<ActionAreaCard allItemsData={underSubData}/>}
-
-             
-  
-          </div>
-      );
-    }else if (superKey !== null) {
-      return (
-        <div>
-
-          <Filters/>
-            <button onClick={()=>{renderAllItemsBtn()
-              }}>View All Items</button>
-            {superLoading ? <Loading /> : underSuperData === []?<>No Data</>: <ActionAreaCard allItemsData={underSuperData}/>}
-              {console.log( underSubData)}
-  
-        </div>    
-      )
+          />
+        ) : (
+          <ActionAreaCard allItemsData={underSubData} />
+        )}
+      </div>
+    );
+  } else if (superKey !== null) {
+    return (
+      <div>
+        <Filters />
+        <button
+          onClick={() => {
+            renderAllItemsBtn();
+          }}
+        >
+          View All Items
+        </button>
+        {superLoading ? (
+          <Loading />
+        ) : underSuperData === [] ? (
+          <>No Data</>
+        ) : (
+          <ActionAreaCard allItemsData={underSuperData} />
+        )}
+        {console.log(underSubData)}
+      </div>
+    );
+  }
 }
-}
-
 
 export default SubAndSuperItems;

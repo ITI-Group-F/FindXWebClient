@@ -11,12 +11,12 @@ import SubAndSuperItems from "./subAndSuperItems";
 import SearchResults from "./searchResults";
 import noAdds from "./../../images/myadds.webp";
 
-
-  //---------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------
 
 export default function Items() {
   let { allItems } = useContext(itemsContext);
-  let { underSubData,
+  let {
+    underSubData,
     underSuperData,
     SetSubCat,
     SetSuperCat,
@@ -25,11 +25,10 @@ export default function Items() {
     superLoading,
     subLoading,
     setSuperLoading,
-    setSubLoading
-    
-     } = useContext(subAndSuperContext);
+    setSubLoading,
+  } = useContext(subAndSuperContext);
 
- /*  let [subKey, setsubKey] = useState(null);
+  /*  let [subKey, setsubKey] = useState(null);
   let [superKey, setsuperKey] = useState(null);
   let [underSubData, setunderSubData] = useState([]);
   let [underSuperData, setunderSuperData] = useState([]); 
@@ -39,10 +38,9 @@ export default function Items() {
   let [didMountSuper, setDidMountSuper] = useState(false);
   */
 
-  
   //---------------------------------------------------------------------------------------
-  
-    /*   useEffect(() => { 
+
+  /*   useEffect(() => { 
         
           setDidMountSub(true) }
         
@@ -68,10 +66,10 @@ export default function Items() {
           setDidMountSub(true);
       
       }, [subKey]) */
-     
-     // let navigate = useNavigate(); 
 
-      /* const GetSuperCategories = () => {
+  // let navigate = useNavigate();
+
+  /* const GetSuperCategories = () => {
 
         try {
           const data = async () => {
@@ -88,17 +86,14 @@ export default function Items() {
           console.log(error + "from (/Items/undersuper) endpoint");
         }
       }; */
-     
 
-    /*   let SetSuperCat = (e) => {
+  /*   let SetSuperCat = (e) => {
         setsuperKey(e.target.value);
         setsubKey(null);
         //navigate(`/about`);
       } */
 
-
-
-    /*   const GetSubCategories = () => {
+  /*   const GetSubCategories = () => {
         try {
           const data = async () => {
             const back = await API.get(`/Items/undersub/${subKey}`).then(
@@ -116,25 +111,22 @@ export default function Items() {
 
       }; */
 
-
-
-     
-     /*  let SetSubCat = (e) => {
+  /*  let SetSubCat = (e) => {
         setsubKey(e.target.value);
         setsuperKey(null);
         //navigate(`/subcategory/${e.target.value}`);
 
       } */
 
-      /* <Route path="subcategory/:subKey" element={<Items />} />
+  /* <Route path="subcategory/:subKey" element={<Items />} />
               <Route path="supercategory/:superKey" element={<Items />} /> */
 
-     /*  let renderAllItemsBtn = ()=>{
+  /*  let renderAllItemsBtn = ()=>{
         setsubKey(null);
         setsuperKey(null);
         
       } */
-/* 
+  /* 
 
                         ** htsa3dny f mwdo3 el go back **
 
@@ -142,25 +134,25 @@ https://dev.to/raaynaldo/react-router-usehistory-uselocation-and-useparams-10cd
 
 
 */
-/* console.log("sub " +subLoading);
+  /* console.log("sub " +subLoading);
 console.log("super " + superLoading); */
-console.log(allItems);
+  //console.log(allItems);
 
   return (
     <div>
-            <Filters/>
-            <br />
-            {allItems === [] ? <img
-            src={noAdds}
-            alt=""
-            className="img-fluid"
-            width="200"
-            height="auto"
-          />:<ActionAreaCard allItemsData = {allItems}/>}
-          </div>
-        )
-      
-      
-
+      <Filters />
+      <br />
+      {allItems === [] ? (
+        <img
+          src={noAdds}
+          alt=""
+          className="img-fluid"
+          width="200"
+          height="auto"
+        />
+      ) : (
+        <ActionAreaCard allItemsData={allItems} />
+      )}
+    </div>
+  );
 }
-
