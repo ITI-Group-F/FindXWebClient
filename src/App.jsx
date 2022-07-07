@@ -36,33 +36,12 @@ function App() {
           <Route path="auth/*" element={<AuthModule />} />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
-          <Route
-            path="post"
-            element={
-              <PrivateRoute>
-                {" "}
-                <Post />{" "}
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="profile"
-            element={
-              <PrivateRoute>
-                {" "}
-                <Profile />{" "}
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="chat/*"
-            element={
-              <PrivateRoute>
-                {" "}
-                <ChatModule />{" "}
-              </PrivateRoute>
-            }
-          />
+
+          <Route  path="post" element={<PrivateRoute>{" "}<Post />{" "}</PrivateRoute>}/>
+          <Route path="profile"element={<PrivateRoute>{" "}<Profile />{" "}</PrivateRoute>  }/>
+          <Route  path="chat/*"element={<PrivateRoute>{" "}<ChatModule />{" "}</PrivateRoute>}/>
+          <Route  path="myads" element={<PrivateRoute>{" "}<MyAds/>{" "}</PrivateRoute>}/>
+            
 
           <Route path="/subandsupercategories/:superKey" element={<SubAndSuperItems />} />
           <Route path="/subandsupercategories/:subKey" element={<SubAndSuperItems />} />
@@ -70,7 +49,6 @@ function App() {
           <Route path="items" element={<Items />} />
           <Route path="details/:id" element={<ItemDetailsPage />} />
           <Route path="*" element={<NotFound />} />
-          <Route path="myads" element={<MyAds />} />
         </Routes>
       </Suspense>
     </>

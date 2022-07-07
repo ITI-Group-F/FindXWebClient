@@ -15,6 +15,7 @@ import {
 import API from "../../Services/api";
 import { useHistory } from "react-router-dom";
 import { display } from "@mui/system";
+import useClaims from "../../hooks/useClaims";
 
 function MyAds() {
   let apiFormData = new FormData();
@@ -23,11 +24,11 @@ function MyAds() {
   const [itemId, setItemId] = useState("");
   const [userHaveProducts, setUserHaveProducts] = useState(false);
   const deleteref = useRef(null);
+  const { userId } = useClaims();
 
   useEffect(() => {
     const getItems = async () => {
       try {
-        let userId = "56beea99-f165-4a1a-8a4a-d659e1a6ce26";
         let res = await API.get(`/UserItems/${userId}`, apiFormData);
         setFilteredData(res.data);
         console.log(filteredData);
@@ -42,7 +43,6 @@ function MyAds() {
   //function to delete card from dom
   const deleteItem = async (itemId) => {
     try {
-      let userId = "56beea99-f165-4a1a-8a4a-d659e1a6ce26";
       let res = await API.delete(`/UserItems/${userId}/${itemId}`);
     } catch (error) {
       console.log(error);
