@@ -1,32 +1,34 @@
 import { Box, CircularProgress, Typography } from "@mui/material";
 import React from "react";
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 const Loading = () => {
   const [loading, setLoading] = useState("Loading");
-useEffect(() => {
-  
-  const intervalId  = setInterval(() => {
-    console.log();
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      console.log();
 
-      setLoading((loading)=>{
+      setLoading((loading) => {
         if (loading == "Loading...") {
-         return "Loading"
-        } 
-        else{
-        return loading + "."
+          return "Loading";
+        } else {
+          return loading + ".";
         }
       });
-      
-  
-  },1000);
+    }, 1000);
 
-  return () => clearInterval(intervalId);
-}, []);
-   return (
+    return () => clearInterval(intervalId);
+  }, []);
+  return (
     <>
       <Box style={{ marginTop: 180 }}>
         <CircularProgress size="80px" thickness={2} color="success" />
-        <Typography style={{ marginTop: 10 }} color="success" variant="h5"  gutterBottom component="div">
+        <Typography
+          style={{ marginTop: 10 }}
+          color="success"
+          variant="h5"
+          gutterBottom
+          component="div"
+        >
           {loading}
         </Typography>
       </Box>
