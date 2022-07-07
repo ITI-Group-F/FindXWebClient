@@ -71,6 +71,9 @@ export default function Posts() {
   };
 
   const submitFormData = () => {
+
+    if(validatedesc()){
+
     console.log(long, lat);
     setApiFormData(new FormData());
     setFormData({ ...formData, longitude: long, latitude: lat });
@@ -88,11 +91,21 @@ export default function Posts() {
 
       try {
       const res = API.post(`/UserItems/${userId}`, apiFormData);
-      // navigate("/", { replace: true });
 
+      res.then((res) => {
+        navigate("/");}).catch((err) => {
+          console.log(err);
+        }
+      );
     } catch (error) {
       console.log(error);
     }
+ 
+    
+  }else {
+
+    console.log("error");
+  }
  
   ;}
 
@@ -172,7 +185,7 @@ export default function Posts() {
   }  
 
 
-    return isdescValid, isFeildsValid ,istitleValid,isbrandValid,isLocationValid;
+    return isdescValid&& isFeildsValid && istitleValid &&isbrandValid && isLocationValid;
   };
 
   const handleshow = (
