@@ -5,24 +5,28 @@ import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import Stack from "@mui/material/Stack";
 import PythonAPI from "../../../Services/SimilarityServiceApi";
+import { useNavigate } from "react-router-dom";
 
 const Input = styled("input")({
   display: "none",
 });
 
-const sendImage = async (e) => {
-  const { files } = e.target;
-  const formData = new FormData();
-  formData.append("img", files[0]);
-  try {
-    const res = await PythonAPI.post("/", formData);
-    console.log(res);
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 const CameraButton = () => {
+  const navigate = useNavigate();
+
+  const sendImage = async (e) => {
+    const { files } = e.target;
+    const formData = new FormData();
+    formData.append("img", files[0]);
+    try {
+      const res = await PythonAPI.post("/", formData);
+      console.log(res);
+      navigate("/", res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Stack direction="row" alignItems="center" spacing={2}>
       <label htmlFor="icon-button-file">
