@@ -17,10 +17,10 @@ export default function Details(props) {
 
         <div className={`ms-3 p-4 d-flex justify-content-between row g-0`}>
 
-   <div className={`col-lg-6   col-12`}>
+   <div className={`col-lg-6   col-12 ${DetailsStyle.detailsContainer}`}>
       <h3 style={{color:'#000000'}}>Details</h3><hr /><br />
       <h4>{selectedItem.superCategory}/{selectedItem.subCategory}</h4>
-        <div className={`ms-4`}>
+        <div className={`ms-4 t ${DetailsStyle.subContainer}`}>
               <p> <strong>Title: </strong>{selectedItem.title}</p>
               <p> <strong>Date: </strong>{selectedItem.date}</p>
               <div className={`${DetailsStyle.fontDetails} ${DetailsStyle.location}`}><p className={` ${DetailsStyle.location}`}> <strong>Location: </strong>{selectedItem.location}</p></div>
