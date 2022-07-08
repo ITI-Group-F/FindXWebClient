@@ -24,14 +24,12 @@ import Home from "./pages/Home";
 import SubAndSuperItems from "./components/Items/subAndSuperItems";
 import SearchResults from "./components/Items/searchResults";
 import ImageResult from "./components/Items/ImageResult";
-import ErrorPage from "./components/Error/ErroPage"
 
 function App() {
   return (
     <>
 
-    <ErrorPage></ErrorPage>
-      {/* <Suspense fallback={<Loading />}>
+      <Suspense fallback={<Loading />}>
         <BackTop />
         <Navbar></Navbar>
         <Routes>
@@ -92,7 +90,7 @@ function App() {
           <Route path="details/:id" element={<ItemDetailsPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </Suspense> */}
+      </Suspense>
     </>
   );
 }
