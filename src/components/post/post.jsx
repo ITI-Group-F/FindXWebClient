@@ -69,6 +69,7 @@ export default function Posts() {
     return day + "/" + month + "/" + year;
   };
 
+
   const submitFormData = () => {
     if (validatedesc()) {
       console.log(long, lat);
@@ -85,19 +86,24 @@ export default function Posts() {
       }
       console.log("----------------");
 
+             
+
       try {
         const res = API.post(`/UserItems/${userId}`, apiFormData);
+          
 
-        res
-          .then((res) => {
-            navigate("/");
+        res.then((res) => {
+            navigate("/myads");
           })
           .catch((err) => {
             console.log(err);
           });
+
+
       } catch (error) {
         console.log(error);
       }
+
     } else {
       console.log("error");
     }
