@@ -6,7 +6,8 @@ export const UserInfo = () => {
   const claims = useClaims();
     return (
 <>
-<Avatar src='img/av.png' /><div className="userInfo">{claims.fullName}</div>
+{/* <Avatar src='img/av.png' /> */}
+<div className="userInfo">{claims.fullName}</div>
 </>
     
   )

@@ -7,6 +7,7 @@ import IconButton from "@mui/material/IconButton";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import Avatar, { avatarClasses } from '@mui/material/Avatar';
 import { UserInfo } from "./userInfo";
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 
 export default function DropDown() {
     return (
@@ -18,18 +19,19 @@ export default function DropDown() {
 
                            <Avatar src={"img/av.png"}/>
                         </IconButton>
-                        <Menu {...bindMenu(popupState)}>
+                        <Menu  {...bindMenu(popupState)}>
 
                              <UserInfo></UserInfo>
                             <ul className="MobilMenuItems">
                                 <li>
+                                    <ManageAccountsIcon color="primary" fontSize="large" userIcon />
                                     <Link
                                         onClick={popupState.close}
                                         className="link"
-                                        to="/"
-                                        data-item="Home"
+                                        to="/profile"
+                                        data-item="Profile"
                                     >
-                                        Home
+                                        Profile
                                     </Link>
                                 </li>
                                 <li>
