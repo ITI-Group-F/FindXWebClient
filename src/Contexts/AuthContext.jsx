@@ -1,5 +1,6 @@
 import { createContext, useState } from "react";
 import useClaims from "../hooks/useClaims";
+import { removeUserinfo } from "../Services/UserService";
 
 
 export const authenticationContext = createContext();
@@ -17,12 +18,18 @@ export const AuthContextProvider = (props) => {
         }
     }));
 
+
     const login = () => {
         setisloggedIn(true);
     }
+const logout = () => {
+    setisloggedIn(false);
+    removeUserinfo();
+}
+
     return (
 
-        <authenticationContext.Provider value={[isloggedIn, login]}>
+        <authenticationContext.Provider value={[isloggedIn, login,logout]}>
             {children}
         </authenticationContext.Provider>
     );

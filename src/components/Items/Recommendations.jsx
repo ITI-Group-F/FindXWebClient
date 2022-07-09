@@ -24,7 +24,7 @@ import { CardActionArea } from '@mui/material';
 export default function ActionAreaCard() {
   let { allItems } = useContext(itemsContext);
     return (
-      <div>
+      <div >
       {allItems.map((res) => {
         
         let description = res.description
@@ -39,7 +39,7 @@ export default function ActionAreaCard() {
         key={res.id}
         sx={{ display: "inline-flex", flexDirection: "row", flexWrap: "wrap" }}
       >
-        <Card sx={{ width:"300px", height:"350px", margin: "20px", paddingLeft: "10px" }}>
+        <Card sx={{ width:"300px", height:"350px", margin: "20px", paddingLeft: "10px", boxShadow:3 }}>
           <Stack direction="row" spacing={2}>
             <Link>
               <Avatar sx={{ bgcolor: deepPurple[500] }}>H

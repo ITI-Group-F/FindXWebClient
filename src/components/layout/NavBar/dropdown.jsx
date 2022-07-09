@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.scss";
 import Menu from "@mui/material/Menu";
@@ -8,8 +8,11 @@ import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import Avatar, { avatarClasses } from '@mui/material/Avatar';
 import { UserInfo } from "./userInfo";
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
+import authenticationContext from "../../../Contexts/AuthContext";
 
 export default function DropDown() {
+    let logout = useContext(authenticationContext)[2];
     return (
         <>
             <PopupState variant="popover" popupId="hamburger">
@@ -17,11 +20,11 @@ export default function DropDown() {
                     <React.Fragment>
                         <IconButton {...bindTrigger(popupState)}>
 
-                           <Avatar src={"img/av.png"}/>
+                            <Avatar src={"img/av.png"} />
                         </IconButton>
                         <Menu  {...bindMenu(popupState)}>
 
-                             <UserInfo></UserInfo>
+                            <UserInfo></UserInfo>
                             <ul className="MobilMenuItems">
                                 <li>
                                     <ManageAccountsIcon color="primary" fontSize="large" userIcon />
@@ -55,13 +58,18 @@ export default function DropDown() {
                                     </Link>
                                 </li>
                                 <li>
+
+                                    <LogoutRoundedIcon color="primary" fontSize="large" />
                                     <Link
-                                        onClick={popupState.close}
+                                        onClick={() => {
+                                            popupState.close();
+                                            logout();
+                                        }}
                                         className="link"
-                                        to="#"
-                                        data-item="Contact"
+                                        to="/"
+                                        data-item="Logout"
                                     >
-                                        Contact
+                                        Logout
                                     </Link>
                                 </li>
                             </ul>
