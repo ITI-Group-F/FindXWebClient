@@ -2,18 +2,21 @@ import React, { createContext, useMemo, useEffect, useState } from "react";
 import API from "../Services/api";
 import { converstions } from "../components/Chat/chatdummydata";
 import { HubConnectionBuilder } from "@microsoft/signalr";
-import { getCurrentUserId } from '../Services/UserService';
+import { getCurrentUserId } from "../Services/UserService";
+import useClaims from "../hooks/useClaims";
+
 const ChatContext = createContext();
 
 const ChatContextProvider = ({ children }) => {
-  let ownerId = getCurrentUserId();
+  const { userId } = useClaims();
+  // let userId = getCurrentUserId();
   const [connection, setConnection] = useState(null);
   let [conversations, setConversations] = useState(converstions);
 
   useEffect(() => {
     const fetchApi = async () => {
       try {
-        const response = await API.get(`/chathistory/${ownerId}`);
+        const response = await API.get(`/chathistory/${userId}`);
         setConversations(response.data);
       } catch (error) {
         console.log(error);
@@ -32,7 +35,7 @@ const ChatContextProvider = ({ children }) => {
     signalRConnection
       .start()
       .then(() =>
-        signalRConnection.invoke("CreatePrivateGroupForUserAsync", ownerId)
+        signalRConnection.invoke("CreatePrivateGroupForUserAsync", userId)
       )
       .then(() => {
         setConnection(signalRConnection);
@@ -43,9 +46,9 @@ const ChatContextProvider = ({ children }) => {
     () => ({
       conversations,
       connection,
-      ownerId,
+      userId,
     }),
-    [connection, ownerId, conversations]
+    [connection, userId, conversations]
   );
 
   return (
