@@ -5,7 +5,8 @@ import Menu from "@mui/material/Menu";
 import PopupState, { bindTrigger, bindMenu } from "material-ui-popup-state";
 import IconButton from "@mui/material/IconButton";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
-
+import Avatar, { avatarClasses } from '@mui/material/Avatar';
+import { UserInfo } from "./userInfo";
 
 export default function DropDown() {
     return (
@@ -14,9 +15,12 @@ export default function DropDown() {
                 {(popupState) => (
                     <React.Fragment>
                         <IconButton {...bindTrigger(popupState)}>
-                            <MenuRoundedIcon fontSize="large" color="primary" />
+
+                           <Avatar src={"img/av.png"}/>
                         </IconButton>
                         <Menu {...bindMenu(popupState)}>
+
+                             <UserInfo></UserInfo>
                             <ul className="MobilMenuItems">
                                 <li>
                                     <Link

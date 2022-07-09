@@ -7,6 +7,7 @@ import Stack from "@mui/material/Stack";
 import PythonAPI from "../../../Services/SimilarityServiceApi";
 import { useNavigate } from "react-router-dom";
 import ImageSearchContext from "../../../Contexts/ImageSearchContext";
+import Tooltip from '@mui/material/Tooltip';
 
 const Input = styled("input")({
   display: "none",
@@ -39,6 +40,7 @@ const CameraButton = () => {
           type="file"
           onChange={sendImage}
         />
+        <Tooltip title="Search By Image">
         <IconButton
           color="primary"
           aria-label="upload picture"
@@ -46,6 +48,8 @@ const CameraButton = () => {
         >
           <PhotoCamera />
         </IconButton>
+        </Tooltip>
+
       </label>
     </Stack>
   );

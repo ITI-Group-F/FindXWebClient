@@ -18,7 +18,8 @@ export default function useToken() {
     sessionStorage.setItem("userName", claims.userName);
     sessionStorage.setItem("email", claims.email);
     sessionStorage.setItem("roles", claims.roles);
-    sessionStorage.setItem("isloggedIn", true);
+    sessionStorage.setItem("fullName", claims.fullName);
+    console.log(claims);
     setToken(userToken.token);
   };
 

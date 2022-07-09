@@ -5,8 +5,11 @@ import Search from "../../Search/Search";
 import LoginButton from "../NavButtons/LoginButton";
 import CameraButton from "../NavButtons/CameraButton";
 import DropDown from "./dropdown";
+import { useContext } from 'react';
+import { authenticationContext } from '../../../Contexts/AuthContext';
 
 export default function Navbar() {
+  const [isloggedIn] = useContext(authenticationContext);
   return (
     <>
       <div className=".xnav">
@@ -16,6 +19,7 @@ export default function Navbar() {
               <img className="logo" src="img/logo.png" alt="" />
             </Link>
             <Search></Search>
+
 
             {/* <ul className="menuItems">
               <li>
@@ -40,13 +44,15 @@ export default function Navbar() {
               </li>
              
             </ul> */}
-            <div className="HammButton">
 
-              <LoginButton />
+            < div className="HammButton">
               <CameraButton />
-              <DropDown />
+
+              {isloggedIn ? <DropDown /> : <LoginButton />}
+
 
             </div>
+
           </nav>
         </section>
       </div>

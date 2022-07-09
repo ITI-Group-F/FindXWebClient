@@ -10,7 +10,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 
 import useClaims from '../../../hooks/useClaims';
-
+import Tooltip from '@mui/material/Tooltip';
 
 export default function LoginButton() {
 
@@ -38,9 +38,12 @@ export default function LoginButton() {
 
 
         <>
-            <IconButton onClick={handleClickOpen}>
-                <LoginRoundedIcon color="primary" fontSize="large" />
-            </IconButton>
+            <Tooltip title="Login">
+                <IconButton onClick={handleClickOpen}>
+                    <LoginRoundedIcon color="primary" fontSize="large" />
+                </IconButton>
+            </Tooltip>
+
             <Dialog
                 open={open}
                 onClose={handleClose}
