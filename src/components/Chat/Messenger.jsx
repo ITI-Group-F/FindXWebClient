@@ -9,6 +9,7 @@ export default function Messenger() {
   const [message, setMessage] = useState("");
   const [loadedChat, setLoadedChat] = useState(<>You have no Messages</>);
   const [msgs, setMsgs] = useState(null);
+  
   const [OtherFullName, seOtherFullName] = useState("User");
   const chatRef = useRef(null);
   const currentContactRef = useRef([]);

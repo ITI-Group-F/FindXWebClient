@@ -2,12 +2,12 @@ export let converstions = [
   {
     _id: "1",
     sender: {
-      _id: "252",
+      _id: "2",
       firstName: "حمبوله",
       lastName: "الشمه",
     },
     receiver: {
-      _id: "242",
+      _id: "3",
       firstName: "Ahmed",
       lastName: "Khaled",
     },

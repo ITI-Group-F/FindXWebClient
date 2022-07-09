@@ -2,27 +2,26 @@ import React, { createContext, useMemo, useEffect, useState } from "react";
 import API from "../Services/api";
 import { converstions } from "../components/Chat/chatdummydata";
 import { HubConnectionBuilder } from "@microsoft/signalr";
-
+import { getCurrentUserId } from '../Services/UserService';
 const ChatContext = createContext();
 
 const ChatContextProvider = ({ children }) => {
-  let ownerId = "1c47a376-1267-4892-87f7-e0efbc66fa9f";
+  let ownerId = getCurrentUserId();
   const [connection, setConnection] = useState(null);
   let [conversations, setConversations] = useState(converstions);
 
-  // useEffect(() => {
-  //   const fetchApi = async () => {
-  //     try {
-  //       const response = await API.get(`/chathistory/${ownerId}`);
-  //       console.log(response.data[0]);
-  //       setConversations(response.data);
-  //     } catch (error) {
-  //       console.log(error);
-  //       setConversations(converstions);
-  //     }
-  //   };
-  //   fetchApi();
-  // }, []);
+  useEffect(() => {
+    const fetchApi = async () => {
+      try {
+        const response = await API.get(`/chathistory/${ownerId}`);
+        setConversations(response.data);
+      } catch (error) {
+        console.log(error);
+        setConversations(converstions);
+      }
+    };
+    fetchApi();
+  }, []);
 
   useEffect(() => {
     const signalRConnection = new HubConnectionBuilder()
