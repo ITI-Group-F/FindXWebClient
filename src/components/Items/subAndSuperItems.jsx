@@ -54,7 +54,7 @@ function SubAndSuperItems(props) {
     return (
       <div>
         <Filters />
-        <button
+        <button style={{display:"block", margin:"auto"}}
           onClick={() => {
             renderAllItemsBtn();
           }}

@@ -10,6 +10,7 @@ import { UserInfo } from "./userInfo";
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import authenticationContext from "../../../Contexts/AuthContext";
+import AdUnitsIcon from '@mui/icons-material/AdUnits';
 
 export default function DropDown() {
     let logout = useContext(authenticationContext)[2];
@@ -38,23 +39,14 @@ export default function DropDown() {
                                     </Link>
                                 </li>
                                 <li>
+                                    <AdUnitsIcon sx={{color:"green"}}></AdUnitsIcon>
                                     <Link
                                         onClick={popupState.close}
                                         className="link"
-                                        to="/login"
-                                        data-item="Login"
+                                        to="/myads"
+                                        data-item="My Ads"
                                     >
-                                        Login
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link
-                                        onClick={popupState.close}
-                                        className="link"
-                                        to="/register"
-                                        data-item="Register"
-                                    >
-                                        Register
+                                        My Ads
                                     </Link>
                                 </li>
                                 <li>

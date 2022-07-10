@@ -1,11 +1,12 @@
 .search {
   position: relative;
   margin-top: 10px;
-  margin-left: 20px;
+  margin-left: 10px;
 }
 
 .searchInputs {
   height: 48px;
+  margin-left: 10px;
   display: flex;
 }
 
