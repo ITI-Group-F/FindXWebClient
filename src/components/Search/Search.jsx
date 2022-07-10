@@ -103,7 +103,7 @@ function Search() {
     // </div>
     
 
-    <Stack spacing={-4} sx={{ width: 400 ,marginLeft:"40px" ,marginTop:"-10px"  }} 
+    <Stack spacing={-4} sx={{ width: 500,marginLeft:"auto"  }} 
     >
         
     <Autocomplete

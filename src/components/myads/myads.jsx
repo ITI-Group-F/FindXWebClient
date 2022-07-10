@@ -74,6 +74,7 @@ function MyAds() {
                 key={item.id}
                 ref={deleteref}
                 // onClick={() => routeHandler(item)}
+                style={{marginLeft:"100px"}}
               >
                 
                 <div className="card">
