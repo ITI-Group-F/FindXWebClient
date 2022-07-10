@@ -144,7 +144,7 @@ export default function Posts() {
     ) {
       isTitleValid = false;
       setShowTitleErr(true);
-     setTitleErr("Field are missing or invalid!");
+     setTitleErr("Field is missing or invalid!");
     } else {
       isTitleValid = true;
       setShowTitleErr(false);
@@ -157,7 +157,7 @@ export default function Posts() {
        ) {
          isRadioValid = false;
          setShowRadioErr(true);
-        setRadioErr("Field are missing or invalid!");
+        setRadioErr("Field is missing or invalid!");
        } else {
          isRadioValid = true;
          setShowRadioErr(false);
@@ -171,7 +171,7 @@ export default function Posts() {
     ) {
       isDescriptionValid = false;
       setShowdescriptionErr(true);
-     setdescriptionErr("Field are missing or invalid!");
+     setdescriptionErr("Field is missing or invalid!");
     } else {
       isDescriptionValid = true;
       setShowdescriptionErr(false);
@@ -185,7 +185,7 @@ export default function Posts() {
     ) {
       islocation2Valid = false;
       setShowlocation2Err(true);
-     setlocation2Err("Field are missing or invalid!");
+     setlocation2Err("Field is missing or invalid!");
     } else {
       islocation2Valid = true;
       setShowlocation2Err(false);
