@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, } from "react";
 import ChatContext from "../../Contexts/ChatContext";
 
 export default function Messenger() {
-  const { conversations, connection, ownerId } = useContext(ChatContext);
+  const { conversations, connection, userId : ownerId } = useContext(ChatContext);
   const [withId, setWithId] = useState(null);
   const [message, setMessage] = useState("");
   const [loadedChat, setLoadedChat] = useState(<>You have no Messages</>);
@@ -36,11 +36,12 @@ export default function Messenger() {
   }, [connection]);
 
   const sendMessage = (message) => {
+    console.log(withId,ownerId);
     if (connection) {
       connection.invoke(
         "SendMessageToGroupAsync",
         ownerId,
-        "557e746a-694b-4dc2-80fb-fe25d6b880b6",
+        withId,
         message
       );
     }
@@ -113,10 +114,11 @@ export default function Messenger() {
    * @returns
    */
   let populateChat = (conv) => {
+    console.log(conv);
     let OwnerisTheSender = true;
     if (ownerId === conv.sender.id) OwnerisTheSender = true;
     else OwnerisTheSender = false;
-    let Other = OwnerisTheSender ? conv.receiver : conv.sender;
+    let Other = OwnerisTheSender ?  conv.sender: conv.receiver ;
 
     setWithId(Other.id);
     let otherFullName = Other.firstName + " " + Other.lastName;
@@ -140,7 +142,6 @@ export default function Messenger() {
     setLoadedChat(chatToLoad);
     activateChat();
     seOtherFullName(otherFullName);
-    //chatRef.current.querySelector(".name").innerText= OtherFullName;
   };
 
   const handleEnter = (event) => {
