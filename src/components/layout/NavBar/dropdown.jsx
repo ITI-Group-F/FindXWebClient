@@ -27,7 +27,7 @@ export default function DropDown() {
                             <UserInfo></UserInfo>
                             <ul className="MobilMenuItems">
                                 <li>
-                                    <ManageAccountsIcon color="primary" fontSize="large" userIcon />
+                                    <ManageAccountsIcon color="primary" fontSize="large"  />
                                     <Link
                                         onClick={popupState.close}
                                         className="link"

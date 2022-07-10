@@ -21,12 +21,14 @@ export default function Messenger() {
     if (connection) {
       connection.on("ReceiveMessage", (sender, message) => {
         let msg;
+        console.log("you get a message from " + sender);
         if (sender === withId) {
           if (ownerId === sender) {
             msg = <div className="bubble me">{message.content}</div>;
           } else {
             msg = <div className="bubble you">{message.content}</div>;
           }
+          alert(`${sender} says: ${message}`);
           setMsgs([...msgs, msg]);
         } else {
           alert(`${sender} says: ${message}`);
@@ -63,21 +65,19 @@ export default function Messenger() {
       return (
         <>
           <li
-
             ref={(element) => { currentContactRef.current[index] = element }}
             onClick={() => {
               if (prevContactRef.current != null) {
                 prevContactRef.current.classList.remove("active");
               }
-
-
               prevContactRef.current = currentContactRef.current[index];
+              console.log("clicked");
               populateChat(conv);
               currentContactRef.current[index].classList.add("active");
             }}
             className="person"
 
-            key={conv._id}
+            key={conv.id}
           >
             <img src="/img/av.png" alt="" />
             <span className="name">{SenderFullName}</span>
@@ -118,8 +118,8 @@ export default function Messenger() {
     let OwnerisTheSender = true;
     if (ownerId === conv.sender.id) OwnerisTheSender = true;
     else OwnerisTheSender = false;
-    let Other = OwnerisTheSender ?  conv.sender: conv.receiver ;
-
+    let Other = OwnerisTheSender ?  conv.receiver : conv.sender ;
+    console.log(Other);
     setWithId(Other.id);
     let otherFullName = Other.firstName + " " + Other.lastName;
     // let lastMessage = conv.messages[conv.messages.length - 1];
@@ -127,14 +127,14 @@ export default function Messenger() {
 
     let toLoadMsgs = conv.messages.map((msg) => {
       if (ownerId === msg.senderId) {
-        return <div key={msg._id} className="bubble me">{msg.content} </div>;
+        return <div key={msg.id} className="bubble me">{msg.content} </div>;
       } else {
-        return <div key={msg._id} className="bubble you">{msg.content}</div>;
+        return <div key={msg.id} className="bubble you">{msg.content}</div>;
       }
     });
     setMsgs(toLoadMsgs);
     let chatToLoad = (
-      <div className="chat" data-chat={conv._id} ref={chatRef}>
+      <div className="chat" data-chat={conv.id} ref={chatRef}>
         <div className="conversation-start"></div>
         {msgs}
       </div>
@@ -142,6 +142,7 @@ export default function Messenger() {
     setLoadedChat(chatToLoad);
     activateChat();
     seOtherFullName(otherFullName);
+    chatRef.current.scrollTo(0, chatRef.current.scrollHeight);
   };
 
   const handleEnter = (event) => {

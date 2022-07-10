@@ -1,9 +1,9 @@
 import React, { createContext, useMemo, useEffect, useState } from "react";
 import API from "../Services/api";
-import { converstions } from "../components/Chat/chatdummydata";
 import { HubConnectionBuilder } from "@microsoft/signalr";
 import { getCurrentUserId } from "../Services/UserService";
 import useClaims from "../hooks/useClaims";
+import { countNotifications } from "../Services/chatService";
 
 const ChatContext = createContext();
 
@@ -11,16 +11,18 @@ const ChatContextProvider = ({ children }) => {
   const { userId } = useClaims();
   // let userId = getCurrentUserId();
   const [connection, setConnection] = useState(null);
-  let [conversations, setConversations] = useState(converstions);
+  let [conversations, setConversations] = useState([]);
+  const [numberOfNotifications, setNumberOfNotifications] = useState(0);
 
   useEffect(() => {
     const fetchApi = async () => {
       try {
         const response = await API.get(`/chathistory/${userId}`);
         setConversations(response.data);
+        setNumberOfNotifications(countNotifications(response.data, userId));
       } catch (error) {
         console.log(error);
-        setConversations(converstions);
+        setConversations([]);
       }
     };
     fetchApi();
@@ -47,8 +49,9 @@ const ChatContextProvider = ({ children }) => {
       conversations,
       connection,
       userId,
+      numberOfNotifications
     }),
-    [connection, userId, conversations]
+    [connection, userId , conversations, numberOfNotifications]
   );
 
   return (
