@@ -32,13 +32,20 @@ export default function Posts() {
   const [showtitleErr, setShowtitleErr] = useState(false);
   const [showbrandErr, setShowbrandErr] = useState(false);
   const [showLocationErr, setShowLocationErr] = useState(false);
+  const [showdescriptionErr, setShowdescriptionErr] = useState(false);
+  const [showlocation2Err, setShowlocation2Err] = useState(false);
+  const [showValidationErr, setShowValidationErr] = useState(false);
+ const [showRadioErr, setShowRadioErr] = useState(false); 
   const [descErr, setdescErr] = useState("");
+  const[descriptionErr,setdescriptionErr]=useState("")
   const [titleErr, settitleErr] = useState("");
   const [brandErr, setbrandErr] = useState("");
   const [LocationErr, setLocationErr] = useState("");
+  const [location2Err, setlocation2Err] = useState("");
+  const [RadioErr, setRadioErr] = useState("");
   const [formData, setFormData] = useState({});
-  const [showfieldErr, setShowfieldErr] = useState(false);
-  const [fieldErr, setfieldErr] = useState("");
+  const [showTitleErr, setShowTitleErr] = useState(false);
+  const [TitleErr,setTitleErr] = useState("");
   const [isLost, setIsLost] = useState(false);
   const [date, setDate] = useState(new Date());
   const { userId } = useClaims();
@@ -105,7 +112,7 @@ export default function Posts() {
       }
 
     } else {
-      console.log("error");
+       setShowValidationErr(true);
     }
   };
 
@@ -128,22 +135,60 @@ export default function Posts() {
       setShowdescErr(false);
     }
 
-    ////////////////////////////////////////////
-    let isFeildsValid = false;
+    //////////////////////////////////////////// 0length
+    let isTitleValid = false;
     if (
       !formData.title ||
-      formData.title?.length <= 1 ||
-      !formData.description ||
-      formData.description?.length <= 1 ||
-      !formData.Location ||
-      formData.Location?.length <= 1
+      formData.title?.length <= 1 
+    
     ) {
-      isFeildsValid = false;
-      setShowfieldErr(true);
-      setfieldErr("some Fiels are missing or invalid!");
+      isTitleValid = false;
+      setShowTitleErr(true);
+     setTitleErr("Field are missing or invalid!");
     } else {
-      isFeildsValid = true;
-      setShowfieldErr(false);
+      isTitleValid = true;
+      setShowTitleErr(false);
+    }
+       //////////////////////////////////////////// 0length
+       let isRadioValid = false;
+       if (
+         formData.isLost==null 
+       
+       ) {
+         isRadioValid = false;
+         setShowRadioErr(true);
+        setRadioErr("Field are missing or invalid!");
+       } else {
+         isRadioValid = true;
+         setShowRadioErr(false);
+       }
+    //////////////////////////////////////////////// 0length
+    let isDescriptionValid = false;
+    if (
+      !formData.description ||
+      formData.description?.length <= 1 
+    
+    ) {
+      isDescriptionValid = false;
+      setShowdescriptionErr(true);
+     setdescriptionErr("Field are missing or invalid!");
+    } else {
+      isDescriptionValid = true;
+      setShowdescriptionErr(false);
+    }
+    /////////////////////////////////////////////////0length
+    let islocation2Valid = false;
+    if (
+      !formData.Location ||
+      formData.Location?.length <= 1 
+    
+    ) {
+      islocation2Valid = false;
+      setShowlocation2Err(true);
+     setlocation2Err("Field are missing or invalid!");
+    } else {
+      islocation2Valid = true;
+      setShowlocation2Err(false);
     }
     ////////////////////////////////////////////////
     let istitleValid = false;
@@ -180,10 +225,13 @@ export default function Posts() {
 
     return (
       isdescValid &&
-      isFeildsValid &&
+      isTitleValid &&
       istitleValid &&
       isbrandValid &&
-      isLocationValid
+      isLocationValid&&
+      isDescriptionValid&&
+      islocation2Valid&&
+      isRadioValid 
     );
   };
 
@@ -205,15 +253,7 @@ export default function Posts() {
             Post Your ad
           </h3>
 
-          {showfieldErr && (
-            <center>
-              <Box width="300px">
-                <Alert severity="error">
-                  Some fileds are missing or invalid.
-                </Alert>
-              </Box>
-            </center>
-          )}
+        
 
           <hr />
           <h4 htmlFor="category">Select Category</h4>
@@ -251,6 +291,8 @@ export default function Posts() {
                 <option value="Cats">Cats</option>
                 <option value="Dogs">Dogs</option>
                 <option value="Birds">Birds</option>
+                <option value="Other">Other</option>
+
               </select>
               <FormControl />
 
@@ -290,10 +332,27 @@ export default function Posts() {
                 <option value="Money">Money</option>
                 <option value="Bags">Bags</option>
                 <option value="Accessories">Accessories</option>
+                <option value="Other">Other</option>
               </select>
               <FormControl />
             </div>
           )}
+            {showhide === "Other" && (
+                <div className="electronicsubcategory">
+                <h6 htmlFor="category">Select Category</h6>
+                <select
+                  name="subcategory"
+                  onChange={setValue}
+                  required
+                  className="form-select"
+                  aria-label="Default select example"
+                > 
+                  <option selected disabled value="Other">Select Category</option>
+                  <option  value="Other">Other</option>
+                </select>
+            </div>
+          )}
+
 
           {showhide === "Electronics" && (
             <div className="electronicsubcategory">
@@ -311,6 +370,7 @@ export default function Posts() {
                 <option value="Mobiles">Mobiles</option>
                 <option value="Tablets">Tablets</option>
                 <option value="Laptops">Laptops</option>
+                <option value="Other">Other</option>
               </select>
 
               <FormControl fullWidth sx={{ m: 1 }} variant="standard">
@@ -368,6 +428,17 @@ export default function Posts() {
               />
             </RadioGroup>
           </FormControl>
+ 
+{/*  */}
+{showRadioErr && (
+            <Box className="err-msg">
+              <Typography color="red" variant="caption" gutterBottom>
+                {RadioErr}
+              </Typography>
+            </Box>
+          )}     
+  
+{/*  */}
 
           <TextField
             name="title"
@@ -380,6 +451,15 @@ export default function Posts() {
           />
 
           {/*  */}
+
+
+          {showTitleErr && (
+            <Box className="err-msg">
+              <Typography color="red" variant="caption" gutterBottom>
+                {TitleErr}
+              </Typography>
+            </Box>
+          )}     
 
           {showtitleErr && (
             <Box className="err-msg">
@@ -405,6 +485,16 @@ export default function Posts() {
             ></textarea>
           </div>
           {/*  */}
+
+          {showdescriptionErr && (
+            <Box className="err-msg">
+              <Typography color="red" variant="caption" gutterBottom>
+                {TitleErr}
+              </Typography>
+            </Box>
+          )}     
+  
+
           {showdescErr && (
             <Box className="err-msg">
               <Typography color="red" variant="caption" gutterBottom>
@@ -447,6 +537,15 @@ export default function Posts() {
           />
 
           {/*  */}
+
+          {showlocation2Err && (
+            <Box className="err-msg">
+              <Typography color="red" variant="caption" gutterBottom>
+                {TitleErr}
+              </Typography>
+            </Box>
+          )}     
+  
           {showLocationErr && (
             <Box className="err-msg">
               <Typography color="red" variant="caption" gutterBottom>
@@ -510,6 +609,19 @@ export default function Posts() {
             maxLength="30"
             required
           /> */}
+
+           {/*  */}
+           {showValidationErr && (
+            <center>
+              <Box width="300px">
+                <Alert severity="error">
+                  Some fileds are missing or invalid.
+                </Alert>
+              </Box>
+            </center>
+          )}
+      {/*  */}
+
 
           <div className="d-grid gap-2">
             <button
