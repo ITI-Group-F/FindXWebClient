@@ -14,6 +14,8 @@ import { SubAndSuperData } from "./Contexts/subAndsuperContext";
 import { SearchProvider } from "./Contexts/SearchContext";
 import { AuthContextProvider } from "./Contexts/AuthContext";
 import { ImageSearchProvider } from "./Contexts/ImageSearchContext";
+import { ChatContextProvider } from "./Contexts/ChatContext";
+
 
 axios.interceptors.request.use(
   function (config) {
@@ -37,11 +39,11 @@ root.render(
           <AuthContextProvider>
             <SearchProvider>
               <ImageSearchProvider>
-
+           <ChatContextProvider>
                 <ThemeProvider theme={defaultlight}>
                   <App />
                 </ThemeProvider>
-
+           </ChatContextProvider>
               </ImageSearchProvider>
             </SearchProvider>
           </AuthContextProvider>

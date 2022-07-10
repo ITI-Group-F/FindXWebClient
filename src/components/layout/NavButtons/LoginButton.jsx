@@ -8,14 +8,12 @@ import useToken from "../../../hooks/useToken";
 
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
-
-import useClaims from '../../../hooks/useClaims';
 import Tooltip from '@mui/material/Tooltip';
 
 export default function LoginButton() {
 
     const { token, setToken } = useToken();
-    const { claims } = useClaims();
+
     const [open, setOpen] = React.useState(false);
 
 

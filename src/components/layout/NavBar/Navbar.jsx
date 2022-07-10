@@ -7,6 +7,7 @@ import CameraButton from "../NavButtons/CameraButton";
 import DropDown from "./dropdown";
 import { useContext } from 'react';
 import { authenticationContext } from '../../../Contexts/AuthContext';
+import { ChatButton } from "../NavButtons/ChatButton";
 
 export default function Navbar() {
   const [isloggedIn] = useContext(authenticationContext);
@@ -48,7 +49,10 @@ export default function Navbar() {
             < div className="HammButton">
               <CameraButton />
 
-              {isloggedIn ? <DropDown /> : <LoginButton />}
+              {isloggedIn ? <>
+                <ChatButton />
+                <DropDown />
+              </> : <LoginButton />}
 
 
             </div>
