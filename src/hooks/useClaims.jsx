@@ -7,7 +7,10 @@ export default function useClaims() {
       userName: sessionStorage.getItem("userName"),
       email: sessionStorage.getItem("email"),
       roles: sessionStorage.getItem("roles"),
-      fullName: sessionStorage.getItem("fullName")
+      fullName: sessionStorage.getItem("fullName"),
+      firstname:sessionStorage.getItem("firstName"),
+      lastname:sessionStorage.getItem("lastName"),
+      phone:sessionStorage.getItem("phone")
         };
     return claims;
   };
