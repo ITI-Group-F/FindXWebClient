@@ -4,12 +4,11 @@ import { useState, useEffect, useRef, } from "react";
 import ChatContext from "../../Contexts/ChatContext";
 
 export default function Messenger() {
-  const { conversations, connection, userId : ownerId } = useContext(ChatContext);
+  const { conversations, connection, userId: ownerId } = useContext(ChatContext);
   const [withId, setWithId] = useState(null);
-  const [message, setMessage] = useState("");
-  const [loadedChat, setLoadedChat] = useState(<>You have no Messages</>);
+  const [message, setMessage] = useState(<>You have no Messages</>);
   const [msgs, setMsgs] = useState(null);
-  
+
   const [OtherFullName, seOtherFullName] = useState("User");
   const chatRef = useRef(null);
   const currentContactRef = useRef([]);
@@ -38,7 +37,7 @@ export default function Messenger() {
   }, [connection]);
 
   const sendMessage = (message) => {
-    console.log(withId,ownerId);
+    console.log(withId, ownerId);
     if (connection) {
       connection.invoke(
         "SendMessageToGroupAsync",
@@ -71,7 +70,7 @@ export default function Messenger() {
                 prevContactRef.current.classList.remove("active");
               }
               prevContactRef.current = currentContactRef.current[index];
-              console.log("clicked");
+
               populateChat(conv);
               currentContactRef.current[index].classList.add("active");
             }}
@@ -118,8 +117,8 @@ export default function Messenger() {
     let OwnerisTheSender = true;
     if (ownerId === conv.sender.id) OwnerisTheSender = true;
     else OwnerisTheSender = false;
-    let Other = OwnerisTheSender ?  conv.receiver : conv.sender ;
-    console.log(Other);
+    let Other = OwnerisTheSender ? conv.receiver : conv.sender;
+
     setWithId(Other.id);
     let otherFullName = Other.firstName + " " + Other.lastName;
     // let lastMessage = conv.messages[conv.messages.length - 1];
@@ -133,16 +132,11 @@ export default function Messenger() {
       }
     });
     setMsgs(toLoadMsgs);
-    let chatToLoad = (
-      <div className="chat" data-chat={conv.id} ref={chatRef}>
-        <div className="conversation-start"></div>
-        {msgs}
-      </div>
-    );
-    setLoadedChat(chatToLoad);
+
     activateChat();
     seOtherFullName(otherFullName);
     chatRef.current.scrollTo(0, chatRef.current.scrollHeight);
+    console.log(chatRef.current);
   };
 
   const handleEnter = (event) => {
@@ -168,7 +162,11 @@ export default function Messenger() {
                 To: <span className="name">{OtherFullName}</span>
               </span>
             </div>
-            {loadedChat}
+            <div className="chat" ref={chatRef}>
+              <div className="conversation-start"></div>
+              {msgs}
+            </div>
+
             <div className="write">
               <input
                 ref={MessageToSendRef}

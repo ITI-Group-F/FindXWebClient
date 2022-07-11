@@ -3,7 +3,6 @@ export const countNotifications = (convs, userid) => {
   convs.forEach((conv) => {
    
     let lastMsg = conv.messages[conv.messages.length - 1];
-    console.log(lastMsg);
     if (lastMsg.senderId == userid && lastMsg.seen == false) {
       count++;
     }
