@@ -10,9 +10,9 @@ function About() {
 <div class="about" id="about">
     <h2>about us</h2>
     <p>
-A person cannot live alone in this world,  and that's why no
+              A person cannot live alone in this world,  and that's why no
               matter how much he tries to rely on himself,  he will not be
-              able to dispense with seeking help from others  in many matters
+              able to dispense with seeking help from others in many matters
               of his life, regardless of his financial and health level,  and
               since a person from childhood begins his life by relying on others
               ,  He will also end it by relying on others,  and also the
@@ -23,59 +23,10 @@ A person cannot live alone in this world,  and that's why no
               people..  we found this is a great way to help people to find
               lost things
 </p>
-<div className="team">team member</div>
 
-    <div class="container">
-        <div class="itemsContainer">
-            <div class="item">
-                <i class="fas fa-pencil-ruler"></i>
-                <h3>Hanan</h3>
-                <h5>hananelzftawy1999@gmail.com</h5>
-            </div>
-
-            <div class="item">
-                {/* <i class="fas fa-file-code"></i> */}
-                <h3>ahmedelgohary</h3>
-                <h5>ahmedelgohary3394@gmail.com</h5>
-                
-            </div>
-
-            <div class="item">
-                {/* <i class="fas fa-object-group"></i> */}
-                <h3>ehapdiab</h3>
-                <h5>diab96@hotmail.com</h5>
-               
-            </div>
-
-            <div class="item">
-                {/* <i class="fas fa-cogs"></i> */}
-                <h3>mohab</h3>
-                <h5>mohabsoft21@outlook.com</h5>
-              
-            </div>
-           
-           
-            <div class="item">
-                {/* <i class="fas fa-cogs"></i> */}
-                <h3>Abdullahelzayat</h3>
-                <h5>Abdullahelzayat23@outlook.com</h5>
-              
-            </div>
-            <div className="item">
-            {/* <i className="fas fa-coffee"></i> */}
-            <h3>mohamedbibers</h3>
-                <h5>mohamedbibers2556@gmail.com</h5>
-        </div>
-        <div className="item">
-            <i className="fas fa-coffee"></i>
-            <h3>mohamed yousry</h3>
-                <h5>odsh97@gmail.com</h5>
-        </div>
-           
 
         </div>
-    </div>
-</div>
+    
 
 {/* <!-- End services section --> */}
 

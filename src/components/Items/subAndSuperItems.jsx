@@ -54,13 +54,7 @@ function SubAndSuperItems(props) {
     return (
       <div>
         <Filters />
-        {/* <button style={{display:"block", margin:"auto"}}
-          onClick={() => {
-            renderAllItemsBtn();
-          }}
-        >
-          View All Items
-        </button> */}
+        
         <button 
               name="submit"
               style={{width: "200px", display:"block" ,margin:"auto"}}

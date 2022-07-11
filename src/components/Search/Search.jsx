@@ -39,7 +39,20 @@ function Search() {
     }
            
   };
+  let onEnterKeyPress = (e) => {
+    if(wordEntered.length>0&&e.key==="Enter"){
+    setSearchWord(wordEntered);
+    // setFilteredData([]);
+    navigate(`/search/${wordEntered}`);
+  }
+  
+};
+let onResultClick=(e)=>{
+  setSearchWord(e.target.value);
+  // setFilteredData([]);
+  navigate(`/search/${wordEntered}`);
 
+}
 
   useEffect(() => {
     const getItems = async () => {
@@ -55,68 +68,27 @@ function Search() {
 
 
 
+console.log(wordEntered);
 
 
+return (
   
-
-  return (
-    // <div className="search">
-    //   <div className="searchInputs">
-    //     <input
-    //       ref={inputref}
-    //       type="text"
-    //       placeholder=" Find Your Lost Belongings ..."
-    //       value={wordEntered}
-    //       onChange={(e) => {setWordEntered(e.target.value)}}
-    //     />
-        
-    //     <div className="searchIcon">
-    //       <div onClick={()=>handleSearch()  }>
-    //         {" "}
-    //         <SearchIcon />{" "}
-    //       </div>
-    //       {filteredData.length !== 0 && (
-    //         <div id="clearBtn" onClick={() => clearInput()}>
-    //           <CloseIcon />
-    //         </div>
-    //       )}
-    //     </div>
-    //   </div>
-    //   {filteredData.length !== 0 && (
-    //     <div className="dataResult">
-    //       {filteredData.map((item) => {
-    //         return (
-    //           <div
-    //             key={item.id}
-    //             className="dataItem"
-    //             ref={selected}
-    //             onClick={(e) => {setWordEntered(e.target.innerText)  }}
-                
-    //           >
-                
-    //             <p>{item.title} </p>
-    //           </div>
-    //         );
-    //       })}
-    //     </div>
-    //   )}
-    // </div>
-    
-
-    <Stack spacing={-4} sx={{ width: 500,marginLeft:"auto"  }} 
-    >
+  
+  <Stack spacing={-4} sx={{ width: 500,marginLeft:"auto"  }} 
+  >
         
     <Autocomplete
         
-      freeSolo
-      id="free-solo-2-demo"
-      disableClearable
-      options={filteredData.map((option) => option.title)}
-      renderInput={(params) => (
-        <TextField
+        freeSolo
+        id="free-solo-2-demo"
+        disableClearable
+        options={filteredData.map((option) => option.title)}
+        renderInput={(params) => (
+          <TextField
         ref={selected}
         onChange={(e) => {setWordEntered(e.target.value) }}
-        onClick={(e) =>{setWordEntered(e.target.value)  }}
+        onClick={(e) =>{setWordEntered(e.target.value) }}
+        onKeyPress={(e)=>{onEnterKeyPress(e)}}
         onBlur={(e) => {setWordEntered(e.target.value)}}
           {...params}
           label="Search"

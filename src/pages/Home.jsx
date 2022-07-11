@@ -8,7 +8,7 @@ function Home(props) {
   let { allItems } = useContext(itemsContext);
     return (
       <div className='Recommendation'>
-      <h2>Recommendations</h2>
+      <h2 style={{marginTop:"20px"}}>Recommendations</h2>
        <ActionAreaCard allItemsData={allItems}/>
        </div>
     );

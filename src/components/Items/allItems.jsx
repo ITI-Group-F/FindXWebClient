@@ -59,7 +59,7 @@ let navigate= useNavigate();
               </Button>
                         <span className="span">item condition</span>
                 </div>
-                        <div class="tags">
+                        <div className="tags">
               <p style={itemConditionColor()}>{itemCondition()}</p>
 
                         </div>

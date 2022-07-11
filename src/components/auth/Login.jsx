@@ -165,11 +165,11 @@ export default function Login({ setToken ,loginfromNavbar}) {
               </Typography>
             </Box>
           )}
-          <Box>
+          {/* <Box>
             <Link href="#" style={{ marginLeft: 70 }}>
               Forgot password?
             </Link>
-          </Box>
+          </Box> */}
           <Box>
             <Button
               variant="contained"

@@ -18,9 +18,12 @@ function SearchResults() {
   } = useContext(searchContext);
   let { setsubKey, setsuperKey } = useContext(subAndSuperContext);
 
+  let navigate = useNavigate();
+
+
   let renderAllItemsBtn = () => {
-    setsubKey(null);
-    setsuperKey(null);
+    navigate("/items");
+
   };
 
   return (
