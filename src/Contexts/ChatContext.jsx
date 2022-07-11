@@ -1,4 +1,4 @@
-import React, { createContext, useMemo, useEffect, useState } from "react";
+import React, { createContext, useMemo, useEffect, useState, useCallback } from "react";
 import API from "../Services/api";
 import { HubConnectionBuilder } from "@microsoft/signalr";
 import { getCurrentUserId } from "../Services/UserService";
@@ -14,18 +14,20 @@ const ChatContextProvider = ({ children }) => {
   let [conversations, setConversations] = useState([]);
   const [numberOfNotifications, setNumberOfNotifications] = useState(0);
 
+  const upDateChatData = useCallback(async () => {
+    try {
+      const response = await API.get(`/chathistory/${userId}`);
+      setConversations(response.data);
+      setNumberOfNotifications(countNotifications(response.data, userId));
+    } catch (error) {
+      console.log(error);
+      setConversations([]);
+    }
+  }, [userId]);
+
+
   useEffect(() => {
-    const fetchApi = async () => {
-      try {
-        const response = await API.get(`/chathistory/${userId}`);
-        setConversations(response.data);
-        setNumberOfNotifications(countNotifications(response.data, userId));
-      } catch (error) {
-        console.log(error);
-        setConversations([]);
-      }
-    };
-    fetchApi();
+    upDateChatData();
   }, []);
 
   useEffect(() => {
@@ -49,9 +51,10 @@ const ChatContextProvider = ({ children }) => {
       conversations,
       connection,
       userId,
-      numberOfNotifications
+      numberOfNotifications,
+      upDateChatData
     }),
-    [connection, userId , conversations, numberOfNotifications]
+    [connection, userId, conversations, numberOfNotifications, upDateChatData]
   );
 
   return (

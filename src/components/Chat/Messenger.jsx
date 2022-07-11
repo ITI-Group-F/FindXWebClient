@@ -4,40 +4,50 @@ import { useState, useEffect, useRef, } from "react";
 import ChatContext from "../../Contexts/ChatContext";
 
 export default function Messenger() {
-  const { conversations, connection, userId: ownerId } = useContext(ChatContext);
+  const { conversations, connection, userId: ownerId,upDateChatData } = useContext(ChatContext);
   const [withId, setWithId] = useState(null);
   const [message, setMessage] = useState(<>You have no Messages</>);
   const [msgs, setMsgs] = useState(null);
-
+  const OtherIdRef = useRef()
   const [OtherFullName, seOtherFullName] = useState("User");
   const chatRef = useRef(null);
   const currentContactRef = useRef([]);
   let prevContactRef = useRef(null);
   const MessageToSendRef = useRef(null);
 
+const handleReceiveMessage=(sender, message)=>{
+
+  let msg;
+
+
+
+       if(OtherIdRef.current == sender) {
+        msg = <div className="bubble you">{message}</div>;
+        setMsgs((mesgs)=>[...mesgs, msg]);
+        chatRef.current.scrollTo(0, chatRef.current.scrollHeight);
+        }
+        else{
+          
+        }
+        upDateChatData().then(() => {
+          populateContact();
+        });
+       
+         
+}
 
   useEffect(() => {
     if (connection) {
       connection.on("ReceiveMessage", (sender, message) => {
-        let msg;
-        console.log("you get a message from " + sender);
-        if (sender === withId) {
-          if (ownerId === sender) {
-            msg = <div className="bubble me">{message.content}</div>;
-          } else {
-            msg = <div className="bubble you">{message.content}</div>;
-          }
-          alert(`${sender} says: ${message}`);
-          setMsgs([...msgs, msg]);
-        } else {
-          alert(`${sender} says: ${message}`);
-        }
+        handleReceiveMessage(sender, message);
+   
+
       });
     }
   }, [connection]);
 
   const sendMessage = (message) => {
-    console.log(withId, ownerId);
+
     if (connection) {
       connection.invoke(
         "SendMessageToGroupAsync",
@@ -45,6 +55,12 @@ export default function Messenger() {
         withId,
         message
       );
+    
+
+      let msg = <div className="bubble me">{message}</div>;
+            setMsgs((mesgs)=>[...mesgs, msg]);
+
+           prevContactRef.current.querySelector(".preview").innerText=message;
     }
   };
 
@@ -62,8 +78,9 @@ export default function Messenger() {
       let lastMessageTime = lastMessage.sendDate.split("T")[1].slice(0, 5);
 
       return (
-        <>
+        
           <li
+            key={conv.id}
             ref={(element) => { currentContactRef.current[index] = element }}
             onClick={() => {
               if (prevContactRef.current != null) {
@@ -76,14 +93,13 @@ export default function Messenger() {
             }}
             className="person"
 
-            key={conv.id}
           >
             <img src="/img/av.png" alt="" />
             <span className="name">{SenderFullName}</span>
             <span className="time">{lastMessageTime}</span>
             <span className="preview">{lastMessage.content}</span>
           </li>
-        </>
+       
       );
     });
   };
@@ -113,13 +129,14 @@ export default function Messenger() {
    * @returns
    */
   let populateChat = (conv) => {
-    console.log(conv);
+ 
     let OwnerisTheSender = true;
     if (ownerId === conv.sender.id) OwnerisTheSender = true;
     else OwnerisTheSender = false;
     let Other = OwnerisTheSender ? conv.receiver : conv.sender;
 
     setWithId(Other.id);
+    OtherIdRef.current = Other.id;
     let otherFullName = Other.firstName + " " + Other.lastName;
     // let lastMessage = conv.messages[conv.messages.length - 1];
     // let lastMessageTime = lastMessage.sendDate.split("T")[1].slice(0,5);
@@ -136,7 +153,7 @@ export default function Messenger() {
     activateChat();
     seOtherFullName(otherFullName);
     chatRef.current.scrollTo(0, chatRef.current.scrollHeight);
-    console.log(chatRef.current);
+    
   };
 
   const handleEnter = (event) => {
