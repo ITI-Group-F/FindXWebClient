@@ -10,7 +10,7 @@ class Footer extends Component {
     render() {
         return (
             <>
-                <table style={{marginTop:"100px",  border: "1px solid white", borderCollapse: "collapse", width: "100%" }}>
+                <table style={{marginTop:"100px",  border: "1px solid white", borderCollapse: "collapse", width: "100%" ,  marginTop:"auto"  }}>
                     <tbody>                    
                     <tr style={{ backgroundColor: "#DCDCDC", marginLeft: "50px", marginRight: "50px" }}>
                         
@@ -21,7 +21,12 @@ class Footer extends Component {
                         <td colSpan="2" style={{paddingLeft: "60px"}}>Follow Us</td>
                         <td colSpan="2"></td>
                         <td colSpan="2" style={{paddingRight:"60px"}}>iti intake 42 . © 2022 FindX</td>
-                        <FacebookIcon /> <TwitterIcon /> <InstagramIcon /> <YouTubeIcon />
+                        <section>
+                        <FacebookIcon /> 
+                        <TwitterIcon /> 
+                        <InstagramIcon /> 
+                        <YouTubeIcon />
+                        </section>
                     </tr>
                     </tbody>
                 </table>

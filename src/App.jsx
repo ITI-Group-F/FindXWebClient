@@ -14,7 +14,7 @@ import Loading from "./pages/Loading";
 import BackTop from "./components/BackTop/BackTop";
 import RenderItems from "./components/Items/allItems";
 import MyAds from "./components/myads/myads";
-
+import Footer from "./components/Footer/Footer";
 // Modules
 import AuthModule from "./modules/AuthModule";
 import ChatModule from "./modules/ChatModule";
@@ -91,6 +91,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
+      <Footer></Footer>
     </>
   );
 }
