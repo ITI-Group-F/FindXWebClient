@@ -54,13 +54,23 @@ function SubAndSuperItems(props) {
     return (
       <div>
         <Filters />
-        <button style={{display:"block", margin:"auto"}}
+        {/* <button style={{display:"block", margin:"auto"}}
           onClick={() => {
             renderAllItemsBtn();
           }}
         >
           View All Items
-        </button>
+        </button> */}
+        <button 
+              name="submit"
+              style={{width: "200px", display:"block" ,margin:"auto"}}
+              onClick={() => {
+                renderAllItemsBtn();
+              }}
+              className="btn btn-success"
+            >
+              View All Items
+            </button>
         {subLoading ? (
           <Loading />
         ) : underSubData === [] ? (
@@ -80,13 +90,23 @@ function SubAndSuperItems(props) {
     return (
       <div>
         <Filters />
-        <button
+        {/* <button
           onClick={() => {
             renderAllItemsBtn();
           }}
         >
           View All Items
-        </button>
+        </button> */}
+        <button
+            style={{width: "200px", display:"block" , margin:"auto"}}
+              name="submit"
+              onClick={() => {
+                renderAllItemsBtn();
+              }}
+              className="btn btn-success"
+            >
+              View All Items
+            </button>
         {superLoading ? (
           <Loading />
         ) : underSuperData === [] ? (

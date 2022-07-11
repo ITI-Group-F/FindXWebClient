@@ -26,13 +26,24 @@ function SearchResults() {
   return (
     <div>
       <Filters />
-      <button
+      {/* <button
         onClick={() => {
           renderAllItemsBtn();
         }}
       >
         View All Items
-      </button>
+      </button> */}
+      
+            <button
+            style={{width: "200px",display:"block" , margin:"auto"}}
+              name="submit"
+              onClick={() => {
+                renderAllItemsBtn();
+              }}
+              className="btn btn-success"
+            >
+              View All Items
+            </button>
       <br />
       {searchLoading ? (
         <Loading />

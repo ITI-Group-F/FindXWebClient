@@ -19,6 +19,7 @@ import Loading from "../Loading";
 import RenderItems from "./allItems";
 import ActionAreaCard from "./allItems";
 import subAndSuperContext from "../../Contexts/subAndsuperContext";
+import "bootstrap/dist/css/bootstrap.min.css";
 //////////////////////////////////
 function Filters() {
   let {
@@ -42,6 +43,7 @@ function Filters() {
         id="sub"
         defaultValue="Choose a Subcategory"
         onChange={SetSuperCat}
+        className="form-select"
       >
         <option disabled defaultValue="Animals">
           Select a Super Category
@@ -61,6 +63,7 @@ function Filters() {
         id="sub"
         defaultValue="Choose a Subcategory"
         onChange={SetSubCat}
+        className="form-select"
       >
         <option disabled>selecet a subcategory</option>
         <option value="Tablets">Tablets</option>
