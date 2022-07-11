@@ -91,7 +91,7 @@ export default function Login({ setToken ,loginfromNavbar}) {
   const loginUser = async (data) => {
     try {
       const response = await API.post("/authentication/login", data);
-      setShowResErrMsg(false);
+      setShowResErrMsg(false);      
       return response.data.token;
     } catch (error) {
       setShowResErrMsg(true);

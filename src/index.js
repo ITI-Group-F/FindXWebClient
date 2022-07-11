@@ -18,39 +18,41 @@ import { ChatContextProvider } from "./Contexts/ChatContext";
 
 
 axios.interceptors.request.use(
-  function (config) {
-    // Do something before request is sent
-    const { getToken } = useToken();
-    config.headers.Authorization = `Bearer ${getToken()}`;
-    return config;
-  },
-  function (error) {
-    // Do something with request error
-    return Promise.reject(error);
-  }
+    function(config) {
+        // Do something before request is sent
+        const { getToken } = useToken();
+
+        config.headers.Authorization = `Bearer ${getToken()}`;
+	
+        console.log("inside interceptor");
+        return config;
+    },
+    function(error) {
+        // Do something with request error
+        return Promise.reject(error);
+    }
 );
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <ItemsProvider>
-        <SubAndSuperData>
-          <AuthContextProvider>
-            <SearchProvider>
-              <ImageSearchProvider>
-           <ChatContextProvider>
-                <ThemeProvider theme={defaultlight}>
-                  <App />
-                </ThemeProvider>
-           </ChatContextProvider>
-              </ImageSearchProvider>
-            </SearchProvider>
-          </AuthContextProvider>
-        </SubAndSuperData>
-      </ItemsProvider>
-    </BrowserRouter>
-  </React.StrictMode>
+root.render( <React.StrictMode>
+    <BrowserRouter >
+    <ItemsProvider >
+    <SubAndSuperData >
+    <AuthContextProvider >
+    <SearchProvider>
+    <ImageSearchProvider >
+    <ChatContextProvider >
+    <ThemeProvider theme = { defaultlight } >
+    <App />
+    </ThemeProvider>
+    </ChatContextProvider>
+    </ImageSearchProvider>
+    </SearchProvider>
+    </AuthContextProvider>
+    </SubAndSuperData>
+    </ItemsProvider> 
+    </BrowserRouter> 
+    </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
