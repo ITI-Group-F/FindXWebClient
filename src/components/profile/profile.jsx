@@ -38,7 +38,7 @@ export default function Profile(){
                     Id:claims.userId
                 }
                 updateUserData(data).then(_res=>{
-                    if(_res.status == 200){
+                    if(_res.status === 200){
                         changeseSsionStorageData(data);
                         alert("User data updated");
                     }else{
@@ -87,7 +87,7 @@ export default function Profile(){
                           Id:claims.userId
                       }
                       updateUserPassword(data).then(_res=>{
-                          if(_res.status == 200){
+                          if(_res.status === 200){
                               alert("User password updated");
                           }else{
                               alert(_res);
