@@ -1,6 +1,7 @@
+
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
-import { NavLink} from "react-router-dom";
+import { NavLink,useNavigate} from "react-router-dom";
 import noAdds from "./../../images/myadds.webp";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
@@ -25,6 +26,7 @@ function MyAds() {
   const [userHaveProducts, setUserHaveProducts] = useState(false);
   const deleteref = useRef(null);
   const { userId } = useClaims();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getItems = async () => {
@@ -68,49 +70,82 @@ function MyAds() {
         <div className="container-fluid mx-3">
           <h2 className="text-dark ml-2">Your Ads</h2>
           <div className="row productRow">
-            {filteredData.map((item) => (
-              <div
-                className="col-lg-2 col-md-6 col-sm-0  "
-                key={item.id}
-                ref={deleteref}
-                // onClick={() => routeHandler(item)}
-                style={{marginLeft:"100px"}}
-              >
-                
-                <div className="card">
-                <NavLink to={`/details/${item.id}`}>
-                  <CardMedia
-                    sx={{ paddingTop: "10px", zIndex: 1 }}
-                    component="img"
-                    height="140"
-                    image={`data:image/jpeg;base64,${item.images[0]}`}
-                    alt={item.date}
-                  />
-                  </NavLink> 
-                  <div className="card-body">
-                    <h5 className="card-title">
-                      {item.title.substring(0, 25).concat("...")}
-                    </h5>
-                    <p className="card-text">
-                      {item.description.substring(0, 40).concat("...")}
-                    </p>
-                  </div>
-                    
-                  <div className="card-footer">
+            
+          <div className="container">
+      {filteredData.map((res) => {
+        let description = res.description.substring(0, 18).concat("...");
+        let title =
+          res.title.length > 18
+            ? res.title.substring(0, 18).concat("...")
+            : res.title;
+            const itemCondition = ()=>{
+              if(res.isLost){
+                return "Lost"
+              }else{
+                return "Found"
+              }
+            }
+            const itemConditionColor = ()=>{
+              if(res.isLost){
+                return {color: "red"}
+              }else{
+                return {color: "green"}
+              }
+            }
+
+        return (
+          <div key={res.id}  >
+          <div className="card">
+            <NavLink to={`/details/${res.id}`}>
+            <div className="card-header">
+              <img src={`data:image/jpeg;base64,${res.images[0]}`} alt={res.date} />
+            </div>
+            </NavLink>
+            <div className="card-body">
+              <span className="tag tag-teal">{res.superCategory}</span>
+              <h4>
+                {title}
+              </h4>
+              <p>
+              {description}
+              </p>
+              <div className="container_tags">
+              <Button sx={{borderRadius:"50px", display:"inline-flex"}} onClick={()=>{navigate(`/details/${res.id}`)}} variant="contained" color="success">
+              Details
+              </Button>
+                        <span className="span">item condition</span>
+                </div>
+                        <div class="tags">
+              <p style={itemConditionColor()}>{itemCondition()}</p>
+                         
+
+                         
+                        </div>
+               
+                        
+              
+              
+            </div>
+            <div className="card-footer">
                     <small className="text-muted"></small>
                     <button
                       type="button"
                       className="btn btn-danger"
-                      onClick={() => deleteItem(item.id)}
+                      onClick={() => deleteItem(res.id)}
                     >
                       Delete
                     </button>
                   </div>
+          </div>
+          
+          </div>
+        );
+      })}
+    </div>
+                    
+                 
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
       ) : (
         <center className="mb-5">
           <img
