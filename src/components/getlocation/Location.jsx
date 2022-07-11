@@ -7,7 +7,7 @@ import ReactMapGL, {
 import "mapbox-gl/dist/mapbox-gl.css";
 import { useEffect, useRef, useState } from "react";
 import Geocoder from "./Geocoder";
-export default function Location() {
+export default function Location({seTCoordinates}) {
   let [lng, setLng] = useState(31.235712);
   let [lat, setLat] = useState(30.04442);
 
@@ -49,6 +49,7 @@ export default function Location() {
         }}
         mapStyle="mapbox://styles/mapbox/streets-v11"
         onClick={(e) => {
+          seTCoordinates(e.lngLat.lat,e.lngLat.lng);
           setLat(e.lngLat.lat);
           setLng(e.lngLat.lng);
         }}
@@ -58,6 +59,7 @@ export default function Location() {
           longitude={lng}
           draggable
           onDragEnd={(e) => {
+            seTCoordinates(e.lngLat.lat,e.lngLat.lng);
             setLat(e.lngLat.lat);
             setLng(e.lngLat.lng);
           }}
@@ -67,6 +69,7 @@ export default function Location() {
           position="top-left"
           trackUserLocation
           onGeolocate={(e) => {
+            seTCoordinates(e.coords.latitude,e.coords.longitude);
             setLat(e.coords.latitude);
             setLng(e.coords.longitude);
           }}

@@ -518,10 +518,10 @@ export default function Posts() {
             multiple
           />
           {/* Details Section */}
-          <h3>
+          <h3>           
             Item location (Click And Drag The Marker Or Search By Location Name)
           </h3>
-          <Location locationSetter={seTCoordinates}></Location>
+          <Location seTCoordinates={seTCoordinates}></Location>
           <br></br>
           <br></br>
 
