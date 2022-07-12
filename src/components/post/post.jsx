@@ -560,7 +560,7 @@ export default function Posts() {
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <Stack spacing={3}>
               <DesktopDatePicker
-                label="Date desktop"
+                label="Date"
                 inputFormat="dd/MM/yyyy"
                 value={date}
                 onChange={(newDate) => {
