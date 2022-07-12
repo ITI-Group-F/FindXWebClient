@@ -17,6 +17,8 @@ export const removeUserinfo = () => {
     sessionStorage.removeItem("firstName");
     sessionStorage.removeItem("lastName");
     sessionStorage.removeItem("phone");
+    sessionStorage.removeItem("token");
+
 }
 
 export const updateUserData = (userData) => {

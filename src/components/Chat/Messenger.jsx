@@ -47,7 +47,7 @@ const handleReceiveMessage=(sender, message)=>{
   }, [connection]);
 
   const sendMessage = (message) => {
-
+    if(!withId) return;
     if (connection) {
       connection.invoke(
         "SendMessageToGroupAsync",

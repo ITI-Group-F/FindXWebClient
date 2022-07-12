@@ -8,7 +8,7 @@ import { countNotifications } from "../Services/chatService";
 const ChatContext = createContext();
 
 const ChatContextProvider = ({ children }) => {
-  const { userId } = useClaims();
+  const { userId } =  useClaims();
   // let userId = getCurrentUserId();
   const [connection, setConnection] = useState(null);
   let [conversations, setConversations] = useState([]);
@@ -16,11 +16,13 @@ const ChatContextProvider = ({ children }) => {
 
   const upDateChatData = useCallback(async () => {
     try {
+      let userId = sessionStorage.getItem("userId"); 
+      console.log( userId);
       const response = await API.get(`/chathistory/${userId}`);
       setConversations(response.data);
       setNumberOfNotifications(countNotifications(response.data, userId));
+      console.log(countNotifications(response.data, userId));
     } catch (error) {
-      console.log(error);
       setConversations([]);
     }
   }, [userId]);
