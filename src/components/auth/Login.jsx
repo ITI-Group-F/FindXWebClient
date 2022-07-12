@@ -5,6 +5,7 @@ import "./auth.css";
 import { useNavigate } from "react-router-dom";
 import useToken from "../../hooks/useToken";
 import { authenticationContext } from "../../Contexts/AuthContext";
+import ChatContext from "../../Contexts/ChatContext";
 
 export default function Login({ setToken ,loginfromNavbar}) {
   /**
@@ -23,6 +24,7 @@ export default function Login({ setToken ,loginfromNavbar}) {
   const [resErrMsg, setResErrMsg] = useState("");
   const navigate = useNavigate();
   const [isloggedIn,login] = useContext(authenticationContext);
+  const{upDateChatData} = useContext(ChatContext);
 
   /*
    * function to handle the change of the form fields
@@ -80,7 +82,7 @@ export default function Login({ setToken ,loginfromNavbar}) {
       if (token) {
         setToken(token);
         navigate("/", { replace: true });
-        login();
+        login(); 
         if(loginfromNavbar){
           loginfromNavbar();
         }

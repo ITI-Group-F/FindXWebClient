@@ -9,3 +9,4 @@ export const countNotifications = (convs, userid) => {
   });
   return count;
 };
+

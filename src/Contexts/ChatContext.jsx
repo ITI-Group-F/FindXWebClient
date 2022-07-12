@@ -1,4 +1,4 @@
-import React, { createContext, useMemo, useEffect, useState } from "react";
+import React, { createContext, useMemo, useEffect, useState, useCallback } from "react";
 import API from "../Services/api";
 import { HubConnectionBuilder } from "@microsoft/signalr";
 import { getCurrentUserId } from "../Services/UserService";
@@ -8,24 +8,28 @@ import { countNotifications } from "../Services/chatService";
 const ChatContext = createContext();
 
 const ChatContextProvider = ({ children }) => {
-  const { userId } = useClaims();
+  const { userId } =  useClaims();
   // let userId = getCurrentUserId();
   const [connection, setConnection] = useState(null);
   let [conversations, setConversations] = useState([]);
   const [numberOfNotifications, setNumberOfNotifications] = useState(0);
 
+  const upDateChatData = useCallback(async () => {
+    try {
+      let userId = sessionStorage.getItem("userId"); 
+      console.log( userId);
+      const response = await API.get(`/chathistory/${userId}`);
+      setConversations(response.data);
+      setNumberOfNotifications(countNotifications(response.data, userId));
+      console.log(countNotifications(response.data, userId));
+    } catch (error) {
+      setConversations([]);
+    }
+  }, [userId]);
+
+
   useEffect(() => {
-    const fetchApi = async () => {
-      try {
-        const response = await API.get(`/chathistory/${userId}`);
-        setConversations(response.data);
-        setNumberOfNotifications(countNotifications(response.data, userId));
-      } catch (error) {
-        console.log(error);
-        setConversations([]);
-      }
-    };
-    fetchApi();
+    upDateChatData();
   }, []);
 
   useEffect(() => {
@@ -49,9 +53,10 @@ const ChatContextProvider = ({ children }) => {
       conversations,
       connection,
       userId,
-      numberOfNotifications
+      numberOfNotifications,
+      upDateChatData
     }),
-    [connection, userId , conversations, numberOfNotifications]
+    [connection, userId, conversations, numberOfNotifications, upDateChatData]
   );
 
   return (
