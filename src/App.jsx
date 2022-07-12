@@ -28,6 +28,8 @@ import ImageResult from "./components/Items/ImageResult";
 function App() {
   return (
     <>
+    <div id="page">   
+
 
       <Suspense fallback={<Loading />}>
         <BackTop />
@@ -91,8 +93,9 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
+      </div>
       <Footer></Footer>
-    </>
+      </>
   );
 }
 

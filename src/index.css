@@ -13,3 +13,13 @@ code {
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200&family=Oswald:wght@200&family=PT+Sans:ital@1&display=swap');
+
+#page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+#page .site-content{
+  flex-grow: 1;
+}

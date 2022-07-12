@@ -44,9 +44,9 @@ export default function DropDown() {
                                         onClick={popupState.close}
                                         className="link"
                                         to="/myads"
-                                        data-item="My Ads"
+                                        data-item="MyAds"
                                     >
-                                        My Ads
+                                        MyAds
                                     </Link>
                                 </li>
                                 <li>
