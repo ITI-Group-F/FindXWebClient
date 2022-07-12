@@ -10,7 +10,7 @@ class Footer extends Component {
     render() {
         return (
             <>
-                <table style={{marginTop:"100px",  border: "1px solid white", borderCollapse: "collapse", width: "100%" ,  marginTop:"auto"  }}>
+                <table style={{marginTop:"100px",  border: "1px solid white", borderCollapse: "collapse", width: "100%"  }}>
                     <tbody>                    
                     <tr style={{ backgroundColor: "#DCDCDC", marginLeft: "50px", marginRight: "50px" }}>
                         

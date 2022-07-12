@@ -17,7 +17,7 @@ export default function ActionAreaCard(props) {
 let navigate= useNavigate();
   console.log(props);
   return (
-    <div className="container">
+    <div className="containerAllItems">
       {props.allItemsData.map((res) => {
         let description = res.description.substring(0, 18).concat("...");
         let title =
@@ -57,7 +57,7 @@ let navigate= useNavigate();
               <Button sx={{borderRadius:"50px", display:"inline-flex"}} onClick={()=>{navigate(`/details/${res.id}`)}} variant="contained" color="success">
               Details
               </Button>
-                        <span className="span">item condition</span>
+                        <span className="spanAllItems">item condition</span>
                 </div>
                         <div className="tags">
               <p style={itemConditionColor()}>{itemCondition()}</p>

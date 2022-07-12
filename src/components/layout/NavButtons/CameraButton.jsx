@@ -4,8 +4,6 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import Stack from "@mui/material/Stack";
-import PythonAPI from "../../../Services/SimilarityServiceApi";
-import { useNavigate } from "react-router-dom";
 import ImageSearchContext from "../../../Contexts/ImageSearchContext";
 import Tooltip from '@mui/material/Tooltip';
 
@@ -14,22 +12,9 @@ const Input = styled("input")({
 });
 
 const CameraButton = () => {
-  const [imageItems, setImageItems] = useContext(ImageSearchContext);
-  const navigate = useNavigate();
+  const [imageItems, setImageItems,sendImage] = useContext(ImageSearchContext);
 
-  const sendImage = async (e) => {
-    const { files } = e.target;
-    const formData = new FormData();
-    formData.append("img", files[0]);
-    try {
-      const items = await PythonAPI.post("/", formData);
-      console.log(items.data);
-      setImageItems(items.data);
-      navigate("/search-by-img");
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  
 
   return (
     <Stack direction="row" alignItems="center" spacing={2}>
