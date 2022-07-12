@@ -1,15 +1,18 @@
-import { useState } from "react";
+import { useState,useContext } from "react";
 import jwt from "jwt-decode";
+import ChatContext from "../Contexts/ChatContext";
 
 export default function useToken() {
   const getToken = () => {
     const tokenString = sessionStorage.getItem("token");
     // const userToken = JSON.parse(tokenString);
     return tokenString ? tokenString : null;
+    
     // return userToken?.token;
   };
 
   const [token, setToken] = useState(getToken());
+  const {upDateChatData} = useContext(ChatContext);
 
   const saveToken = (userToken) => {
     const claims = jwt(userToken);
@@ -24,7 +27,8 @@ export default function useToken() {
     if(claims.phone){
       sessionStorage.setItem("phone", claims.phone);
     }
-
+    upDateChatData(claims.userId);
+  
     console.log(claims);
     setToken(userToken.token);
   };

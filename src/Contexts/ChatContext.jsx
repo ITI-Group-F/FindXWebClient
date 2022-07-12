@@ -1,23 +1,27 @@
 import React, { createContext, useMemo, useEffect, useState, useCallback } from "react";
 import API from "../Services/api";
 import { HubConnectionBuilder } from "@microsoft/signalr";
-import { getCurrentUserId } from "../Services/UserService";
+import { getCurrentUserId, updateUserData } from "../Services/UserService";
 import useClaims from "../hooks/useClaims";
 import { countNotifications } from "../Services/chatService";
 
 const ChatContext = createContext();
 
 const ChatContextProvider = ({ children }) => {
-  const { userId } =  useClaims();
+  let userId =  sessionStorage.getItem("userId")
   // let userId = getCurrentUserId();
   const [connection, setConnection] = useState(null);
   let [conversations, setConversations] = useState([]);
   const [numberOfNotifications, setNumberOfNotifications] = useState(0);
 
-  const upDateChatData = useCallback(async () => {
+
+  const upDateChatData = useCallback(async (id) => {
     try {
-      let userId = sessionStorage.getItem("userId"); 
-      console.log( userId);
+      
+      if (id) {
+       userId = id;
+      }
+
       const response = await API.get(`/chathistory/${userId}`);
       setConversations(response.data);
       setNumberOfNotifications(countNotifications(response.data, userId));
@@ -25,12 +29,10 @@ const ChatContextProvider = ({ children }) => {
     } catch (error) {
       setConversations([]);
     }
-  }, [userId]);
-
-
-  useEffect(() => {
-    upDateChatData();
   }, []);
+
+
+
 
   useEffect(() => {
     const signalRConnection = new HubConnectionBuilder()

@@ -152,7 +152,10 @@ const handleReceiveMessage=(sender, message)=>{
 
     activateChat();
     seOtherFullName(otherFullName);
-    chatRef.current.scrollTo(0, chatRef.current.scrollHeight);
+    setTimeout(() => {
+      chatRef.current.scrollTo(0, chatRef.current.scrollHeight);
+    }, 100);
+ 
     
   };
 
@@ -160,6 +163,8 @@ const handleReceiveMessage=(sender, message)=>{
     if (event.key === "Enter") {
       sendMessage(message);
       MessageToSendRef.current.value = "";
+      chatRef.current.scrollTop = chatRef.current.scrollHeight;
+    
     }
   };
 

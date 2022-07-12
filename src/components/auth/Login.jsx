@@ -24,7 +24,7 @@ export default function Login({ setToken ,loginfromNavbar}) {
   const [resErrMsg, setResErrMsg] = useState("");
   const navigate = useNavigate();
   const [isloggedIn,login] = useContext(authenticationContext);
-  const{upDateChatData} = useContext(ChatContext);
+
 
   /*
    * function to handle the change of the form fields
@@ -83,6 +83,8 @@ export default function Login({ setToken ,loginfromNavbar}) {
         setToken(token);
         navigate("/", { replace: true });
         login(); 
+
+     
         if(loginfromNavbar){
           loginfromNavbar();
         }
