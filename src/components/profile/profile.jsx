@@ -45,8 +45,7 @@ export default function Profile(){
                         alert(_res);
                     }
                 }).catch(_err=>{
-                    alert(_err);
-                    console.log(_err);
+                    alert(_err.response.data);                    
                 });
     
                 setFirstname(firstnameUpdated);
