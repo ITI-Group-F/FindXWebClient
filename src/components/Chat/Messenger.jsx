@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, } from "react";
 import ChatContext from "../../Contexts/ChatContext";
 
 export default function Messenger() {
-  const { conversations, connection, userId: ownerId,upDateChatData,PosterDetails } = useContext(ChatContext);
+  const { conversations, connection, userId: ownerId, upDateChatData, PosterDetails } = useContext(ChatContext);
   const [withId, setWithId] = useState(null);
   const [message, setMessage] = useState(<>You have no Messages</>);
   const [msgs, setMsgs] = useState(null);
@@ -16,46 +16,46 @@ export default function Messenger() {
   const MessageToSendRef = useRef(null);
   const isFirstConv = useRef(true);
 
-const handleReceiveMessage=(sender, message)=>{
+  const handleReceiveMessage = (sender, message) => {
 
-  let msg;
-       if(OtherIdRef.current == sender) {
-        msg = <div className="bubble you">{message}</div>;
-        setMsgs((mesgs)=>[...mesgs, msg]);
-        setTimeout(() => {
-          chatRef.current.scrollTo(0, chatRef.current.scrollHeight);
-        }, 100);
-        }
-        else{
-          
-        }
-        upDateChatData().then(() => {
-          populateContact();
-        });
-}
-//handling start of chat
-useEffect(() => {
-  if(PosterDetails){
-    setWithId(PosterDetails.id);
-    setMsgs([<>You are starting new Conversation with {PosterDetails.fullName}  Please Say Something </>]);
-    seOtherFullName(PosterDetails.fullName);
-    chatRef.current.classList.add("active-chat");
+    let msg;
+    if (OtherIdRef.current == sender) {
+      msg = <div className="bubble you">{message}</div>;
+      setMsgs((mesgs) => [...mesgs, msg]);
+      setTimeout(() => {
+        chatRef.current.scrollTo(0, chatRef.current.scrollHeight);
+      }, 100);
+    }
+    else {
+
+    }
+    upDateChatData().then(() => {
+      populateContact();
+    });
   }
-},[]);
+  //handling start of chat
+  useEffect(() => {
+    if (PosterDetails) {
+      setWithId(PosterDetails.id);
+      setMsgs([<>You are starting new Conversation with {PosterDetails.fullName}  Please Say Something </>]);
+      seOtherFullName(PosterDetails.fullName);
+      chatRef.current.classList.add("active-chat");
+    }
+  }, [PosterDetails]);
 
 
   useEffect(() => {
     if (connection) {
       connection.on("ReceiveMessage", (sender, message) => {
         handleReceiveMessage(sender, message);
-   
+
 
       });
     }
   }, [connection]);
 
   const sendMessage = (message) => {
-    if(!withId) return;
+    if (!withId) return;
     if (connection) {
       connection.invoke(
         "SendMessageToGroupAsync",
@@ -64,17 +64,19 @@ useEffect(() => {
         message
       );
 
-      if (isFirstConv.current&&PosterDetails) {
+      if (isFirstConv.current && PosterDetails) {
         isFirstConv.current = false;
         setMsgs([]);
         upDateChatData().then(() => {
           populateContact();
         });
       }
+      else {
+        prevContactRef.current.querySelector(".preview").innerText = message;
+      }
       let msg = <div className="bubble me">{message}</div>;
-            setMsgs((mesgs)=>[...mesgs, msg]);
+      setMsgs((mesgs) => [...mesgs, msg]);
 
-           prevContactRef.current.querySelector(".preview").innerText=message;
     }
   };
 
@@ -92,28 +94,28 @@ useEffect(() => {
       let lastMessageTime = lastMessage.sendDate.split("T")[1].slice(0, 5);
 
       return (
-        
-          <li
-            key={conv.id}
-            ref={(element) => { currentContactRef.current[index] = element }}
-            onClick={() => {
-              if (prevContactRef.current != null) {
-                prevContactRef.current.classList.remove("active");
-              }
-              prevContactRef.current = currentContactRef.current[index];
 
-              populateChat(conv);
-              currentContactRef.current[index].classList.add("active");
-            }}
-            className="person"
+        <li
+          key={conv.id}
+          ref={(element) => { currentContactRef.current[index] = element }}
+          onClick={() => {
+            if (prevContactRef.current != null) {
+              prevContactRef.current.classList.remove("active");
+            }
+            prevContactRef.current = currentContactRef.current[index];
 
-          >
-            <img src="/img/av.png" alt="" />
-            <span className="name">{SenderFullName}</span>
-            <span className="time">{lastMessageTime}</span>
-            <span className="preview">{lastMessage.content}</span>
-          </li>
-       
+            populateChat(conv);
+            currentContactRef.current[index].classList.add("active");
+          }}
+          className="person"
+
+        >
+          <img src="/img/av.png" alt="" />
+          <span className="name">{SenderFullName}</span>
+          <span className="time">{lastMessageTime}</span>
+          <span className="preview">{lastMessage.content}</span>
+        </li>
+
       );
     });
   };
@@ -143,7 +145,7 @@ useEffect(() => {
    * @returns
    */
   let populateChat = (conv) => {
- 
+
     let OwnerisTheSender = true;
     if (ownerId === conv.sender.id) OwnerisTheSender = true;
     else OwnerisTheSender = false;
@@ -169,8 +171,8 @@ useEffect(() => {
     setTimeout(() => {
       chatRef.current.scrollTo(0, chatRef.current.scrollHeight);
     }, 100);
- 
-    
+
+
   };
 
   const handleEnter = (event) => {
@@ -180,7 +182,7 @@ useEffect(() => {
       setTimeout(() => {
         chatRef.current.scrollTo(0, chatRef.current.scrollHeight);
       }, 100);
-    
+
     }
   };
 
