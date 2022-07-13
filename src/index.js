@@ -4,8 +4,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
-import axios from "axios";
-import useToken from "./hooks/useToken";
+import axios from "./Services/api";
 import { ItemsProvider } from "./Contexts/itemsContext";
 
 import { ThemeProvider } from '@mui/material/styles';
@@ -16,13 +15,13 @@ import { AuthContextProvider } from "./Contexts/AuthContext";
 import { ImageSearchProvider } from "./Contexts/ImageSearchContext";
 import { ChatContextProvider } from "./Contexts/ChatContext";
 
-
 axios.interceptors.request.use(
     function(config) {
         // Do something before request is sent
-        const { getToken } = useToken();
-
-        config.headers.Authorization = `Bearer ${getToken()}`;
+        const token=sessionStorage.getItem("token").replaceAll('"', '');
+        config.headers.Authorization = `Bearer ${token}`;
+        // console.log(token.)
+        console.log(config.headers.Authorization)
 	
         console.log("inside interceptor");
         return config;
@@ -32,6 +31,9 @@ axios.interceptors.request.use(
         return Promise.reject(error);
     }
 );
+
+
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render( <React.StrictMode>
