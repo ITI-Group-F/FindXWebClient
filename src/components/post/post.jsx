@@ -23,6 +23,7 @@ import { useNavigate } from "react-router-dom";
 import API from "../../Services/api";
 import useClaims from "../../hooks/useClaims";
 
+
 export default function Posts() {
   const [apiFormData, setApiFormData] = useState(new FormData());
   const [showhide, setshowhide] = useState("");
@@ -50,6 +51,7 @@ export default function Posts() {
   const [date, setDate] = useState(new Date());
   const { userId } = useClaims();
   const navigate = useNavigate();
+ 
 
   //this function will be send to Location component to set longtude and latitude
   const seTCoordinates = (lt, lg) => {
@@ -60,7 +62,11 @@ export default function Posts() {
   const setValue = (e) => {
     const { name, value } = e.target;
     console.log(name, value);
+    
+        
     setFormData({ ...formData, [name]: value });
+     
+ 
     validatedesc();
   };
 
@@ -79,9 +85,10 @@ export default function Posts() {
 
   const submitFormData = () => {
     if (validatedesc()) {
-      console.log(long, lat);
       setApiFormData(new FormData());
+
       setFormData({ ...formData, longitude: long, latitude: lat });
+
       console.log(formData);
 
       for (let k in formData) {
@@ -521,7 +528,7 @@ export default function Posts() {
           <h3>           
             Item location (Click And Drag The Marker Or Search By Location Name)
           </h3>
-          <Location seTCoordinates={seTCoordinates}></Location>
+          <Location seTCoordinates={seTCoordinates} ></Location>
           <br></br>
           <br></br>
 
@@ -529,6 +536,8 @@ export default function Posts() {
           <TextField
             name="Location"
             onChange={setValue}
+            onBlur={()=> setFormData({ ...formData, longitude: long, latitude: lat })}
+            onMouseOver={()=>setFormData({ ...formData, longitude: long, latitude: lat })}
             required
             maxLength="20"
             fullWidth
@@ -567,8 +576,12 @@ export default function Posts() {
                   newDate = getFormattedDate(newDate);
                   setDate(newDate);
                   setFormData({ ...formData, date: newDate });
+                     
                   console.log(formData);
                 }}
+
+                
+                
                 renderInput={(params) => <TextField {...params} />}
               />
             </Stack>
