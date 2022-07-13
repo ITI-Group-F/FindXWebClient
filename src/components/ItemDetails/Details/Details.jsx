@@ -3,10 +3,12 @@ import DetailsStyle from '../Details/Details.module.css'
 import Button from '@mui/material/Button';
 import MapLocation from "../../Map/MapLocation"
 import SendIcon from '@mui/icons-material/Send';
+import { useContext } from 'react';
+import ChatContext from '../../../Contexts/ChatContext';
 
 export default function Details(props) {
 
-
+const {handleNewChat} = useContext(ChatContext);  
 
  const selectedItem=props.item
 
@@ -44,7 +46,7 @@ export default function Details(props) {
         <div className={`mb-2`} style={{textAlign:'left'}}>
 
         {/* it will be send message or Edit post depends on the case  */}
-        <Button  color='success' className='mx-2' variant="contained">Send Message &nbsp;<SendIcon/></Button>
+        <Button onClick={()=>{handleNewChat(selectedItem.id)}}  color='primary' className='mx-2' variant="contained">Send Message &nbsp;<SendIcon/></Button>
        
 
 

@@ -12,6 +12,7 @@ export default function Wrapper(props) {
   const selectedID = useParams().id;
   let selectedItem = getItemById(selectedID);
 
+
   useEffect(() => {
     //if the item not found
     //this mean this id Coming from profile or post
@@ -21,6 +22,8 @@ export default function Wrapper(props) {
         .get(`/Items/${selectedID}`)
         .then((d) => {
           selectedItem = d;
+  
+  
         })
         .catch((err) => {
           navigate("/notFound");

@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, } from "react";
 import ChatContext from "../../Contexts/ChatContext";
 
 export default function Messenger() {
-  const { conversations, connection, userId: ownerId,upDateChatData } = useContext(ChatContext);
+  const { conversations, connection, userId: ownerId,upDateChatData,PosterDetails } = useContext(ChatContext);
   const [withId, setWithId] = useState(null);
   const [message, setMessage] = useState(<>You have no Messages</>);
   const [msgs, setMsgs] = useState(null);
@@ -14,17 +14,17 @@ export default function Messenger() {
   const currentContactRef = useRef([]);
   let prevContactRef = useRef(null);
   const MessageToSendRef = useRef(null);
+  const isFirstConv = useRef(true);
 
 const handleReceiveMessage=(sender, message)=>{
 
   let msg;
-
-
-
        if(OtherIdRef.current == sender) {
         msg = <div className="bubble you">{message}</div>;
         setMsgs((mesgs)=>[...mesgs, msg]);
-        chatRef.current.scrollTo(0, chatRef.current.scrollHeight);
+        setTimeout(() => {
+          chatRef.current.scrollTo(0, chatRef.current.scrollHeight);
+        }, 100);
         }
         else{
           
@@ -32,9 +32,17 @@ const handleReceiveMessage=(sender, message)=>{
         upDateChatData().then(() => {
           populateContact();
         });
-       
-         
 }
+//handling start of chat
+useEffect(() => {
+  if(PosterDetails){
+    setWithId(PosterDetails.id);
+    setMsgs([<>You are starting new Conversation with {PosterDetails.fullName}  Please Say Something </>]);
+    seOtherFullName(PosterDetails.fullName);
+    chatRef.current.classList.add("active-chat");
+  }
+},[]);
+
 
   useEffect(() => {
     if (connection) {
@@ -55,8 +63,14 @@ const handleReceiveMessage=(sender, message)=>{
         withId,
         message
       );
-    
 
+      if (isFirstConv.current&&PosterDetails) {
+        isFirstConv.current = false;
+        setMsgs([]);
+        upDateChatData().then(() => {
+          populateContact();
+        });
+      }
       let msg = <div className="bubble me">{message}</div>;
             setMsgs((mesgs)=>[...mesgs, msg]);
 
@@ -163,7 +177,9 @@ const handleReceiveMessage=(sender, message)=>{
     if (event.key === "Enter") {
       sendMessage(message);
       MessageToSendRef.current.value = "";
-      chatRef.current.scrollTop = chatRef.current.scrollHeight;
+      setTimeout(() => {
+        chatRef.current.scrollTo(0, chatRef.current.scrollHeight);
+      }, 100);
     
     }
   };
