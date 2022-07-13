@@ -5,10 +5,11 @@ import "./search.css";
 import API from "../../Services/api";
 import { NavLink, useNavigate } from "react-router-dom";
 import searchContext from "../../Contexts/SearchContext";
-
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Autocomplete from '@mui/material/Autocomplete';
+import Button from '@mui/material/Button';
 
 function Search() {
   //   const {allPost,setAllPost}=useContext(itemsContext)
@@ -74,11 +75,10 @@ console.log(wordEntered);
 return (
   
   
-  <Stack spacing={-4} sx={{ width: 500,marginLeft:"auto"  }} 
-  >
-        
+  <>
+     <div className="spanSearch">
     <Autocomplete
-        
+        className="searchInput"
         freeSolo
         id="free-solo-2-demo"
         disableClearable
@@ -103,11 +103,13 @@ return (
       )}
       
     />
-     <div onClick={()=>handleSearch() }   style={{  marginTop:"-41px" ,marginRight:"-439px"  }}>
-           {" "}
-             <SearchIcon />{" "}
-           </div>
-  </Stack>
+
+           <Button className="divBtnSearch" onClick={()=>handleSearch() } variant="contained" color="success">
+     <SearchOutlinedIcon />
+        
+      </Button>
+        </div>   
+ </>
  
 
 );
