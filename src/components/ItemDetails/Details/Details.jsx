@@ -6,11 +6,17 @@ import SendIcon from '@mui/icons-material/Send';
 import { useContext } from 'react';
 import ChatContext from '../../../Contexts/ChatContext';
 
+import useClaims from "../../../hooks/useClaims"
+
 export default function Details(props) {
 
 const {handleNewChat} = useContext(ChatContext);  
 
- const selectedItem=props.item
+ const selectedItem=props.item;
+
+ const {userId}=useClaims();
+
+
 
 
   
@@ -46,7 +52,10 @@ const {handleNewChat} = useContext(ChatContext);
         <div className={`mb-2`} style={{textAlign:'left'}}>
 
         {/* it will be send message or Edit post depends on the case  */}
-        <Button onClick={()=>{handleNewChat(selectedItem.id)}}  color='primary' className='mx-2' variant="contained">Send Message &nbsp;<SendIcon/></Button>
+{
+  (userId!==selectedItem.userId)?( <Button onClick={()=>{handleNewChat(selectedItem.id)}}  color='primary' className='mx-2' variant="contained">Send Message &nbsp;<SendIcon/></Button>):( <Button   color='primary' className='mx-2' variant="contained">Edit Post &nbsp;<SendIcon/></Button>)
+}
+       
        
 
 

@@ -81,7 +81,7 @@ export default function Login({ setToken ,loginfromNavbar}) {
       const token = await loginUser(formData);
       if (token) {
         setToken(token);
-        navigate("/", { replace: true });
+        navigate("/items", { replace: true });
         login(); 
 
      

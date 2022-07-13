@@ -4,14 +4,23 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import TwitterIcon from '@mui/icons-material/Twitter';
-
+import "bootstrap/dist/css/bootstrap.min.css";
 
 class Footer extends Component {
     render() {
         return (
-            <>
-                <table style={{marginTop:"100px",  border: "1px solid white", borderCollapse: "collapse", width: "100%"  }}>
-                    <tbody>                    
+
+                  
+            
+          
+        <table style={{marginTop:"auto",  border: "1px solid white", borderCollapse: "collapse", width: "100%"  }}>
+        
+
+            
+                    <tbody>  
+
+                       
+                                          
                     <tr style={{ backgroundColor: "#DCDCDC", marginLeft: "50px", marginRight: "50px" }}>
                         
                         
@@ -30,7 +39,6 @@ class Footer extends Component {
                     </tr>
                     </tbody>
                 </table>
-            </>
         );
     }
 }

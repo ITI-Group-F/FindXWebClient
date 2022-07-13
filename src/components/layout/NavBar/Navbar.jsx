@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import "./Navbar.scss";
 import Search from "../../Search/Search";
 import LoginButton from "../NavButtons/LoginButton";
@@ -8,17 +8,23 @@ import DropDown from "./dropdown";
 import { useContext } from 'react';
 import { authenticationContext } from '../../../Contexts/AuthContext';
 import { ChatButton } from "../NavButtons/ChatButton";
-
+import MakePostButton from "../NavButtons/MakePostButton";
 export default function Navbar() {
   const [isloggedIn] = useContext(authenticationContext);
+  let navigate = useNavigate();
   return (
     <>
       <div className=".xnav">
         <section>
           <nav>
+            {isloggedIn?<Link to="/items">
+              <img className="logo" src="img/logo.png" alt="" />
+            </Link>
+            :
             <Link to="/">
               <img className="logo" src="img/logo.png" alt="" />
             </Link>
+            }
             <Search></Search>
 
 
@@ -41,15 +47,18 @@ export default function Navbar() {
               <li>
                 <Link className="link" to="/contact" data-item="Contact">
                   Contact
-                </Link>
               </li>
+                </Link>
              
             </ul> */}
 
             < div className="HammButton">
+         
+
               <CameraButton />
 
               {isloggedIn ? <>
+                <MakePostButton/>
                 <ChatButton />
                 <DropDown />
               </> : <LoginButton />}
