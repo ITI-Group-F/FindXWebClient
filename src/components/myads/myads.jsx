@@ -65,13 +65,13 @@ function MyAds() {
   console.log(filteredData, "userHaveProducts");
 
   return (
-    <div className="">
+    <div className="" style={{marginLeft:"1rem",marginRight:"1rem" }}>
       {filteredData.length != 0 ? (
         <div className="container-fluid mx-3">
           <h2 className="text-dark ml-2">Your Ads</h2>
           <div className="row productRow">
             
-          <div className="container">
+          <div className="container"    >
       {filteredData.map((res) => {
         let description = res.description.substring(0, 18).concat("...");
         let title =
@@ -96,11 +96,10 @@ function MyAds() {
         return (
           <div key={res.id}  >
           <div className="card">
-            <NavLink to={`/details/${res.id}`}>
+            
             <div className="card-header">
               <img src={`data:image/jpeg;base64,${res.images[0]}`} alt={res.date} />
             </div>
-            </NavLink>
             <div className="card-body">
               <span className="tag tag-teal">{res.superCategory}</span>
               <h4>
@@ -113,9 +112,10 @@ function MyAds() {
               <Button sx={{borderRadius:"50px", display:"inline-flex"}} onClick={()=>{navigate(`/details/${res.id}`)}} variant="contained" color="success">
               Details
               </Button>
-                        <span className="span">item condition</span>
+                        <span className="span"> item condition</span>
                 </div>
                         <div class="tags">
+
               <p style={itemConditionColor()}>{itemCondition()}</p>
                          
 
