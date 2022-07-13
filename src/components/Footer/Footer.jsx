@@ -5,7 +5,6 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import "bootstrap/dist/css/bootstrap.min.css";
-import"./footer.css"
 
 class Footer extends Component {
     render() {
