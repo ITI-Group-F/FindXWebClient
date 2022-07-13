@@ -2,9 +2,8 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.scss";
 import Menu from "@mui/material/Menu";
-import PopupState, { bindTrigger, bindMenu } from "material-ui-popup-state";
+import  { bindTrigger, bindMenu,usePopupState } from "material-ui-popup-state/hooks";
 import IconButton from "@mui/material/IconButton";
-import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import Avatar, { avatarClasses } from '@mui/material/Avatar';
 import { UserInfo } from "./userInfo";
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
@@ -14,10 +13,10 @@ import AdUnitsIcon from '@mui/icons-material/AdUnits';
 
 export default function DropDown() {
     let logout = useContext(authenticationContext)[2];
+    const popupState = usePopupState({ variant: 'popover', popupId: 'demoMenu' })
     return (
         <>
-            <PopupState variant="popover" popupId="hamburger">
-                {(popupState) => (
+              
                     <React.Fragment>
                         <IconButton {...bindTrigger(popupState)}>
 
@@ -68,8 +67,8 @@ export default function DropDown() {
                         </Menu>
                         <div className="search"></div>
                     </React.Fragment>
-                )}
-            </PopupState>
+                
+     
 
         </>)
 }
