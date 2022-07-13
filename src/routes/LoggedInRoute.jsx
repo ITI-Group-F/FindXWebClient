@@ -5,7 +5,7 @@ const LoggedInRoute = ({ children }) => {
   const { token } = useToken();
 
   if (token) {
-    return <Navigate to="/" />;
+    return <Navigate to="/items" />;
   }
   return <>{children}</>;
 };

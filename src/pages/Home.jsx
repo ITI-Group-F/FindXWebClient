@@ -38,19 +38,19 @@ let navigate = useNavigate();
 <>
   <div className="containerHome">
       <img className='img' src={img} alt="tt"/>
-
-  </div>
   <span className='spanHome'>
 
-<h1 className="h3">Lost somthing?</h1>
+<h1 className="h3">Lost Somthing?</h1>
 <h3 className='h1'>It's One Click Away.</h3>
 <h5 className='h5'>Now You Can Look For Your Lost Item With Just A Picture Of IT</h5>
   
   <span className='btnGroupHome'>
 
   <span className='spanCameraHome'>
-  <p className='pCameraHome'>Search By Image</p>
-  <CameraButton />
+  <p className='pCameraHome'>Check Out Some Postes By Other Users</p>
+      <Button className='buttonAllItemsHome' variant="contained" color="success" onClick={()=>{navigate("/items")}}>
+        View Posts
+        </Button>
   </span>
       <span className='spanLoginHome'>
       <p className='pLoginHome'>Or Click Here To Login</p>
@@ -59,9 +59,11 @@ let navigate = useNavigate();
         </Button>
       </span>
   </span>
+     
   </span>
 
 
+      </div>
     </>
     );
 }
