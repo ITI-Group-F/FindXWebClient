@@ -19,8 +19,10 @@ const ChatContextProvider = ({ children }) => {
     try {
       
       if (id) {
+   
        userId = id;
       }
+     
 
       const response = await API.get(`/chathistory/${userId}`);
       setConversations(response.data);
@@ -29,6 +31,9 @@ const ChatContextProvider = ({ children }) => {
     } catch (error) {
       setConversations([]);
     }
+  }, []);
+  useEffect(() => {
+    upDateChatData();
   }, []);
 
 
