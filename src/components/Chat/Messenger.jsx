@@ -2,9 +2,10 @@ import React, { useContext } from "react";
 import "./Messenger.scss";
 import { useState, useEffect, useRef, } from "react";
 import ChatContext from "../../Contexts/ChatContext";
+import { setLastMessageAsSeen } from "../../Services/chatService";
 
 export default function Messenger() {
-  const { conversations, connection, userId: ownerId, upDateChatData, PosterDetails } = useContext(ChatContext);
+  const { conversations, connection, userId: ownerId, upDateChatData, PosterDetails,setNumberOfNotifications } = useContext(ChatContext);
   const [withId, setWithId] = useState(null);
   const [message, setMessage] = useState(<>You have no Messages</>);
   const [msgs, setMsgs] = useState(null);
@@ -35,7 +36,7 @@ export default function Messenger() {
   }
   //handling start of chat
   useEffect(() => {
-    if (PosterDetails) {
+    if (PosterDetails.id) {
       setWithId(PosterDetails.id);
       setMsgs([<>You are starting new Conversation with {PosterDetails.fullName}  Please Say Something </>]);
       seOtherFullName(PosterDetails.fullName);
@@ -64,7 +65,7 @@ export default function Messenger() {
         message
       );
 
-      if (isFirstConv.current && PosterDetails) {
+      if (isFirstConv.current && PosterDetails.id) {
         isFirstConv.current = false;
         setMsgs([]);
         upDateChatData().then(() => {
@@ -74,7 +75,7 @@ export default function Messenger() {
       else {
         prevContactRef.current.querySelector(".preview").innerText = message;
       }
-      let msg = <div className="bubble me">{message}</div>;
+      let msg = <div className="bubble me">{message} </div>;
       setMsgs((mesgs) => [...mesgs, msg]);
 
     }
@@ -130,14 +131,6 @@ export default function Messenger() {
       chatRef.current.classList.add("active-chat");
     }
 
-    //currentContactRef.current.classList.add("active")
-
-    // chat.current = chat.container.querySelector('.active-chat')
-    // chat.person = chatRef.current.getAttribute('data-chat')
-    // chat.current.classList.remove('active-chat')
-    // chat.container.querySelector('[data-chat="' + chat.person + '"]').classList.add('active-chat')
-    // friends.name = chatRef.current.querySelector('.name').innerText
-    // chat.name.innerHTML = friends.name
   };
 
   /**
@@ -154,9 +147,6 @@ export default function Messenger() {
     setWithId(Other.id);
     OtherIdRef.current = Other.id;
     let otherFullName = Other.firstName + " " + Other.lastName;
-    // let lastMessage = conv.messages[conv.messages.length - 1];
-    // let lastMessageTime = lastMessage.sendDate.split("T")[1].slice(0,5);
-
     let toLoadMsgs = conv.messages.map((msg) => {
       if (ownerId === msg.senderId) {
         return <div key={msg.id} className="bubble me">{msg.content} </div>;
@@ -165,15 +155,21 @@ export default function Messenger() {
       }
     });
     setMsgs(toLoadMsgs);
-
     activateChat();
     seOtherFullName(otherFullName);
     setTimeout(() => {
       chatRef.current.scrollTo(0, chatRef.current.scrollHeight);
     }, 100);
+console.log(conv);
+    if (conv.messages[conv.messages.length - 1].seen === false){
+      setLastMessageAsSeen(connection, ownerId, conv.id)
+      conv.messages[conv.messages.length - 1].seen = true;
+      setNumberOfNotifications(prevCount => prevCount - 1);
+    }
 
 
   };
+
 
   const handleEnter = (event) => {
     if (event.key === "Enter") {
@@ -222,10 +218,3 @@ export default function Messenger() {
   );
 }
 
-function wait(ms) {
-  var start = new Date().getTime();
-  var end = start;
-  while (end < start + ms) {
-    end = new Date().getTime();
-  }
-}
