@@ -37,9 +37,9 @@ export default function Posts() {
   const [showdescriptionErr, setShowdescriptionErr] = useState(false);
   const [showlocation2Err, setShowlocation2Err] = useState(false);
   const [showValidationErr, setShowValidationErr] = useState(false);
- const [showRadioErr, setShowRadioErr] = useState(false); 
+  const [showRadioErr, setShowRadioErr] = useState(false);
   const [descErr, setdescErr] = useState("");
-  const[descriptionErr,setdescriptionErr]=useState("")
+  const [descriptionErr, setdescriptionErr] = useState("")
   const [titleErr, settitleErr] = useState("");
   const [brandErr, setbrandErr] = useState("");
   const [LocationErr, setLocationErr] = useState("");
@@ -47,12 +47,12 @@ export default function Posts() {
   const [RadioErr, setRadioErr] = useState("");
   const [formData, setFormData] = useState({});
   const [showTitleErr, setShowTitleErr] = useState(false);
-  const [TitleErr,setTitleErr] = useState("");
+  const [TitleErr, setTitleErr] = useState("");
   const [isLost, setIsLost] = useState(false);
   const [date, setDate] = useState(new Date());
   const { userId } = useClaims();
   const navigate = useNavigate();
- 
+
 
   //this function will be send to Location component to set longtude and latitude
   const seTCoordinates = (lt, lg) => {
@@ -63,10 +63,10 @@ export default function Posts() {
   const setValue = (e) => {
     const { name, value } = e.target;
     console.log(name, value);
-    
-        
+
+
     setFormData({ ...formData, [name]: value });
-     
+
     title();
     description();
     brand();
@@ -88,31 +88,39 @@ export default function Posts() {
 
 
   const submitFormData = () => {
-    if (title()&&description()&&location()&&brand()&&radio()) {
+    if (title() && description() && location() && brand() && radio()) {
       setApiFormData(new FormData());
 
       setFormData({ ...formData, longitude: long, latitude: lat });
 
-      console.log(formData);
-
       for (let k in formData) {
-        apiFormData.append(`${k}`.replace(/\d$/, ""), formData[k]);
+        if (k == 'files') {
+          for (let i = 0; i < formData.files.length; i++) {
+            apiFormData.append("File", formData.files[i]);
+          }
+        } else {
+          apiFormData.append(k, formData[k]);
+        }
       }
+
+      // for (let k in formData) {
+      //   apiFormData.append(`${k}`.replace(/\d$/, ""), formData[k]);
+      // }
       console.log("----------------");
       for (var pair of apiFormData.entries()) {
         console.log(pair[0] + ": " + pair[1]);
       }
       console.log("----------------");
 
-             
+
 
       try {
         const res = API.post(`/UserItems/${userId}`, apiFormData);
-          
+
 
         res.then((res) => {
-            navigate("/items");
-          })
+          navigate("/myads");
+        })
           .catch((err) => {
             console.log(err);
           });
@@ -123,21 +131,21 @@ export default function Posts() {
       }
 
     } else {
-       setShowValidationErr(true);
+      setShowValidationErr(true);
     }
   };
 
-  // const [formImgs, setFormImgs] = useState([]);
   const setFormFiles = (e) => {
     const { files } = e.target;
-    for (let i = 0; i < files.length; i++) {
-      setFormData({ ...formData, [`File${i}`]: files[i] });
-    }
+    setFormData({ ...formData, files: files });
+    // for (let i = 0; i < files.length; i++) {
+    //   setFormData({ ...formData, [`File${i}`]: files[i] });
+    // }
   };
 
-  
 
-  const description =()=>{
+
+  const description = () => {
     let isdescValid = false;
     if (formData.description?.length >= 200) {
       isdescValid = false;
@@ -151,46 +159,46 @@ export default function Posts() {
     let isDescriptionValid = false;
     if (
       !formData.description ||
-      formData.description?.length <= 1 
-    
+      formData.description?.length <= 1
+
     ) {
       isDescriptionValid = false;
       setShowdescriptionErr(true);
-     setdescriptionErr("Field is missing or invalid!");
+      setdescriptionErr("Field is missing or invalid!");
     } else {
       isDescriptionValid = true;
       setShowdescriptionErr(false);
     }
-    return(isdescValid&&isDescriptionValid);
+    return (isdescValid && isDescriptionValid);
   }
-  const title =()=>{
-        //////////////////////////////////////////// 0length
-        let isTitleValid = false;
-        if (
-          !formData.title ||
-          formData.title?.length <= 1 
-        
-        ) {
-          isTitleValid = false;
-          setShowTitleErr(true);
-         setTitleErr("Field is missing or invalid!");
-        } else {
-          isTitleValid = true;
-          setShowTitleErr(false);
-        }
-     ////////////////////////////////////////////////
-     let istitleValid = false;
-     if (formData.title?.length >= 101) {
-       istitleValid = false;
-       setShowtitleErr(true);
-       settitleErr("The Title is too long, the max is 100 characters");
-     } else {
-       istitleValid = true;
-       setShowtitleErr(false);
-     }
-     return(istitleValid && isTitleValid);
+  const title = () => {
+    //////////////////////////////////////////// 0length
+    let isTitleValid = false;
+    if (
+      !formData.title ||
+      formData.title?.length <= 1
+
+    ) {
+      isTitleValid = false;
+      setShowTitleErr(true);
+      setTitleErr("Field is missing or invalid!");
+    } else {
+      isTitleValid = true;
+      setShowTitleErr(false);
+    }
+    ////////////////////////////////////////////////
+    let istitleValid = false;
+    if (formData.title?.length >= 101) {
+      istitleValid = false;
+      setShowtitleErr(true);
+      settitleErr("The Title is too long, the max is 100 characters");
+    } else {
+      istitleValid = true;
+      setShowtitleErr(false);
+    }
+    return (istitleValid && isTitleValid);
   }
-  const location =()=>{
+  const location = () => {
     let isLocationValid = false;
     if (formData.Location?.length >= 101) {
       isLocationValid = false;
@@ -205,36 +213,36 @@ export default function Posts() {
     let islocation2Valid = false;
     if (
       !formData.Location ||
-      formData.Location?.length <= 1 
-    
+      formData.Location?.length <= 1
+
     ) {
       islocation2Valid = false;
       setShowlocation2Err(true);
-     setlocation2Err("Field is missing or invalid!");
+      setlocation2Err("Field is missing or invalid!");
     } else {
       islocation2Valid = true;
       setShowlocation2Err(false);
     }
-      return(isLocationValid&&islocation2Valid);
+    return (isLocationValid && islocation2Valid);
   }
-  const radio =()=>{
+  const radio = () => {
     //////////////////////////////////////////// 0length
     let isRadioValid = false;
     if (
-      formData.isLost==null 
-    
+      formData.isLost == null
+
     ) {
       isRadioValid = false;
       setShowRadioErr(true);
-     setRadioErr("Field is missing or invalid!");
+      setRadioErr("Field is missing or invalid!");
     } else {
       isRadioValid = true;
       setShowRadioErr(false);
     }
-    return(isRadioValid);
+    return (isRadioValid);
   }
-  const brand =()=>{ 
-    
+  const brand = () => {
+
     let isbrandValid = false;
     if (formData.brand?.length >= 31) {
       isbrandValid = false;
@@ -244,12 +252,12 @@ export default function Posts() {
       isbrandValid = true;
       setShowbrandErr(false);
     }
-    return(isbrandValid);
+    return (isbrandValid);
   }
 
 
 
-  
+
 
   const handleshow = (
     event //function to handle show fields based on category selection
@@ -269,7 +277,7 @@ export default function Posts() {
             Post Your ad
           </h3>
 
-        
+
 
           <hr />
           <h4 htmlFor="category">Select Category</h4>
@@ -353,19 +361,19 @@ export default function Posts() {
               <FormControl />
             </div>
           )}
-            {showhide === "Other" && (
-                <div className="electronicsubcategory">
-                <h6 htmlFor="category">Select Category</h6>
-                <select
-                  name="subcategory"
-                  onChange={setValue}
-                  required
-                  className="form-select"
-                  aria-label="Default select example"
-                > 
-                  <option selected disabled value="Other">Select Category</option>
-                  <option  value="Other">Other</option>
-                </select>
+          {showhide === "Other" && (
+            <div className="electronicsubcategory">
+              <h6 htmlFor="category">Select Category</h6>
+              <select
+                name="subcategory"
+                onChange={setValue}
+                required
+                className="form-select"
+                aria-label="Default select example"
+              >
+                <option selected disabled value="Other">Select Category</option>
+                <option value="Other">Other</option>
+              </select>
             </div>
           )}
 
@@ -444,17 +452,17 @@ export default function Posts() {
               />
             </RadioGroup>
           </FormControl>
- 
-{/*  */}
-{showRadioErr && (
+
+          {/*  */}
+          {showRadioErr && (
             <Box className="err-msg">
               <Typography color="red" variant="caption" gutterBottom>
                 {RadioErr}
               </Typography>
             </Box>
-          )}     
-  
-{/*  */}
+          )}
+
+          {/*  */}
 
           <TextField
             name="title"
@@ -475,7 +483,7 @@ export default function Posts() {
                 {TitleErr}
               </Typography>
             </Box>
-          )}     
+          )}
 
           {showtitleErr && (
             <Box className="err-msg">
@@ -508,8 +516,8 @@ export default function Posts() {
                 {TitleErr}
               </Typography>
             </Box>
-          )}     
-  
+          )}
+
 
           {showdescErr && (
             <Box className="err-msg">
@@ -534,7 +542,7 @@ export default function Posts() {
             multiple
           />
           {/* Details Section */}
-          <h3>           
+          <h3>
             Item location (Click And Drag The Marker Or Search By Location Name)
           </h3>
           <Location seTCoordinates={seTCoordinates} ></Location>
@@ -546,8 +554,8 @@ export default function Posts() {
             name="Location"
             onChange={setValue}
 
-            onBlur={()=> setFormData({ ...formData, longitude: long, latitude: lat })}
-            onMouseOver={()=>setFormData({ ...formData, longitude: long, latitude: lat })}
+            onBlur={() => setFormData({ ...formData, longitude: long, latitude: lat })}
+            onMouseOver={() => setFormData({ ...formData, longitude: long, latitude: lat })}
             required
             maxLength="20"
             fullWidth
@@ -563,8 +571,8 @@ export default function Posts() {
                 {TitleErr}
               </Typography>
             </Box>
-          )}     
-  
+          )}
+
           {showLocationErr && (
             <Box className="err-msg">
               <Typography color="red" variant="caption" gutterBottom>
@@ -586,12 +594,12 @@ export default function Posts() {
                   newDate = getFormattedDate(newDate);
                   setDate(newDate);
                   setFormData({ ...formData, date: newDate });
-                     
+
                   console.log(formData);
                 }}
 
-                
-                
+
+
                 renderInput={(params) => <TextField {...params} />}
               />
             </Stack>
@@ -633,8 +641,8 @@ export default function Posts() {
             required
           /> */}
 
-           {/*  */}
-           {showValidationErr && (
+          {/*  */}
+          {showValidationErr && (
             <center>
               <Box width="300px">
                 <Alert severity="error">
@@ -643,7 +651,7 @@ export default function Posts() {
               </Box>
             </center>
           )}
-      {/*  */}
+          {/*  */}
 
 
           <div className="d-grid gap-2 " >
