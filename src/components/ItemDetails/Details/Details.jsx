@@ -11,10 +11,14 @@ import useClaims from "../../../hooks/useClaims"
 export default function Details(props) {
 
 const {handleNewChat} = useContext(ChatContext);  
-
  const selectedItem=props.item;
+const {userId}=useClaims();
 
- const {userId}=useClaims();
+//Date...
+const  inputDate=selectedItem.date;
+
+const date=new Date(inputDate).toLocaleDateString();
+const time=new Date(inputDate).toLocaleTimeString();
 
 
 
@@ -30,7 +34,8 @@ const {handleNewChat} = useContext(ChatContext);
       <h4>{selectedItem.superCategory}/{selectedItem.subCategory}</h4>
         <div className={`ms-4 t ${DetailsStyle.subContainer}`}>
               <p> <strong>Title: </strong>{selectedItem.title}</p>
-              <p> <strong>Date: </strong>{selectedItem.date}</p>
+              <p> <strong>Date: </strong>{date}</p>
+              <p> <strong>Publish Time: </strong>{time}</p>
               <div className={`${DetailsStyle.fontDetails} ${DetailsStyle.location}`}><p className={` ${DetailsStyle.location}`}> <strong>Location: </strong>{selectedItem.location}</p></div>
          </div>
   </div>
