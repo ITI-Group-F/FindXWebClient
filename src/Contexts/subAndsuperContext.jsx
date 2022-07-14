@@ -34,24 +34,23 @@ export const SubAndSuperData = (props) => {
     , [])
 
   useEffect(() => {
-    if (didMountSuper) {
+    
 
       GetSuperCategories();
-    }
+    
 
-    setDidMountSuper(true);
+    
 
   }, [superKey])
 
   useEffect(() => {
 
-    if (didMountSub) {
+   
 
       GetSubCategories();
-    }
-    //
+   
 
-    setDidMountSub(true);
+   
 
   }, [subKey])
 
@@ -76,14 +75,16 @@ export const SubAndSuperData = (props) => {
   };
 
   const GetSubCategories = () => {
+    console.log("hiiiiiiiiiiiii");
     setSubLoading(true)
     try {
+      console.log("again");
       //allItems.prev = underSubData;
       const data = async () => {
         const back = await API.get(`/Items/undersub/${subKey}`).then(
           (response) => response.data
         );
-        //console.log(back);
+        console.log(back);
         setunderSubData(back);
         setSubLoading(false);
       };
@@ -97,8 +98,10 @@ export const SubAndSuperData = (props) => {
 
   let SetSubCat = (e) => {
     if (typeof e === 'string') {
+      console.log(e);
       setsubKey(e);
     } else {
+      console.log(e);
       setsubKey(e.target.value);
     }
     setsuperKey(null);
@@ -106,9 +109,11 @@ export const SubAndSuperData = (props) => {
 
   let SetSuperCat = (e) => {
     if (typeof e === 'string') {
-      setsuperKey(e);
-    } else {
-      setsuperKey(e.target.value);
+   console.log(e);
+   setsuperKey(e);
+  } else {
+    setsuperKey(e.target.value);
+    console.log(e);
     }
     setsubKey(null);
   }

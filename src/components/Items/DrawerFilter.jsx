@@ -54,7 +54,7 @@ const DrawerFilter = () => {
         SetSuperCat(superCategory);
     }
 
-    const handleSupClick = (event) => {
+    const handleSubClick = (event) => {
         event.preventDefault();
         const supCategory = event.target.innerText;
         SetSubCat(supCategory);
@@ -63,7 +63,7 @@ const DrawerFilter = () => {
     const supCategoriesList = () => {
         return <>
             <ListItem key={'Tablets'} disablePadding>
-                <ListItemButton onClick={handleSuperClick}>
+                <ListItemButton onClick={handleSubClick}>
                     <ListItemIcon>
                         <TabletMacIcon />
                     </ListItemIcon>
@@ -72,7 +72,7 @@ const DrawerFilter = () => {
             </ListItem>
 
             <ListItem key={'Mobiles'} disablePadding>
-                <ListItemButton onClick={handleSuperClick}>
+                <ListItemButton onClick={handleSubClick}>
                     <ListItemIcon>
                         <PhoneIphoneIcon />
                     </ListItemIcon>
@@ -81,7 +81,7 @@ const DrawerFilter = () => {
             </ListItem>
 
             <ListItem key={'Laptops'} disablePadding>
-                <ListItemButton onClick={handleSuperClick}>
+                <ListItemButton onClick={handleSubClick}>
                     <ListItemIcon>
                         <LaptopMacIcon />
                     </ListItemIcon>
@@ -90,7 +90,7 @@ const DrawerFilter = () => {
             </ListItem>
 
             <ListItem key={'Birds'} disablePadding>
-                <ListItemButton onClick={handleSuperClick}>
+                <ListItemButton onClick={handleSubClick}>
                     <ListItemIcon>
                         <FontAwesomeIcon icon={faDove} />
                     </ListItemIcon>
@@ -99,7 +99,7 @@ const DrawerFilter = () => {
             </ListItem>
 
             <ListItem key={'Cats'} disablePadding>
-                <ListItemButton onClick={handleSuperClick}>
+                <ListItemButton onClick={handleSubClick}>
                     <ListItemIcon>
                         <PetsIcon />
                     </ListItemIcon>
@@ -109,7 +109,7 @@ const DrawerFilter = () => {
 
 
             <ListItem key={'Dogs'} disablePadding>
-                <ListItemButton onClick={handleSuperClick}>
+                <ListItemButton onClick={handleSubClick}>
                     <ListItemIcon>
                         <PetsIcon />
                     </ListItemIcon>
@@ -118,7 +118,7 @@ const DrawerFilter = () => {
             </ListItem>
 
             <ListItem key={'Personal cards and papers'} disablePadding>
-                <ListItemButton onClick={handleSuperClick}>
+                <ListItemButton onClick={handleSubClick}>
                     <ListItemIcon>
                         <RecentActorsIcon />
                     </ListItemIcon>
@@ -127,7 +127,7 @@ const DrawerFilter = () => {
             </ListItem>
 
             <ListItem key={'Wallets'} disablePadding>
-                <ListItemButton onClick={handleSuperClick}>
+                <ListItemButton onClick={handleSubClick}>
                     <ListItemIcon>
                         <AccountBalanceWalletIcon />
                     </ListItemIcon>
@@ -136,7 +136,7 @@ const DrawerFilter = () => {
             </ListItem>
 
             <ListItem key={'Glasses'} disablePadding>
-                <ListItemButton onClick={handleSuperClick}>
+                <ListItemButton onClick={handleSubClick}>
                     <ListItemIcon>
                         <FontAwesomeIcon icon="fa-solid fa-glasses" />
                     </ListItemIcon>
@@ -145,7 +145,7 @@ const DrawerFilter = () => {
             </ListItem>
 
             <ListItem key={'Money'} disablePadding>
-                <ListItemButton onClick={handleSuperClick}>
+                <ListItemButton onClick={handleSubClick}>
                     <ListItemIcon>
                         <AttachMoneyIcon />
                     </ListItemIcon>
@@ -154,7 +154,7 @@ const DrawerFilter = () => {
             </ListItem>
 
             <ListItem key={'Bags'} disablePadding>
-                <ListItemButton onClick={handleSuperClick}>
+                <ListItemButton onClick={handleSubClick}>
                     <ListItemIcon>
                         <BusinessCenterIcon />
                     </ListItemIcon>
@@ -163,7 +163,7 @@ const DrawerFilter = () => {
             </ListItem>
 
             <ListItem key={'Accessories'} disablePadding>
-                <ListItemButton onClick={handleSuperClick}>
+                <ListItemButton onClick={handleSubClick}>
                     <ListItemIcon>
                         <EarbudsBatteryIcon />
                     </ListItemIcon>
@@ -172,7 +172,7 @@ const DrawerFilter = () => {
             </ListItem>
 
             <ListItem key={'Other'} disablePadding>
-                <ListItemButton onClick={handleSuperClick}>
+                <ListItemButton onClick={handleSubClick}>
                     <ListItemIcon>
                         <HelpCenterIcon />
                     </ListItemIcon>

@@ -46,10 +46,14 @@
 }
 .chatcontainer {
   position: relative;
-  top: 38%;
+  
   left: 50%;
   width: 100%;
-  height: 75%;
+  
+  bottom: 0px;
+  height: 531px;
+  top: 261px;
+
   background-color: var(--white);
   transform: translate(-50%, -50%);
 
@@ -235,12 +239,12 @@
     }
     .write {
       position: absolute;
-      bottom: 10px;
+      bottom: 40px;
       left: 20px;
       height: 42px;
       padding-left: 8px;
       border: 1px solid var(--light);
-      background-color: #eceff1;
+      background-color: #eceff193 ;
       width: calc(100% - 58px);
       border-radius: 5px;
       display: flex;
@@ -252,7 +256,7 @@
         color: var(--dark);
         border: 0;
         outline: none;
-        background-color: #eceff1;
+        background-color: #ECEFF1;
         @include font;
         flex: 1;
       }
