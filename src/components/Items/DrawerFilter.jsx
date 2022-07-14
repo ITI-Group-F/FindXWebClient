@@ -241,7 +241,7 @@ const DrawerFilter = () => {
 
     return (
         <div>
-            {['☰'].map((anchor) => (
+            {['☰ Filters'].map((anchor) => (
                 <React.Fragment key={anchor}>
                     <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
                     <Drawer
