@@ -21,13 +21,14 @@ import ActionAreaCard from "./allItems";
 import subAndSuperContext from "../../Contexts/subAndsuperContext";
 import Filters from "./filters";
 import noAdds from "./../../images/myadds.webp";
-import {useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import DrawerFilter from "./DrawerFilter";
 
 //////////////////////////////////
 
 function SubAndSuperItems(props) {
   let navigate = useNavigate();
-  let {para} = useParams();
+  let { para } = useParams();
 
   let {
     SetSubCat,
@@ -41,30 +42,31 @@ function SubAndSuperItems(props) {
     underSubData,
     underSuperData,
   } = useContext(subAndSuperContext);
-  
+
 
   let renderAllItemsBtn = () => {
     navigate("/items");
   };
   console.log(subKey);
-//  console.log(superKey);
+  //  console.log(superKey);
   console.log(underSubData);
 
   if (subKey !== null) {
     return (
       <div>
-        <Filters />
-        
-        <button 
-              name="submit"
-              style={{width: "200px", display:"block" ,margin:"auto"}}
-              onClick={() => {
-                renderAllItemsBtn();
-              }}
-              className="btn btn-success"
-            >
-              View All Items
-            </button>
+        <DrawerFilter />
+        {/* <Filters /> */}
+
+        <button
+          name="submit"
+          style={{ width: "200px", display: "block", margin: "auto" }}
+          onClick={() => {
+            renderAllItemsBtn();
+          }}
+          className="btn btn-success"
+        >
+          View All Items
+        </button>
         {subLoading ? (
           <Loading />
         ) : underSubData === [] ? (
@@ -83,7 +85,8 @@ function SubAndSuperItems(props) {
   } else if (superKey !== null) {
     return (
       <div>
-        <Filters />
+        <DrawerFilter />
+        {/* <Filters /> */}
         {/* <button
           onClick={() => {
             renderAllItemsBtn();
@@ -92,15 +95,15 @@ function SubAndSuperItems(props) {
           View All Items
         </button> */}
         <button
-            style={{width: "200px", display:"block" , margin:"auto"}}
-              name="submit"
-              onClick={() => {
-                renderAllItemsBtn();
-              }}
-              className="btn btn-success"
-            >
-              View All Items
-            </button>
+          style={{ width: "200px", display: "block", margin: "auto" }}
+          name="submit"
+          onClick={() => {
+            renderAllItemsBtn();
+          }}
+          className="btn btn-success"
+        >
+          View All Items
+        </button>
         {superLoading ? (
           <Loading />
         ) : underSuperData === [] ? (

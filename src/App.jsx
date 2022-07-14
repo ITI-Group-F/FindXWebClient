@@ -24,6 +24,7 @@ import Home from "./pages/Home";
 import SubAndSuperItems from "./components/Items/subAndSuperItems";
 import SearchResults from "./components/Items/searchResults";
 import ImageResult from "./components/Items/ImageResult";
+import LoggedInRoute from "./routes/LoggedInRoute";
 
 function App() {
   return (
@@ -33,7 +34,7 @@ function App() {
         <BackTop />
         <Navbar></Navbar>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<LoggedInRoute><Home /></LoggedInRoute>} />
           <Route path="search-by-img" element={<ImageResult />} />
           <Route path="details" element={<ItemDetailsPage />} />
           <Route path="auth/*" element={<AuthModule />} />

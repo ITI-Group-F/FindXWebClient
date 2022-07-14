@@ -5,9 +5,9 @@ import { useNavigate } from "react-router-dom";
 ///////////////////////////////////////////////////////////  
 const subAndSuperContext = createContext();
 
-  export const SubAndSuperData = (props)=>{
-    const {children} = props;
-      let [subKey, setsubKey] = useState(null);
+export const SubAndSuperData = (props) => {
+  const { children } = props;
+  let [subKey, setsubKey] = useState(null);
   let [superKey, setsuperKey] = useState(null);
   let [underSubData, setunderSubData] = useState([]);
   let [underSuperData, setunderSuperData] = useState([]);
@@ -17,64 +17,66 @@ const subAndSuperContext = createContext();
   const [didMountSuper, setDidMountSuper] = useState(false);
   let navigate = useNavigate();
 
-  
+
   //////////////////////////////////////////////////
 
-useEffect(() => { 
-    
-    setDidMountSub(true) }
-  
-  , [])
-useEffect(() => { 
-  
-    setDidMountSuper(true) }
-    
-  , [])
-  
   useEffect(() => {
-      if (didMountSuper){
 
-        GetSuperCategories();
-      } 
-      
-      setDidMountSuper(true);
-      
-      }, [superKey])
-      
-      useEffect(() => {
-          
-        if (didMountSub){
-
-          GetSubCategories();
-        } 
-  //
-  
-    setDidMountSub(true);
-  
-}, [subKey])
-
-const GetSuperCategories = () => {
-  setSuperLoading(true);
-
-  try {
-    const data = async () => {
-      const back = await API.get(`/Items/undersup/${superKey}`).then(
-        (response) => response.data
-      );
-      //console.log(back);
-      setunderSuperData(back);
-      setSuperLoading(false);      
-    };
-    data();
-  } catch (error) {
-    console.log(error + "from (/Items/undersuper) endpoint");
+    setDidMountSub(true)
   }
-  navigate(`/subandsupercategories/${superKey}`);
 
-};
+    , [])
+  useEffect(() => {
 
-const GetSubCategories = () => {
-  setSubLoading(true)
+    setDidMountSuper(true)
+  }
+
+    , [])
+
+  useEffect(() => {
+    if (didMountSuper) {
+
+      GetSuperCategories();
+    }
+
+    setDidMountSuper(true);
+
+  }, [superKey])
+
+  useEffect(() => {
+
+    if (didMountSub) {
+
+      GetSubCategories();
+    }
+    //
+
+    setDidMountSub(true);
+
+  }, [subKey])
+
+  const GetSuperCategories = () => {
+    setSuperLoading(true);
+
+    try {
+      const data = async () => {
+        const back = await API.get(`/Items/undersup/${superKey}`).then(
+          (response) => response.data
+        );
+        //console.log(back);
+        setunderSuperData(back);
+        setSuperLoading(false);
+      };
+      data();
+    } catch (error) {
+      console.log(error + "from (/Items/undersuper) endpoint");
+    }
+    navigate(`/subandsupercategories/${superKey}`);
+
+  };
+
+  const GetSubCategories = () => {
+    setSubLoading(true)
     try {
       //allItems.prev = underSubData;
       const data = async () => {
@@ -92,20 +94,26 @@ const GetSubCategories = () => {
     navigate(`/subandsupercategories/${subKey}`);
 
   };
-  
+
   let SetSubCat = (e) => {
-    setsubKey(e.target.value);
+    if (typeof e === 'string') {
+      setsubKey(e);
+    } else {
+      setsubKey(e.target.value);
+    }
     setsuperKey(null);
-    
-    
   }
-  
+
   let SetSuperCat = (e) => {
-    setsuperKey(e.target.value);
+    if (typeof e === 'string') {
+      setsuperKey(e);
+    } else {
+      setsuperKey(e.target.value);
+    }
     setsubKey(null);
   }
 
-  let contextValue= useMemo(()=>({
+  let contextValue = useMemo(() => ({
     underSubData,
     underSuperData,
     SetSubCat,
@@ -118,8 +126,8 @@ const GetSubCategories = () => {
     subLoading,
     setSuperLoading,
     setSubLoading
-    
-  }),[underSubData,
+
+  }), [underSubData,
     underSuperData,
     SetSubCat,
     SetSuperCat,
@@ -131,14 +139,14 @@ const GetSubCategories = () => {
     subLoading,
     setSuperLoading,
     setSubLoading
-    
-    ])
+
+  ])
 
   return (
     <subAndSuperContext.Provider value={contextValue}>
-        {children}
+      {children}
     </subAndSuperContext.Provider>
   )
 
-    };
-    export default  subAndSuperContext ;
+};
+export default subAndSuperContext;

@@ -7,6 +7,7 @@ import subAndSuperContext from "../../Contexts/subAndsuperContext";
 import Filters from "./filters";
 import Loading from "../Loading";
 import noAdds from "./../../images/myadds.webp";
+import DrawerFilter from "./DrawerFilter";
 
 function SearchResults() {
   let {
@@ -28,7 +29,8 @@ function SearchResults() {
 
   return (
     <div>
-      <Filters />
+      <DrawerFilter />
+      {/* <Filters /> */}
       {/* <button
         onClick={() => {
           renderAllItemsBtn();
@@ -36,17 +38,17 @@ function SearchResults() {
       >
         View All Items
       </button> */}
-      
-            <button
-            style={{width: "200px",display:"block" , margin:"auto"}}
-              name="submit"
-              onClick={() => {
-                renderAllItemsBtn();
-              }}
-              className="btn btn-success"
-            >
-              View All Items
-            </button>
+
+      <button
+        style={{ width: "200px", display: "block", margin: "auto" }}
+        name="submit"
+        onClick={() => {
+          renderAllItemsBtn();
+        }}
+        className="btn btn-success"
+      >
+        View All Items
+      </button>
       <br />
       {searchLoading ? (
         <Loading />
