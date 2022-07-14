@@ -37,7 +37,7 @@
   position: relative;
   left: 50%;
   width: var(--wrapper);
-  height: 800px;
+  min-height: 800px;
   transform: translate(-50%, 0);
   @include font;
   -webkit-font-smoothing: antialiased;

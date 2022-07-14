@@ -1,4 +1,4 @@
-import React, { createContext, useMemo, useEffect, useState, useCallback} from "react";
+import React, { createContext, useMemo, useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../Services/api";
 import { HubConnectionBuilder } from "@microsoft/signalr";
@@ -27,7 +27,7 @@ const ChatContextProvider = ({ children }) => {
       const response = await API.get(`/chathistory/${userId}`);
       setConversations(response.data);
       setNumberOfNotifications(countNotifications(response.data, userId));
-     
+
     } catch (error) {
       setConversations([]);
     }
@@ -43,7 +43,7 @@ const ChatContextProvider = ({ children }) => {
         setPosterDetails({ id: response.data.userId, fullName: response.data.itemPosterFullName })
         navigate('/chat/messanger');
       });
-  },[]);
+  }, []);
 
 
   useEffect(() => {
@@ -62,6 +62,7 @@ const ChatContextProvider = ({ children }) => {
       });
   }, []);
 
+
   const contextValue = useMemo(
     () => ({
       conversations,
@@ -70,14 +71,17 @@ const ChatContextProvider = ({ children }) => {
       numberOfNotifications,
       upDateChatData,
       handleNewChat,
-      PosterDetails
+      PosterDetails,
+      setNumberOfNotifications
     }),
-    [connection, 
-      userId, 
-      conversations, 
+    [connection,
+      userId,
+      conversations,
       numberOfNotifications,
-       upDateChatData,handleNewChat,
-       PosterDetails]
+      upDateChatData, 
+      handleNewChat,
+      PosterDetails,
+      setNumberOfNotifications]
   );
 
   return (
