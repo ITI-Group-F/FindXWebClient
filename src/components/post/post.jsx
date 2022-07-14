@@ -66,8 +66,11 @@ export default function Posts() {
         
     setFormData({ ...formData, [name]: value });
      
- 
-    validatedesc();
+    title();
+    description();
+    brand();
+    radio();
+    location();
   };
 
   const getFormattedDate = (date) => {
@@ -84,7 +87,7 @@ export default function Posts() {
 
 
   const submitFormData = () => {
-    if (validatedesc()) {
+    if (title()&&description()&&location()&&brand()&&radio()) {
       setApiFormData(new FormData());
 
       setFormData({ ...formData, longitude: long, latitude: lat });
@@ -131,7 +134,9 @@ export default function Posts() {
     }
   };
 
-  const validatedesc = () => {
+  
+
+  const description =()=>{
     let isdescValid = false;
     if (formData.description?.length >= 200) {
       isdescValid = false;
@@ -141,34 +146,6 @@ export default function Posts() {
       isdescValid = true;
       setShowdescErr(false);
     }
-
-    //////////////////////////////////////////// 0length
-    let isTitleValid = false;
-    if (
-      !formData.title ||
-      formData.title?.length <= 1 
-    
-    ) {
-      isTitleValid = false;
-      setShowTitleErr(true);
-     setTitleErr("Field is missing or invalid!");
-    } else {
-      isTitleValid = true;
-      setShowTitleErr(false);
-    }
-       //////////////////////////////////////////// 0length
-       let isRadioValid = false;
-       if (
-         formData.isLost==null 
-       
-       ) {
-         isRadioValid = false;
-         setShowRadioErr(true);
-        setRadioErr("Field is missing or invalid!");
-       } else {
-         isRadioValid = true;
-         setShowRadioErr(false);
-       }
     //////////////////////////////////////////////// 0length
     let isDescriptionValid = false;
     if (
@@ -183,6 +160,46 @@ export default function Posts() {
       isDescriptionValid = true;
       setShowdescriptionErr(false);
     }
+    return(isdescValid&&isDescriptionValid);
+  }
+  const title =()=>{
+        //////////////////////////////////////////// 0length
+        let isTitleValid = false;
+        if (
+          !formData.title ||
+          formData.title?.length <= 1 
+        
+        ) {
+          isTitleValid = false;
+          setShowTitleErr(true);
+         setTitleErr("Field is missing or invalid!");
+        } else {
+          isTitleValid = true;
+          setShowTitleErr(false);
+        }
+     ////////////////////////////////////////////////
+     let istitleValid = false;
+     if (formData.title?.length >= 101) {
+       istitleValid = false;
+       setShowtitleErr(true);
+       settitleErr("The Title is too long, the max is 100 characters");
+     } else {
+       istitleValid = true;
+       setShowtitleErr(false);
+     }
+     return(istitleValid && isTitleValid);
+  }
+  const location =()=>{
+    let isLocationValid = false;
+    if (formData.Location?.length >= 101) {
+      isLocationValid = false;
+      setShowLocationErr(true);
+      setLocationErr("The Location is too long, the max is 100 characters");
+    } else {
+      isLocationValid = true;
+      setShowLocationErr(false);
+    }
+
     /////////////////////////////////////////////////0length
     let islocation2Valid = false;
     if (
@@ -197,18 +214,26 @@ export default function Posts() {
       islocation2Valid = true;
       setShowlocation2Err(false);
     }
-    ////////////////////////////////////////////////
-    let istitleValid = false;
-    if (formData.title?.length >= 101) {
-      istitleValid = false;
-      setShowtitleErr(true);
-      settitleErr("The Title is too long, the max is 100 characters");
+      return(isLocationValid&&islocation2Valid);
+  }
+  const radio =()=>{
+    //////////////////////////////////////////// 0length
+    let isRadioValid = false;
+    if (
+      formData.isLost==null 
+    
+    ) {
+      isRadioValid = false;
+      setShowRadioErr(true);
+     setRadioErr("Field is missing or invalid!");
     } else {
-      istitleValid = true;
-      setShowtitleErr(false);
+      isRadioValid = true;
+      setShowRadioErr(false);
     }
-    ////////////////////////////////////////////////
-
+    return(isRadioValid);
+  }
+  const brand =()=>{ 
+    
     let isbrandValid = false;
     if (formData.brand?.length >= 31) {
       isbrandValid = false;
@@ -218,29 +243,12 @@ export default function Posts() {
       isbrandValid = true;
       setShowbrandErr(false);
     }
+    return(isbrandValid);
+  }
 
-    ////////////////////////////////////////////////
-    let isLocationValid = false;
-    if (formData.Location?.length >= 101) {
-      isLocationValid = false;
-      setShowLocationErr(true);
-      setLocationErr("The Location is too long, the max is 100 characters");
-    } else {
-      isLocationValid = true;
-      setShowLocationErr(false);
-    }
 
-    return (
-      isdescValid &&
-      isTitleValid &&
-      istitleValid &&
-      isbrandValid &&
-      isLocationValid&&
-      isDescriptionValid&&
-      islocation2Valid&&
-      isRadioValid 
-    );
-  };
+
+  
 
   const handleshow = (
     event //function to handle show fields based on category selection
@@ -536,6 +544,7 @@ export default function Posts() {
           <TextField
             name="Location"
             onChange={setValue}
+
             onBlur={()=> setFormData({ ...formData, longitude: long, latitude: lat })}
             onMouseOver={()=>setFormData({ ...formData, longitude: long, latitude: lat })}
             required
@@ -636,7 +645,7 @@ export default function Posts() {
       {/*  */}
 
 
-          <div className="d-grid gap-2">
+          <div className="d-grid gap-2 mb-3" >
             <button
               name="submit"
               onClick={submitFormData}
