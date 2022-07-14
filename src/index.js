@@ -18,10 +18,10 @@ import { ChatContextProvider } from "./Contexts/ChatContext";
 axios.interceptors.request.use(
     function(config) {
         // Do something before request is sent
-        const token=sessionStorage.getItem("token").replaceAll('"', '');
-        config.headers.Authorization = `Bearer ${token}`;
+        // const token=sessionStorage.getItem("token").replaceAll('"', '');
+        // config.headers.Authorization = `Bearer ${token}`;
         // console.log(token.)
-        console.log(config.headers.Authorization)
+        // console.log(config.headers.Authorization)
 	
         console.log("inside interceptor");
         return config;
