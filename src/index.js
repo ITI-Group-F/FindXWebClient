@@ -18,7 +18,7 @@ import { ChatContextProvider } from "./Contexts/ChatContext";
 axios.interceptors.request.use(
     function(config) {
        // Do something before request is sent
-        const token=sessionStorage.getItem("token").replaceAll('"', '');
+        const token=sessionStorage.getItem("token")?.replaceAll('"', '');
         if(token){
 
             config.headers.Authorization = `Bearer ${token}`;
