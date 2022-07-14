@@ -17,13 +17,13 @@ import { ChatContextProvider } from "./Contexts/ChatContext";
 
 axios.interceptors.request.use(
     function(config) {
-        // Do something before request is sent
-        // const token=sessionStorage.getItem("token").replaceAll('"', '');
-        // config.headers.Authorization = `Bearer ${token}`;
-        // console.log(token.)
-        // console.log(config.headers.Authorization)
+       // Do something before request is sent
+        const token=sessionStorage.getItem("token").replaceAll('"', '');
+        if(token){
+
+            config.headers.Authorization = `Bearer ${token}`;
+        }
 	
-        console.log("inside interceptor");
         return config;
     },
     function(error) {
