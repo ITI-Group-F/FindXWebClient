@@ -14,6 +14,7 @@ import {
   FormLabel,
 } from "@mui/material";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./post.css";
 import Location from "../getlocation/Location";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -255,7 +256,7 @@ export default function Posts() {
         {/* {spinner ? (
             <Spinner className="post__spinner" type="grow" color="info" />
           ) : ( */}
-        <div className="col-lg-6 col-md-6 col-12 shadow">
+        <div className="col-lg-6 col-md-6 col-12 shadow addPostMargin" >
           <h3 className="text-center text-uppercase pt-3  pb-3 text-underline shadow">
             Post Your ad
           </h3>
@@ -640,7 +641,7 @@ export default function Posts() {
             <button
               name="submit"
               onClick={submitFormData}
-              className="btn btn-success"
+              className="btn btn-success addPostMargin "
             >
               Post Now
             </button>
