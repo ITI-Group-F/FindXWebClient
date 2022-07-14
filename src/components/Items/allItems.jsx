@@ -19,7 +19,13 @@ let navigate= useNavigate();
   return (
     <div className="containerAllItems">
       {props.allItemsData.map((res) => {
-        let description = res.description.substring(0, 18).concat("...");
+
+let description = res.description.substring(0, 80)
+        if (res.description.length > 80) {
+          description.concat("...");
+        }
+      
+        
         let title =
           res.title.length > 18
             ? res.title.substring(0, 18).concat("...")
