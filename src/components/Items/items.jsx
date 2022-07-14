@@ -10,6 +10,7 @@ import Filters from "./filters";
 import SubAndSuperItems from "./subAndSuperItems";
 import SearchResults from "./searchResults";
 import noAdds from "./../../images/myadds.webp";
+import DrawerFilter from "./DrawerFilter";
 
 //---------------------------------------------------------------------------------------
 
@@ -140,7 +141,8 @@ console.log("super " + superLoading); */
 
   return (
     <div>
-      <Filters />
+      <DrawerFilter />
+      {/* <Filters /> */}
       <br />
       {allItems === [] ? (
         <img
