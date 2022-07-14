@@ -10,9 +10,8 @@ class Footer extends Component {
     render() {
         return ( 
 
-            <div>
-
-<table style={{marginTop:"auto",  border: "1px solid white", borderCollapse: "collapse", width: "100%"  }}>
+        
+<table style={{  border: "1px solid white", borderCollapse: "collapse", width: "100%", marginTop:"auto"  }}>
         
 
             
@@ -39,7 +38,7 @@ class Footer extends Component {
     </table>
 
                 
-            </div>
+        
          )
 
                   

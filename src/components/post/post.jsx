@@ -646,7 +646,7 @@ export default function Posts() {
       {/*  */}
 
 
-          <div className="d-grid gap-2 mb-3" >
+          <div className="d-grid gap-2 " >
             <button
               name="submit"
               onClick={submitFormData}

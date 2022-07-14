@@ -65,15 +65,21 @@ function MyAds() {
   console.log(filteredData, "userHaveProducts");
 
   return (
-    <div className="" style={{marginLeft:"1rem",marginRight:"1rem" }}>
+    <div className="" style={{marginLeft:"1rem",marginRight:"1rem"  }}>
       {filteredData.length != 0 ? (
         <div className="container-fluid mx-3">
           <h2 className="text-dark ml-2">Your Ads</h2>
-          <div className="row productRow">
+          <div className="row productRow" >
             
-          <div className="container"    >
-      {filteredData.map((res) => {
-        let description = res.description.substring(0, 18).concat("...");
+          <div className="container"  >
+          {filteredData.map((res) => {
+
+let description = res.description.substring(0, 80)
+        if (res.description.length > 80) {
+          description.concat("...");
+        }
+      
+        
         let title =
           res.title.length > 18
             ? res.title.substring(0, 18).concat("...")
@@ -95,11 +101,12 @@ function MyAds() {
 
         return (
           <div key={res.id}  >
-          <div className="card">
-            
+          <div className="card" style={{marginRight:"25px"}}>
+            <NavLink to={`/details/${res.id}`}>
             <div className="card-header">
-              <img src={`data:image/jpeg;base64,${res.images[0]}`} alt={res.date} />
+              <img src={`data:image/jpeg;base64,${res.images[0]}`} alt=" " />
             </div>
+            </NavLink>
             <div className="card-body">
               <span className="tag tag-teal">{res.superCategory}</span>
               <h4>
@@ -112,10 +119,9 @@ function MyAds() {
               <Button sx={{borderRadius:"50px", display:"inline-flex"}} onClick={()=>{navigate(`/details/${res.id}`)}} variant="contained" color="success">
               Details
               </Button>
-                        <span className="span"> item condition</span>
+                        <span className="spanAllItems">item condition</span>
                 </div>
-                        <div class="tags">
-
+                        <div className="tags">
               <p style={itemConditionColor()}>{itemCondition()}</p>
                          
 
