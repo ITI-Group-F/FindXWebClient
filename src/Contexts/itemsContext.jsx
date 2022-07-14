@@ -26,9 +26,11 @@ export const ItemsProvider = (props) => {
   let [allItems, setAllItems] = useState([]);
   let [allItemsLoading, setAllItemsLoading] = useState(true);
 
+
+
   useEffect(() => {
     setAllItemsLoading(true);
-
+  
     try {
       const data = async () => {
         const back = await API.get(`/items/all`).then(
@@ -62,6 +64,7 @@ export const ItemsProvider = (props) => {
       allItems,
       getItemById,
       setAllItems,
+
     }),
     [allItems, getItemById, setAllItems]
   );

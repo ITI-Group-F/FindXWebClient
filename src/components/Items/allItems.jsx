@@ -10,12 +10,16 @@ import Stack from "@mui/material/Stack";
 import { deepPurple } from "@mui/material/colors";
 import { NavLink,useNavigate } from "react-router-dom";
 import Button from '@mui/material/Button';
+import { useState } from "react";
+import { useEffect } from "react";
 
 ///////////////////////////////////////////////////
 
 export default function ActionAreaCard(props) {
 let navigate= useNavigate();
   console.log(props);
+
+
   return (
     <div className="containerAllItems">
       {props.allItemsData.map((res) => {

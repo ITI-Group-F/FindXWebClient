@@ -15,7 +15,7 @@ import DrawerFilter from "./DrawerFilter";
 //---------------------------------------------------------------------------------------
 
 export default function Items() {
-  let { allItems } = useContext(itemsContext);
+  let { allItems} = useContext(itemsContext);
   let {
     underSubData,
     underSuperData,
@@ -28,6 +28,10 @@ export default function Items() {
     setSuperLoading,
     setSubLoading,
   } = useContext(subAndSuperContext);
+
+  const x=useNavigate();
+
+  x();
 
   /*  let [subKey, setsubKey] = useState(null);
   let [superKey, setsuperKey] = useState(null);

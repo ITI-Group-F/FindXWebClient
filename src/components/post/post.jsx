@@ -111,7 +111,7 @@ export default function Posts() {
           
 
         res.then((res) => {
-            navigate("/myads");
+            navigate("/items");
           })
           .catch((err) => {
             console.log(err);
