@@ -29,10 +29,10 @@ export default function Items() {
     setSubLoading,
   } = useContext(subAndSuperContext);
 
-  const x=useNavigate();
+/*   const x=useNavigate();
 
   x();
-
+ */
   /*  let [subKey, setsubKey] = useState(null);
   let [superKey, setsuperKey] = useState(null);
   let [underSubData, setunderSubData] = useState([]);
