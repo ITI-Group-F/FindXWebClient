@@ -57,13 +57,14 @@ let onResultClick=(e)=>{
 
   useEffect(() => {
     const getItems = async () => {
+      if(wordEntered.length>0){
       try {
         const res = await API.get(`/search/${wordEntered}`, apiFormData);
         setFilteredData(res.data);
       } catch (error) {
         console.log(error);
       }
-    };
+    }};
     getItems();
   }, [wordEntered]);
 
