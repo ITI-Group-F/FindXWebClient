@@ -222,9 +222,11 @@ export default function Messenger() {
     setMsgs(toLoadMsgs);
     activateChat();
     seOtherFullName(otherFullName);
+    upDateChatData()
     setTimeout(() => {
       chatRef.current.scrollTo(0, chatRef.current.scrollHeight);
     }, 100);
+
 
     if (conv.messages[conv.messages.length - 1].seen === false) {
       setLastMessageAsSeen(connection, ownerId, conv.id)
