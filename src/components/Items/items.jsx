@@ -8,16 +8,19 @@ import DrawerFilter from "./DrawerFilter";
 //---------------------------------------------------------------------------------------
 
 export default function Items() {
-  let { allItems} = useContext(itemsContext);
-  
+  let { allItems } = useContext(itemsContext);
 
-/*   const x=useNavigate();
+  /*   const x=useNavigate();
 
   x();
  */
- 
+
   return (
     <div>
+      <div style={{ overflow: "hidden" }}>
+        <img src="https://imgur.com/2isonGi.png" />
+      </div>
+
       <DrawerFilter />
       <br />
       {allItems === [] ? (
