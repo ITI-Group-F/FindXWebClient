@@ -92,9 +92,9 @@ export default function Messenger() {
 
   useEffect(() => {
 
-if (  lastConnection.current) {
-  lastConnection.current.stop();
-}
+// if (  lastConnection.current) {
+//   lastConnection.current.stop();
+// }
     if (connection) {
       connection.on("ReceiveMessage", (sender, message) => {
         handleReceiveMessage(sender, message);
@@ -107,6 +107,7 @@ if (  lastConnection.current) {
 
   const sendMessage = (message) => {
     console.log(withId);
+    console.log(connection);
     if (!withId) return;
     if (connection) {
       connection.invoke(
@@ -126,6 +127,7 @@ if (  lastConnection.current) {
       else {
         prevContactRef.current.querySelector(".preview").innerText = message;
       }
+
       let msg = <div key={Math.random()} className="bubble me">{message} </div>;
       setMsgs((mesgs) => [...mesgs, msg]);
 
