@@ -62,8 +62,21 @@
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
 }
 
-@media all and (max-width:767px){
-    .hrProfile{
+@media all and (max-width:767px) {
+    .hrProfile {
         display: none;
     }
+}
+
+#updateDataButton,
+#updatePassButton {
+    background-color: #28a745;
+}
+
+#errorMessage {
+    color: red !important;
+}
+
+#successMessage {
+    color: #28a745 !important;
 }

@@ -14,6 +14,8 @@ export default function Profile(){
     const [email, setEmail] = useState(claims.email); 
     const [password, setPassword] = useState("123"); 
     const [Cpassword, setCPassword] = useState("123");
+    const [errorMessage,SetErrorMessage] = useState("");
+    const [Message,SetMessage] = useState("");
     let UpdateDataOk =false;
     let UpdatePassOk =false;               
     const updateProfile=()=>{   
@@ -24,9 +26,13 @@ export default function Profile(){
             let emailUpdated=document.getElementById("email").value;
     
             if([firstnameUpdated,lastnameUpdated,phoneUpdated,emailUpdated].includes('')){
-                alert("Some data is missing !!");
+                // alert("Some data is missing !!");
+                SetErrorMessage("Some data is missing !!");
+                SetMessage("");
             }else if (!ValidateEmail(emailUpdated)){
-                alert("Invalid email !!");
+                // alert("Invalid email !!");
+                SetErrorMessage("Invalid email !!");
+                SetMessage("");
             }else{
                 let data ={
                     FirstName:firstnameUpdated,
@@ -40,18 +46,25 @@ export default function Profile(){
                 updateUserData(data).then(_res=>{
                     if(_res.status === 200){
                         changeseSsionStorageData(data);
-                        alert("User data updated");
+                        // alert("User data updated");
+                        SetMessage("User data updated");
+                        SetErrorMessage("");
+                        setFirstname(firstnameUpdated);
+                        setLastname(lastnameUpdated);
+                        setPhone(phoneUpdated);
+                        setEmail(emailUpdated);
                     }else{
-                        alert(_res);
+                        // alert(_res);
+                        SetErrorMessage(_res);
+                        SetMessage("");
+                        
                     }
                 }).catch(_err=>{
-                    alert(_err.response.data);                    
+                    SetErrorMessage(_err.response.data);
+                    SetMessage("");                    
                 });
     
-                setFirstname(firstnameUpdated);
-                setLastname(lastnameUpdated);
-                setPhone(phoneUpdated);
-                setEmail(emailUpdated);
+                
                 //calling api to update the  data
             }
         }else{
@@ -69,12 +82,18 @@ export default function Profile(){
                   let CpasswordUpdate=document.getElementById("Cpassword").value;
           
                   if([passwordUpdate,CpasswordUpdate].includes('')){
-                      alert("Some data is missing !!");
+                    //   alert("Some data is missing !!");
+                      SetErrorMessage("Some data is missing !!");
+                      SetMessage("");
                   }else if(passwordUpdate !== CpasswordUpdate){
-                     alert("Password don't match !");            
+                    //  alert("Password don't match !"); 
+                     SetErrorMessage("Password don't match !");
+                     SetMessage("");           
                   }else if(!ValidatePassword(passwordUpdate)){
-                      alert("invalid password (Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character is required)");
-                  }else{
+                    //   alert("invalid password (Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character is required)");
+                      SetErrorMessage("invalid password (Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character is required)");
+                      SetMessage("");
+                    }else{
           
                       let data ={
                           FirstName:sessionStorage.getItem("firstName"),
@@ -87,17 +106,23 @@ export default function Profile(){
                       }
                       updateUserPassword(data).then(_res=>{
                           if(_res.status === 200){
-                              alert("User password updated");
+                            //   alert("User password updated");
+                            SetMessage("User password updated");
+                            SetErrorMessage("");
+                            setPassword(passwordUpdate);
+                            setCPassword(CpasswordUpdate);
                           }else{
-                              alert(_res);
+                            //   alert(_res);
+                              SetErrorMessage(_res);
+                              SetMessage("");
                           }
                       }).catch(_err=>{
-                          alert(_err);
-                          console.log(_err);
+                        //   alert(_err);                          
+                          SetErrorMessage(_err);
+                          SetMessage("");
                       });
           
-                      setPassword(passwordUpdate);
-                      setCPassword(CpasswordUpdate);
+                     
                       //calling api to update the  data
                   }
               }  else{
@@ -106,6 +131,7 @@ export default function Profile(){
         
     }
 
+   
     function ValidatePassword(password) 
     {
         if (/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(password))
@@ -149,11 +175,17 @@ export default function Profile(){
     }
     const cancelDataUpdate=()=>{
         UpdateDataOk=false;
+        let email = sessionStorage.getItem("email");        
+        setEmail(email);
+        document.getElementById("email").value=email;
         document.getElementById("firstname").disabled =true;
         document.getElementById("lastname").disabled =true;
         document.getElementById("phone").disabled =true;
         document.getElementById("email").disabled =true;
         document.getElementById("updateDataButton").innerText= "Update profile";
+        SetErrorMessage("");
+        SetMessage("");
+        
         // document.getElementById("cancelUpdateDataButton").disabled= true;
     }
     const cancelPassUpdate=()=>{
@@ -161,6 +193,10 @@ export default function Profile(){
         document.getElementById("password").disabled =true;
         document.getElementById("Cpassword").disabled =true;
         document.getElementById("updatePassButton").innerText= "Update Password";
+        SetErrorMessage("");
+        SetMessage("");
+        setPassword(password);
+        setCPassword(Cpassword);
         // document.getElementById("cancelUpdatePassButton").disabled= true;
     }
 
@@ -186,8 +222,13 @@ export default function Profile(){
         <div className="right-div col-md-9 border-right">
             <div className="p-3 py-5">
                 <div className="d-flex justify-content-between align-items-center mb-3">
-                    <h4 className="text-right" style={{marginLeft:"-1px"}}>Profile Settings</h4>
+                    <h4 className="text-right" style={{marginLeft:"-1px"}}>Profile Settings</h4>                   
                 </div>
+                {/* <p id="Errormessage">test</p> */}
+                
+                <div class="err-msg MuiBox-root css-0"><span class="MuiTypography-root MuiTypography-caption MuiTypography-gutterBottom css-ijb3jp-MuiTypography-root" id="errorMessage">{errorMessage}</span></div>
+                <div class="MuiBox-root css-0"><span class="MuiTypography-root MuiTypography-caption MuiTypography-gutterBottom css-ijb3jp-MuiTypography-root" id="successMessage">{Message}</span></div>
+
                 <div className="row mt-2">
                     <div className="col-md-6"><label className="labels">First name</label><input type="text" id="firstname" disabled className="form-control" placeholder="first name" defaultValue={firstname}/></div>
                     <div className="col-md-6"><label className="labels">Last name</label><input type="text" id="lastname" disabled className="form-control" placeholder="last name" defaultValue={lastname} /></div>
