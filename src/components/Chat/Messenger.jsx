@@ -106,6 +106,7 @@ if (  lastConnection.current) {
   }, [connection]);
 
   const sendMessage = (message) => {
+    console.log(withId);
     if (!withId) return;
     if (connection) {
       connection.invoke(

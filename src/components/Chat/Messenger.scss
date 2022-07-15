@@ -155,9 +155,9 @@
         }
         .time {
           font-size: 14px;
-          position: absolute;
-          top: 16px;
-          right: 10%;
+          position: relative;
+          margin-left: auto;
+          margin-right: 10px;
           padding: 0 0 5px 5px;
           color: var(--grey);
           background-color: var(--white);
@@ -238,15 +238,16 @@
       }
     }
     .write {
-      position: absolute;
-      bottom: 40px;
-      left: 20px;
-      height: 42px;
-      padding-left: 8px;
-      border: 1px solid var(--light);
-      background-color: #eceff193 ;
-      width: calc(100% - 58px);
-      border-radius: 5px;
+      // position: absolute;
+      // bottom: 40px;
+      // left: 20px;
+      // height: 42px;
+      // padding-left: 8px;
+      // border: 1px solid var(--light);
+      // background-color: #eceff193 ;
+      // width: calc(100% - 58px);
+      // border-radius: 5px;
+     
       display: flex;
       input {
         font-size: 16px;
@@ -259,6 +260,8 @@
         background-color: #ECEFF1;
         @include font;
         flex: 1;
+        border-radius: 100px;
+        margin-top: 12px;
       }
     }
     .bubble {
