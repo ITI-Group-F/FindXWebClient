@@ -16,6 +16,8 @@ export default function Messenger() {
   let prevContactRef = useRef(null);
   const MessageToSendRef = useRef(null);
   const isFirstConv = useRef(true);
+  const [isNewConversation, setIsNewConversation] = useState(false);
+
 
   const handleReceiveMessage = (sender, message) => {
 
@@ -37,6 +39,7 @@ export default function Messenger() {
 
 
   const hasOldChat = (id) => {
+    console.log(conversations);
     for (let i = 0; i < conversations.length; i++) {
       if (conversations[i].receiver.id == id || conversations[i].sender.id == id) {
         return [true, conversations[i], i];
@@ -44,6 +47,21 @@ export default function Messenger() {
     }
     return [false, null, null];
   };
+
+  // const addNewContactConversation = (toId) => {
+  //   let newConversation = {
+  //     id: null,
+  //     sender: {
+  //       id: ownerId,
+  //     },
+  //     receiver: {
+  //       id: toId,
+  //     },
+  //     messages: [
+  //     ],
+  //   }
+  //   conversations.push(newConversation);
+  // };
 
   //handling start of chat
   useEffect(() => {
@@ -54,10 +72,12 @@ export default function Messenger() {
         setMsgs([<>
           You are starting new Conversation with <b>{PosterDetails.fullName}</b> Please Say Something
           <br />
-          <img style={{ width: 500, marginLeft: 150, marginTop: 20 }} src="https://marketing-assets.wheniwork-production.com/2020/08/11105808/updated-homepage-hero-optimized.svg" alt="Italian Trulli"></img>
+          <img style={{ width: 500, marginLeft: 150, marginTop: 20 }}
+            src="https://marketing-assets.wheniwork-production.com/2020/08/11105808/updated-homepage-hero-optimized.svg" alt="Italian Trulli"></img>
         </>]);
         seOtherFullName(PosterDetails.fullName);
         chatRef.current.classList.add("active-chat");
+        setIsNewConversation(true);
       } else {
         populateChat(isOldChat[1]);
         currentContactRef.current[isOldChat[2]].classList.add("active");
@@ -65,6 +85,7 @@ export default function Messenger() {
       }
     }
   }, [PosterDetails]);
+
 
   useEffect(() => {
     if (connection) {
@@ -198,6 +219,15 @@ export default function Messenger() {
       setTimeout(() => {
         chatRef.current.scrollTo(0, chatRef.current.scrollHeight);
       }, 100);
+
+      if (isNewConversation) {
+        setIsNewConversation(false);
+        upDateChatData().then(() => {
+          populateContact();
+          // currentContactRef.current[conversations.length - 1].classList.add("active");
+          // prevContactRef.current = currentContactRef.current[conversations.length - 1];
+        });
+      }
     }
   };
 
