@@ -9,28 +9,17 @@ import ChatContext from '../../../Contexts/ChatContext';
 import useClaims from "../../../hooks/useClaims"
 import axios from '../../../Services/api';
 import AlertDialogSlide from '../ConfirmationDialog/Dialog';
-export default function Details(props) {
+ function Details(props) {
 
 const {handleNewChat} = useContext(ChatContext);  
  const selectedItem=props.item;
 const {userId}=useClaims();
 
 //Date...
-const  inputDate=selectedItem.date;
+const  inputDate=selectedItem?.date;
 
 const date=new Date(inputDate).toLocaleDateString();
 const time=new Date(inputDate).toLocaleTimeString();
-
-
-//close Issue
-// const close=()=>{
-//   axios.get('close').then(d=>{
-
-//     console.log(d);
-//   }).
-// }
-
-
 
 
   
@@ -80,4 +69,4 @@ const time=new Date(inputDate).toLocaleTimeString();
   ):(<div></div>)
 }
 
-
+export default React.memo(Details);

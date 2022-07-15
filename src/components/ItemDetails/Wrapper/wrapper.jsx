@@ -6,22 +6,25 @@ import itemsContext from "../../../Contexts/itemsContext";
 import axios from "../../../Services/api";
 import { useNavigate, useParams, useRoutes } from "react-router-dom";
 
-export default function Wrapper(props) {
+ function Wrapper(props) {
   const navigate = useNavigate();
   const { getItemById } = useContext(itemsContext);
   const selectedID = useParams().id;
   let selectedItem = getItemById(selectedID);
-
+  const [item,setItem]=useState(null);
 
   useEffect(() => {
     //if the item not found
     //this mean this id Coming from profile or post
     //so we need to fetch this item
-    if (!selectedItem) {
+    if (!item) {
       axios
         .get(`/Items/${selectedID}`)
         .then((d) => {
-          selectedItem = d;
+          console.log('call now');
+          console.log(d.data);
+          selectedItem = d.data;
+          setItem(d.data);
   
   
         })
@@ -29,15 +32,18 @@ export default function Wrapper(props) {
           navigate("/notFound");
         });
     }
-  });
+  },[]);
 
   return (
     <>
       <div className={`row g-0 d-flex justify-content-around`}>
-        <ItemSlider item={selectedItem} />
-        <Details item={selectedItem} />
+        <ItemSlider item={item} />
+        <Details item={item} />
       </div>
-      <Description item={selectedItem} />
+      <Description item={item} />
     </>
   );
 }
+
+
+export default React.memo(Wrapper);

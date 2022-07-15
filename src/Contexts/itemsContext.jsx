@@ -58,6 +58,8 @@ export const ItemsProvider = (props) => {
     [allItems]
   );
 
+  console.log(allItems)
+
   //memoize obeject that contain context data and send to any one who use this context ...
   let contextValue = useMemo(
     () => ({

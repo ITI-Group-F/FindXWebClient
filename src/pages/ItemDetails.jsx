@@ -3,7 +3,7 @@ import Wrapper from "../components/ItemDetails/Wrapper/wrapper";
 import { ItemsProvider } from "../Contexts/itemsContext";
 
 
-export default function ItemDetailsPage() {
+ function ItemDetailsPage() {
   return (
     <div>
       <ItemsProvider>
@@ -12,3 +12,6 @@ export default function ItemDetailsPage() {
     </div>
   );
 }
+
+
+export default React.memo(ItemDetailsPage);
