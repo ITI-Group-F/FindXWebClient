@@ -26,7 +26,7 @@ export const SearchinContacts = (contacts,searchWord) => {
 
   let fuse = new Fuse(contacts, {
     keys: ["receiver.firstName", "receiver.lastName","sender.firstName", "sender.lastName"],
-    threshold: 0.3,
+    threshold: .3,
   });
   let result= fuse.search(searchWord)
 
