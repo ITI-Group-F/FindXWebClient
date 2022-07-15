@@ -5,7 +5,7 @@ import ChatContext from "../../Contexts/ChatContext";
 import { setLastMessageAsSeen } from "../../Services/chatService";
 
 export default function Messenger() {
-  const { conversations, connection, userId: ownerId, upDateChatData, PosterDetails,setNumberOfNotifications } = useContext(ChatContext);
+  const { conversations, connection, userId: ownerId, upDateChatData, PosterDetails, setNumberOfNotifications } = useContext(ChatContext);
   const [withId, setWithId] = useState(null);
   const [message, setMessage] = useState(<>You have no Messages</>);
   const [msgs, setMsgs] = useState(null);
@@ -160,11 +160,15 @@ export default function Messenger() {
     setTimeout(() => {
       chatRef.current.scrollTo(0, chatRef.current.scrollHeight);
     }, 100);
-console.log(conv);
-    if (conv.messages[conv.messages.length - 1].seen === false){
+    console.log(conv);
+    if (conv.messages[conv.messages.length - 1].seen === false) {
       setLastMessageAsSeen(connection, ownerId, conv.id)
       conv.messages[conv.messages.length - 1].seen = true;
-      setNumberOfNotifications(prevCount => prevCount - 1);
+      setNumberOfNotifications(prevCount => {
+        if (prevCount > 0) {
+          return prevCount - 1;
+        }
+      });
     }
 
 
