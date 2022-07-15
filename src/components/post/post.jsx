@@ -67,11 +67,11 @@ export default function Posts() {
 
     setFormData({ ...formData, [name]: value });
 
-    title();
-    description();
-    brand();
-    radio();
-    location();
+    // title();
+    // description();
+    // brand();
+    // radio();
+    // location();
   };
 
   const getFormattedDate = (date) => {
@@ -404,6 +404,8 @@ export default function Posts() {
                 <Input
                   name="brand"
                   required
+                  onClick={brand}
+                  onBlur={brand}
                   onChange={setValue}
                   maxLength="20"
                   id="standard-adornment-amount"
@@ -437,6 +439,8 @@ export default function Posts() {
               aria-labelledby="demo-controlled-radio-buttons-group"
               name="controlled-radio-buttons-group"
               onChange={setValue}
+              onClick={radio}
+              onBlur={radio}
             >
               <FormControlLabel
                 name="isLost"
@@ -467,6 +471,8 @@ export default function Posts() {
           <TextField
             name="title"
             onChange={setValue}
+            onClick={title}
+            onBlur={title}
             required
             maxLength="20"
             fullWidth
@@ -502,6 +508,8 @@ export default function Posts() {
               name="description"
               required
               onChange={setValue}
+              onClick={description}
+              onBlur={description}
               maxLength="250"
               className="form-control"
               id="exampleFormControlTextarea1"
@@ -513,7 +521,7 @@ export default function Posts() {
           {showdescriptionErr && (
             <Box className="err-msg">
               <Typography color="red" variant="caption" gutterBottom>
-                {TitleErr}
+                {descriptionErr}
               </Typography>
             </Box>
           )}
@@ -553,8 +561,8 @@ export default function Posts() {
           <TextField
             name="Location"
             onChange={setValue}
-
-            onBlur={() => setFormData({ ...formData, longitude: long, latitude: lat })}
+            onClick={location}
+            onBlur={() => {setFormData({ ...formData, longitude: long, latitude: lat });location()}}
             onMouseOver={() => setFormData({ ...formData, longitude: long, latitude: lat })}
             required
             maxLength="20"
