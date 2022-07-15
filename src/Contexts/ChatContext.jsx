@@ -9,8 +9,9 @@ import authenticationContext from "./AuthContext";
 const ChatContext = createContext();
 
 const ChatContextProvider = ({ children }) => {
+
   let userId = sessionStorage.getItem("userId")
-const {isloggedIn} = useContext(authenticationContext)
+ const [isloggedIn] = useContext(authenticationContext)
 
   const [ connection  , setConnection] = useState(null);
   let [conversations  , setConversations] = useState([]);
@@ -48,8 +49,9 @@ const {isloggedIn} = useContext(authenticationContext)
 
 
   useEffect(() => {
-    if(isloggedIn) return;
-    
+    // if (!isloggedIn) return; 
+    console.log(userId);
+    console.log(isloggedIn);
     const signalRConnection = new HubConnectionBuilder()
       .withUrl("https://localhost:7085/hubs/chat")
       .withAutomaticReconnect()
@@ -61,8 +63,11 @@ const {isloggedIn} = useContext(authenticationContext)
         signalRConnection.invoke("CreatePrivateGroupForUserAsync", userId)
       )
       .then(() => {
+       
+      
         setConnection(signalRConnection);
-      });
+      })
+      .catch(error => {console.log(error);})
   }, [isloggedIn]);
 
   // useEffect(() => {
