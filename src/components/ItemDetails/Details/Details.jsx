@@ -7,7 +7,8 @@ import { useContext } from 'react';
 import ChatContext from '../../../Contexts/ChatContext';
 
 import useClaims from "../../../hooks/useClaims"
-
+import axios from '../../../Services/api';
+import AlertDialogSlide from '../ConfirmationDialog/Dialog';
 export default function Details(props) {
 
 const {handleNewChat} = useContext(ChatContext);  
@@ -19,6 +20,15 @@ const  inputDate=selectedItem.date;
 
 const date=new Date(inputDate).toLocaleDateString();
 const time=new Date(inputDate).toLocaleTimeString();
+
+
+//close Issue
+// const close=()=>{
+//   axios.get('close').then(d=>{
+
+//     console.log(d);
+//   }).
+// }
 
 
 
@@ -58,7 +68,7 @@ const time=new Date(inputDate).toLocaleTimeString();
 
         {/* it will be send message or Edit post depends on the case  */}
 {
-  (userId!==selectedItem.userId)?( <Button onClick={()=>{handleNewChat(selectedItem.id)}}  color='primary' className='mx-2' variant="contained">Send Message &nbsp;<SendIcon/></Button>):( <Button   color='primary' className='mx-2' variant="contained">Edit Post &nbsp;<SendIcon/></Button>)
+  (userId!==selectedItem.userId)?( <Button onClick={()=>{handleNewChat(selectedItem.id)}}  color='primary' className='mx-2' variant="contained">Send Message &nbsp;<SendIcon/></Button>):(<AlertDialogSlide id={selectedItem.id}/>)
 }
        
        
