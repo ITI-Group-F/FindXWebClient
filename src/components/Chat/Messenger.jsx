@@ -39,10 +39,10 @@ export default function Messenger() {
   const hasOldChat = (id) => {
     for (let i = 0; i < conversations.length; i++) {
       if (conversations[i].receiver.id == id || conversations[i].sender.id == id) {
-        return [true, conversations[i]];
+        return [true, conversations[i], i];
       }
     }
-    return [false, null];
+    return [false, null, null];
   };
 
   //handling start of chat
@@ -60,6 +60,7 @@ export default function Messenger() {
         chatRef.current.classList.add("active-chat");
       } else {
         populateChat(isOldChat[1]);
+        currentContactRef.current[isOldChat[2]].classList.add("active");
       }
     }
   }, [PosterDetails]);
@@ -147,7 +148,6 @@ export default function Messenger() {
     if (chatRef.current) {
       chatRef.current.classList.add("active-chat");
     }
-
   };
 
   /**
