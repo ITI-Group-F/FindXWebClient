@@ -68,7 +68,7 @@ function MyAds() {
     <div className="" style={{marginLeft:"1rem",marginRight:"1rem"  }}>
       {filteredData.length != 0 ? (
         <div className="container-fluid mx-3">
-          <h2  style={{marginLeft:"550px"}}>Your Ads</h2>
+          <h2  style={{marginLeft:"auto"}}>Your Ads</h2>
           <div className="row productRow" >
             
           <div className="container"  >
@@ -101,7 +101,7 @@ let description = res.description.substring(0, 80)
 
         return (
           <div key={res.id}  >
-          <div className="card" style={{marginLeft:"550px", textAlign:"center", justifyContent:"center"}}>
+          <div className="card" style={{marginLeft:"auto"}}>
             <NavLink to={`/details/${res.id}`}>
             <div className="card-header">
               <img src={`data:image/jpeg;base64,${res.images[0]}`} alt=" " />
