@@ -23,7 +23,6 @@ export default function AlertDialogSlide(props) {
     setOpen(false);
   };
 
-console.log(props.id)
   const nav=useNavigate()
   //close this post and navigate to Items...
   const closeIssue=()=>{

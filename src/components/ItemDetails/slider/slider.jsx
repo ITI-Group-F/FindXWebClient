@@ -2,6 +2,7 @@ import {useState} from "react"
 import sliderStyles from "./slider.module.css";
 import Carousel from 'react-bootstrap/Carousel';
 import "../itemDetails.css"
+import React from "react";
 
 
 const ItemSlider=(props)=>{
@@ -16,13 +17,13 @@ const ItemSlider=(props)=>{
 
     const selectedItem=props.item;
 
-    const SliderImages=selectedItem?.images.map((value,index)=>{
+    const SliderImages=selectedItem?.images?.map((value,index)=>{
 
       return ( <Carousel.Item key={index} style={{height:'100%'}} className={sliderStyles.item}>
       <div className={`${sliderStyles.wrapperContainer}`} >
         <div   className={`w-75 mx-auto d-flex align-items-center ${sliderStyles.imgContainer} `}>
           <img className={`${sliderStyles.slideImg}`}
-              src={`data:image/jpeg;base64,${selectedItem.images[0]}`}
+              src={`data:image/jpeg;base64,${value}`}
               alt={`slide number ${index}`}
             />
         </div>
@@ -50,4 +51,4 @@ return selectedItem? (
 }
 
 
-export default ItemSlider;
+export default React.memo(ItemSlider);
