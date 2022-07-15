@@ -72,6 +72,7 @@ export default function Messenger() {
       const isOldChat = hasOldChat(PosterDetails.id);
       if (!isOldChat[0]) {
         setWithId(PosterDetails.id);
+
         setMsgs([<>
           You are starting new Conversation with <b>{PosterDetails.fullName}</b> Please Say Something
           <br />
@@ -119,12 +120,17 @@ export default function Messenger() {
 
       if (isFirstConv.current && PosterDetails.id) {
         isFirstConv.current = false;
+
+      if( !hasOldChat(PosterDetails.id)[0]){
         setMsgs([]);
+      }
+       
         upDateChatData().then(() => {
           populateContact();
         });
       }
       else {
+
         prevContactRef.current.querySelector(".preview").innerText = message;
       }
 
@@ -236,6 +242,12 @@ export default function Messenger() {
       if (isNewConversation) {
         setIsNewConversation(false);
         upDateChatData().then(() => {
+         setTimeout(() => {
+          let toUpdate = currentContactRef.current[currentContactRef.current.length - 1];
+          toUpdate.classList.add("active");
+          prevContactRef.current = toUpdate;
+         }, 500);
+
           populateContact();
           // currentContactRef.current[conversations.length - 1].classList.add("active");
           // prevContactRef.current = currentContactRef.current[conversations.length - 1];
