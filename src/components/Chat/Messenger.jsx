@@ -3,8 +3,11 @@ import "./Messenger.scss";
 import { useState, useEffect, useRef, } from "react";
 import ChatContext from "../../Contexts/ChatContext";
 import { setLastMessageAsSeen } from "../../Services/chatService";
+import { useCallback } from "react";
+import { HubConnection } from "@microsoft/signalr";
 
 export default function Messenger() {
+  /** @type {{connection:HubConnection}}  */
   const { conversations, connection, userId: ownerId, upDateChatData, PosterDetails, setNumberOfNotifications } = useContext(ChatContext);
   const [withId, setWithId] = useState(null);
   const [message, setMessage] = useState(<>You have no Messages</>);
@@ -17,13 +20,13 @@ export default function Messenger() {
   const MessageToSendRef = useRef(null);
   const isFirstConv = useRef(true);
   const [isNewConversation, setIsNewConversation] = useState(false);
+  const lastConnection = useRef(connection);
 
-
-  const handleReceiveMessage = (sender, message) => {
+  const handleReceiveMessage = useCallback( (sender, message) => {
 
     let msg;
     if (OtherIdRef.current == sender) {
-      msg = <div className="bubble you">{message}</div>;
+      msg = <div key={Math.random()} className="bubble you">{message}</div>;
       setMsgs((mesgs) => [...mesgs, msg]);
       setTimeout(() => {
         chatRef.current.scrollTo(0, chatRef.current.scrollHeight);
@@ -35,7 +38,7 @@ export default function Messenger() {
     upDateChatData().then(() => {
       populateContact();
     });
-  }
+  }, []);
 
 
   const hasOldChat = (id) => {
@@ -88,10 +91,17 @@ export default function Messenger() {
 
 
   useEffect(() => {
+
+if (  lastConnection.current) {
+  lastConnection.current.stop();
+}
     if (connection) {
       connection.on("ReceiveMessage", (sender, message) => {
         handleReceiveMessage(sender, message);
+        console.log(connection.connectionId,"ReceiveMessage", message);
       });
+      lastConnection.current = connection;
+      
     }
   }, [connection]);
 
@@ -115,7 +125,7 @@ export default function Messenger() {
       else {
         prevContactRef.current.querySelector(".preview").innerText = message;
       }
-      let msg = <div className="bubble me">{message} </div>;
+      let msg = <div key={Math.random()} className="bubble me">{message} </div>;
       setMsgs((mesgs) => [...mesgs, msg]);
 
     }

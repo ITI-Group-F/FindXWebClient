@@ -1,7 +1,7 @@
 import React, { createContext, useMemo, useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../Services/api";
-import { HubConnectionBuilder } from "@microsoft/signalr";
+import { HubConnection, HubConnectionBuilder } from "@microsoft/signalr";
 import useClaims from "../hooks/useClaims";
 import { countNotifications } from "../Services/chatService";
 import api from "../Services/api";
@@ -10,9 +10,10 @@ const ChatContext = createContext();
 
 const ChatContextProvider = ({ children }) => {
   let userId = sessionStorage.getItem("userId")
-  // let userId = getCurrentUserId();
-  const [connection, setConnection] = useState(null);
-  let [conversations, setConversations] = useState([]);
+
+
+  const [ connection  , setConnection] = useState(null);
+  let [conversations  , setConversations] = useState([]);
   const [numberOfNotifications, setNumberOfNotifications] = useState(0);
   const [PosterDetails, setPosterDetails] = useState({});
   const navigate = useNavigate();
