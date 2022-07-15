@@ -22,7 +22,6 @@ const  inputDate=selectedItem?.date;
 const date=new Date(inputDate).toLocaleDateString();
 const time=new Date(inputDate).toLocaleTimeString();
 
-
   
   return selectedItem?(
     <div  className={`col-md-6 col-12 d-flex flex-column justify-content-between ${DetailsStyle.itm_details_Con}`}>
