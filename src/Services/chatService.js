@@ -1,4 +1,4 @@
-
+import Fuse from 'fuse.js';
 
 export const countNotifications = (convs, userid) => {
   let count = 0;
@@ -21,3 +21,15 @@ export const setLastMessageAsSeen = (connection,Userid,ConvID) => {
     );
   }
 }
+
+export const SearchinContacts = (contacts,searchWord) => {
+
+  let fuse = new Fuse(contacts, {
+    keys: ["receiver.firstName", "receiver.lastName","sender.firstName", "sender.lastName"],
+    threshold: 0.3,
+  });
+  let result= fuse.search(searchWord)
+
+ return result
+}
+

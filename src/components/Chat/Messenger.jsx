@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import "./Messenger.scss";
 import { useState, useEffect, useRef, } from "react";
 import ChatContext from "../../Contexts/ChatContext";
-import { setLastMessageAsSeen } from "../../Services/chatService";
+import { SearchinContacts, setLastMessageAsSeen } from "../../Services/chatService";
 import { useCallback } from "react";
 import { HubConnection } from "@microsoft/signalr";
 
@@ -21,9 +21,15 @@ export default function Messenger() {
   const isFirstConv = useRef(true);
   const [isNewConversation, setIsNewConversation] = useState(false);
   const lastConnection = useRef(connection);
+  const searchwordRef = useRef(null);
+  const [conversationsToMap, setConversationsToMap] = useState(conversations);
 
-  const handleReceiveMessage = useCallback( (sender, message) => {
 
+  useEffect(() => {
+    setConversationsToMap(conversations);
+  }, [conversations]);
+
+  const handleReceiveMessage = useCallback((sender, message) => {
     let msg;
     if (OtherIdRef.current == sender) {
       msg = <div key={Math.random()} className="bubble you">{message}</div>;
@@ -42,7 +48,7 @@ export default function Messenger() {
 
 
   const hasOldChat = (id) => {
-    console.log(conversations);
+    
     for (let i = 0; i < conversations.length; i++) {
       if (conversations[i].receiver.id == id || conversations[i].sender.id == id) {
         return [true, conversations[i], i];
@@ -93,22 +99,21 @@ export default function Messenger() {
 
   useEffect(() => {
 
-// if (  lastConnection.current) {
-//   lastConnection.current.stop();
-// }
+    // if (  lastConnection.current) {
+    //   lastConnection.current.stop();
+    // }
     if (connection) {
       connection.on("ReceiveMessage", (sender, message) => {
         handleReceiveMessage(sender, message);
-        console.log(connection.connectionId,"ReceiveMessage", message);
+        
       });
       lastConnection.current = connection;
-      
+
     }
   }, [connection]);
 
   const sendMessage = (message) => {
-    console.log(withId);
-    console.log(connection);
+
     if (!withId) return;
     if (connection) {
       connection.invoke(
@@ -121,10 +126,10 @@ export default function Messenger() {
       if (isFirstConv.current && PosterDetails.id) {
         isFirstConv.current = false;
 
-      if( !hasOldChat(PosterDetails.id)[0]){
-        setMsgs([]);
-      }
-       
+        if (!hasOldChat(PosterDetails.id)[0]) {
+          setMsgs([]);
+        }
+
         upDateChatData().then(() => {
           populateContact();
         });
@@ -141,8 +146,10 @@ export default function Messenger() {
   };
 
   let populateContact = () => {
-    return conversations.map((conv, index) => {
 
+    return conversationsToMap.map((conv, index) => {
+     
+      
       let SenderFullName;
       if (conv.receiver.id === ownerId) {
         SenderFullName = conv.sender.firstName + " " + conv.sender.lastName;
@@ -218,7 +225,7 @@ export default function Messenger() {
     setTimeout(() => {
       chatRef.current.scrollTo(0, chatRef.current.scrollHeight);
     }, 100);
-    console.log(conv);
+
     if (conv.messages[conv.messages.length - 1].seen === false) {
       setLastMessageAsSeen(connection, ownerId, conv.id)
       conv.messages[conv.messages.length - 1].seen = true;
@@ -242,11 +249,11 @@ export default function Messenger() {
       if (isNewConversation) {
         setIsNewConversation(false);
         upDateChatData().then(() => {
-         setTimeout(() => {
-          let toUpdate = currentContactRef.current[currentContactRef.current.length - 1];
-          toUpdate.classList.add("active");
-          prevContactRef.current = toUpdate;
-         }, 500);
+          setTimeout(() => {
+            let toUpdate = currentContactRef.current[currentContactRef.current.length - 1];
+            toUpdate.classList.add("active");
+            prevContactRef.current = toUpdate;
+          }, 500);
 
           populateContact();
           // currentContactRef.current[conversations.length - 1].classList.add("active");
@@ -255,6 +262,19 @@ export default function Messenger() {
       }
     }
   };
+ 
+  const contactsearchhandler = (e) => {
+
+    let  serachresult  = SearchinContacts(conversations, searchwordRef.current.value)
+
+   if (serachresult.length > 1) {
+      setConversationsToMap ( serachresult.map((con) => con.item));
+    }
+   
+   
+  }
+
+
 
   return (
     <>
@@ -262,7 +282,8 @@ export default function Messenger() {
         <div className="chatcontainer">
           <div className="left">
             <div className="top">
-              <input type="text" placeholder="Search" />
+              <input ref={searchwordRef} type="text" placeholder="Search"
+                onChange={contactsearchhandler} />
             </div>
             <ul className="people">{populateContact()}</ul>
           </div>
