@@ -165,20 +165,28 @@ export default function Profile(){
     }
 
      return(
-   <div className="container profile-contanier rounded bg-white mt-5 mb-5">
-    <div className="row">
+   <div className="container profile-contanier rounded bg-white mt-5 mb-5" >
+    <div className="row" style={{width: "870px",marginTop:"-40px",marginBottom: "18px"}}>
         <div className="col-md-3 border-right">
             <div className="divLeftContainer d-flex flex-column align-items-center text-center p-3 py-5">
                 <img className="rounded-circle mt-5" width="150px" src="img/av.png" alt=""/>
                 <span className="font-weight-bold">{firstname+' '+lastname}</span>
                 <span className="text-black-50">{email}</span>
-                <hr className="hrProfile"/>
+                <hr className="hrProfile" style={{height: "444px",
+    width: "1px",
+    marginLeft: "219px",
+    marginTop: "-240px",
+    marginBottom: "12px",
+    paddingTop: "0px",
+    borderTopWidth: "40px",
+    borderBottomWidth: "31px"
+    }}/>
             </div>
         </div>
         <div className="right-div col-md-9 border-right">
             <div className="p-3 py-5">
                 <div className="d-flex justify-content-between align-items-center mb-3">
-                    <h4 className="text-right" style={{marginLeft:"-70px"}}>Profile Settings</h4>
+                    <h4 className="text-right" style={{marginLeft:"-1px"}}>Profile Settings</h4>
                 </div>
                 <div className="row mt-2">
                     <div className="col-md-6"><label className="labels">First name</label><input type="text" id="firstname" disabled className="form-control" placeholder="first name" defaultValue={firstname}/></div>
