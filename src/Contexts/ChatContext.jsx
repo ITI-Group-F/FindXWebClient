@@ -17,11 +17,10 @@ const ChatContextProvider = ({ children }) => {
   const [PosterDetails, setPosterDetails] = useState({});
   const navigate = useNavigate();
 
+
   const upDateChatData = useCallback(async (id) => {
     try {
-
       if (id) {
-
         userId = id;
       }
       const response = await API.get(`/chathistory/${userId}`);
@@ -32,6 +31,7 @@ const ChatContextProvider = ({ children }) => {
       setConversations([]);
     }
   }, []);
+
   useEffect(() => {
     upDateChatData();
   }, []);
@@ -62,6 +62,13 @@ const ChatContextProvider = ({ children }) => {
       });
   }, []);
 
+  // useEffect(() => {
+  //   if (isNewConversation) {
+  //     upDateChatData();
+  //     setIsNewConversation(false);
+  //   }
+  // }, [isNewConversation]);
+
 
   const contextValue = useMemo(
     () => ({
@@ -72,13 +79,13 @@ const ChatContextProvider = ({ children }) => {
       upDateChatData,
       handleNewChat,
       PosterDetails,
-      setNumberOfNotifications
+      setNumberOfNotifications,
     }),
     [connection,
       userId,
       conversations,
       numberOfNotifications,
-      upDateChatData, 
+      upDateChatData,
       handleNewChat,
       PosterDetails,
       setNumberOfNotifications]
