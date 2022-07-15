@@ -56,7 +56,7 @@ function SubAndSuperItems(props) {
 
         <button
           name="submit"
-          style={{ width: "200px", display: "block", marginLeft: "583px" }}
+          style={{ width: "200px", display: "flex",justifyContent:"center", marginLeft: "583px" }}
           onClick={() => {
             renderAllItemsBtn();
           }}

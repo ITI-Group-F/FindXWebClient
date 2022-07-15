@@ -50,8 +50,7 @@ const ChatContextProvider = ({ children }) => {
 
   useEffect(() => {
     // if (!isloggedIn) return; 
-    console.log(userId);
-    console.log(isloggedIn);
+
     const signalRConnection = new HubConnectionBuilder()
       .withUrl("https://localhost:7085/hubs/chat")
       .withAutomaticReconnect()
@@ -67,7 +66,7 @@ const ChatContextProvider = ({ children }) => {
       
         setConnection(signalRConnection);
       })
-      .catch(error => {console.log(error);})
+      .catch(error => {;})
   }, [isloggedIn]);
 
   // useEffect(() => {
