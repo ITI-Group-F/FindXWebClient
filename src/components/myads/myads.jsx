@@ -101,7 +101,7 @@ let description = res.description.substring(0, 80)
 
         return (
           <div key={res.id}  >
-          <div className="card" style={{marginLeft:"auto"}}>
+          <div className="card" style={{marginLeft:"20px"}}>
             <NavLink to={`/details/${res.id}`}>
             <div className="card-header">
               <img src={`data:image/jpeg;base64,${res.images[0]}`} alt=" " />

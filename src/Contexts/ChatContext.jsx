@@ -1,18 +1,19 @@
-import React, { createContext, useMemo, useEffect, useState, useCallback } from "react";
+import React, { createContext, useMemo, useEffect, useState, useCallback,useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../Services/api";
 import { HubConnectionBuilder } from "@microsoft/signalr";
-import useClaims from "../hooks/useClaims";
 import { countNotifications } from "../Services/chatService";
 import api from "../Services/api";
+import authenticationContext from "./AuthContext";
 
 const ChatContext = createContext();
 
 const ChatContextProvider = ({ children }) => {
   let userId = sessionStorage.getItem("userId")
-  // let userId = getCurrentUserId();
-  const [connection, setConnection] = useState(null);
-  let [conversations, setConversations] = useState([]);
+const {isloggedIn} = useContext(authenticationContext)
+
+  const [ connection  , setConnection] = useState(null);
+  let [conversations  , setConversations] = useState([]);
   const [numberOfNotifications, setNumberOfNotifications] = useState(0);
   const [PosterDetails, setPosterDetails] = useState({});
   const navigate = useNavigate();
@@ -47,6 +48,8 @@ const ChatContextProvider = ({ children }) => {
 
 
   useEffect(() => {
+    if(isloggedIn) return;
+    
     const signalRConnection = new HubConnectionBuilder()
       .withUrl("https://localhost:7085/hubs/chat")
       .withAutomaticReconnect()
@@ -60,7 +63,7 @@ const ChatContextProvider = ({ children }) => {
       .then(() => {
         setConnection(signalRConnection);
       });
-  }, []);
+  }, [isloggedIn]);
 
   // useEffect(() => {
   //   if (isNewConversation) {
