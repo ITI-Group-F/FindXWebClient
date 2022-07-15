@@ -168,31 +168,59 @@ export default function Profile(){
    <div className="container profile-contanier rounded bg-white mt-5 mb-5">
     <div className="row">
         <div className="col-md-3 border-right">
-            <div className="d-flex flex-column align-items-center text-center p-3 py-5"><img className="rounded-circle mt-5" width="150px" src="img/av.png"/><span className="font-weight-bold">{firstname+' '+lastname}</span><span className="text-black-50">{email}</span><span> </span></div>
+            <div className="divLeftContainer d-flex flex-column align-items-center text-center p-3 py-5">
+                <img className="rounded-circle mt-5" width="150px" src="img/av.png" alt=""/>
+                <span className="font-weight-bold">{firstname+' '+lastname}</span>
+                <span className="text-black-50">{email}</span>
+                <hr className="hrProfile"/>
+            </div>
         </div>
-        <div className="col-md-9 border-right">
+        <div className="right-div col-md-9 border-right">
             <div className="p-3 py-5">
                 <div className="d-flex justify-content-between align-items-center mb-3">
-                    <h4 className="text-right">Profile Settings</h4>
+                    <h4 className="text-right" style={{marginLeft:"-70px"}}>Profile Settings</h4>
                 </div>
                 <div className="row mt-2">
                     <div className="col-md-6"><label className="labels">First name</label><input type="text" id="firstname" disabled className="form-control" placeholder="first name" defaultValue={firstname}/></div>
                     <div className="col-md-6"><label className="labels">Last name</label><input type="text" id="lastname" disabled className="form-control" placeholder="last name" defaultValue={lastname} /></div>
                 </div>
                 <div className="row mt-3">
-                    <div className="col-md-12"><label className="labels">Mobile Number</label><input type="text" id="phone" disabled className="form-control" placeholder="enter phone number" defaultValue={phone}/></div>
-                    <div className="col-md-12"><label className="labels">Email</label><input type="email"  id="email" disabled className="form-control" placeholder="email" defaultValue={email}/></div></div>         
-                    <div className="mt-5 text-center"><button className="btn btn-primary profile-button" id="updateDataButton" type="button" onClick={updateProfile}>Update Profile</button>
-                    <button className="btn m-1 btn-danger profile-button" id="cancelUpdateDataButton"  onClick={cancelDataUpdate} type="button" >Cancel</button>
+                    <div className="col-md-12">
+                        <label className="labels">Mobile Number</label>
+                        <input type="text" id="phone" disabled className="form-control" placeholder="enter phone number" defaultValue={phone}/>
+                    </div>
+                    <div className="col-md-12">
+                        <label className="labels">Email</label>
+                        <input type="email"  id="email" disabled className="form-control" placeholder="email" defaultValue={email}/>
+                    </div>
+                </div>         
+                    <div className="text-center" style={{marginTop:"5px"}}>
+                        <button className="btn btn-primary profile-button" id="updateDataButton" type="button" onClick={updateProfile}>
+                            Update Profile
+                        </button>
+                        <button className="btn m-1 btn-danger profile-button" id="cancelUpdateDataButton"  onClick={cancelDataUpdate} type="button" >
+                            Cancel
+                        </button>
                     </div>            
-                          
+                          <hr className="hrDivider"/>
 
                     <div className="row mt-3">
-                        <div className="col-md-6"><label className="labels">Password</label><input type="password"  disabled id="password" className="form-control" defaultValue={password} placeholder="Password" /></div>
-                        <div className="col-md-6"><label className="labels">Confirm password</label><input  disabled type="password" id="Cpassword" className="form-control" defaultValue={Cpassword} placeholder="Confirm password"/></div>
+                        <div className="col-md-6">
+                            <label className="labels">Password</label>
+                            <input type="password"  disabled id="password" className="form-control" defaultValue={password} placeholder="Password" />
                         </div>
-                    <div className="mt-5 text-center"><button className="btn btn-primary profile-button" id="updatePassButton" onClick={updatePassword} type="button">Update Password</button>
-                    <button className="btn m-1 btn-danger profile-button" id="cancelUpdatePassButton"   onClick={cancelPassUpdate} type="button" >Cancel</button>
+                        <div className="col-md-6">
+                            <label className="labels">Confirm password</label>
+                            <input  disabled type="password" id="Cpassword" className="form-control" defaultValue={Cpassword} placeholder="Confirm password"/>
+                        </div>
+                    </div>
+                    <div className="text-center">
+                        <button className="btn btn-primary profile-button" id="updatePassButton" onClick={updatePassword} type="button">
+                            Update Password
+                        </button>
+                        <button className="btn m-1 btn-danger profile-button" id="cancelUpdatePassButton"   onClick={cancelPassUpdate} type="button" >
+                            Cancel
+                        </button>
                     </div>            
                 </div>                
             </div>

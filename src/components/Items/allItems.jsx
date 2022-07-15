@@ -17,7 +17,7 @@ import { useEffect } from "react";
 
 export default function ActionAreaCard(props) {
 let navigate= useNavigate();
-  console.log(props);
+  
 
 
   return (

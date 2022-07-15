@@ -1,3 +1,37 @@
+.divLeftContainer{
+
+    padding-top: 46px;
+    margin-right: -30px;
+    padding-bottom: 9px;
+    margin-top:-80px
+}
+.row{
+    margin-top: -80px;
+    margin-left: -80px;
+
+    
+}
+.right-div{
+    padding-left: 150px;
+}
+hr{
+    margin-left: -60px;
+}
+.hrProfile{
+    
+    
+    width: 1px;
+    padding-bottom: 433px;
+    padding-top: 0px;
+    margin-left: 400px;
+    margin-top: -210px;
+
+
+}
+.text-center{
+    margin-top: 5px;
+}
+
 .bg-secondary-soft {
     background-color: rgba(208, 212, 217, 0.1) !important;
 }
@@ -60,4 +94,27 @@
     transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+}
+
+@media all and (max-width:991px){
+
+    .hrProfile{
+        margin-left: 350px;
+    }
+}
+@media all and (max-width:767px){
+    .hrProfile{
+        display: none;
+    }
+    
+    .divLeftContainer{
+
+        margin-right: -90px;
+    }
+    hr{
+    margin-left: -65px;
+    }
+    .text-center{
+        margin-left: -50px;
+    }
 }

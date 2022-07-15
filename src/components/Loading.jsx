@@ -20,7 +20,7 @@ const Loading = () => {
   }, []);
   return (
     <>
-      <Box style={{ marginTop: 180 }}>
+      <Box style={{ marginTop: 180,textAlign:"center" }}>
         <CircularProgress size="80px" thickness={2} color="success" />
         <Typography
           style={{ marginTop: 10 }}

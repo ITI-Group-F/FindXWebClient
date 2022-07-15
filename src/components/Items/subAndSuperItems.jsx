@@ -47,10 +47,7 @@ function SubAndSuperItems(props) {
   let renderAllItemsBtn = () => {
     navigate("/items");
   };
-  console.log(subKey);
-  //  console.log(superKey);
-  console.log(underSubData);
-
+  
   if (subKey !== null) {
     return (
       <div>
@@ -111,7 +108,6 @@ function SubAndSuperItems(props) {
         ) : (
           <ActionAreaCard allItemsData={underSuperData} />
         )}
-        {console.log(underSubData)}
       </div>
     );
   }

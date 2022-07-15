@@ -50,7 +50,6 @@ const DrawerFilter = () => {
     const handleSuperClick = (event) => {
         event.preventDefault();
         const superCategory = event.target.innerText;
-        console.log(superCategory);
         SetSuperCat(superCategory);
     }
 
@@ -240,7 +239,7 @@ const DrawerFilter = () => {
     );
 
     return (
-        <div>
+        <div style={{textAlign:"center"}}>
             {['☰ Filters'].map((anchor) => (
                 <React.Fragment key={anchor}>
                     <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
