@@ -18,6 +18,7 @@ import { useEffect } from "react";
 export default function ActionAreaCard(props) {
 let navigate= useNavigate();
   
+console.log(props);
 
 
   return (
@@ -48,6 +49,21 @@ let description = res.description.substring(0, 80)
                 return {color: "green"}
               }
             }
+            const closedCase=()=>{
+              if(res.isClosed){
+                return "Case Closed"
+              }else{
+                return "Case Open"
+              }
+            }
+            const closedCaseColor = ()=>{
+              if(res.isClosed){
+                return {color: "green"}
+              }else{
+                return {color: "red"}
+              
+              }
+            }
 
         return (
           <div key={res.id} >
@@ -57,6 +73,7 @@ let description = res.description.substring(0, 80)
             </div>
             <div className="card-body">
               <span className="tag tag-teal">{res.superCategory}</span>
+              <span className="tag tag-black" style={closedCaseColor()}>{closedCase()}</span>
               <h4>
                 {title}
               </h4>
