@@ -38,7 +38,11 @@ export default function Messenger() {
   useEffect(() => {
     if (PosterDetails.id) {
       setWithId(PosterDetails.id);
-      setMsgs([<>You are starting new Conversation with {PosterDetails.fullName}  Please Say Something </>]);
+      setMsgs([<>
+        You are starting new Conversation with <b>{PosterDetails.fullName}</b> Please Say Something
+        <br />
+        <img style={{ width: 500, marginLeft: 150, marginTop: 20 }} src="https://marketing-assets.wheniwork-production.com/2020/08/11105808/updated-homepage-hero-optimized.svg" alt="Italian Trulli"></img>
+      </>]);
       seOtherFullName(PosterDetails.fullName);
       chatRef.current.classList.add("active-chat");
     }
@@ -49,8 +53,6 @@ export default function Messenger() {
     if (connection) {
       connection.on("ReceiveMessage", (sender, message) => {
         handleReceiveMessage(sender, message);
-
-
       });
     }
   }, [connection]);
@@ -170,8 +172,6 @@ export default function Messenger() {
         }
       });
     }
-
-
   };
 
 
@@ -182,7 +182,6 @@ export default function Messenger() {
       setTimeout(() => {
         chatRef.current.scrollTo(0, chatRef.current.scrollHeight);
       }, 100);
-
     }
   };
 
