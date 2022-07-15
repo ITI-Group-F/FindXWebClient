@@ -105,8 +105,8 @@ export default function Login({ setToken ,loginfromNavbar}) {
   };
 
   return (
-    <>
-      <Typography variant="h3" component="h3" gutterBottom>
+    <div style={{margin:"auto"}}>
+      <Typography variant="h3" component="h3" gutterBottom sx={{marginLeft:"50px"}}>
         Login
       </Typography>
       <form onSubmit={submitLoginData}>
@@ -186,7 +186,7 @@ export default function Login({ setToken ,loginfromNavbar}) {
             </Button>
           </Box>
           <Box style={{ marginBottom: "100px" }}>
-            <Typography variant="subtitle2" component="span">
+            <Typography variant="subtitle2" component="span" sx={{marginLeft:"25px"}}>
               Not a member?
             </Typography>
             <Link href="/auth/register" style={{ marginLeft: 5 }}>
@@ -195,6 +195,6 @@ export default function Login({ setToken ,loginfromNavbar}) {
           </Box>
         </Box>
       </form>
-    </>
+    </div>
   );
 }

@@ -130,8 +130,8 @@ export default function Register({ setToken }) {
   };
 
   return (
-    <>
-      <Typography variant="h3" component="div" gutterBottom>
+    <div style={{margin:"auto"}}>
+      <Typography variant="h3" component="div" gutterBottom sx={{marginLeft:"30px"}}>
         Register
       </Typography>
       <form onSubmit={submitRegisterData}>
@@ -268,7 +268,7 @@ export default function Register({ setToken }) {
             </Button>
           </Box>
           <Box>
-            <Typography variant="subtitle2" component="span">
+            <Typography variant="subtitle2" component="span" sx={{marginLeft:"25px"}}>
               Already a member?
             </Typography>
 
@@ -278,6 +278,6 @@ export default function Register({ setToken }) {
           </Box>
         </Box>
       </form>
-    </>
+    </div>
   );
 }
