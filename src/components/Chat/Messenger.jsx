@@ -23,6 +23,7 @@ export default function Messenger() {
   const lastConnection = useRef(connection);
   const searchwordRef = useRef(null);
   const [conversationsToMap, setConversationsToMap] = useState(conversations);
+  const clickingSameContact = useRef(false);
 
 
   useEffect(() => {
@@ -168,10 +169,18 @@ export default function Messenger() {
           onClick={() => {
             if (prevContactRef.current != null) {
               prevContactRef.current.classList.remove("active");
+          
+              if (prevContactRef.current === currentContactRef.current[index]) {
+               clickingSameContact.current = true;
+              }
+              else {
+                clickingSameContact.current = false;
+              }
             }
+            
             prevContactRef.current = currentContactRef.current[index];
 
-            populateChat(conv);
+            populateChat(conv,index);
             currentContactRef.current[index].classList.add("active");
           }}
           className="person"
@@ -202,30 +211,41 @@ export default function Messenger() {
    * @param {convs[0]} conv
    * @returns
    */
-  let populateChat = (conv) => {
+  let populateChat = (conv,index) => {
 
+    if (clickingSameContact.current) return;
+
+  
     let OwnerisTheSender = true;
     if (ownerId === conv.sender.id) OwnerisTheSender = true;
     else OwnerisTheSender = false;
     let Other = OwnerisTheSender ? conv.receiver : conv.sender;
-
+    
     setWithId(Other.id);
+
     OtherIdRef.current = Other.id;
     let otherFullName = Other.firstName + " " + Other.lastName;
-    let toLoadMsgs = conv.messages.map((msg) => {
-      if (ownerId === msg.senderId) {
-        return <div key={msg.id} className="bubble me">{msg.content} </div>;
-      } else {
-        return <div key={msg.id} className="bubble you">{msg.content}</div>;
-      }
+    let toLoadMsgs;
+    upDateChatData().then(() => {
+      populateContact();
+     toLoadMsgs = conv.messages.map((msg) => {
+        if (ownerId === msg.senderId) {
+          return <div key={msg.id} className="bubble me">{msg.content} </div>;
+        } else {
+          return <div key={msg.id} className="bubble you">{msg.content}</div>;
+        }
+      });
+      setMsgs(toLoadMsgs);
+      setTimeout(() => {
+        chatRef.current.scrollTo(0, chatRef.current.scrollHeight);
+      }, 100);  
+      
     });
-    setMsgs(toLoadMsgs);
+    
+    
     activateChat();
     seOtherFullName(otherFullName);
-    upDateChatData()
-    setTimeout(() => {
-      chatRef.current.scrollTo(0, chatRef.current.scrollHeight);
-    }, 100);
+
 
 
     if (conv.messages[conv.messages.length - 1].seen === false) {
@@ -257,7 +277,7 @@ export default function Messenger() {
             prevContactRef.current = toUpdate;
           }, 500);
 
-          populateContact();
+          
           // currentContactRef.current[conversations.length - 1].classList.add("active");
           // prevContactRef.current = currentContactRef.current[conversations.length - 1];
         });
