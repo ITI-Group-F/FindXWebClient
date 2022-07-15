@@ -61,6 +61,7 @@ export default function Messenger() {
       } else {
         populateChat(isOldChat[1]);
         currentContactRef.current[isOldChat[2]].classList.add("active");
+        prevContactRef.current = currentContactRef.current[isOldChat[2]];
       }
     }
   }, [PosterDetails]);
