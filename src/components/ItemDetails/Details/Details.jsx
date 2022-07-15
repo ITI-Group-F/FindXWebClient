@@ -5,6 +5,7 @@ import MapLocation from "../../Map/MapLocation"
 import SendIcon from '@mui/icons-material/Send';
 import { useContext } from 'react';
 import ChatContext from '../../../Contexts/ChatContext';
+import Alert from 'react-bootstrap/Alert';
 
 import useClaims from "../../../hooks/useClaims"
 import axios from '../../../Services/api';
@@ -52,18 +53,25 @@ const time=new Date(inputDate).toLocaleTimeString();
         
           
         </div>
+        {
 
-        <div className={`mb-2`} style={{textAlign:'left'}}>
+          (selectedItem.isClosed===true)?<Alert className='mb-0' variant='warning'> This Issue Has Been Closed</Alert>:( <div className={`mb-2`} style={{textAlign:'left'}}>
 
-        {/* it will be send message or Edit post depends on the case  */}
-{
-  (userId!==selectedItem.userId)?( <Button onClick={()=>{handleNewChat(selectedItem.id)}}  color='primary' className='mx-2' variant="contained">Send Message &nbsp;<SendIcon/></Button>):(<AlertDialogSlide id={selectedItem.id}/>)
-}
+          {/* it will be send message or Edit post depends on the case  */}
+  
+  
+  
+  {
+    (userId!==selectedItem.userId)?( <Button onClick={()=>{handleNewChat(selectedItem.id)}}  color='primary' className='mx-2' variant="contained">Send Message &nbsp;<SendIcon/></Button>):(<AlertDialogSlide id={selectedItem.id}/>)
+  }
+         
+         
+  
+  
+          </div>)
+        }
+
        
-       
-
-
-        </div>
       
     </div>
   ):(<div></div>)
