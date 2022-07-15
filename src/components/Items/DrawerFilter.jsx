@@ -272,6 +272,7 @@ const DrawerFilter = () => {
 					</Drawer>
 				</React.Fragment>
 			</div>
+					<br/>
 		</>
 	);
 }

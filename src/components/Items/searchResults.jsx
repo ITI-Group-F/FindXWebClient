@@ -40,7 +40,7 @@ function SearchResults() {
       </button> */}
 
       <button
-        style={{ width: "200px", display: "block", margin: "auto" }}
+        style={{ width: "200px", display: "block", marginLeft: "583px" }}
         name="submit"
         onClick={() => {
           renderAllItemsBtn();
