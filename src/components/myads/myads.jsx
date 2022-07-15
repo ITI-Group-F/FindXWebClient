@@ -98,10 +98,25 @@ let description = res.description.substring(0, 80)
                 return {color: "green"}
               }
             }
+            const closedCase=()=>{
+              if(res.isClosed){
+                return "Case Closed"
+              }else{
+                return "Case Open"
+              }
+            }
+            const closedCaseColor = ()=>{
+              if(res.isClosed){
+                return {color: "green"}
+              }else{
+                return {color: "red"}
+              
+              }
+            }
 
         return (
           <div key={res.id}  >
-          <div className="card" style={{marginLeft:"20px"}}>
+          <div className="card" style={{marginLeft:"20px", marginBottom:"10px",height:"514px"}}>
             <NavLink to={`/details/${res.id}`}>
             <div className="card-header">
               <img src={`data:image/jpeg;base64,${res.images[0]}`} alt=" " />
@@ -109,6 +124,7 @@ let description = res.description.substring(0, 80)
             </NavLink>
             <div className="card-body">
               <span className="tag tag-teal">{res.superCategory}</span>
+              <span className="tag tag-black" style={closedCaseColor()}>{closedCase()}</span>
               <h4>
                 {title}
               </h4>
