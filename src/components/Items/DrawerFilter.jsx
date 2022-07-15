@@ -25,6 +25,8 @@ import RecentActorsIcon from '@mui/icons-material/RecentActors';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import EarbudsBatteryIcon from '@mui/icons-material/EarbudsBattery';
+import MenuIcon from '@mui/icons-material/Menu';
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
 
 
 const DrawerFilter = () => {
@@ -239,20 +241,38 @@ const DrawerFilter = () => {
     );
 
     return (
-        <div style={{textAlign:"center"}}>
-            {['☰ Filters'].map((anchor) => (
-                <React.Fragment key={anchor}>
-                    <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+        <>
+            {/* <div>
+                {['☰ Filters'].map((anchor) => (
+                    <React.Fragment key={anchor}>
+                        <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+                        <Drawer
+                            anchor={anchor}
+                            open={state[anchor]}
+                            onClose={toggleDrawer(anchor, false)}
+                        >
+                            {list(anchor)}
+                        </Drawer>
+                    </React.Fragment>
+                ))}
+            </div> */}
+
+            <div>
+                <React.Fragment key={'left'}>
+                    <Button style={{ marginLeft: 30, marginTop: 10 }} onClick={toggleDrawer('left', true)} variant="contained">
+                        <FilterAltIcon /> Filters
+
+                    </Button>
                     <Drawer
-                        anchor={anchor}
-                        open={state[anchor]}
-                        onClose={toggleDrawer(anchor, false)}
+                        anchor={'left'}
+                        open={state['left']}
+                        onClose={toggleDrawer('left', false)}
                     >
-                        {list(anchor)}
+                        {list('left')}
                     </Drawer>
                 </React.Fragment>
-            ))}
-        </div>
+            </div>
+        </>
     );
 }
 
