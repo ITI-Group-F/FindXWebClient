@@ -30,7 +30,9 @@ const ChatContextProvider = ({ children }) => {
       setNumberOfNotifications(countNotifications(response.data, userId));
 
     } catch (error) {
-      setConversations([]);
+      console.log(
+        error
+      );
     }
   }, []);
 
