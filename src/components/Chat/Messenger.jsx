@@ -256,8 +256,7 @@ export default function Messenger() {
     
     activateChat();
     seOtherFullName(otherFullName);
-
-
+    upDateChatData()
 
   };
 
