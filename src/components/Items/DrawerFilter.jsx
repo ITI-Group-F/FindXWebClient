@@ -260,7 +260,7 @@ const DrawerFilter = () => {
 
 			<div>
 				<React.Fragment key={'left'}>
-					<Button style={{ marginLeft: 30, marginTop: 10 }} onClick={toggleDrawer('left', true)} variant="contained">
+					<Button style={{ marginTop: 10 }} onClick={toggleDrawer('left', true)} variant="contained">
 						<FilterAltIcon /> Filters
 
 					</Button>
