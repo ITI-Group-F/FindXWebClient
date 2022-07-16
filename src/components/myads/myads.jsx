@@ -184,4 +184,4 @@ let description = res.description.substring(0, 80)
   );
 }
 
-export default MyAds;
+export default React.memo( MyAds);
