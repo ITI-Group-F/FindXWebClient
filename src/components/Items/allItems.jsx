@@ -25,11 +25,10 @@ console.log(props);
     <div className="containerAllItems">
       {props.allItemsData.map((res) => {
 
-let description = res.description.substring(0, 80)
-        if (res.description.length > 80) {
-          description.concat("...");
-        }
-      
+let description = res.description.length > 70?
+res.description.substring(0, 70).concat("...")
+:res.description.substring(0, 73);
+
         
         let title =
           res.title.length > 18
