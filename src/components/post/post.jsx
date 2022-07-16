@@ -105,7 +105,7 @@ function Posts() {
       try {
         const res = await API.post(`/UserItems/${userId}`, apiFormData);
         console.log(res);
-        // navigate(`/details/${res.data.id}`);
+         navigate(`/details/${res.data.id}`);
       } catch (error) {
         console.log(error);
       }
