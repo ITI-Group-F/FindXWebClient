@@ -54,16 +54,19 @@ function SubAndSuperItems(props) {
         <DrawerFilter />
         {/* <Filters /> */}
 
-        <button
-          name="submit"
-          style={{ width: "200px", display: "flex",justifyContent:"center", marginLeft: "583px" }}
-          onClick={() => {
-            renderAllItemsBtn();
-          }}
-          className="btn btn-success"
-        >
-          View All Items
-        </button>
+        <div className="d-flex justify-content-center">
+      <button
+        style={{ width: "200px", display: "block" }}
+        name="submit"
+        onClick={() => {
+          renderAllItemsBtn();
+        }}
+        className="btn btn-success"
+      >
+        View All Items
+      </button>
+
+      </div>
         {subLoading ? (
           <Loading />
         ) : underSubData === [] ? (
@@ -91,16 +94,19 @@ function SubAndSuperItems(props) {
         >
           View All Items
         </button> */}
-        <button
-          style={{ width: "200px", display: "block", margin: "auto" }}
-          name="submit"
-          onClick={() => {
-            renderAllItemsBtn();
-          }}
-          className="btn btn-success"
-        >
-          View All Items
-        </button>
+    <div className="d-flex justify-content-center">
+      <button
+        style={{ width: "200px", display: "block" }}
+        name="submit"
+        onClick={() => {
+          renderAllItemsBtn();
+        }}
+        className="btn btn-success"
+      >
+        View All Items
+      </button>
+
+      </div>
         {superLoading ? (
           <Loading />
         ) : underSuperData === [] ? (

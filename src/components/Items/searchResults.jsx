@@ -39,8 +39,9 @@ function SearchResults() {
         View All Items
       </button> */}
 
+    <div className="d-flex justify-content-center">
       <button
-        style={{ width: "200px", display: "block", marginLeft: "583px" }}
+        style={{ width: "200px", display: "block" }}
         name="submit"
         onClick={() => {
           renderAllItemsBtn();
@@ -49,6 +50,8 @@ function SearchResults() {
       >
         View All Items
       </button>
+
+      </div>
       <br />
       {searchLoading ? (
         <Loading />

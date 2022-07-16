@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 import { NavLink,useNavigate} from "react-router-dom";
 import noAdds from "./../../images/myadds.webp";
 import "bootstrap/dist/css/bootstrap.min.css";
+import AdsStyle from './Ads.module.css';
+import CloseIcon from '@mui/icons-material/Close';
 import {
   Card,
   CardContent,
@@ -67,11 +69,11 @@ function MyAds() {
   return (
     <div className="" style={{marginLeft:"1rem",marginRight:"1rem"  }}>
       {filteredData.length != 0 ? (
-        <div className="container-fluid mx-3">
+        <div className="container-fluid ">
           <h2  style={{marginLeft:"auto"}}>Your Ads</h2>
           <div className="row productRow" >
             
-          <div className="container"  >
+          <div className="container d-flex justify-content-center"  >
           {filteredData.map((res) => {
 
 let description = res.description.substring(0, 80)
@@ -107,57 +109,57 @@ let description = res.description.substring(0, 80)
             }
             const closedCaseColor = ()=>{
               if(res.isClosed){
-                return {color: "green"}
-              }else{
                 return {color: "red"}
+              }else{
+                return {color: "green"}
               
               }
             }
 
         return (
           <div key={res.id}  >
-          <div className="card" style={{marginLeft:"20px", marginBottom:"10px",height:"514px"}}>
+          <div className="card" style={{marginLeft:"20px", marginBottom:"10px",height:"500px"}}>
             <NavLink to={`/details/${res.id}`}>
             <div className="card-header">
               <img src={`data:image/jpeg;base64,${res.images[0]}`} alt=" " />
             </div>
             </NavLink>
             <div className="card-body">
-              <span className="tag tag-teal">{res.superCategory}</span>
-              <span className="tag tag-black" style={closedCaseColor()}>{closedCase()}</span>
+              <div className="w-100 text-end">
+
+              <CloseIcon className="text-danger fs-1 fw-bolder" style={{cursor:'pointer'}}
+                      onClick={() => deleteItem(res.id)}></CloseIcon>
+
+              </div>
+              <span className={`tag tag-teal ${AdsStyle.tag}`}>{res.superCategory}</span>
+              <span  className={`tag tag-black   ${AdsStyle.tag}`} style={closedCaseColor()}>{closedCase()}</span>
               <h4>
                 {title}
               </h4>
-              <p>
+              <p className="mb-0">
               {description}
               </p>
-              <div className="container_tags">
+              <div className="container_tags mt-2">
               <Button sx={{borderRadius:"50px", display:"inline-flex"}} onClick={()=>{navigate(`/details/${res.id}`)}} variant="contained" color="success">
               Details
               </Button>
                         <span className="spanAllItems">item condition</span>
-                </div>
+
+
                         <div className="tags">
-              <p style={itemConditionColor()}>{itemCondition()}</p>
+                      <p style={itemConditionColor()}>{itemCondition()}</p>
                          
 
                          
                         </div>
+                </div>
+
                
                         
               
               
             </div>
-            <div className="card-footer">
-                    <small className="text-muted"></small>
-                    <button
-                      type="button"
-                      className="btn btn-danger"
-                      onClick={() => deleteItem(res.id)}
-                    >
-                      Delete
-                    </button>
-                  </div>
+          
           </div>
           
           </div>

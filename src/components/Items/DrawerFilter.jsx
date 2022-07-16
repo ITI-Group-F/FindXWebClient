@@ -51,6 +51,7 @@ const DrawerFilter = () => {
 
 	const handleSuperClick = (event) => {
 		event.preventDefault();
+		console.log(event.target.innerText)
 		const superCategory = event.target.innerText;
 		SetSuperCat(superCategory);
 	}
