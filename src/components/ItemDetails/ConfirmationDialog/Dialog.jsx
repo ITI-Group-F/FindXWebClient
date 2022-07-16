@@ -32,7 +32,10 @@ export default function AlertDialogSlide(props) {
     axios
       .get(`/Items/close/${props.id}`)
       .then(() => {
-        window.location.replace("/items");
+
+            window.location.replace("/items");
+            
+
       })
       .catch((err) => {
         nav("/notFound");
@@ -58,7 +61,7 @@ export default function AlertDialogSlide(props) {
         <DialogContent>
           <img
             style={{ width: "450px" }}
-            src="https://marketing-assets.wheniwork-production.com/2020/01/16143317/footer-group-illustration-optimized.svg"
+           alt="Confirmation Imag" src="https://marketing-assets.wheniwork-production.com/2020/01/16143317/footer-group-illustration-optimized.svg"
           />
           <br />
           <br />
