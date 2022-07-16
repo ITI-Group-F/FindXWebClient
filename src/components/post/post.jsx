@@ -83,7 +83,7 @@ export default function Posts() {
     return day + "/" + month + "/" + year;
   };
 
-  const submitFormData = () => {
+  const submitFormData = async () => {
     if (title() && description() && location() && brand() && radio()) {
       setApiFormData(new FormData());
 
@@ -109,15 +109,8 @@ export default function Posts() {
       console.log("----------------");
 
       try {
-        const res = API.post(`/UserItems/${userId}`, apiFormData);
-
-        res
-          .then((res) => {
-            navigate("/myads");
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+        const res = await API.post(`/UserItems/${userId}`, apiFormData);
+        navigate(`/details/${res.data.id}`);
       } catch (error) {
         console.log(error);
       }
@@ -570,6 +563,7 @@ export default function Posts() {
                 value={date}
                 onChange={(newDate) => {
                   setDate(newDate);
+                  newDate = getFormattedDate(newDate);
                   setFormData({ ...formData, date: newDate });
                 }}
                 renderInput={(params) => <TextField {...params} />}
@@ -577,43 +571,6 @@ export default function Posts() {
             </Stack>
           </LocalizationProvider>
           <hr />
-
-          {/* <h3>Review Your Details</h3>
-          <label htmlFor="location">Your Name</label>
-          <TextField
-            name="name"
-            onChange={setValue}
-            fullWidth
-            label="your name"
-            id="fullWidth"
-            maxLength="20"
-            required
-          />
-
-          <label htmlFor="location">Your Phone Number</label>
-          <TextField
-            name="phone"
-            onChange={setValue}
-            fullWidth
-            label="your phone number"
-            id="fullWidth"
-            type="number"
-            maxLength="13"
-            required
-          />
-
-          <label htmlFor="location">Your Address</label>
-          <TextField
-            name="address"
-            onChange={setValue}
-            fullWidth
-            label="your Address"
-            id="fullWidth"
-            maxLength="30"
-            required
-          /> */}
-
-          {/*  */}
           {showValidationErr && (
             <center>
               <Box width="300px">
@@ -623,8 +580,6 @@ export default function Posts() {
               </Box>
             </center>
           )}
-          {/*  */}
-
           <div className="d-grid gap-2 ">
             <button
               name="submit"
