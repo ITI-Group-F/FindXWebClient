@@ -62,7 +62,6 @@ function Posts() {
 
   const setValue = (e) => {
     const { name, value } = e.target;
-    console.log(name, value);
 
     setFormData({ ...formData, [name]: value });
   };
@@ -98,11 +97,7 @@ function Posts() {
       // for (let k in formData) {
       //   apiFormData.append(`${k}`.replace(/\d$/, ""), formData[k]);
       // }
-      console.log("----------------");
-      for (var pair of apiFormData.entries()) {
-        console.log(pair[0] + ": " + pair[1]);
-      }
-      console.log("----------------");
+     
 
       try {
         const res = await API.post(`/UserItems/${userId}`, apiFormData);
