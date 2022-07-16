@@ -239,8 +239,7 @@ export default function Messenger() {
     OtherIdRef.current = Other.id;
     let otherFullName = Other.firstName + " " + Other.lastName;
     let toLoadMsgs;
-    upDateChatData().then(() => {
-      populateContact();
+
      toLoadMsgs = conv.messages.map((msg) => {
         if (ownerId === msg.senderId) {
           return <div key={msg.id} className="bubble me">{msg.content} </div>;
@@ -253,8 +252,7 @@ export default function Messenger() {
         chatRef.current.scrollTo(0, chatRef.current.scrollHeight);
       }, 100);  
       
-    });
-    
+  
     
     activateChat();
     seOtherFullName(otherFullName);
