@@ -16,6 +16,7 @@ export default function Register({ setToken }) {
   const [showLNameErr, setShowLNameErr] = useState(false);
   const [showMailErr, setShowMailErr] = useState(false);
   const [showPassErr, setShowPassErr] = useState(false);
+  const [showPhoneErr, setShowPhoneErr] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [showUserNameErr, setShowUserNameErr] = useState(false);
   const [userNameErr, setUserNameErr] = useState("");
@@ -23,19 +24,40 @@ export default function Register({ setToken }) {
   const [lNameErr, setLNameErr] = useState("");
   const [mailErr, setMailErr] = useState("");
   const [passErr, setPassErr] = useState("");
+  const [phoneErr, setPhoneErr] = useState("");
 
   const [showResErrMsg, setShowResErrMsg] = useState(false);
   const [resErrMsg, setResErrMsg] = useState("");
 
   const setValue = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-    validateLogin();
+    const newState = { ...formData, [name]: value };
+    setFormData(newState);
+    switch (name) {
+      case "firstName":
+        validateFirstName(newState);
+        break;
+      case "lastName":
+        validateLastName(newState);
+        break;
+      case "email":
+        validateEmail(newState);
+        break;
+      case "password":
+        validatePassword(newState);
+        break;
+      case "userName":
+        validateUserName(newState);
+        break;
+      default:
+        break;
+    }
   };
 
   const submitRegisterData = async (event) => {
     event.preventDefault();
-    if (!validateLogin()) {
+    const state = { ...formData };
+    if (!validateRgister(state)) {
       setShowAlert(true);
     } else {
       setShowAlert(false);
@@ -51,7 +73,24 @@ export default function Register({ setToken }) {
    *
    * @returns {boolean} true if the form is valid, false otherwise
    */
-  const validateLogin = () => {
+  const validateRgister = (formData) => {
+    const isFirstNameValid = validateFirstName(formData);
+    const isLastNameValid = validateLastName(formData);
+    const isMailValid = validateEmail(formData);
+    const isPassValid = validatePassword(formData);
+    const isUserNameValid = validateUserName(formData);
+    const isPhoneValid = validatePhone(formData);
+    return (
+      isFirstNameValid &&
+      isLastNameValid &&
+      isMailValid &&
+      isPassValid &&
+      isUserNameValid &&
+      isPhoneValid
+    );
+  };
+
+  const validateFirstName = (formData) => {
     let isFNameValid = false;
     if (!formData.firstName || formData.firstName.length < 1) {
       setShowFNameErr(true);
@@ -63,7 +102,10 @@ export default function Register({ setToken }) {
       isFNameValid = true;
       setShowFNameErr(false);
     }
+    return isFNameValid;
+  };
 
+  const validateLastName = (formData) => {
     let isLNameValid = false;
     if (!formData.lastName || formData.lastName.length < 1) {
       setShowLNameErr(true);
@@ -75,7 +117,10 @@ export default function Register({ setToken }) {
       isLNameValid = true;
       setShowLNameErr(false);
     }
+    return isLNameValid;
+  };
 
+  const validateUserName = (formData) => {
     let isUserNameValid = false;
     if (!formData.userName || formData.userName.length < 1) {
       setShowUserNameErr(true);
@@ -84,7 +129,10 @@ export default function Register({ setToken }) {
       isUserNameValid = true;
       setShowUserNameErr(false);
     }
+    return isUserNameValid;
+  };
 
+  const validateEmail = (formData) => {
     let isMailValid = false;
     if (!formData.email || formData.email.length < 1) {
       setShowMailErr(true);
@@ -99,7 +147,10 @@ export default function Register({ setToken }) {
       isMailValid = true;
       setShowMailErr(false);
     }
+    return isMailValid;
+  };
 
+  const validatePassword = (formData) => {
     let isPassValid = false;
     if (!formData.password || formData.password.length < 1) {
       setShowPassErr(true);
@@ -108,13 +159,19 @@ export default function Register({ setToken }) {
       isPassValid = true;
       setShowPassErr(false);
     }
-    return (
-      isFNameValid &&
-      isLNameValid &&
-      isUserNameValid &&
-      isMailValid &&
-      isPassValid
-    );
+    return isPassValid;
+  };
+
+  const validatePhone = (formData) => {
+    let isPhoneValid = false;
+    if (!formData.phone || formData.phone.length < 1) {
+      setShowPhoneErr(true);
+      setPhoneErr("Phone number is required");
+    } else {
+      isPhoneValid = true;
+      setShowPhoneErr(false);
+    }
+    return isPhoneValid;
   };
 
   const registerUser = async (data) => {
@@ -130,8 +187,13 @@ export default function Register({ setToken }) {
   };
 
   return (
-    <div style={{margin:"auto"}}>
-      <Typography variant="h3" component="div" gutterBottom sx={{marginLeft:"30px"}}>
+    <div style={{ margin: "auto" }}>
+      <Typography
+        variant="h3"
+        component="div"
+        gutterBottom
+        sx={{ marginLeft: "30px" }}
+      >
         Register
       </Typography>
       <form onSubmit={submitRegisterData}>
@@ -239,6 +301,13 @@ export default function Register({ setToken }) {
               onChange={setValue}
             />
           </Box>
+          {showPassErr && (
+            <Box className="err-msg">
+              <Typography color="red" variant="caption" gutterBottom>
+                {passErr}
+              </Typography>
+            </Box>
+          )}
           <Box>
             <TextField
               style={{ width: "200px", margin: "5px" }}
@@ -249,10 +318,15 @@ export default function Register({ setToken }) {
               onChange={setValue}
             />
           </Box>
-          {showPassErr && (
+          {showPhoneErr && (
             <Box className="err-msg">
-              <Typography color="red" variant="caption" gutterBottom>
-                {passErr}
+              <Typography
+                color="red"
+                variant="caption"
+                gutterBottom
+                style={{ marginLeft: 20 }}
+              >
+                {phoneErr}
               </Typography>
             </Box>
           )}
@@ -268,7 +342,11 @@ export default function Register({ setToken }) {
             </Button>
           </Box>
           <Box>
-            <Typography variant="subtitle2" component="span" sx={{marginLeft:"25px"}}>
+            <Typography
+              variant="subtitle2"
+              component="span"
+              sx={{ marginLeft: "25px" }}
+            >
               Already a member?
             </Typography>
 

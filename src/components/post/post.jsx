@@ -39,7 +39,7 @@ import useClaims from "../../hooks/useClaims";
   const [showValidationErr, setShowValidationErr] = useState(false);
   const [showRadioErr, setShowRadioErr] = useState(false);
   const [descErr, setdescErr] = useState("");
-  const [descriptionErr, setdescriptionErr] = useState("")
+  const [descriptionErr, setdescriptionErr] = useState("");
   const [titleErr, settitleErr] = useState("");
   const [brandErr, setbrandErr] = useState("");
   const [LocationErr, setLocationErr] = useState("");
@@ -53,7 +53,6 @@ import useClaims from "../../hooks/useClaims";
   const { userId } = useClaims();
   const navigate = useNavigate();
 
-
   //this function will be send to Location component to set longtude and latitude
   const seTCoordinates = (lt, lg) => {
     setLong(lg);
@@ -63,7 +62,6 @@ import useClaims from "../../hooks/useClaims";
   const setValue = (e) => {
     const { name, value } = e.target;
     console.log(name, value);
-
 
     setFormData({ ...formData, [name]: value });
 
@@ -86,15 +84,14 @@ import useClaims from "../../hooks/useClaims";
     return day + "/" + month + "/" + year;
   };
 
-
-  const submitFormData = () => {
+  const submitFormData = async () => {
     if (title() && description() && location() && brand() && radio()) {
       setApiFormData(new FormData());
 
       setFormData({ ...formData, longitude: long, latitude: lat });
 
       for (let k in formData) {
-        if (k == 'files') {
+        if (k == "files") {
           for (let i = 0; i < formData.files.length; i++) {
             apiFormData.append("File", formData.files[i]);
           }
@@ -112,24 +109,12 @@ import useClaims from "../../hooks/useClaims";
       }
       console.log("----------------");
 
-
-
       try {
-        const res = API.post(`/UserItems/${userId}`, apiFormData);
-
-
-        res.then((res) => {
-          navigate("/myads");
-        })
-          .catch((err) => {
-            console.log(err);
-          });
-
-
+        const res = await API.post(`/UserItems/${userId}`, apiFormData);
+        navigate(`/details/${res.data.id}`);
       } catch (error) {
         console.log(error);
       }
-
     } else {
       setShowValidationErr(true);
     }
@@ -143,8 +128,6 @@ import useClaims from "../../hooks/useClaims";
     // }
   };
 
-
-
   const description = () => {
     let isdescValid = false;
     if (formData.description?.length >= 200) {
@@ -157,11 +140,7 @@ import useClaims from "../../hooks/useClaims";
     }
     //////////////////////////////////////////////// 0length
     let isDescriptionValid = false;
-    if (
-      !formData.description ||
-      formData.description?.length <= 1
-
-    ) {
+    if (!formData.description || formData.description?.length <= 1) {
       isDescriptionValid = false;
       setShowdescriptionErr(true);
       setdescriptionErr("Field is missing or invalid!");
@@ -169,16 +148,12 @@ import useClaims from "../../hooks/useClaims";
       isDescriptionValid = true;
       setShowdescriptionErr(false);
     }
-    return (isdescValid && isDescriptionValid);
-  }
+    return isdescValid && isDescriptionValid;
+  };
   const title = () => {
     //////////////////////////////////////////// 0length
     let isTitleValid = false;
-    if (
-      !formData.title ||
-      formData.title?.length <= 1
-
-    ) {
+    if (!formData.title || formData.title?.length <= 1) {
       isTitleValid = false;
       setShowTitleErr(true);
       setTitleErr("Field is missing or invalid!");
@@ -196,8 +171,8 @@ import useClaims from "../../hooks/useClaims";
       istitleValid = true;
       setShowtitleErr(false);
     }
-    return (istitleValid && isTitleValid);
-  }
+    return istitleValid && isTitleValid;
+  };
   const location = () => {
     let isLocationValid = false;
     if (formData.Location?.length >= 101) {
@@ -211,11 +186,7 @@ import useClaims from "../../hooks/useClaims";
 
     /////////////////////////////////////////////////0length
     let islocation2Valid = false;
-    if (
-      !formData.Location ||
-      formData.Location?.length <= 1
-
-    ) {
+    if (!formData.Location || formData.Location?.length <= 1) {
       islocation2Valid = false;
       setShowlocation2Err(true);
       setlocation2Err("Field is missing or invalid!");
@@ -223,15 +194,12 @@ import useClaims from "../../hooks/useClaims";
       islocation2Valid = true;
       setShowlocation2Err(false);
     }
-    return (isLocationValid && islocation2Valid);
-  }
+    return isLocationValid && islocation2Valid;
+  };
   const radio = () => {
     //////////////////////////////////////////// 0length
     let isRadioValid = false;
-    if (
-      formData.isLost == null
-
-    ) {
+    if (formData.isLost == null) {
       isRadioValid = false;
       setShowRadioErr(true);
       setRadioErr("Field is missing or invalid!");
@@ -239,10 +207,9 @@ import useClaims from "../../hooks/useClaims";
       isRadioValid = true;
       setShowRadioErr(false);
     }
-    return (isRadioValid);
-  }
+    return isRadioValid;
+  };
   const brand = () => {
-
     let isbrandValid = false;
     if (formData.brand?.length >= 31) {
       isbrandValid = false;
@@ -252,12 +219,8 @@ import useClaims from "../../hooks/useClaims";
       isbrandValid = true;
       setShowbrandErr(false);
     }
-    return (isbrandValid);
-  }
-
-
-
-
+    return isbrandValid;
+  };
 
   const handleshow = (
     event //function to handle show fields based on category selection
@@ -272,12 +235,10 @@ import useClaims from "../../hooks/useClaims";
         {/* {spinner ? (
             <Spinner className="post__spinner" type="grow" color="info" />
           ) : ( */}
-        <div className="col-lg-6 col-md-6 col-12 shadow addPostMargin" >
+        <div className="col-lg-6 col-md-6 col-12 shadow addPostMargin">
           <h3 className="text-center text-uppercase pt-3  pb-3 text-underline shadow">
             Post Your ad
           </h3>
-
-
 
           <hr />
           <h4 htmlFor="category">Select Category</h4>
@@ -316,7 +277,6 @@ import useClaims from "../../hooks/useClaims";
                 <option value="Dogs">Dogs</option>
                 <option value="Birds">Birds</option>
                 <option value="Other">Other</option>
-
               </select>
               <FormControl />
 
@@ -371,12 +331,13 @@ import useClaims from "../../hooks/useClaims";
                 className="form-select"
                 aria-label="Default select example"
               >
-                <option selected disabled value="Other">Select Category</option>
+                <option selected disabled value="Other">
+                  Select Category
+                </option>
                 <option value="Other">Other</option>
               </select>
             </div>
           )}
-
 
           {showhide === "Electronics" && (
             <div className="electronicsubcategory">
@@ -482,7 +443,6 @@ import useClaims from "../../hooks/useClaims";
 
           {/*  */}
 
-
           {showTitleErr && (
             <Box className="err-msg">
               <Typography color="red" variant="caption" gutterBottom>
@@ -526,7 +486,6 @@ import useClaims from "../../hooks/useClaims";
             </Box>
           )}
 
-
           {showdescErr && (
             <Box className="err-msg">
               <Typography color="red" variant="caption" gutterBottom>
@@ -553,7 +512,7 @@ import useClaims from "../../hooks/useClaims";
           <h3>
             Item location (Click And Drag The Marker Or Search By Location Name)
           </h3>
-          <Location seTCoordinates={seTCoordinates} ></Location>
+          <Location seTCoordinates={seTCoordinates}></Location>
           <br></br>
           <br></br>
 
@@ -562,8 +521,13 @@ import useClaims from "../../hooks/useClaims";
             name="Location"
             onChange={setValue}
             onClick={location}
-            onBlur={() => {setFormData({ ...formData, longitude: long, latitude: lat });location()}}
-            onMouseOver={() => setFormData({ ...formData, longitude: long, latitude: lat })}
+            onBlur={() => {
+              setFormData({ ...formData, longitude: long, latitude: lat });
+              location();
+            }}
+            onMouseOver={() =>
+              setFormData({ ...formData, longitude: long, latitude: lat })
+            }
             required
             maxLength="20"
             fullWidth
@@ -599,57 +563,15 @@ import useClaims from "../../hooks/useClaims";
                 inputFormat="dd/MM/yyyy"
                 value={date}
                 onChange={(newDate) => {
-                  newDate = getFormattedDate(newDate);
                   setDate(newDate);
+                  newDate = getFormattedDate(newDate);
                   setFormData({ ...formData, date: newDate });
-
-                  console.log(formData);
                 }}
-
-
-
                 renderInput={(params) => <TextField {...params} />}
               />
             </Stack>
           </LocalizationProvider>
           <hr />
-
-          {/* <h3>Review Your Details</h3>
-          <label htmlFor="location">Your Name</label>
-          <TextField
-            name="name"
-            onChange={setValue}
-            fullWidth
-            label="your name"
-            id="fullWidth"
-            maxLength="20"
-            required
-          />
-
-          <label htmlFor="location">Your Phone Number</label>
-          <TextField
-            name="phone"
-            onChange={setValue}
-            fullWidth
-            label="your phone number"
-            id="fullWidth"
-            type="number"
-            maxLength="13"
-            required
-          />
-
-          <label htmlFor="location">Your Address</label>
-          <TextField
-            name="address"
-            onChange={setValue}
-            fullWidth
-            label="your Address"
-            id="fullWidth"
-            maxLength="30"
-            required
-          /> */}
-
-          {/*  */}
           {showValidationErr && (
             <center>
               <Box width="300px">
@@ -659,10 +581,7 @@ import useClaims from "../../hooks/useClaims";
               </Box>
             </center>
           )}
-          {/*  */}
-
-
-          <div className="d-grid gap-2 " >
+          <div className="d-grid gap-2 ">
             <button
               name="submit"
               onClick={submitFormData}

@@ -17,10 +17,6 @@ export default function Items() {
 
   return (
     <div>
-      <div style={{ overflow: "hidden" }}>
-        <img src="https://imgur.com/2isonGi.png" />
-      </div>
-
       <DrawerFilter />
       <br />
       {allItems === [] ? (
@@ -34,6 +30,9 @@ export default function Items() {
       ) : (
         <ActionAreaCard allItemsData={allItems} />
       )}
+      <div style={{ overflow: "hidden" }}>
+        <img src="https://imgur.com/2isonGi.png" />
+      </div>
     </div>
   );
 }

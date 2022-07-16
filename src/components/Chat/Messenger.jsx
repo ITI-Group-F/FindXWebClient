@@ -27,6 +27,7 @@ export default function Messenger() {
 
 
   useEffect(() => {
+   
     setConversationsToMap(conversations);
   }, [conversations]);
 
@@ -42,9 +43,8 @@ export default function Messenger() {
     else {
 
     }
-    upDateChatData().then(() => {
-      populateContact();
-    });
+    upDateChatData()
+    
   }, []);
 
 
@@ -106,6 +106,9 @@ export default function Messenger() {
     if (connection) {
       connection.on("ReceiveMessage", (sender, message) => {
         handleReceiveMessage(sender, message);
+       setTimeout(() => {
+        upDateChatData()
+       }, 500);
         
       });
       lastConnection.current = connection;
@@ -133,6 +136,7 @@ export default function Messenger() {
 
         upDateChatData().then(() => {
           populateContact();
+
         });
       }
       else {
@@ -195,10 +199,10 @@ export default function Messenger() {
       );
     });
   };
-
+  
   const setMessageValue = (e) => {
     setMessage(e.target.value);
-
+    
   };
 
   let activateChat = () => {
@@ -212,7 +216,16 @@ export default function Messenger() {
    * @returns
    */
   let populateChat = (conv,index) => {
-
+    
+    if (conv.messages[conv.messages.length - 1].seen === false) {
+      setLastMessageAsSeen(connection, ownerId, conv.id)
+      conv.messages[conv.messages.length - 1].seen = true;
+      setNumberOfNotifications(prevCount => {
+        if (prevCount > 0) {
+          return prevCount - 1;
+        }
+      });
+    }
     if (clickingSameContact.current) return;
 
   
@@ -226,8 +239,7 @@ export default function Messenger() {
     OtherIdRef.current = Other.id;
     let otherFullName = Other.firstName + " " + Other.lastName;
     let toLoadMsgs;
-    upDateChatData().then(() => {
-      populateContact();
+
      toLoadMsgs = conv.messages.map((msg) => {
         if (ownerId === msg.senderId) {
           return <div key={msg.id} className="bubble me">{msg.content} </div>;
@@ -240,23 +252,13 @@ export default function Messenger() {
         chatRef.current.scrollTo(0, chatRef.current.scrollHeight);
       }, 100);  
       
-    });
-    
+  
     
     activateChat();
     seOtherFullName(otherFullName);
 
 
 
-    if (conv.messages[conv.messages.length - 1].seen === false) {
-      setLastMessageAsSeen(connection, ownerId, conv.id)
-      conv.messages[conv.messages.length - 1].seen = true;
-      setNumberOfNotifications(prevCount => {
-        if (prevCount > 0) {
-          return prevCount - 1;
-        }
-      });
-    }
   };
 
 

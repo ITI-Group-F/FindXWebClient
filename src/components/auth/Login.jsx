@@ -1,5 +1,5 @@
 import { Box, Button, TextField, Typography, Link, Alert } from "@mui/material";
-import React, { useState,useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import API from "../../Services/api";
 import "./auth.css";
 import { useNavigate } from "react-router-dom";
@@ -7,7 +7,7 @@ import useToken from "../../hooks/useToken";
 import { authenticationContext } from "../../Contexts/AuthContext";
 import ChatContext from "../../Contexts/ChatContext";
 
-export default function Login({ setToken ,loginfromNavbar}) {
+export default function Login({ setToken, loginfromNavbar }) {
   /**
    * variables for the form state and validation state of the form
    * fields and the error message for the form fields if they are
@@ -23,23 +23,40 @@ export default function Login({ setToken ,loginfromNavbar}) {
   const [showResErrMsg, setShowResErrMsg] = useState(false);
   const [resErrMsg, setResErrMsg] = useState("");
   const navigate = useNavigate();
-  const [isloggedIn,login] = useContext(authenticationContext);
-
+  const [isloggedIn, login] = useContext(authenticationContext);
 
   /*
    * function to handle the change of the form fields
    */
   const setValue = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-    validateLogin();
+    const newState = { ...formData, [name]: value };
+    setFormData(newState);
+    switch (name) {
+      case "email":
+        validateEmail(newState);
+        break;
+      case "password":
+        validatePassword(newState);
+        break;
+      default:
+        break;
+    }
   };
+
+  useEffect(() => {}, [formData]);
 
   /**
    *
    * @returns {boolean} true if the form is valid, false otherwise
    */
-  const validateLogin = () => {
+  const validateLogin = (formData) => {
+    const isEmailValid = validateEmail(formData);
+    const isPasswordValid = validatePassword(formData);
+    return isEmailValid && isPasswordValid;
+  };
+
+  const validateEmail = (formData) => {
     let isMailValid = false;
     if (!formData.email || formData.email.length < 1) {
       isMailValid = false;
@@ -56,7 +73,10 @@ export default function Login({ setToken ,loginfromNavbar}) {
       isMailValid = true;
       setShowMailErr(false);
     }
+    return isMailValid;
+  };
 
+  const validatePassword = (formData) => {
     let isPassValid = false;
     if (!formData.password || formData.password.length < 1) {
       isPassValid = false;
@@ -66,7 +86,7 @@ export default function Login({ setToken ,loginfromNavbar}) {
       isPassValid = true;
       setShowPassErr(false);
     }
-    return isMailValid && isPassValid;
+    return isPassValid;
   };
 
   /*
@@ -74,7 +94,8 @@ export default function Login({ setToken ,loginfromNavbar}) {
    */
   const submitLoginData = async (event) => {
     event.preventDefault();
-    if (!validateLogin()) {
+    const state = { ...formData };
+    if (!validateLogin(state)) {
       setShowAlert(true);
     } else {
       setShowAlert(false);
@@ -82,10 +103,8 @@ export default function Login({ setToken ,loginfromNavbar}) {
       if (token) {
         setToken(token);
         navigate("/items", { replace: true });
-        login(); 
-
-     
-        if(loginfromNavbar){
+        login();
+        if (loginfromNavbar) {
           loginfromNavbar();
         }
       }
@@ -95,7 +114,7 @@ export default function Login({ setToken ,loginfromNavbar}) {
   const loginUser = async (data) => {
     try {
       const response = await API.post("/authentication/login", data);
-      setShowResErrMsg(false);      
+      setShowResErrMsg(false);
       return response.data.token;
     } catch (error) {
       setShowResErrMsg(true);
@@ -105,8 +124,13 @@ export default function Login({ setToken ,loginfromNavbar}) {
   };
 
   return (
-    <div style={{margin:"auto"}}>
-      <Typography variant="h3" component="h3" gutterBottom sx={{marginLeft:"50px"}}>
+    <div style={{ margin: "auto" }}>
+      <Typography
+        variant="h3"
+        component="h3"
+        gutterBottom
+        sx={{ marginLeft: "50px" }}
+      >
         Login
       </Typography>
       <form onSubmit={submitLoginData}>
@@ -186,7 +210,11 @@ export default function Login({ setToken ,loginfromNavbar}) {
             </Button>
           </Box>
           <Box style={{ marginBottom: "100px" }}>
-            <Typography variant="subtitle2" component="span" sx={{marginLeft:"25px"}}>
+            <Typography
+              variant="subtitle2"
+              component="span"
+              sx={{ marginLeft: "25px" }}
+            >
               Not a member?
             </Typography>
             <Link href="/auth/register" style={{ marginLeft: 5 }}>

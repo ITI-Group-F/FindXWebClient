@@ -1,162 +1,152 @@
-import * as React from 'react';
-import { styled } from '@mui/material/styles';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import Collapse from '@mui/material/Collapse';
-import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import { red } from '@mui/material/colors';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { NavLink } from "react-router-dom";
+import API from "../Services/api";
+import { createContext, useCallback, useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+///////////////////////////////////////////////////////////  
+const subAndSuperContext = createContext();
+
+export const SubAndSuperData = (props) => {
+  const { children } = props;
+  let [subKey, setsubKey] = useState(null);
+  let [superKey, setsuperKey] = useState(null);
+  let [underSubData, setunderSubData] = useState([]);
+  let [underSuperData, setunderSuperData] = useState([]);
+  let [superLoading, setSuperLoading] = useState(true);
+  let [subLoading, setSubLoading] = useState(true);
+  const [didMountSub, setDidMountSub] = useState(false);
+  const [didMountSuper, setDidMountSuper] = useState(false);
+  let navigate = useNavigate();
 
 
-const ExpandMore = styled((props) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-  marginLeft: 'auto',
-  transition: theme.transitions.create('transform', {
-    duration: theme.transitions.duration.shortest,
-  }),
-}));
+  //////////////////////////////////////////////////
 
-export default function ActionAreaCard(props) {
-  const [expanded, setExpanded] = React.useState(false);
+  useEffect(() => {
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
+    setDidMountSub(true)
+  }
+
+    , [])
+  useEffect(() => {
+
+    setDidMountSuper(true)
+  }
+
+    , [])
+
+  useEffect(() => {
+    if (didMountSuper) {
+
+      GetSuperCategories();
+    }
+
+    setDidMountSuper(true);
+
+  }, [superKey])
+
+  useEffect(() => {
+
+    if (didMountSub) {
+
+      GetSubCategories();
+    }
+    //
+
+    setDidMountSub(true);
+
+  }, [subKey])
+
+  const GetSuperCategories = () => {
+    setSuperLoading(true);
+
+    try {
+      const data = async () => {
+        const back = await API.get(`/Items/undersup/${superKey}`).then(
+          (response) => response.data
+        );
+        //console.log(back);
+        setunderSuperData(back);
+        setSuperLoading(false);
+      };
+      data();
+    } catch (error) {
+      console.log(error + "from (/Items/undersuper) endpoint");
+    }
+    navigate(`/subandsupercategories/${superKey}`);
+
   };
-  return (
-    <div>
-      {props.allItemsData.map((res) => {
-        let description = res.description.substring(0, 8).concat("...");
-        let title =
-        res.title.length > 18
-            ? res.title.substring(0, 18).concat("...")
-            : res.title;
-            const itemCondition = ()=>{
-              if(res.isLost){
-                return "This Item Is Lost"
-              }else{
-                return "This Item Was Found"
-              }
-            }
-            
-  return (
-    <div style={{display: "inline-flex",
-    flexDirection: "row",
-    flexWrap: "wrap",width: "300px",
-    height: "350px",
-    margin: "20px",
-    paddingLeft: "10px"}}>
-    <Card key={res.id}>
-      <CardHeader
-        avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            R
-          </Avatar>
-        }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
-        title={title}
-        subheader={itemCondition()}
 
-      />
-      <NavLink to={`/details/${res.id}`}>
-      <CardMedia
-        component="img"
-        height="194"
-        image={`data:image/jpeg;base64,${res.images[0]}`}
-        alt={res.date}
-        sx={{
-          paddingTop: "10px",
-          zIndex: 1,
-          objectFit: "contain",
-          width: "200px",
-          height: "200px",
-          margin: "auto",
-        }}
-        />
-        </NavLink>
-      <CardContent>
-        <Typography variant="body2" color="text.secondary">
-          {description}
-        </Typography>
-      </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
-        <ExpandMore
-          expand={expanded}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </ExpandMore>
-      </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph>Posted On : {res.date}</Typography>
-          <Typography paragraph>
-          {res.description}
-          </Typography>
-        </CardContent>
-      </Collapse>
-    </Card>
-  </div>
+  const GetSubCategories = () => {
+    setSubLoading(true)
+    try {
+      //allItems.prev = underSubData;
+      const data = async () => {
+        const back = await API.get(`/Items/undersub/${subKey}`).then(
+          (response) => response.data
+        );
+        //console.log(back);
+        setunderSubData(back);
+        setSubLoading(false);
+      };
+      data();
+    } catch (error) {
+      console.log(error + "from (/Items/undersub) endpoint");
+    }
+    navigate(`/subandsupercategories/${subKey}`);
+
+  };
+
+  let SetSubCat = (e) => {
+    if (typeof e === 'string') {
+      setsubKey(e);
+    } else {
+      setsubKey(e.target.value);
+    }
+    setsuperKey(null);
+  }
+
+  let SetSuperCat = (e) => {
+    if (typeof e === 'string') {
+      setsuperKey(e);
+    } else {
+      setsuperKey(e.target.value);
+    }
+    setsubKey(null);
+  }
+
+  let contextValue = useMemo(() => ({
+    underSubData,
+    underSuperData,
+    SetSubCat,
+    SetSuperCat,
+    subKey,
+    superKey,
+    setsubKey,
+    setsuperKey,
+    superLoading,
+    subLoading,
+    setSuperLoading,
+    setSubLoading
+
+  }), [underSubData,
+    underSuperData,
+    SetSubCat,
+    SetSuperCat,
+    subKey,
+    superKey,
+    setsubKey,
+    setsuperKey,
+    superLoading,
+    subLoading,
+    setSuperLoading,
+    setSubLoading
+
+  ])
+
+  return (
+    <subAndSuperContext.Provider value={contextValue}>
+      {children}
+    </subAndSuperContext.Provider>
   )
-      })}
-  </div>
-)}
 
-
-/* 
-
-
-
-
-
-*/
-
-
-
-/*
-
-
- <div key={res.id} class="container">
-          <div class="card">
-            <div class="card-header">
-              <img src={`data:image/jpeg;base64,${res.images[0]}`} alt=" " />
-            </div>
-            <div class="card-body">
-              <span class="tag tag-teal">{res.superCategory}</span>
-              <h4>
-                {title}
-              </h4>
-              <p>
-              {description}
-              </p>
-              <Button variant="contained" color="success">
-				<NavLink to={`/details/${res.id}`} class="card__button">Details</NavLink>
-      </Button>
-            </div>
-          </div>
-          
-          </div>
- */
+};
+export default subAndSuperContext;
