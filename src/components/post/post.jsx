@@ -37,6 +37,7 @@ function Posts() {
   const [showlocation2Err, setShowlocation2Err] = useState(false);
   const [showValidationErr, setShowValidationErr] = useState(false);
   const [showRadioErr, setShowRadioErr] = useState(false);
+  const [showImageErr, setShowImageErr] = useState(false);
   const [descErr, setdescErr] = useState("");
   const [descriptionErr, setdescriptionErr] = useState("");
   const [titleErr, settitleErr] = useState("");
@@ -44,6 +45,7 @@ function Posts() {
   const [LocationErr, setLocationErr] = useState("");
   const [location2Err, setlocation2Err] = useState("");
   const [RadioErr, setRadioErr] = useState("");
+  const [ImageErr, setImageErr] = useState("");
   const [formData, setFormData] = useState({});
   const [showTitleErr, setShowTitleErr] = useState(false);
   const [TitleErr, setTitleErr] = useState("");
@@ -78,7 +80,7 @@ function Posts() {
   };
 
   const submitFormData = async () => {
-    if (title() && description() && location() && brand() && radio()) {
+    if (title() && description() && location() && brand() && radio()&&Image()) {
       setApiFormData(new FormData());
 
       setFormData({ ...formData, longitude: long, latitude: lat });
@@ -104,8 +106,9 @@ function Posts() {
 
       try {
         const res = await API.post(`/UserItems/${userId}`, apiFormData);
-        console.log(res);
-         navigate(`/details/${res.data.id}`);
+         
+            navigate("/myads");
+
       } catch (error) {
         console.log(error);
       }
@@ -215,7 +218,18 @@ function Posts() {
     }
     return isbrandValid;
   };
-
+  const Image = () => {
+    let isImageValid = false;
+    if (!formData.files) {
+      isImageValid = false;
+      setShowImageErr(true);
+      setImageErr("Field is missing or invalid!");
+    } else {
+      isImageValid = true;
+      setShowImageErr(false);
+    }
+    return isImageValid;
+  };
   const handleshow = (
     event //function to handle show fields based on category selection
   ) => {
@@ -495,14 +509,20 @@ function Posts() {
           <input
             name="image"
             onChange={setFormFiles}
-            required
+            required="required"
             className="form-control"
             type="File"
             accept="image/png , image/jpeg"
             id="formFileMultiple"
             multiple
           />
-          {/* Details Section */}
+            {showImageErr && (
+            <Box className="err-msg">
+              <Typography color="red" variant="caption" gutterBottom>
+                {ImageErr}
+              </Typography>
+            </Box>
+          )}
           <h3>
             Item location (Click And Drag The Marker Or Search By Location Name)
           </h3>
@@ -578,7 +598,11 @@ function Posts() {
           <div className="d-grid gap-2 ">
             <button
               name="submit"
-              onClick={submitFormData}
+              onClick={() => {
+                Image();
+                submitFormData();
+                
+              }}
               className="btn btn-success addPostMargin "
             >
               Post Now
