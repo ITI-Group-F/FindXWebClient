@@ -23,7 +23,7 @@ console.log(props);
 
   return (
     <div className="containerAllItems">
-      {props.allItemsData.map((res) => {
+      {props.allItemsData.length!=0?(props.allItemsData.map((res) => {
 
 let description = res.description.length > 70?
 res.description.substring(0, 70).concat("...")
@@ -97,7 +97,11 @@ res.description.substring(0, 70).concat("...")
           
           </div>
         );
-      })}
+      })):(<div style={{display:"flex",flexDirection:"column"}}>
+        <img style={{width:"500px", display:"block"}} src="img/3973481.jpg" alt=""/>
+        <div >No Data To Be Displayed</div>
+      </div>
+      )}
     </div>
   );
 }

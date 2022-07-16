@@ -36,8 +36,8 @@ export const ItemsProvider = (props) => {
         const back = await API.get(`/items/all`).then(
           (response) => response.data
         );
-        //console.log(back);
         setAllItems(back);
+        //console.log(allItems);
         setAllItemsLoading(false);
         //{date,description,id,images,isLost,latitude,location,longitude,subCategory,superCategory,title,userId }= allItems
       };
@@ -58,7 +58,7 @@ export const ItemsProvider = (props) => {
     [allItems]
   );
 
-  console.log(allItems)
+
 
   //memoize obeject that contain context data and send to any one who use this context ...
   let contextValue = useMemo(
