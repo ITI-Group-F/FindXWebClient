@@ -24,7 +24,8 @@ import { useNavigate } from "react-router-dom";
 import API from "../../Services/api";
 import useClaims from "../../hooks/useClaims";
 
-export default function Posts() {
+
+ function Posts() {
   const [apiFormData, setApiFormData] = useState(new FormData());
   const [showhide, setshowhide] = useState("");
   const [long, setLong] = useState(null);
@@ -594,3 +595,4 @@ export default function Posts() {
     </div>
   );
 }
+export default React.memo(Posts);
