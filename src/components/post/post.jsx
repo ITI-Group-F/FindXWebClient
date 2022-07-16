@@ -24,8 +24,7 @@ import { useNavigate } from "react-router-dom";
 import API from "../../Services/api";
 import useClaims from "../../hooks/useClaims";
 
-
- function Posts() {
+function Posts() {
   const [apiFormData, setApiFormData] = useState(new FormData());
   const [showhide, setshowhide] = useState("");
   const [long, setLong] = useState(null);
@@ -64,12 +63,6 @@ import useClaims from "../../hooks/useClaims";
     console.log(name, value);
 
     setFormData({ ...formData, [name]: value });
-
-    // title();
-    // description();
-    // brand();
-    // radio();
-    // location();
   };
 
   const getFormattedDate = (date) => {
@@ -81,7 +74,7 @@ import useClaims from "../../hooks/useClaims";
     var day = date.getDate().toString();
     day = day.length > 1 ? day : "0" + day;
 
-    return day + "/" + month + "/" + year;
+    return month + "/" + day + "/" + year;
   };
 
   const submitFormData = async () => {
@@ -111,7 +104,8 @@ import useClaims from "../../hooks/useClaims";
 
       try {
         const res = await API.post(`/UserItems/${userId}`, apiFormData);
-        navigate(`/details/${res.data.id}`);
+        console.log(res);
+        // navigate(`/details/${res.data.id}`);
       } catch (error) {
         console.log(error);
       }
